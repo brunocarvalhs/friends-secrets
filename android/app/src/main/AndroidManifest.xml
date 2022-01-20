@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.brunocarvalhs.friends_secrets.friends_secrets">
+    package="br.brunocarvalhs.friends_secrets">
    <application
-        android:label="friends_secrets"
+        android:label="Friends Secrets"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
