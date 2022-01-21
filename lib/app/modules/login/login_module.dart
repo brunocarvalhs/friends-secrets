@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_register/number_register_controller.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_register/number_register_page.dart';
-import 'package:friends_secrets/app/modules/login/presenter/pages/number_validation/number_register_page.dart';
+import 'package:friends_secrets/app/modules/login/presenter/pages/number_validation/number_validation_page.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_validation/number_validation_controller.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:friends_secrets/app/modules/login/domain/repositories/login_repository.dart';
