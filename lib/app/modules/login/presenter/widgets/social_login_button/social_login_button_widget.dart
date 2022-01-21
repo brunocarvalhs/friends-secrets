@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friends_secrets/app/shared/utils/assets_utils.dart';
+import 'package:friends_secrets/app/core/shared/utils/assets_utils.dart';
 
 class SocialLoginButtonWidget extends StatelessWidget {
   final String icon;
@@ -30,7 +30,7 @@ class SocialLoginButtonWidget extends StatelessWidget {
         icon: google,
         label: label,
         fontColor: const Color(0xFF5A5A5A),
-        background: const Color(0xFFF6F4F5),
+        background: const Color(0xFFE4E4E4),
         borderColor: const Color(0xFF5A5A5A),
         onTap: onTap,
         styleLabel: styleLabel,
@@ -41,7 +41,6 @@ class SocialLoginButtonWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 274,
         height: 56,
         decoration: BoxDecoration(
           color: background,

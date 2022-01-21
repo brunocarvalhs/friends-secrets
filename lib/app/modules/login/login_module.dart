@@ -1,4 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/modules/login/presenter/pages/number_register/number_register_controller.dart';
+import 'package:friends_secrets/app/modules/login/presenter/pages/number_register/number_register_page.dart';
+import 'package:friends_secrets/app/modules/login/presenter/pages/number_validation/number_register_page.dart';
+import 'package:friends_secrets/app/modules/login/presenter/pages/number_validation/number_validation_controller.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:friends_secrets/app/modules/login/domain/repositories/login_repository.dart';
 import 'package:friends_secrets/app/modules/login/infra/datasource/login_data_source.dart';
@@ -20,19 +24,23 @@ class LoginModule extends Module {
     // Stores ------------------------------------------------------------------------------------------
     Bind.lazySingleton<AuthStore>((i) => AuthStore(i.get(), i.get()), export: true),
     // Use cases ---------------------------------------------------------------------------------------
-    Bind.lazySingleton<Logout>((i) => LogoutImpl(i.get()), export: true),
-    Bind.lazySingleton<LoginWithGoogle>((i) => LoginWithGoogleImpl(i.get())),
-    Bind.lazySingleton<GetLoggedUser>((i) => GetLoggedUserImpl(i.get()), export: true),
+    Bind.factory<Logout>((i) => LogoutImpl(i.get()), export: true),
+    Bind.factory<LoginWithGoogle>((i) => LoginWithGoogleImpl(i.get())),
+    Bind.factory<GetLoggedUser>((i) => GetLoggedUserImpl(i.get()), export: true),
     // Repositories ------------------------------------------------------------------------------------
-    Bind.lazySingleton<LoginRepository>((i) => LoginRepositoryImpl(i.get()), export: true),
+    Bind.factory<LoginRepository>((i) => LoginRepositoryImpl(i.get()), export: true),
     // Datasource --------------------------------------------------------------------------------------
-    Bind.lazySingleton<LoginDataSource>((i) => LoginDataSourceImpl(i.get(), i.get(), i.get()), export: true),
+    Bind.factory<LoginDataSource>((i) => LoginDataSourceImpl(i.get(), i.get(), i.get()), export: true),
     // Controller --------------------------------------------------------------------------------------
-    Bind.lazySingleton((i) => LoginController(i.get(), i.get())),
+    Bind.factory((i) => LoginController(i.get(), i.get())),
+    Bind.factory((i) => NumberRegisterController(i.get())),
+    Bind.factory((i) => NumberValidationController(i.get()))
   ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, args) => const LoginPage()),
+    ChildRoute("/phone", child: (_, args) => const NumberRegisterPage()),
+    ChildRoute("/phone/validation", child: (_, args) => const NumberValidationPage()),
   ];
 }

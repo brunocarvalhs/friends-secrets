@@ -48,10 +48,10 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       uuid: map['uuid'] as String,
-      email: map['email'] as String,
-      name: map['name'] as String,
-      photoUrl: map['photoUrl'] as String,
-      phone: map['phone'] as String,
+      email: map['email'] as String?,
+      name: map['name'] as String?,
+      photoUrl: map['photoUrl'] as String?,
+      phone: map['phone'] as String?,
     );
   }
 

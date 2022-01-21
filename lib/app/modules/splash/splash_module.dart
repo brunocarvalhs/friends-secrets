@@ -5,7 +5,7 @@ import 'package:friends_secrets/app/modules/splash/presenter/pages/splash_page.d
 class SplashModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.singleton((i) => SplashController()),
+    Bind.factory((i) => SplashController()),
   ];
 
   @override
