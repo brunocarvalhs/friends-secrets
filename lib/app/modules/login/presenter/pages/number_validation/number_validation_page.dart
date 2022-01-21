@@ -50,6 +50,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[0],
+                        focusNode: controller.focus[0],
+                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[1]),
                         decoration: const InputDecoration(
                           filled: true,
                         ),
@@ -61,6 +63,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[1],
+                        focusNode: controller.focus[1],
+                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[2]),
                         decoration: const InputDecoration(
                           filled: true,
                         ),
@@ -72,6 +76,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[2],
+                        focusNode: controller.focus[2],
+                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[3]),
                         decoration: const InputDecoration(
                           filled: true,
                         ),
@@ -83,6 +89,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[3],
+                        focusNode: controller.focus[3],
+                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[4]),
                         decoration: const InputDecoration(
                           filled: true,
                         ),
@@ -94,6 +102,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[4],
+                        focusNode: controller.focus[4],
+                        onChanged: (value) => FocusManager.instance.primaryFocus?.unfocus(),
                         decoration: const InputDecoration(
                           filled: true,
                         ),
@@ -107,7 +117,7 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => {},
+        onPressed: () => controller.redirect(),
         label: const Text("Registrar"),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

@@ -22,4 +22,17 @@ abstract class _NumberValidationControllerBase with Store {
     TextEditingController(),
     TextEditingController(),
   ];
+
+  List<FocusNode> focus = [
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+  ];
+
+  void redirect() {
+    Modular.to.pushReplacementNamed("/home");
+  }
 }
