@@ -1,5 +1,6 @@
+import 'package:asuka/asuka.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
@@ -58,7 +59,9 @@ abstract class _GroupsListControllerBase with Store {
   Future<void> request() async {
     setLoading(true);
     var result = await getGroups();
-    result.fold((failure) {}, (list) {
+    result.fold((failure) {
+      AsukaSnackbar.warning(failure.message.toString());
+    }, (list) {
       addAll(list as Iterable<GroupModel>);
     });
     setLoading(false);
