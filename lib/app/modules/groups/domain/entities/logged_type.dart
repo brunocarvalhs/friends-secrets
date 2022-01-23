@@ -4,7 +4,7 @@ class LoggedType extends Equatable {
   final String? uuid;
   final String? name;
   final String? describle;
-  final String? isDrawName;
+  final bool? isDrawName;
   final String? created;
   final String? updated;
 

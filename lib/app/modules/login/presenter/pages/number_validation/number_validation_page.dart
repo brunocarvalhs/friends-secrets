@@ -117,6 +117,7 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        enableFeedback: false,
         onPressed: () => controller.redirect(),
         label: const Text("Registrar"),
       ),

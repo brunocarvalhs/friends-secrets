@@ -8,7 +8,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
     required String? uuid,
     required String? name,
     required String? describle,
-    required String? isDrawName,
+    required bool? isDrawName,
     required String? created,
     required String? updated,
   }) : super(
@@ -24,7 +24,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
   TypeModel copyWith({
     String? name,
     String? describle,
-    String? isDrawName,
+    bool? isDrawName,
   }) {
     return TypeModel(
       uuid: uuid,
@@ -53,9 +53,9 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
       uuid: map["uuid"] as String,
       name: map["name"] as String,
       describle: map["describle"] as String,
-      isDrawName: map["isDrawName"] as String,
-      created: map["created"] as String,
-      updated: map["updated"] as String,
+      isDrawName: map["is_draw_name"] as bool,
+      created: map["created_at"] as String,
+      updated: map["updated_at"] as String,
     );
   }
 

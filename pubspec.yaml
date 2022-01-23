@@ -33,6 +33,9 @@ dependencies:
   # Image
   image_picker: ^0.8.4+4
   flutter_svg: ^1.0.2
+  # Android
+  flutter_contacts: ^1.1.2
+  permission_handler: ^8.3.0
 
 dev_dependencies:
   flutter_test:

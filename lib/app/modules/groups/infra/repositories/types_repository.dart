@@ -13,9 +13,9 @@ class TypesRepositoryImpl extends TypesRepository {
   @override
   Future<Either<Failure, Iterable<LoggedTypeInfo>>> all() async {
     try {
-      final response = await datasource.get("/type");
-      // var types = list.docs.map((element) => TypeModel.fromMap(element.data()));
-      return Right([]);
+      final response = await datasource.get<List<dynamic>>("/type");
+      final types = response.data?.map((e) => TypeModel.fromMap(e)) ?? [];
+      return Right(types);
     } catch (e) {
       return Left(ErrorCreate(message: "Error ao tentar criar Groupo"));
     }

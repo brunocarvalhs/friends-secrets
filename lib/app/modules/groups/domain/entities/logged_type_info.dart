@@ -2,7 +2,7 @@ abstract class LoggedTypeInfo {
   String? get uuid;
   String? get name;
   String? get describle;
-  String? get isDrawName;
+  bool? get isDrawName;
   String? get created;
   String? get updated;
 
@@ -11,6 +11,6 @@ abstract class LoggedTypeInfo {
   LoggedTypeInfo copyWith({
     String? name,
     String? describle,
-    String? isDrawName,
+    bool? isDrawName,
   });
 }

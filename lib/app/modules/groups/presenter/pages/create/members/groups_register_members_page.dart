@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/pages/list/groups_list_controller.dart';
-import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/create/members/groups_register_members_controller.dart';
 
-class GroupsListPage extends StatefulWidget {
-  const GroupsListPage({Key? key}) : super(key: key);
+class GroupsRegisterMembersPage extends StatefulWidget {
+  const GroupsRegisterMembersPage({Key? key}) : super(key: key);
   @override
-  GroupsListPageState createState() => GroupsListPageState();
+  GroupsRegisterMembersPageState createState() => GroupsRegisterMembersPageState();
 }
 
-class GroupsListPageState extends ModularState<GroupsListPage, GroupsListController> {
+class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersPage, GroupsRegisterMembersController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +32,21 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
-                          style: Theme.of(context).textTheme.headline1,
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Registro de \nTelefone",
+                              style: Theme.of(context).textTheme.headline1,
+                            ),
+                            const SizedBox(height: 20),
+                            Text(
+                              "Cadastrando seu telefone, o organizador\ndo grupo, poderá te incluir no amigo\nsecreto.",
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -50,16 +61,13 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                       child: Column(
                         children: [
                           ListTile(
-                            title: Text("${controller.allGroups[index].name}"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text("${controller.allGroups[index].describle}"),
+                            leading: const CircleAvatar(),
+                            title: Text("${controller.allContacts[index].name}"),
                           ),
                         ],
                       ),
                     ),
-                    childCount: controller.countGroups,
+                    childCount: controller.countContacts,
                   ),
                 ),
               ),
@@ -71,8 +79,8 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.redirect(),
-          label: const Text("Criar Grupo"),
-          icon: const Icon(Icons.add),
+          label: const Text("Continuar"),
+          icon: const Icon(Icons.arrow_right),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
@@ -17,6 +18,15 @@ abstract class _GroupsListControllerBase with Store {
   _GroupsListControllerBase(this.user, this.getGroups) {
     request();
   }
+
+  @observable
+  bool _buttonExtends = true;
+
+  @computed
+  bool get buttonExtends => _buttonExtends;
+
+  @action
+  void setExtendsButton(bool value) => _buttonExtends = value;
 
   @observable
   ObservableList<GroupModel> _groups = ObservableList<GroupModel>.of([]);
@@ -54,10 +64,13 @@ abstract class _GroupsListControllerBase with Store {
     setLoading(false);
   }
 
-  bool scrollController(ScrollNotification scroll) {
-    if (scroll is ScrollEndNotification) request();
+  bool notificationPredicate(ScrollNotification scroll) {
+    if (scroll.metrics.pixels == scroll.metrics.maxScrollExtent) {
+      request();
+    }
+    setExtendsButton(scroll.metrics.extentAfter > scroll.metrics.extentBefore);
     return true;
   }
 
-  void redirect() => Modular.to.pushNamed("/home/register");
+  void redirect() => Modular.to.pushNamed("/home/register/members");
 }

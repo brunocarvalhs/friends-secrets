@@ -19,6 +19,13 @@ final $GroupsListController = BindInject(
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GroupsListController on _GroupsListControllerBase, Store {
+  Computed<bool>? _$buttonExtendsComputed;
+
+  @override
+  bool get buttonExtends =>
+      (_$buttonExtendsComputed ??= Computed<bool>(() => super.buttonExtends,
+              name: '_GroupsListControllerBase.buttonExtends'))
+          .value;
   Computed<bool>? _$isGroupsComputed;
 
   @override
@@ -40,6 +47,22 @@ mixin _$GroupsListController on _GroupsListControllerBase, Store {
       (_$allGroupsComputed ??= Computed<List<GroupModel>>(() => super.allGroups,
               name: '_GroupsListControllerBase.allGroups'))
           .value;
+
+  final _$_buttonExtendsAtom =
+      Atom(name: '_GroupsListControllerBase._buttonExtends');
+
+  @override
+  bool get _buttonExtends {
+    _$_buttonExtendsAtom.reportRead();
+    return super._buttonExtends;
+  }
+
+  @override
+  set _buttonExtends(bool value) {
+    _$_buttonExtendsAtom.reportWrite(value, super._buttonExtends, () {
+      super._buttonExtends = value;
+    });
+  }
 
   final _$_groupsAtom = Atom(name: '_GroupsListControllerBase._groups');
 
@@ -73,6 +96,17 @@ mixin _$GroupsListController on _GroupsListControllerBase, Store {
 
   final _$_GroupsListControllerBaseActionController =
       ActionController(name: '_GroupsListControllerBase');
+
+  @override
+  void setExtendsButton(bool value) {
+    final _$actionInfo = _$_GroupsListControllerBaseActionController
+        .startAction(name: '_GroupsListControllerBase.setExtendsButton');
+    try {
+      return super.setExtendsButton(value);
+    } finally {
+      _$_GroupsListControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void add(GroupModel value) {
@@ -111,6 +145,7 @@ mixin _$GroupsListController on _GroupsListControllerBase, Store {
   String toString() {
     return '''
 loading: ${loading},
+buttonExtends: ${buttonExtends},
 isGroups: ${isGroups},
 countGroups: ${countGroups},
 allGroups: ${allGroups}
