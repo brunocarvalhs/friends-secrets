@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">auth</string>
+
+    <!-- Register Activity -->
+    <string name="register_describle">Cadastrando seu telefone, o organizador do grupo, poderá te incluir no amigo secreto.</string>
+    <string name="register_title">Registro de Telefone</string>
+
+    <!-- Sign In Activity -->
+    <string name="sign_in_title">Organize seus amigos secretos em um lugar</string>
+    <string name="sign_in_describle">Crie grupos para realizar seu amigo secreto com seus amigos</string>
+
+    <!-- Validation Activity -->
+    <string name="validation_title">Validando Telefone</string>
+    <string name="validation_describle">Um código foi enviado para o telefone registrado para validar seu número</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

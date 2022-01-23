@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application -->
+    <string name="app_name">Friends Secrets</string>
+
+    <!-- Register Activity -->
+    <string name="register_describle">Cadastrando seu telefone, o organizador do grupo, poderá te incluir no amigo secreto.</string>
+    <string name="register_title">Registro de Telefone</string>
+
+    <!-- Sign In Activity -->
+    <string name="sign_in_title">Organize seus amigos secretos em um lugar</string>
+    <string name="sign_in_describle">Crie grupos para realizar seu amigo secreto com seus amigos</string>
+
+    <!-- Validation Activity -->
+    <string name="validation_title">Validando Telefone</string>
+    <string name="validation_describle">Um código foi enviado para o telefone registrado para validar seu número</string>
+    <string name="profile_register_title">Criação de gostos</string>
+    <string name="profile_register_describle">Para que seu amigo secreto saiba seus gostos, nos disponibilizamos uma lista de coisas que gosta.</string>
+</resources>

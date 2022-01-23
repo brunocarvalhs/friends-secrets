@@ -1,0 +1,45 @@
+ext {
+    kotlinDependencies = [
+            kotlin_stdlib: "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version",
+    ]
+
+    androidDependencies = [
+            core               : "androidx.core:core-ktx:$versions.core",
+            appcompat          : "androidx.appcompat:appcompat:$versions.appcompat",
+            constraintlayout   : "androidx.constraintlayout:constraintlayout:$versions.constraintlayout",
+            lifecycleViewmodel : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleViewmodel",
+            lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleExtensions",
+            fragment           : "androidx.fragment:fragment-ktx:$versions.fragment",
+            legacySupport      : "androidx.legacy:legacy-support-v4:$versions.legacySupport"
+    ]
+
+    uiDependencies = [
+            material: "com.google.android.material:material:$versions.material"
+    ]
+
+    koinAndroidDependencies = [
+            koin_android   : "io.insert-koin:koin-android:$versions.koin_version",
+            koin_java      : "io.insert-koin:koin-android-compat:$versions.koin_version",
+            koin_androix   : "io.insert-koin:koin-androidx-workmanager:$versions.koin_version",
+            koin_navigation: "io.insert-koin:koin-androidx-navigation:$versions.koin_version",
+    ]
+
+    deggerDependencies = [
+            dagger: "com.google.dagger:dagger:$versions.dagger_version",
+            dagger_compiler: "com.google.dagger:dagger-compiler:$versions.dagger_version"
+    ]
+
+    navigationDependencies = [
+            navigation_fragment: "androidx.navigation:navigation-fragment-ktx:$versions.nav_version",
+            navigation_ui      : "androidx.navigation:navigation-ui-ktx:$versions.nav_version"
+    ]
+
+    testsDependencies = [
+            junit: "junit:junit:$versions.junit"
+    ]
+
+    androidTestsDependencies = [
+            junitExt    : "androidx.test.ext:junit:$versions.junitExt",
+            espressoCore: "androidx.test.espresso:espresso-core:$versions.espressoCore"
+    ]
+}

@@ -1,0 +1,20 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+apply from: "${rootDir}/gradle/config/versions.gradle"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+
+dependencies {
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit2ConverterGson"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptor"
+
+    implementation project(":utility")
+}

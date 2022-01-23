@@ -1,0 +1,57 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.google.gms.google-services'
+}
+
+apply from: "${rootDir}/versions.gradle"
+apply from: "${rootDir}/dependencies.gradle"
+
+android {
+    compileSdk versions.android.compileSdk
+
+    defaultConfig {
+        applicationId "br.brunocarvalhs.friends_secrets"
+        minSdk versions.android.minSdk
+        targetSdk versions.android.targetSdk
+        versionCode versions.android.versionCode
+        versionName versions.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    viewBinding {
+        enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation kotlinDependencies.values()
+    implementation androidDependencies.values()
+    implementation uiDependencies.values()
+    implementation uiDependencies.values()
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+    def dagger_version = '2.27'
+    implementation "com.google.dagger:dagger:$dagger_version"
+    api "com.google.dagger:dagger-compiler:$dagger_version"
+
+    testImplementation testsDependencies.values()
+    androidTestImplementation androidTestsDependencies.values()
+
+
+
+    // Features
+//    implementation project(":feature:auth")
+//    implementation project(":feature:groups")
+//    implementation project(":feature:home")
+}

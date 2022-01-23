@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="11">
+      <module name="Friends_Secrets.core.network" target="1.8" />
+      <module name="Friends_Secrets.cores" target="11" />
+      <module name="Friends_Secrets.feature.auth" target="11" />
+      <module name="Friends_Secrets.feature.groups" target="11" />
+      <module name="Friends_Secrets.feature.home" target="11" />
+      <module name="Friends_Secrets.feature.profile" target="11" />
+      <module name="Friends_Secrets.features.auth" target="11" />
+      <module name="Friends_Secrets.utilitys" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

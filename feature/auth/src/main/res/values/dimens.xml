@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- layout -->
+    <dimen name="title_layout_width">300dp</dimen>
+    <dimen name="describle_layout_width">252dp</dimen>
+
+    <!-- Margin -->
+    <dimen name="title_margin_top">20dp</dimen>
+    <dimen name="describle_margin_top">20dp</dimen>
+
+    <!-- Font Size -->
+    <dimen name="title_font_size">40sp</dimen>
+    <dimen name="describle_font_size">15sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>

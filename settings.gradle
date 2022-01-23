@@ -1,0 +1,18 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Friends Secrets"
+include ':app'
+//include ':feature'
+//
+//// Core
+//include ':core:network'
+//include ':utility'
+//include ':feature:home'
+//include ':feature:groups'
+//include ':feature:auth'
+//include ':feature:profile'
