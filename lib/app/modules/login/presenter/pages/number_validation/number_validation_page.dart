@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_validation/number_validation_controller.dart';
+import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 
 class NumberValidationPage extends StatefulWidget {
   const NumberValidationPage({Key? key}) : super(key: key);
@@ -14,32 +14,18 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Validando\nTelefone",
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Um código foi enviado para o telefone\nregistrado para validar seu número",
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                ],
+              const HeaderDefault(
+                title: "Validando\nTelefone",
+                subtitle: "Um código foi enviado para o telefone\nregistrado para validar seu número",
               ),
               const SizedBox(height: 50),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,

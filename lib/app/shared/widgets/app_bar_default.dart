@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 
 class AppBarDefault extends StatelessWidget {
   final bool automaticallyImplyLeading;
@@ -27,58 +28,15 @@ class AppBarDefault extends StatelessWidget {
         stretch: true,
         automaticallyImplyLeading: automaticallyImplyLeading,
         actions: actions,
-        flexibleSpace: subtitle != null
-            ? FlexibleSpaceBar(
-                background: Padding(
-                  padding: EdgeInsets.only(top: automaticallyImplyLeading ? 50 : 0, left: 20, right: 20),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            title,
-                            style: Theme.of(context).textTheme.headline1,
-                          ),
-                          const SizedBox(height: 30),
-                          Text(
-                            subtitle!,
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            : FlexibleSpaceBar(
-                background: Padding(
-                  padding: EdgeInsets.only(top: automaticallyImplyLeading ? 50 : 0, left: 20, right: 20),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            title,
-                            style: Theme.of(context).textTheme.headline1,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+        flexibleSpace: FlexibleSpaceBar(
+          background: HeaderDefault(
+            title: title,
+            subtitle: subtitle,
+            top: automaticallyImplyLeading ? 50 : 0,
+            left: 20,
+            right: 20,
+          ),
+        ),
       ),
     );
   }
