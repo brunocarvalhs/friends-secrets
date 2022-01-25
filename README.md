@@ -18,7 +18,7 @@
     </a>
 </p>
 
-Inglês | [Português](/README_ptbr.md)
+Inglês | [Português](/docs/README_ptbr.md)
 
 > As of now, this project is designed to only output builds for Android and iOS. Even though, given the current
 > _stability_ of Flutter SDK for desktop (Windows, Linux and macOS) and web, there is a high probability that this
@@ -46,7 +46,7 @@ If you have Flutter setup locally, on the project's root folder, install pubspec
 ## Arquitetura
 
 How this application works from inside and how it interacts with external dependencies - written in details in
-[ARCHITECTURE.md](ARCHITECTURE.md).
+[ARCHITECTURE](docs/ARCHITECTURE.md).
 
 ## Contribuindo
 
