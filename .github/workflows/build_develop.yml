@@ -20,6 +20,11 @@ jobs:
         with:
           flutter-version: "2.x"
 
+      - name: create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -41,6 +46,11 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: "2.x"
+
+      - name: create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
 
       - name: Install dependencies
         run: dart pub get
@@ -70,6 +80,11 @@ jobs:
         with:
           channel: "stable"
 
+      - name: create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
       - name: Install pub Dependencies
         run: flutter pub get
 
@@ -77,7 +92,7 @@ jobs:
         run: |
           flutter build apk --split-per-abi
           flutter build appbundle
-          
+
       - name: Build iOS App
         run: |
           flutter build ios --no-codesign
