@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/brunocarvalhs/friends-secrets" target="_blank"><img src="https://github.com/brunocarvalhs/friends-secrets/blob/master/docs/logo.png" width="250"></a></p>
+<p align="center"><a href="https://github.com/brunocarvalhs/friends-secrets" target="_blank"><img src="https://github.com/brunocarvalhs/friends-secrets/blob/develop/docs/images/logo.png" width="250"></a></p>
 
 <p align="center">
     <a href="https://github.com/brunocarvalhs/friends-secrets/blob/master/LICENSE">
