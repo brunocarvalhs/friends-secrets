@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/core/shared/utils/assets_utils.dart';
+import 'package:friends_secrets/app/shared/utils/assets_utils.dart';
 import 'package:friends_secrets/app/modules/splash/presenter/pages/splash_controller.dart';
 
 class SplashPage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/core/shared/utils/assets_utils.dart';
+import 'package:friends_secrets/app/shared/utils/assets_utils.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/login/login_controller.dart';
 import 'package:friends_secrets/app/modules/login/presenter/widgets/social_login_button/social_login_button_widget.dart';
 

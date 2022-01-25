@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/list/groups_list_controller.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 
@@ -15,55 +16,44 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () => controller.request(),
-          notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
-          child: CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                expandedHeight: 400,
-                automaticallyImplyLeading: false,
-                flexibleSpace: SizedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
-                          style: Theme.of(context).textTheme.headline1,
+        child: NestedScrollView(
+          headerSliverBuilder: (_, b) => [
+            AppBarDefault(
+              actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))],
+              automaticallyImplyLeading: false,
+              expandedHeight: 150,
+              title:
+                  "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
+            ),
+          ],
+          body: RefreshIndicator(
+            onRefresh: () => controller.request(),
+            notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+            child: CustomScrollView(
+              slivers: <Widget>[
+                Observer(
+                  builder: (_) => SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) => Card(
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text("${controller.allGroups[index].name}"),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text("${controller.allGroups[index].describle}"),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Observer(
-                builder: (_) => SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) => Card(
-                      clipBehavior: Clip.antiAlias,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text("${controller.allGroups[index].name}"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text("${controller.allGroups[index].describle}"),
-                          ),
-                        ],
                       ),
+                      childCount: controller.countGroups,
                     ),
-                    childCount: controller.countGroups,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

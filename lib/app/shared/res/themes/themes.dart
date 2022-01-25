@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friends_secrets/app/core/shared/res/colors/colors_themes.dart';
+import 'package:friends_secrets/app/shared/res/colors/colors_themes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Themes {
@@ -69,7 +69,7 @@ class Themes {
         surface: Colors.white,
         background: Colors.white,
         error: Color(0xffb00020),
-        onPrimary: Colors.white,
+        onPrimary: ColorsThemes.primary,
         onSecondary: Colors.white,
         onSurface: Colors.black,
         onBackground: Colors.black,
@@ -95,10 +95,6 @@ class Themes {
           brightness: Brightness.dark,
         ),
       ),
-      iconTheme: const IconThemeData(
-        color: ColorsThemes.primary,
-        size: 20,
-      ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         extendedTextStyle: GoogleFonts.rajdhani(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
       ),
@@ -108,7 +104,6 @@ class Themes {
   static ThemeData dark() {
     return ThemeData(
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: Colors.transparent,
       textTheme: TextTheme(
         headline1: GoogleFonts.rajdhani(
           fontSize: 40,
@@ -175,7 +170,7 @@ class Themes {
         error: Color(0xffb00020),
         onPrimary: Colors.white,
         onSecondary: Colors.white,
-        onSurface: Colors.black,
+        onSurface: ColorsThemes.primary,
         onBackground: Colors.black,
         onError: Colors.white,
         brightness: Brightness.dark,
@@ -198,9 +193,6 @@ class Themes {
           onError: Colors.white,
           brightness: Brightness.dark,
         ),
-      ),
-      iconTheme: const IconThemeData(
-        size: 20,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         extendedTextStyle: GoogleFonts.rajdhani(
