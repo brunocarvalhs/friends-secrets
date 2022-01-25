@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/brunocarvalhs/friends-secrets" target="_blank"><img src="https://github.com/brunocarvalhs/friends-secrets/blob/master/docs/logo.png" width="250"></a></p>
+<p align="center"><a href="https://github.com/brunocarvalhs/friends-secrets" target="_blank"><img src="https://github.com/brunocarvalhs/friends-secrets/blob/develop/docs/images/logo.png" width="150"></a></p>
 
 <p align="center">
     <a href="https://github.com/brunocarvalhs/friends-secrets/blob/master/LICENSE">
@@ -18,7 +18,7 @@
     </a>
 </p>
 
-Inglês | [Português](/README_ptbr.md)
+Inglês | [Português](docs/README_ptbr.md)
 
 > A partir de agora, este projeto é projetado para produzir apenas compilações para Android e iOS. Mesmo assim, dado o atual
 > _estabilidade_ do Flutter SDK para desktop (Windows, Linux e macOS) e web, há uma grande probabilidade de que isso
