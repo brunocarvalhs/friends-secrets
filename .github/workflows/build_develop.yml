@@ -84,7 +84,7 @@ jobs:
           tag: ${{ env.APP_VERSION }}
           name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GH_TOKEN }}
-          artifacts: "build/app/outputs/bundle/release/*.aab"
+          artifacts: "build/ios/iphoneos/*.ipa"
 
   android:
     name: Build Android
