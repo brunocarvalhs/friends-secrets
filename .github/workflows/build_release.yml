@@ -20,7 +20,7 @@ jobs:
         with:
           flutter-version: "2.x"
 
-      - name: create env file
+      - name: Create env file
         run: |
           touch .env
           echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
@@ -47,7 +47,7 @@ jobs:
         with:
           flutter-version: "2.x"
 
-      - name: create env file
+      - name: Create env file
         run: |
           touch .env
           echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
@@ -103,7 +103,7 @@ jobs:
         with:
           channel: "stable"
 
-      - name: create env file
+      - name: Create env file
         run: |
           touch .env
           echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
