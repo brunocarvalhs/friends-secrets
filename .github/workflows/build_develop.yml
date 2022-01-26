@@ -38,7 +38,7 @@ jobs:
         run: curl -s https://codecov.io/bash -t ${{ secrets.CODECOV_TOKEN }}
         shell: bash
 
-  build:
+  ios:
     name: Build IOS
     needs: [quality]
     runs-on: macos-latest
@@ -86,7 +86,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           artifacts: "build/app/outputs/bundle/release/*.aab"
 
-  build:
+  android:
     name: Build Android
     needs: [quality]
     runs-on: ubuntu-latest
