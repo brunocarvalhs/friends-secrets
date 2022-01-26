@@ -28,44 +28,68 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Test validation
-        run: flutter test
+      - name: Analyze
+        run: flutter analyze
 
-  quality:
-    name: Quality dart Code
-    needs: [test]
-    runs-on: ubuntu-latest
+      - name: Run tests
+        run: flutter test --coverage
+
+      - name: Upload coverage to codecov
+        run: curl -s https://codecov.io/bash -t ${{ secrets.CODECOV_TOKEN }}
+        shell: bash
+
+  build:
+    name: Build IOS
+    needs: [quality]
+    runs-on: macos-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
 
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
+      - name: Checkout repository
+        uses: actions/checkout@v1
 
-      - uses: subosito/flutter-action@v1
+      - name: Set up Java
+        uses: actions/setup-java@v2
         with:
-          flutter-version: "2.x"
+          java-version: "8"
+          distribution: "adopt"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
 
       - name: Create env file
         run: |
           touch .env
           echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
 
-      - name: Install dependencies
-        run: dart pub get
+      - name: Install pub Dependencies
+        run: flutter pub get
 
-      - name: Analyze Dart
-        uses: zgosalvez/github-actions-analyze-dart@v1
+      - name: Build iOS App
+        run: |
+          flutter build ios --release --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
+
+      - name: Release Apps
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
+          token: ${{ secrets.GH_TOKEN }}
+          artifacts: "build/app/outputs/bundle/release/*.aab"
 
   build:
-    name: Build Apps ${{ matrix.project}} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Build Android
     needs: [quality]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
@@ -93,27 +117,9 @@ jobs:
         run: flutter pub get
 
       - name: Build Android App
-        if: startsWith(matrix.os, 'ubuntu')
         run: |
           flutter build apk --split-per-abi
           flutter build appbundle
-
-      - name: Build iOS App
-        if: startsWith(matrix.os, 'macOS')
-        run: |
-          flutter build ios --no-codesign
-          cd build/ios/iphoneos
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
-          zip -r app.ipa Payload
-
-      # - name: Build Web App
-      #   run: |
-      #     flutter build web
-      #     cd build/web
-      #     zip -r web-app.zip .
 
       - name: Release Apps
         uses: ncipollo/release-action@v1
@@ -121,4 +127,4 @@ jobs:
           tag: ${{ env.APP_VERSION }}
           name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GH_TOKEN }}
-          artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/*.aab,build/ios/iphoneos/*.ipa"
+          artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/*.aab"
