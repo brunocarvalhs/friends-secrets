@@ -2,9 +2,11 @@
 name: Analyze & Tests
 
 on:
-  pull_request:
+  push:
     branches:
       - develop
+  pull_request:
+    branches:
       - master
 
 env:

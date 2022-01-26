@@ -48,3 +48,11 @@ jobs:
       # Build iOS app in production environment without code sign
       - name: Build iOS App
         run: flutter build ios --release --dart-define=ENV=PROD --no-codesign
+
+      - name: Release Apps
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
+          token: ${{ secrets.GH_TOKEN }}
+          artifacts: "*.ipa"

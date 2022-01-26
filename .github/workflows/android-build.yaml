@@ -2,6 +2,9 @@
 name: Android Build
 
 on:
+  push:
+    branches:
+      - develop
   pull_request:
     branches:
       - develop
@@ -47,6 +50,16 @@ jobs:
 
       # Build Android app in production environment without signing the appbundle
       - name: Build Android App
-        run: flutter build appbundle --release --dart-define=ENV=PROD
+        run: |
+          flutter build appbundle --release --dart-define=ENV=PROD
+          flutter build apk --release --dart-define=ENV=PROD
         env:
           IS_SIGNING_ENABLED: false
+
+      - name: Release Apps
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
+          token: ${{ secrets.GH_TOKEN }}
+          artifacts: "*.apk,*.aab"
