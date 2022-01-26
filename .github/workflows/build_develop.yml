@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch all history for all tags and branches
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v1
         run: |
           git fetch --prune --depth=10000
 
