@@ -4,6 +4,7 @@ name: Analyze & Tests
 on:
   pull_request:
     branches:
+      - develop
       - master
 
 env:
