@@ -62,12 +62,6 @@ jobs:
           sed -i 's/99.99.99+99/'$GIT_TAG_NAME'/g' pubspec.yaml|
           echo "Tag used version:"$GIT_TAG_NAME
 
-      - name: Cache Flutter
-        uses: actions/cache@v2
-        with:
-          path: /Users/runner/hostedtoolcache/flutter
-          key: macos-flutter
-
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
