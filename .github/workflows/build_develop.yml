@@ -40,6 +40,7 @@ jobs:
 
   ios:
     name: Build IOS
+    needs: [test]
     runs-on: macos-latest
     steps:
       - name: Export Release Timestamp
@@ -87,6 +88,7 @@ jobs:
 
   android:
     name: Build Android
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: Export Release Timestamp
