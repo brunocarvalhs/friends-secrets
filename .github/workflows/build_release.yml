@@ -20,20 +20,25 @@ jobs:
         with:
           flutter-version: "2.x"
 
+      - name: create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
       - name: Install dependencies
         run: flutter pub get
 
       - name: Test validation
         run: flutter test
-        
+
   quality:
     name: Quality dart Code
-    needs: [ test ]
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
@@ -41,7 +46,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: "2.x"
-          
+
+      - name: create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
       - name: Install dependencies
         run: dart pub get
 
@@ -50,7 +60,7 @@ jobs:
 
   version:
     name: Create version number
-    needs: [ quality ]
+    needs: [quality]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -93,6 +103,11 @@ jobs:
         with:
           channel: "stable"
 
+      - name: create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
       - name: Install pub Dependencies
         run: flutter pub get
 
@@ -111,11 +126,11 @@ jobs:
           cd ..
           zip -r app.ipa Payload
 
-      - name: Build Web App
-        run: |
-          flutter build web
-          cd build/web
-          zip -r web-app.zip .
+      # - name: Build Web App
+      #   run: |
+      #     flutter build web
+      #     cd build/web
+      #     zip -r web-app.zip .
 
       - name: Release Apps
         uses: ncipollo/release-action@v1

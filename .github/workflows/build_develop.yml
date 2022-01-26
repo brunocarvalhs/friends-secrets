@@ -20,7 +20,7 @@ jobs:
         with:
           flutter-version: "2.x"
 
-      - name: create env file
+      - name: Create env file
         run: |
           touch .env
           echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
@@ -47,7 +47,7 @@ jobs:
         with:
           flutter-version: "2.x"
 
-      - name: create env file
+      - name: Create env file
         run: |
           touch .env
           echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
@@ -80,7 +80,7 @@ jobs:
         with:
           channel: "stable"
 
-      - name: create env file
+      - name: Create env file
         run: |
           touch .env
           echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
@@ -103,11 +103,11 @@ jobs:
           cd ..
           zip -r app.ipa Payload
 
-      - name: Build Web App
-        run: |
-          flutter build web
-          cd build/web
-          zip -r web-app.zip .
+      # - name: Build Web App
+      #   run: |
+      #     flutter build web
+      #     cd build/web
+      #     zip -r web-app.zip .
 
       - name: Release Apps
         uses: ncipollo/release-action@v1
