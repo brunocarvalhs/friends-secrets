@@ -1,4 +1,4 @@
 abstract class RegisterDataSource {
-  Future<List<String>> register(String phone);
+  Future<Map<String, dynamic>> register(String phone);
   Future<bool> validation(String code);
 }

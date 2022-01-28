@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_validation/number_validation_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 
 class NumberValidationPage extends StatefulWidget {
-  const NumberValidationPage({Key? key}) : super(key: key);
+  final String phone;
+  const NumberValidationPage({Key? key, required this.phone}) : super(key: key);
   @override
   NumberValidationPageState createState() => NumberValidationPageState();
 }
@@ -102,11 +104,13 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        enableFeedback: false,
-        onPressed: () => controller.redirect(),
-        label: const Text("Registrar"),
-      ),
+      floatingActionButton: Observer(builder: (context) {
+        return FloatingActionButton.extended(
+          enableFeedback: false,
+          onPressed: () => controller.validation(),
+          label: const Text("Registrar"),
+        );
+      }),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }

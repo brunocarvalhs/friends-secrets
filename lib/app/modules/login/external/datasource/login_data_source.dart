@@ -20,7 +20,8 @@ class LoginDataSourceImpl implements LoginDataSource {
 
     if (storage != null && token != null) {
       http.setToken(token);
-      return UserModel.fromJson(storage);
+      final response = await http.get("/user");
+      return UserModel.fromMap(response.data);
     }
 
     throw ErrorGetLoggedUser();

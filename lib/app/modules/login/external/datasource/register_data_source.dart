@@ -12,19 +12,19 @@ class RegisterDataSourceImpl implements RegisterDataSource {
   RegisterDataSourceImpl(this.googleSignIn, this.secureStorage, this.http);
 
   @override
-  Future<List<String>> register(String phone) async {
+  Future<Map<String, dynamic>> register(String phone) async {
     var params = {
       "phone": phone,
     };
 
     final response = await http.post("/phone", data: params);
 
-    return [""];
+    return response.data;
   }
 
   @override
   Future<bool> validation(String code) async {
     final response = await http.get("/phone/$code");
-    return response.data["status"];
+    return response.statusCode == 200;
   }
 }

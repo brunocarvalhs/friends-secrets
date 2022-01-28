@@ -15,49 +15,52 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: Container(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Image.asset(
-                  loginBackground,
-                  fit: BoxFit.contain,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.46,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    loginBackground,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Organize seus\namigos secretos\nem um lugar",
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    "Crie grupos para realizar seu amigo\nsecreto com seus amigos",
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                  const SizedBox(height: 42),
-                  Center(
-                    child: SocialLoginButtonWidget.google(
-                      label: "Entrar com Google",
-                      onTap: () => controller.enterGoogle(),
-                      styleLabel: Theme.of(context).textTheme.button,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Organize seus\namigos secretos\nem um lugar",
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.headline1,
                     ),
-                  )
-                ],
+                    const SizedBox(height: 16),
+                    Text(
+                      "Crie grupos para realizar seu amigo\nsecreto com seus amigos",
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: SocialLoginButtonWidget.google(
+                        label: "Entrar com Google",
+                        onTap: () => controller.enterGoogle(),
+                        styleLabel: Theme.of(context).textTheme.button,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

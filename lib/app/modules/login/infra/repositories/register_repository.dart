@@ -10,7 +10,7 @@ class RegisterRepositoryImpl extends RegisterRepository {
   RegisterRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, List<String>>> register(String phone) async {
+  Future<Either<Failure, Map<String, dynamic>>> register(String phone) async {
     try {
       var register = await dataSource.register(phone);
       return Right(register);
@@ -22,8 +22,8 @@ class RegisterRepositoryImpl extends RegisterRepository {
   @override
   Future<Either<Failure, bool>> validation(String code) async {
     try {
-      var validation = await dataSource.validation(code);
-      return Right(validation);
+      await dataSource.validation(code);
+      return const Right(true);
     } catch (e) {
       return Left(ErrorGetLoggedUser(message: "Error ao tentar validar código"));
     }
