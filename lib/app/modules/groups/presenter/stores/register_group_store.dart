@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/register_group.dart';
@@ -18,7 +16,7 @@ abstract class _RegisterGroupStoreBase with Store {
 
   _RegisterGroupStoreBase(this.registersGroup);
 
-  // Type ---------------------------------------------
+  // Type ========================================================================
 
   @observable
   TypeModel? _type;
@@ -29,7 +27,7 @@ abstract class _RegisterGroupStoreBase with Store {
   @computed
   TypeModel? get getCategory => _type;
 
-  // Members ------------------------------------------
+  // Members ========================================================================
 
   @observable
   ObservableList<UserModel> _members = ObservableList<UserModel>.of([]);
@@ -41,27 +39,19 @@ abstract class _RegisterGroupStoreBase with Store {
   void removeMember(UserModel value) => _members.remove(value);
 
   @computed
-  List<UserModel>? get getMembers => _members;
+  List<UserModel>? get getMembers => _members.toList();
 
-  // Data ----------------------------------------------
+  // Data ========================================================================
 
-  @observable
-  String? _name;
+  // Name ------------------------------------------------------------------------
 
-  @action
-  void setName(String? value) => _name = value;
+  final TextEditingController controllerName = TextEditingController();
 
-  @computed
-  String get getName => _name ?? "";
+  // Discrible -------------------------------------------------------------------
 
-  @observable
-  String? _discrible;
+  final TextEditingController controllerDescrible = TextEditingController();
 
-  @action
-  void setDiscrible(String? value) => _discrible = value;
-
-  @computed
-  String get getDiscrible => _discrible ?? "";
+  // Date -------------------------------------------------------------------
 
   @observable
   DateTime _date = DateTime.now();
@@ -81,27 +71,56 @@ abstract class _RegisterGroupStoreBase with Store {
         _date.microsecond,
       );
 
+  // Time -------------------------------------------------------------------
+
   @observable
   TimeOfDay _time = TimeOfDay.now();
 
   @action
   void setTime(TimeOfDay? time) => _time = time ?? TimeOfDay.now();
 
+  // Price -------------------------------------------------------------------
+
+  final TextEditingController controllerPriceMin = TextEditingController();
+  final TextEditingController controllerPriceMax = TextEditingController();
+
+  @observable
+  RangeValues rangeSliderDiscreteValues = const RangeValues(0, 100);
+
+  @action
+  void setPrice(RangeValues price) {
+    controllerPriceMax.text = price.end.toStringAsFixed(2);
+    controllerPriceMin.text = price.start.toStringAsFixed(2);
+    rangeSliderDiscreteValues = price;
+  }
+
+  // Functions ==================================================================
+
   Future<void> register() async {
     var group = GroupModel(
-      name: getName,
-      describle: getDiscrible,
+      name: controllerName.text,
+      describle: controllerDescrible.text,
       date: getDate.toIso8601String(),
+      type: getCategory,
+      members: getMembers,
+      priceMax: controllerPriceMax.text,
+      priceMin: controllerPriceMin.text,
     );
     var result = await registersGroup(group);
     result.fold((failure) {}, (list) {
-      clear();
-      Modular.to.navigate("/home/");
+      clean();
+      Modular.to.pushReplacementNamed("/home/");
     });
   }
 
-  void clear() {
-    setName(null);
-    setDiscrible(null);
+  void clean() {
+    _members.clear();
+    _type = null;
+    controllerName.clear();
+    controllerDescrible.clear();
+    controllerPriceMax.clear();
+    controllerPriceMin.clear();
+    _date = DateTime.now();
+    _time = TimeOfDay.now();
   }
 }

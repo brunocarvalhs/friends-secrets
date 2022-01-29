@@ -10,9 +10,9 @@ class ContactsRepositoryImpl extends ContactsRepository {
   ContactsRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<Failure, List<dynamic>>> all(List<String> phones) async {
+  Future<Either<Failure, List<dynamic>>> all(List<String> list) async {
     try {
-      final params = {"contacts": phones};
+      final params = {"contacts": list};
       final response = await datasource.post<List<dynamic>>("/contacts", data: params);
       final contacts = response.data?.map((e) => UserModel.fromMap(e)).toList() ?? [];
       return Right(contacts);

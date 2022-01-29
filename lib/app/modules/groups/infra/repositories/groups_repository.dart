@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
 import 'package:friends_secrets/app/modules/groups/domain/errors/errors.dart';
 import 'package:friends_secrets/app/modules/groups/domain/entities/logged_group_info.dart';
@@ -17,8 +15,9 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedGroupInfo>> create(LoggedGroupInfo groups) async {
     try {
-      final group = GroupModel(uuid: "", name: "", created: "", updated: "");
-      return Right(group);
+      final params = groups.toJson();
+      final response = await datasource.post("/group", data: params);
+      return Right(response.data);
     } catch (e) {
       return Left(ErrorCreate());
     }

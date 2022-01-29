@@ -20,8 +20,9 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
           headerSliverBuilder: (_, b) => [
             const AppBarDefault(
               expandedHeight: 300,
-              title: "Registro de \nTelefone",
-              subtitle: "Cadastrando seu telefone, o organizador\ndo grupo, poderá te incluir no amigo\nsecreto.",
+              title: "Selecione\nos membros",
+              subtitle:
+                  "Com base na sua lista de contatos,\nlistamos os usuários que tem vinculo no aplicativo, assim facilitando ao selecionar seus membros do amigo secreto.",
             ),
           ],
           body: RefreshIndicator(

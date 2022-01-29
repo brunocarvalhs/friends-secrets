@@ -36,7 +36,7 @@ class GroupsModule extends Module {
     // Dependencies -----------------------------------------------------------------------------
     Bind.instance<ImagePicker>(ImagePicker()),
     // Stores -----------------------------------------------------------------------------------
-    Bind.factory<RegisterGroupStore>((i) => RegisterGroupStore(i.get())),
+    Bind.lazySingleton<RegisterGroupStore>((i) => RegisterGroupStore(i.get())),
     // Datasource -------------------------------------------------------------------------------
     Bind.factory<GaleryPhotoDatasource>((i) => GaleryPhotoDatasourceImpl(i.get())),
     Bind.factory<ContactsDataSource>((i) => ContactServiceDatasource()),
@@ -57,8 +57,8 @@ class GroupsModule extends Module {
     // Controllers -------------------------------------------------------------------------------
     Bind.factory((i) => GroupsListController(i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterMembersController(i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsRegisterTypeController(i.get(), i.get())),
-    Bind.factory((i) => GroupsRegisterInformationController(i.get(), i.get())),
+    Bind.factory((i) => GroupsRegisterTypeController(i.get(), i.get(), i.get())),
+    Bind.factory((i) => GroupsRegisterInformationController(i.get(), i.get(), i.get())),
   ];
 
   @override

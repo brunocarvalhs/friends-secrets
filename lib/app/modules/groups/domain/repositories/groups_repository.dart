@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:dartz/dartz.dart';
 
 import '../entities/logged_group_info.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/list_contacts.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
@@ -74,11 +73,11 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
 
       List<String> phones = [];
 
-      list.forEach((contact) {
-        contact.forEach((number) {
+      for (var contact in list) {
+        for (var number in contact) {
           phones.add(number);
-        });
-      });
+        }
+      }
 
       return phones;
     } else {

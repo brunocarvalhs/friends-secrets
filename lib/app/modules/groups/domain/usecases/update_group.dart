@@ -4,7 +4,7 @@ import 'package:friends_secrets/app/modules/groups/domain/errors/errors.dart';
 import 'package:friends_secrets/app/modules/groups/domain/repositories/groups_repository.dart';
 
 abstract class UpdateGroup {
-  Future<Either<Failure, void>> call(LoggedGroupInfo Group);
+  Future<Either<Failure, void>> call(LoggedGroupInfo group);
 }
 
 class UpdateGroupImpl extends UpdateGroup {
@@ -13,7 +13,7 @@ class UpdateGroupImpl extends UpdateGroup {
   UpdateGroupImpl(this.repository);
 
   @override
-  Future<Either<Failure, void>> call(LoggedGroupInfo Group) async {
-    return await repository.update(Group);
+  Future<Either<Failure, void>> call(LoggedGroupInfo group) async {
+    return await repository.update(group);
   }
 }

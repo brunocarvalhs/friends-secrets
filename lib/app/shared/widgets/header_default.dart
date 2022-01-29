@@ -33,12 +33,12 @@ class HeaderDefault extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                     const SizedBox(height: 30),
                     Text(
                       subtitle!,
-                      style: Theme.of(context).textTheme.headline3,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
                 ),
@@ -59,7 +59,7 @@ class HeaderDefault extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ],
                 ),

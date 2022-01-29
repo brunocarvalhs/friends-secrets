@@ -17,12 +17,12 @@ class ContactTodo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => isSelected ? onRemove(user) : onSelect(user),
-      child: Card(
-        borderOnForeground: true,
-        semanticContainer: false,
-        clipBehavior: Clip.antiAlias,
+    return Card(
+      borderOnForeground: true,
+      semanticContainer: false,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => isSelected ? onRemove(user) : onSelect(user),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
@@ -41,6 +41,12 @@ class ContactTodo extends StatelessWidget {
                   backgroundImage: NetworkImage("${user.photoUrl}"),
                 ),
                 title: Text("${user.name}"),
+                trailing: isSelected
+                    ? Icon(
+                        Icons.check,
+                        color: Theme.of(context).primaryColor,
+                      )
+                    : null,
               ),
             ],
           ),

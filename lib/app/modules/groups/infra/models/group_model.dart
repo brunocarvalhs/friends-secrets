@@ -1,17 +1,21 @@
 import 'dart:convert';
 
+import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
+import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
+
 import '../../domain/entities/logged_group.dart';
 import '../../domain/entities/logged_group_info.dart';
 
 class GroupModel extends LoggedGroup implements LoggedGroupInfo {
   const GroupModel({
     String? uuid,
-    Object? type,
+    TypeModel? type,
     String? name,
     String? describle,
     String? date,
     String? priceMin,
     String? priceMax,
+    List<UserModel>? members,
     String? created,
     String? updated,
   }) : super(
@@ -22,29 +26,35 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
           date: date,
           priceMin: priceMin,
           priceMax: priceMax,
+          members: members,
           created: created,
           updated: updated,
         );
 
   @override
   GroupModel copyWith({
-    Object? type,
+    String? uuid,
+    TypeModel? type,
     String? name,
     String? describle,
     String? date,
     String? priceMin,
     String? priceMax,
+    List<UserModel>? members,
+    String? created,
+    String? updated,
   }) {
     return GroupModel(
-      uuid: uuid,
+      uuid: uuid ?? this.uuid,
       type: type ?? this.type,
       name: name ?? this.name,
       describle: describle ?? this.describle,
       date: date ?? this.date,
       priceMin: priceMin ?? this.priceMin,
       priceMax: priceMax ?? this.priceMax,
-      created: created,
-      updated: updated,
+      members: members ?? this.members,
+      created: created ?? this.created,
+      updated: updated ?? this.updated,
     );
   }
 
@@ -52,12 +62,13 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
   Map<String, dynamic> toMap() {
     return {
       "uuid": uuid,
-      "type": type,
+      "type": type?.toMap(),
       "name": name,
       "describle": describle,
       "date": date,
       "priceMin": priceMin,
       "priceMax": priceMax,
+      'members': members?.map((x) => x?.toMap())?.toList(),
       "created": created,
       "updated": updated,
     };
@@ -66,12 +77,13 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
   factory GroupModel.fromMap(Map<String, dynamic> map) {
     return GroupModel(
       uuid: map["uuid"] as String,
-      // type: map["types_id"] as String?,
+      type: map['type'] != null ? TypeModel.fromMap(map['type']) : null,
       name: map["name"] as String,
       describle: map["describle"] as String?,
       date: map["date"] as String?,
       priceMin: map["price_min"] as String?,
       priceMax: map["price_max"] as String?,
+      members: map['members'] != null ? List<UserModel>.from(map['members']?.map((x) => UserModel.fromMap(x))) : null,
       created: map["created_at"] as String,
       updated: map["updated_at"] as String,
     );

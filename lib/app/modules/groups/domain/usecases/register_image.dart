@@ -5,7 +5,7 @@ import 'package:friends_secrets/app/modules/groups/domain/errors/errors.dart';
 import 'package:friends_secrets/app/modules/groups/domain/repositories/storage_repository.dart';
 
 abstract class RegisterImage {
-  Future<Either<Failure, String>> call(File Group);
+  Future<Either<Failure, String>> call(File group);
 }
 
 class RegisterImageImpl extends RegisterImage {
@@ -14,7 +14,7 @@ class RegisterImageImpl extends RegisterImage {
   RegisterImageImpl(this.repository);
 
   @override
-  Future<Either<Failure, String>> call(File Group) async {
-    return await repository.uploadFile(Group);
+  Future<Either<Failure, String>> call(File group) async {
+    return await repository.uploadFile(group);
   }
 }
