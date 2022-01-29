@@ -34,7 +34,7 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                   children: [
                     SizedBox(
                       width: 36,
-                      child: TextField(
+                      child: TextFormField(
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[0],
@@ -47,7 +47,7 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                     ),
                     SizedBox(
                       width: 36,
-                      child: TextField(
+                      child: TextFormField(
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[1],
@@ -60,7 +60,7 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                     ),
                     SizedBox(
                       width: 36,
-                      child: TextField(
+                      child: TextFormField(
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[2],
@@ -73,7 +73,7 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                     ),
                     SizedBox(
                       width: 36,
-                      child: TextField(
+                      child: TextFormField(
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[3],
@@ -86,7 +86,7 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                     ),
                     SizedBox(
                       width: 36,
-                      child: TextField(
+                      child: TextFormField(
                         keyboardType: TextInputType.phone,
                         autofocus: true,
                         controller: controller.inputs[4],

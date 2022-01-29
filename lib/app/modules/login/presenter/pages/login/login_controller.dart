@@ -1,6 +1,7 @@
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/shared/widgets/loading.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../domain/usecases/login_with_google.dart';
@@ -18,13 +19,7 @@ abstract class _LoginControllerBase with Store {
   _LoginControllerBase(this.loginWithGoogleUsecase, this.authStore);
 
   enterGoogle() async {
-    var entry = OverlayEntry(
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+    var entry = OverlayEntry(builder: (context) => const Loading());
     asuka.addOverlay(entry);
     var result = await loginWithGoogleUsecase();
     entry.remove();

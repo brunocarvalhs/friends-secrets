@@ -34,7 +34,7 @@ class GroupsRegisterInformationPageState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextField(
+                    TextFormField(
                       controller: controller.controllerName,
                       keyboardType: TextInputType.name,
                       decoration: const InputDecoration(
@@ -93,7 +93,7 @@ class GroupsRegisterInformationPageState
                     const SizedBox(
                       height: 14,
                     ),
-                    TextField(
+                    TextFormField(
                       controller: controller.controllerDescrible,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
@@ -112,7 +112,7 @@ class GroupsRegisterInformationPageState
                       children: [
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
-                          child: TextField(
+                          child: TextFormField(
                             controller: controller.controllerPriceMin,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
@@ -125,7 +125,7 @@ class GroupsRegisterInformationPageState
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
-                          child: TextField(
+                          child: TextFormField(
                             controller: controller.controllerPriceMax,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
