@@ -109,6 +109,7 @@ class Themes {
           brightness: Brightness.dark,
         ),
       ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(elevation: 0),
     );
   }
 
@@ -218,6 +219,7 @@ class Themes {
           brightness: Brightness.dark,
         ),
       ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(elevation: 0),
     );
   }
 }

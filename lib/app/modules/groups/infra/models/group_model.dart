@@ -68,7 +68,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       "date": date,
       "priceMin": priceMin,
       "priceMax": priceMax,
-      'members': members?.map((x) => x?.toMap())?.toList(),
+      'members': members?.map((x) => x.toMap()).toList(),
       "created": created,
       "updated": updated,
     };
