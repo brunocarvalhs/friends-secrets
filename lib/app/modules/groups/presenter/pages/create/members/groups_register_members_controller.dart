@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/list_contacts.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
@@ -14,9 +16,10 @@ class GroupsRegisterMembersController = _GroupsRegisterMembersControllerBase wit
 
 abstract class _GroupsRegisterMembersControllerBase with Store {
   final AuthStore user;
-  final GetGroups getGroups;
+  final RegisterGroupStore registerGroupStore;
+  final ListContacts listContacts;
 
-  _GroupsRegisterMembersControllerBase(this.user, this.getGroups) {
+  _GroupsRegisterMembersControllerBase(this.user, this.registerGroupStore, this.listContacts) {
     request();
   }
 
@@ -41,11 +44,45 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
     _listContacts.addAll(contacts);
   }
 
+  void selectContact(UserModel user) {
+    registerGroupStore.addMember(user);
+  }
+
+  void removeContact(UserModel user) {
+    registerGroupStore.removeMember(user);
+  }
+
+  bool isSelectedContact(UserModel user) {
+    return registerGroupStore.getMembers?.contains(user) ?? false;
+  }
+
   Future<void> request() async {
+    final contacts = await _requestListContact();
+    final result = await listContacts(contacts);
+    result.fold((l) {}, (users) {
+      addAll(users as List<UserModel>);
+    });
+  }
+
+  Future<List<String>> _requestListContact() async {
     if (await Permission.contacts.request().isGranted) {
-      List<Contact> contacts = await FlutterContacts.getContacts();
-      final users = contacts.map((e) => UserModel(uuid: "uuid", name: e.displayName));
-      addAll(users);
+      List<Contact> contacts = await FlutterContacts.getContacts(withPhoto: true, withProperties: true);
+
+      final list = contacts
+          .map((e) => e.phones.map((e) => e.number.replaceAll(RegExp(r"/(?<!^)\+|[^\d+]+"), "")).toList())
+          .toList();
+
+      List<String> phones = [];
+
+      list.forEach((contact) {
+        contact.forEach((number) {
+          phones.add(number);
+        });
+      });
+
+      return phones;
+    } else {
+      return [];
     }
   }
 
