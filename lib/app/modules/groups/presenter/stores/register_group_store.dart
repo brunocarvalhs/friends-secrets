@@ -1,9 +1,11 @@
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/register_group.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
+import 'package:friends_secrets/app/shared/widgets/loading.dart';
 
 import 'package:mobx/mobx.dart';
 
@@ -97,6 +99,8 @@ abstract class _RegisterGroupStoreBase with Store {
   // Functions ==================================================================
 
   Future<void> register() async {
+    var entry = OverlayEntry(builder: (context) => const Loading());
+    asuka.addOverlay(entry);
     var group = GroupModel(
       name: controllerName.text,
       describle: controllerDescrible.text,
@@ -107,7 +111,10 @@ abstract class _RegisterGroupStoreBase with Store {
       priceMin: controllerPriceMin.text,
     );
     var result = await registersGroup(group);
-    result.fold((failure) {}, (list) {
+    entry.remove();
+    result.fold((failure) {
+      asuka.AsukaSnackbar.warning(failure.message.toString());
+    }, (list) {
       clean();
       Modular.to.pushReplacementNamed("/home/");
     });
