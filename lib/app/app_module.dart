@@ -31,7 +31,11 @@ class AppModule extends Module {
     Bind.instance<FirebaseAnalytics>(FirebaseAnalytics()),
     Bind.instance<FirebaseMessaging>(FirebaseMessaging.instance),
     Bind.lazySingleton<FirebaseAnalyticsObserver>((i) => FirebaseAnalyticsObserver(analytics: i.get())),
-    Bind.instance<Dio>(Dio(BaseOptions(baseUrl: dotenv.env['BASE_URL'].toString()))),
+    Bind.instance<Dio>(Dio(BaseOptions(
+      baseUrl: dotenv.env['BASE_URL'].toString(),
+      connectTimeout: 10000,
+      receiveTimeout: 10000,
+    ))),
     Bind.lazySingleton<NetworkDataSource>((i) => DioDataSourceImpl(i.get(), i.get())),
     Bind.lazySingleton<NetworkRepository>((i) => NetworkRepositoryImpl(i.get())),
     AsyncBind<SharedPreferences>((i) => SharedPreferences.getInstance()),

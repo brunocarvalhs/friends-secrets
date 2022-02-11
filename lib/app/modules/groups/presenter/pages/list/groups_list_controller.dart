@@ -1,4 +1,3 @@
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -59,9 +58,7 @@ abstract class _GroupsListControllerBase with Store {
   Future<void> request() async {
     setLoading(true);
     var result = await getGroups();
-    result.fold((failure) {
-      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
-    }, (list) {
+    result.fold((failure) {}, (list) {
       addAll(list as Iterable<GroupModel>);
     });
     setLoading(false);

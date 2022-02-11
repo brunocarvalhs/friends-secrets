@@ -56,6 +56,7 @@ class GroupsRegisterInformationPageState
                             child: Observer(
                               builder: (context) => InputDecorator(
                                 decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
                                   filled: true,
                                   hintText: "Data",
                                   labelText: "Data",
@@ -75,6 +76,7 @@ class GroupsRegisterInformationPageState
                             child: Observer(
                               builder: (context) => InputDecorator(
                                 decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
                                   filled: true,
                                   hintText: "Horário",
                                   labelText: "Horário",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:badges/badges.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/list/groups_list_controller.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
@@ -19,7 +20,22 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
-              actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))],
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Badge(
+                    position: BadgePosition.topStart(),
+                    elevation: 0,
+                    badgeContent: const Text(
+                      '3',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: const Icon(Icons.notifications),
+                  ),
+                ),
+              ],
               automaticallyImplyLeading: false,
               expandedHeight: 150,
               title:
