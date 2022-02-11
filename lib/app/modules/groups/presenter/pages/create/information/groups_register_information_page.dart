@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/create/information/groups_register_information_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
+import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
 
 class GroupsRegisterInformationPage extends StatefulWidget {
   const GroupsRegisterInformationPage({Key? key}) : super(key: key);
@@ -34,14 +35,12 @@ class GroupsRegisterInformationPageState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFormField(
+                    TextFieldDefault(
                       controller: controller.controllerName,
                       keyboardType: TextInputType.name,
-                      decoration: const InputDecoration(
-                        filled: true,
-                        hintText: "Nome",
-                        labelText: "Nome",
-                      ),
+                      filled: true,
+                      hintText: "Nome",
+                      labelText: "Nome",
                     ),
                     const SizedBox(
                       height: 14,
@@ -93,15 +92,13 @@ class GroupsRegisterInformationPageState
                     const SizedBox(
                       height: 14,
                     ),
-                    TextFormField(
+                    TextFieldDefault(
                       controller: controller.controllerDescrible,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      decoration: const InputDecoration(
-                        filled: true,
-                        hintText: "Descrição",
-                        labelText: "Descrição",
-                      ),
+                      filled: true,
+                      hintText: "Descrição",
+                      labelText: "Descrição",
                     ),
                     const SizedBox(
                       height: 14,
@@ -112,28 +109,24 @@ class GroupsRegisterInformationPageState
                       children: [
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
-                          child: TextFormField(
+                          child: TextFieldDefault(
                             controller: controller.controllerPriceMin,
                             keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              filled: true,
-                              hintText: "Min",
-                              labelText: "Min",
-                              prefixText: "R\$ ",
-                            ),
+                            filled: true,
+                            hintText: "Min",
+                            labelText: "Min",
+                            prefixText: "R\$ ",
                           ),
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
-                          child: TextFormField(
+                          child: TextFieldDefault(
                             controller: controller.controllerPriceMax,
                             keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              filled: true,
-                              hintText: "Max",
-                              labelText: "Max",
-                              prefixText: "R\$ ",
-                            ),
+                            filled: true,
+                            hintText: "Max",
+                            labelText: "Max",
+                            prefixText: "R\$ ",
                           ),
                         ),
                       ],

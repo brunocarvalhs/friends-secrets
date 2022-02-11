@@ -60,7 +60,7 @@ abstract class _GroupsListControllerBase with Store {
     setLoading(true);
     var result = await getGroups();
     result.fold((failure) {
-      asuka.AsukaSnackbar.warning(failure.message.toString());
+      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
     }, (list) {
       addAll(list as Iterable<GroupModel>);
     });

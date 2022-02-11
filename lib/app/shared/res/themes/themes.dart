@@ -77,9 +77,7 @@ class Themes {
       ),
       colorScheme: const ColorScheme(
         primary: ColorsThemes.primary,
-        primaryVariant: ColorsThemes.primaryVariant,
         secondary: ColorsThemes.secondary,
-        secondaryVariant: ColorsThemes.secondaryVariant,
         surface: Colors.white,
         background: Colors.white,
         error: Color(0xffb00020),
@@ -95,9 +93,7 @@ class Themes {
         height: 56,
         colorScheme: ColorScheme(
           primary: ColorsThemes.primary,
-          primaryVariant: ColorsThemes.primaryVariant,
           secondary: ColorsThemes.secondary,
-          secondaryVariant: ColorsThemes.secondaryVariant,
           surface: Colors.white,
           background: Colors.white,
           error: Color(0xffb00020),
@@ -187,9 +183,7 @@ class Themes {
       ),
       colorScheme: const ColorScheme(
         primary: ColorsThemes.primary,
-        primaryVariant: ColorsThemes.primaryVariant,
         secondary: ColorsThemes.secondary,
-        secondaryVariant: ColorsThemes.secondaryVariant,
         surface: Colors.white,
         background: Colors.white,
         error: Color(0xffb00020),
@@ -205,9 +199,7 @@ class Themes {
         height: 56,
         colorScheme: ColorScheme(
           primary: ColorsThemes.primary,
-          primaryVariant: ColorsThemes.primaryVariant,
           secondary: ColorsThemes.secondary,
-          secondaryVariant: ColorsThemes.secondaryVariant,
           surface: Colors.white,
           background: Colors.white,
           error: Color(0xffb00020),

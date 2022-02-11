@@ -5,7 +5,7 @@ import 'package:friends_secrets/app/modules/groups/domain/usecases/register_grou
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
-import 'package:friends_secrets/app/shared/widgets/loading.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
 
 import 'package:mobx/mobx.dart';
 
@@ -99,7 +99,7 @@ abstract class _RegisterGroupStoreBase with Store {
   // Functions ==================================================================
 
   Future<void> register() async {
-    var entry = OverlayEntry(builder: (context) => const Loading());
+    var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
     var group = GroupModel(
       name: controllerName.text,
@@ -113,7 +113,7 @@ abstract class _RegisterGroupStoreBase with Store {
     var result = await registersGroup(group);
     entry.remove();
     result.fold((failure) {
-      asuka.AsukaSnackbar.warning(failure.message.toString());
+      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
     }, (list) {
       clean();
       Modular.to.pushReplacementNamed("/home/");

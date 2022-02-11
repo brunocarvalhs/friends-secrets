@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_register/number_register_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
+import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class NumberRegisterPage extends StatefulWidget {
   const NumberRegisterPage({Key? key}) : super(key: key);
@@ -34,17 +36,13 @@ class NumberRegisterPageState extends ModularState<NumberRegisterPage, NumberReg
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextFormField(
+                      TextFieldDefault(
                         controller: controller.phone,
                         validator: (text) => controller.validateNumber(text),
                         keyboardType: TextInputType.phone,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                        ],
-                        decoration: const InputDecoration(
-                          prefixText: "+55 ",
-                          filled: true,
-                        ),
+                        labelText: 'Celular',
+                        hintText: '(00) 0 0000-0000',
+                        inputFormatters: <TextInputFormatter>[controller.maskFormatter],
                       ),
                     ],
                   ),

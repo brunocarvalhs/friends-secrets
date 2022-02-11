@@ -1,4 +1,3 @@
-import 'package:friends_secrets/app/modules/groups/domain/entities/logged_type.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 

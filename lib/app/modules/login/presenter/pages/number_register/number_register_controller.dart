@@ -2,7 +2,8 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/domain/usecases/register_phone.dart';
-import 'package:friends_secrets/app/shared/widgets/loading.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../presenter/stores/auth_store.dart';
@@ -19,17 +20,21 @@ abstract class _NumberRegisterControllerBase with Store {
   _NumberRegisterControllerBase(this.authStore, this.registerPhone);
 
   TextEditingController phone = TextEditingController();
+  final maskFormatter = MaskTextInputFormatter(
+    mask: '(##) # ####-####',
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
   final formKey = GlobalKey<FormState>();
 
   Future<void> postPhone() async {
     if (!formKey.currentState!.validate()) return;
-
-    var entry = OverlayEntry(builder: (context) => const Loading());
+    var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
-    final result = await registerPhone(phone.text.toString());
+    final result = await registerPhone(maskFormatter.getUnmaskedText());
     entry.remove();
     result.fold((l) {
-      asuka.AsukaSnackbar.warning(l.message.toString());
+      asuka.AsukaSnackbar.message(l.message.toString()).show();
     }, (r) {
       redirectValidation();
     });
