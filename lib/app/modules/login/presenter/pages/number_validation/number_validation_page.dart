@@ -5,8 +5,9 @@ import 'package:friends_secrets/app/modules/login/presenter/pages/number_validat
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 
 class NumberValidationPage extends StatefulWidget {
-  final String phone;
-  const NumberValidationPage({Key? key, required this.phone}) : super(key: key);
+  final String? verificadId;
+
+  const NumberValidationPage({Key? key, required this.verificadId}) : super(key: key);
   @override
   NumberValidationPageState createState() => NumberValidationPageState();
 }

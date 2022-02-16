@@ -33,10 +33,10 @@ abstract class _NumberRegisterControllerBase with Store {
     asuka.addOverlay(entry);
     final result = await validationPhone(maskFormatter.getUnmaskedText());
     entry.remove();
-    result.fold((l) {
-      asuka.AsukaSnackbar.message(l.message.toString()).show();
-    }, (r) {
-      redirectValidation();
+    result.fold((error) {
+      asuka.AsukaSnackbar.message(error.message.toString()).show();
+    }, (validationId) {
+      redirectValidation(maskFormatter.getUnmaskedText(), validationId);
     });
   }
 
@@ -47,5 +47,6 @@ abstract class _NumberRegisterControllerBase with Store {
     return null;
   }
 
-  void redirectValidation() => Modular.to.pushNamed("/login/phone/validation", arguments: phone.text);
+  void redirectValidation(String phone, String? validationId) =>
+      Modular.to.pushNamed("/login/phone/$phone.text", arguments: validationId);
 }

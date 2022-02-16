@@ -16,7 +16,7 @@ abstract class _NumberValidationControllerBase with Store {
 
   _NumberValidationControllerBase(this.authStore, this.registerPhone);
 
-  final String? phone = Modular.args.queryParams["phone"];
+  final String? phone = Modular.args.queryParams["phone"] ?? "";
   final String verificadId = Modular.args.data;
 
   List<TextEditingController> inputs = [

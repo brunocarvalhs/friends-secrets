@@ -51,6 +51,6 @@ class LoginModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, args) => const LoginPage()),
     ChildRoute("/phone", child: (_, args) => const NumberRegisterPage()),
-    ChildRoute("/phone/validation", child: (_, args) => NumberValidationPage(phone: args.data)),
+    ChildRoute("/phone/:phone", child: (_, args) => NumberValidationPage(verificadId: args.data)),
   ];
 }
