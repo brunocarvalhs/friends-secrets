@@ -19,7 +19,7 @@ class AppBarDefault extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.only(top: !automaticallyImplyLeading ? 50 : 0, right: 20),
+      padding: EdgeInsets.only(top: !automaticallyImplyLeading ? 50 : 0),
       sliver: SliverAppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

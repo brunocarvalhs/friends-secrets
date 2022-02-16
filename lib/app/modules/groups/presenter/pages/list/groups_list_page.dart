@@ -21,18 +21,21 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
               actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Badge(
-                    position: BadgePosition.topStart(),
-                    elevation: 0,
-                    badgeContent: const Text(
-                      '3',
-                      style: TextStyle(
-                        color: Colors.white,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Badge(
+                      position: BadgePosition.topStart(),
+                      elevation: 0,
+                      badgeContent: const Text(
+                        '3',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
+                      child: const Icon(Icons.notifications),
                     ),
-                    child: const Icon(Icons.notifications),
                   ),
                 ),
               ],
