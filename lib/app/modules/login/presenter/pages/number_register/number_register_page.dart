@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_register/number_register_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class NumberRegisterPage extends StatefulWidget {
   const NumberRegisterPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -28,8 +28,9 @@ class AppModule extends Module {
   final List<Bind> binds = [
     Bind.instance<DotEnv>(dotenv),
     Bind.instance<FirebaseApp>(Firebase.app()),
-    Bind.instance<FirebaseAnalytics>(FirebaseAnalytics()),
+    Bind.instance<FirebaseAnalytics>(FirebaseAnalytics.instance),
     Bind.instance<FirebaseMessaging>(FirebaseMessaging.instance),
+    Bind.instance<FirebaseAuth>(FirebaseAuth.instance),
     Bind.lazySingleton<FirebaseAnalyticsObserver>((i) => FirebaseAnalyticsObserver(analytics: i.get())),
     Bind.instance<Dio>(Dio(BaseOptions(
       baseUrl: dotenv.env['BASE_URL'].toString(),

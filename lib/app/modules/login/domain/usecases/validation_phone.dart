@@ -3,7 +3,7 @@ import 'package:friends_secrets/app/modules/login/domain/errors/errors.dart';
 import 'package:friends_secrets/app/modules/login/domain/repositories/register_repository.dart';
 
 abstract class ValidationPhone {
-  Future<Either<Failure, void>> call(String code);
+  Future<Either<Failure, void>> call(String phone);
 }
 
 class ValidationPhoneImpl extends ValidationPhone {
@@ -12,7 +12,7 @@ class ValidationPhoneImpl extends ValidationPhone {
   ValidationPhoneImpl(this.repository);
 
   @override
-  Future<Either<Failure, void>> call(String code) async {
-    return await repository.validation(code);
+  Future<Either<Failure, void>> call(String phone) async {
+    return await repository.validation(phone);
   }
 }

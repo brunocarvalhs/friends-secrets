@@ -7,7 +7,7 @@ part of 'number_register_controller.dart';
 // **************************************************************************
 
 final $NumberRegisterController = BindInject(
-  (i) => NumberRegisterController(i<AuthStore>(), i<RegisterPhone>()),
+  (i) => NumberRegisterController(i<AuthStore>(), i<ValidationPhone>()),
   isSingleton: true,
   isLazy: true,
 );

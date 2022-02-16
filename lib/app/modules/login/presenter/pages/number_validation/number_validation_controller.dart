@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/login/domain/usecases/validation_phone.dart';
+import 'package:friends_secrets/app/modules/login/domain/usecases/register_phone.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../presenter/stores/auth_store.dart';
@@ -12,11 +12,12 @@ class NumberValidationController = _NumberValidationControllerBase with _$Number
 
 abstract class _NumberValidationControllerBase with Store {
   final AuthStore authStore;
-  final ValidationPhone validationPhone;
+  final RegisterPhone registerPhone;
 
-  _NumberValidationControllerBase(this.authStore, this.validationPhone);
+  _NumberValidationControllerBase(this.authStore, this.registerPhone);
 
   final String? phone = Modular.args.queryParams["phone"];
+  final String verificadId = Modular.args.data;
 
   List<TextEditingController> inputs = [
     TextEditingController(),
@@ -38,7 +39,7 @@ abstract class _NumberValidationControllerBase with Store {
 
   Future<void> validation() async {
     final code = inputs.map((e) => e.text).join("");
-    final result = await validationPhone(code);
+    final result = await registerPhone(verificadId, code);
     result.fold((l) {}, (r) {
       authStore.setUser(authStore.user?.copyWith(phone: phone));
       redirect();

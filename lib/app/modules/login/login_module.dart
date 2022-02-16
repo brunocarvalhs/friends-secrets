@@ -39,8 +39,8 @@ class LoginModule extends Module {
     Bind.factory<LoginRepository>((i) => LoginRepositoryImpl(i.get()), export: true),
     Bind.factory<RegisterRepository>((i) => RegisterRepositoryImpl(i.get()), export: true),
     // Datasource --------------------------------------------------------------------------------------
-    Bind.factory<LoginDataSource>((i) => LoginDataSourceImpl(i.get(), i.get(), i.get()), export: true),
-    Bind.factory<RegisterDataSource>((i) => RegisterDataSourceImpl(i.get(), i.get(), i.get()), export: true),
+    Bind.factory<LoginDataSource>((i) => LoginDataSourceImpl(i.get(), i.get(), i.get(), i.get()), export: true),
+    Bind.factory<RegisterDataSource>((i) => RegisterDataSourceImpl(i.get(), i.get(), i.get(), i.get()), export: true),
     // Controller --------------------------------------------------------------------------------------
     Bind.factory((i) => LoginController(i.get(), i.get())),
     Bind.factory((i) => NumberRegisterController(i.get(), i.get())),

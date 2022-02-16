@@ -26,7 +26,6 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, bool>> exit(String id) async {
     try {
-      final response = await datasource.get("/group");
       return const Right(true);
     } catch (e) {
       return Left(ErrorRemove());
@@ -36,7 +35,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, bool>> remove(String id) async {
     try {
-      final response = await datasource.get("/group");
+      await datasource.get("/group");
       return const Right(true);
     } catch (e) {
       return Left(ErrorRemove());
@@ -46,8 +45,8 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedGroupInfo>> select(String id) async {
     try {
-      final group = GroupModel(uuid: "", name: "", created: "", updated: "");
-      return Right(group);
+      const group = GroupModel(uuid: "", name: "", created: "", updated: "");
+      return const Right(group);
     } catch (e) {
       return Left(ErrorSelect());
     }
@@ -67,10 +66,10 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedGroupInfo>> update(LoggedGroupInfo groups) async {
     try {
-      final response = await datasource.get("/group");
-      final group = GroupModel(uuid: "", name: "", created: "", updated: "");
+      await datasource.get("/group");
+      const group = GroupModel(uuid: "", name: "", created: "", updated: "");
 
-      return Right(group);
+      return const Right(group);
     } catch (e) {
       return Left(ErrorUpdate());
     }

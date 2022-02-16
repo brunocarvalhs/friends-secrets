@@ -91,6 +91,19 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         autofocus: true,
                         controller: controller.inputs[4],
                         focusNode: controller.focus[4],
+                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[5]),
+                        decoration: const InputDecoration(
+                          filled: true,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 36,
+                      child: TextFormField(
+                        keyboardType: TextInputType.phone,
+                        autofocus: true,
+                        controller: controller.inputs[5],
+                        focusNode: controller.focus[5],
                         onChanged: (value) => FocusManager.instance.primaryFocus?.unfocus(),
                         decoration: const InputDecoration(
                           filled: true,

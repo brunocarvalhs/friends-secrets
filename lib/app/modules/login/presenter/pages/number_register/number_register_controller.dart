@@ -1,7 +1,7 @@
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/login/domain/usecases/register_phone.dart';
+import 'package:friends_secrets/app/modules/login/domain/usecases/validation_phone.dart';
 import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:mobx/mobx.dart';
@@ -15,9 +15,9 @@ class NumberRegisterController = _NumberRegisterControllerBase with _$NumberRegi
 
 abstract class _NumberRegisterControllerBase with Store {
   final AuthStore authStore;
-  final RegisterPhone registerPhone;
+  final ValidationPhone validationPhone;
 
-  _NumberRegisterControllerBase(this.authStore, this.registerPhone);
+  _NumberRegisterControllerBase(this.authStore, this.validationPhone);
 
   TextEditingController phone = TextEditingController();
   final maskFormatter = MaskTextInputFormatter(
@@ -31,7 +31,7 @@ abstract class _NumberRegisterControllerBase with Store {
     if (!formKey.currentState!.validate()) return;
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
-    final result = await registerPhone(maskFormatter.getUnmaskedText());
+    final result = await validationPhone(maskFormatter.getUnmaskedText());
     entry.remove();
     result.fold((l) {
       asuka.AsukaSnackbar.message(l.message.toString()).show();
