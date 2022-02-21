@@ -16,13 +16,13 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
       (_$getCategoryComputed ??= Computed<TypeModel?>(() => super.getCategory,
               name: '_RegisterGroupStoreBase.getCategory'))
           .value;
-  Computed<List<UserModel>?>? _$getMembersComputed;
+  Computed<List<UserModel>?>? _$getUsersComputed;
 
   @override
-  List<UserModel>? get getMembers => (_$getMembersComputed ??=
-          Computed<List<UserModel>?>(() => super.getMembers,
-              name: '_RegisterGroupStoreBase.getMembers'))
-      .value;
+  List<UserModel>? get getUsers =>
+      (_$getUsersComputed ??= Computed<List<UserModel>?>(() => super.getUsers,
+              name: '_RegisterGroupStoreBase.getUsers'))
+          .value;
   Computed<DateTime>? _$getDateComputed;
 
   @override
@@ -46,18 +46,18 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
     });
   }
 
-  final _$_membersAtom = Atom(name: '_RegisterGroupStoreBase._members');
+  final _$_usersAtom = Atom(name: '_RegisterGroupStoreBase._users');
 
   @override
-  ObservableList<UserModel> get _members {
-    _$_membersAtom.reportRead();
-    return super._members;
+  ObservableList<UserModel> get _users {
+    _$_usersAtom.reportRead();
+    return super._users;
   }
 
   @override
-  set _members(ObservableList<UserModel> value) {
-    _$_membersAtom.reportWrite(value, super._members, () {
-      super._members = value;
+  set _users(ObservableList<UserModel> value) {
+    _$_usersAtom.reportWrite(value, super._users, () {
+      super._users = value;
     });
   }
 
@@ -182,7 +182,7 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
     return '''
 rangeSliderDiscreteValues: ${rangeSliderDiscreteValues},
 getCategory: ${getCategory},
-getMembers: ${getMembers},
+getUsers: ${getUsers},
 getDate: ${getDate}
     ''';
   }

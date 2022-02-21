@@ -54,7 +54,7 @@ class TypeTodo extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "${type.describle}",
+                  "${type.description}",
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),

@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class LoggedType extends Equatable {
   final String? uuid;
   final String? name;
-  final String? describle;
+  final String? description;
   final bool? isDrawName;
   final String? created;
   final String? updated;
@@ -11,7 +11,7 @@ class LoggedType extends Equatable {
   const LoggedType({
     required this.uuid,
     required this.name,
-    required this.describle,
+    required this.description,
     required this.isDrawName,
     required this.created,
     required this.updated,
@@ -21,7 +21,7 @@ class LoggedType extends Equatable {
   List<Object?> get props => [
         uuid,
         name,
-        describle,
+        description,
         isDrawName,
         created,
         updated,

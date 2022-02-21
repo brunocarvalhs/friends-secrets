@@ -2,14 +2,14 @@ import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart'
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 
 abstract class LoggedGroupInfo {
-  String? get uuid;
+  String? get id;
   TypeModel? get type;
   String? get name;
-  String? get describle;
+  String? get description;
   String? get date;
   String? get priceMin;
   String? get priceMax;
-  List<UserModel>? get members;
+  List<UserModel>? get users;
   String? get created;
   String? get updated;
 
@@ -18,9 +18,9 @@ abstract class LoggedGroupInfo {
   LoggedGroupInfo copyWith({
     TypeModel? type,
     String? name,
-    String? describle,
+    String? description,
     String? date,
-    List<UserModel>? members,
+    List<UserModel>? users,
     String? priceMin,
     String? priceMax,
   });

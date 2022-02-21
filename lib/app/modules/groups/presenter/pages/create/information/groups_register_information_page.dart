@@ -95,7 +95,7 @@ class GroupsRegisterInformationPageState
                       height: 14,
                     ),
                     TextFieldDefault(
-                      controller: controller.controllerDescrible,
+                      controller: controller.controllerDescription,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       filled: true,

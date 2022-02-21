@@ -29,19 +29,19 @@ abstract class _RegisterGroupStoreBase with Store {
   @computed
   TypeModel? get getCategory => _type;
 
-  // Members ========================================================================
+  // users ========================================================================
 
   @observable
-  ObservableList<UserModel> _members = ObservableList<UserModel>.of([]);
+  ObservableList<UserModel> _users = ObservableList<UserModel>.of([]);
 
   @action
-  void addMember(UserModel value) => _members.add(value);
+  void addMember(UserModel value) => _users.add(value);
 
   @action
-  void removeMember(UserModel value) => _members.remove(value);
+  void removeMember(UserModel value) => _users.remove(value);
 
   @computed
-  List<UserModel>? get getMembers => _members.toList();
+  List<UserModel>? get getUsers => _users.toList();
 
   // Data ========================================================================
 
@@ -51,7 +51,7 @@ abstract class _RegisterGroupStoreBase with Store {
 
   // Discrible -------------------------------------------------------------------
 
-  final TextEditingController controllerDescrible = TextEditingController();
+  final TextEditingController controllerdescription = TextEditingController();
 
   // Date -------------------------------------------------------------------
 
@@ -103,10 +103,10 @@ abstract class _RegisterGroupStoreBase with Store {
     asuka.addOverlay(entry);
     var group = GroupModel(
       name: controllerName.text,
-      describle: controllerDescrible.text,
+      description: controllerdescription.text,
       date: getDate.toIso8601String(),
       type: getCategory,
-      members: getMembers,
+      users: getUsers,
       priceMax: controllerPriceMax.text,
       priceMin: controllerPriceMin.text,
     );
@@ -121,10 +121,10 @@ abstract class _RegisterGroupStoreBase with Store {
   }
 
   void clean() {
-    _members.clear();
+    _users.clear();
     _type = null;
     controllerName.clear();
-    controllerDescrible.clear();
+    controllerdescription.clear();
     controllerPriceMax.clear();
     controllerPriceMin.clear();
     _date = DateTime.now();

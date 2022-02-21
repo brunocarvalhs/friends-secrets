@@ -52,7 +52,7 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   }
 
   bool isSelectedContact(UserModel user) {
-    return registerGroupStore.getMembers?.contains(user) ?? false;
+    return registerGroupStore.getUsers?.contains(user) ?? false;
   }
 
   Future<void> request() async {

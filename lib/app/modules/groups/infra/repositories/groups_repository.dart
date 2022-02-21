@@ -45,7 +45,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedGroupInfo>> select(String id) async {
     try {
-      const group = GroupModel(uuid: "", name: "", created: "", updated: "");
+      const group = GroupModel(id: "", name: "", created: "", updated: "");
       return const Right(group);
     } catch (e) {
       return Left(ErrorSelect());
@@ -67,7 +67,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
   Future<Either<Failure, LoggedGroupInfo>> update(LoggedGroupInfo groups) async {
     try {
       await datasource.get("/group");
-      const group = GroupModel(uuid: "", name: "", created: "", updated: "");
+      const group = GroupModel(id: "", name: "", created: "", updated: "");
 
       return const Right(group);
     } catch (e) {

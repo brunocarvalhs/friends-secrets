@@ -25,7 +25,7 @@ abstract class _GroupsRegisterInformationControllerBase with Store {
   TextEditingController get controllerPriceMin => registerGroupStore.controllerPriceMin;
   TextEditingController get controllerName => registerGroupStore.controllerName;
   TextEditingController get controllerPriceMax => registerGroupStore.controllerPriceMax;
-  TextEditingController get controllerDescrible => registerGroupStore.controllerDescrible;
+  TextEditingController get controllerDescription => registerGroupStore.controllerdescription;
 
   @computed
   RangeValues get rangeSliderDiscreteValues => registerGroupStore.rangeSliderDiscreteValues;
