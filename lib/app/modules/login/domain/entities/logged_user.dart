@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class LoggedUser extends Equatable {
-  final String uuid;
+  final String id;
   final String? email;
   final String? name;
   final String? photoUrl;
   final String? phone;
 
   const LoggedUser({
-    required this.uuid,
+    required this.id,
     this.name,
     this.email,
     this.photoUrl,
@@ -16,5 +16,5 @@ class LoggedUser extends Equatable {
   });
 
   @override
-  List<Object> get props => [uuid];
+  List<Object> get props => [id];
 }

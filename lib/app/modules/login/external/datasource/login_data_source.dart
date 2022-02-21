@@ -13,7 +13,8 @@ class LoginDataSourceImpl implements LoginDataSource {
   final NetworkDataSource http;
   final FirebaseMessaging firebaseMessaging;
 
-  LoginDataSourceImpl(this.googleSignIn, this.secureStorage, this.http, this.firebaseMessaging);
+  LoginDataSourceImpl(
+      this.googleSignIn, this.secureStorage, this.http, this.firebaseMessaging);
 
   @override
   Future<UserModel> currentUser() async {
@@ -42,13 +43,14 @@ class LoginDataSourceImpl implements LoginDataSource {
     var googleUser = await googleSignIn.signIn();
     if (googleUser == null) throw ErrorLogin();
 
-    await firebaseMessaging.getToken();
+    final fcmToken = await firebaseMessaging.getToken();
 
     var params = {
       "email": googleUser.email,
-      "google_auth": googleUser.id,
+      "googleAuth": googleUser.id,
       "name": googleUser.displayName,
-      "photoUrl": googleUser.photoUrl
+      "photoUrl": googleUser.photoUrl,
+      "fcmToken": fcmToken,
     };
 
     final response = await http.post("/login", data: params);

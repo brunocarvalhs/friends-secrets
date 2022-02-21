@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:badges/badges.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/widgets/group_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/list/groups_list_controller.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
@@ -53,20 +54,7 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                 Observer(
                   builder: (_) => SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) => Card(
-                        clipBehavior: Clip.antiAlias,
-                        child: Column(
-                          children: [
-                            ListTile(
-                              title: Text("${controller.allGroups[index].name}"),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text("${controller.allGroups[index].describle}"),
-                            ),
-                          ],
-                        ),
-                      ),
+                      (BuildContext context, int index) => GroupTodo(groupModel: controller.allGroups[index]),
                       childCount: controller.countGroups,
                     ),
                   ),

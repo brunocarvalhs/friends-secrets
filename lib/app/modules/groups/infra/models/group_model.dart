@@ -76,7 +76,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
 
   factory GroupModel.fromMap(Map<String, dynamic> map) {
     return GroupModel(
-      uuid: map["uuid"] as String,
+      uuid: map["id"] as String,
       type: map['type'] != null ? TypeModel.fromMap(map['type']) : null,
       name: map["name"] as String,
       describle: map["describle"] as String?,

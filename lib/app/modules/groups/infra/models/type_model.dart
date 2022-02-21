@@ -50,7 +50,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
 
   factory TypeModel.fromMap(Map<String, dynamic> map) {
     return TypeModel(
-      uuid: map["uuid"] as String,
+      uuid: map["id"] as String,
       name: map["name"] as String,
       describle: map["describle"] as String,
       isDrawName: map["is_draw_name"] as bool,
