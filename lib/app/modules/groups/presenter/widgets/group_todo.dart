@@ -20,7 +20,7 @@ class GroupTodo extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               subtitle: Text(
-                "${groupModel.date}",
+                "${groupModel.type?.name}",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ),
