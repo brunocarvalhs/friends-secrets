@@ -25,7 +25,7 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
-                  child: Image.network(
+                  child: Image.asset(
                     loginBackground,
                     fit: BoxFit.cover,
                   ),
