@@ -19,11 +19,11 @@ final $GroupsReadController = BindInject(
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
-  Computed<GroupModel>? _$getGroupComputed;
+  Computed<GroupModel?>? _$getGroupComputed;
 
   @override
-  GroupModel get getGroup =>
-      (_$getGroupComputed ??= Computed<GroupModel>(() => super.getGroup,
+  GroupModel? get getGroup =>
+      (_$getGroupComputed ??= Computed<GroupModel?>(() => super.getGroup,
               name: '_GroupsReadControllerBase.getGroup'))
           .value;
   Computed<bool>? _$buttonExtendsComputed;
@@ -37,13 +37,13 @@ mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
   final _$_groupModelAtom = Atom(name: '_GroupsReadControllerBase._groupModel');
 
   @override
-  GroupModel get _groupModel {
+  GroupModel? get _groupModel {
     _$_groupModelAtom.reportRead();
     return super._groupModel;
   }
 
   @override
-  set _groupModel(GroupModel value) {
+  set _groupModel(GroupModel? value) {
     _$_groupModelAtom.reportWrite(value, super._groupModel, () {
       super._groupModel = value;
     });
@@ -62,21 +62,6 @@ mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
   set _buttonExtends(bool value) {
     _$_buttonExtendsAtom.reportWrite(value, super._buttonExtends, () {
       super._buttonExtends = value;
-    });
-  }
-
-  final _$_groupsAtom = Atom(name: '_GroupsReadControllerBase._groups');
-
-  @override
-  ObservableList<GroupModel> get _groups {
-    _$_groupsAtom.reportRead();
-    return super._groups;
-  }
-
-  @override
-  set _groups(ObservableList<GroupModel> value) {
-    _$_groupsAtom.reportWrite(value, super._groups, () {
-      super._groups = value;
     });
   }
 

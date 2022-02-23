@@ -107,8 +107,8 @@ abstract class _RegisterGroupStoreBase with Store {
       date: getDate.toIso8601String(),
       type: getCategory,
       users: getUsers,
-      priceMax: controllerPriceMax.text,
-      priceMin: controllerPriceMin.text,
+      priceMax: num.tryParse(controllerPriceMax.text)?.toDouble(),
+      priceMin: num.tryParse(controllerPriceMin.text)?.toDouble(),
     );
     var result = await registersGroup(group);
     entry.remove();

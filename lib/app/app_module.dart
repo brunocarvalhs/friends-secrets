@@ -34,8 +34,9 @@ class AppModule extends Module {
     Bind.lazySingleton<FirebaseAnalyticsObserver>((i) => FirebaseAnalyticsObserver(analytics: i.get())),
     Bind.instance<Dio>(Dio(BaseOptions(
       baseUrl: dotenv.env['BASE_URL'].toString(),
-      connectTimeout: 10000,
-      receiveTimeout: 10000,
+      receiveDataWhenStatusError: true,
+      connectTimeout: 60 * 1000, // 60 seconds
+      receiveTimeout: 60 * 1000, // 60 seconds
     ))),
     Bind.lazySingleton<NetworkDataSource>((i) => DioDataSourceImpl(i.get(), i.get())),
     Bind.lazySingleton<NetworkRepository>((i) => NetworkRepositoryImpl(i.get())),

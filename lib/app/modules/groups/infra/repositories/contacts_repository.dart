@@ -13,7 +13,7 @@ class ContactsRepositoryImpl extends ContactsRepository {
   Future<Either<Failure, List<dynamic>>> all(List<String> list) async {
     try {
       final params = {"contacts": list};
-      final response = await datasource.post<List<dynamic>>("/contacts", data: params);
+      final response = await datasource.post<List<dynamic>>("/user/contacts", data: params);
       final contacts = response.data?.map((e) => UserModel.fromMap(e)).toList() ?? [];
       return Right(contacts);
     } catch (e) {

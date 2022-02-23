@@ -7,8 +7,9 @@ abstract class LoggedGroupInfo {
   String? get name;
   String? get description;
   String? get date;
-  String? get priceMin;
-  String? get priceMax;
+  double? get priceMin;
+  double? get priceMax;
+  UserModel? get author;
   List<UserModel>? get users;
   String? get created;
   String? get updated;
@@ -20,8 +21,9 @@ abstract class LoggedGroupInfo {
     String? name,
     String? description,
     String? date,
+    UserModel? author,
     List<UserModel>? users,
-    String? priceMin,
-    String? priceMax,
+    double? priceMin,
+    double? priceMax,
   });
 }

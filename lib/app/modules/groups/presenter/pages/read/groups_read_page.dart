@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/read/groups_read_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/members_todo.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
+import 'package:friends_secrets/app/shared/widgets/app_bar_loading.dart';
 
 class GroupsReadPage extends StatefulWidget {
-  final GroupModel groupModel;
-  const GroupsReadPage({Key? key, required this.groupModel}) : super(key: key);
+  final String id;
+  const GroupsReadPage({Key? key, required this.id}) : super(key: key);
   @override
   GroupsReadPageState createState() => GroupsReadPageState();
 }
@@ -21,10 +21,12 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
-            AppBarDefault(
-              expandedHeight: 300,
-              title: "${controller.getGroup.name}",
-              subtitle: "${controller.getGroup.description}",
+            Observer(
+              builder: (_) => AppBarDefault(
+                expandedHeight: 300,
+                title: controller.getGroup?.name,
+                subtitle: controller.getGroup?.description,
+              ),
             ),
           ],
           body: RefreshIndicator(
@@ -37,10 +39,10 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) => Observer(
                         builder: (context) => MembersTodo(
-                          user: Modular.get<AuthStore>().user!,
+                          user: controller.getGroup?.users![index],
                         ),
                       ),
-                      childCount: 1,
+                      childCount: controller.getGroup?.users?.length ?? 0,
                     ),
                   ),
                 ),
@@ -51,7 +53,7 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
       ),
       floatingActionButton: Observer(
         builder: (_) => Visibility(
-          visible: false,
+          visible: controller.getGroup?.author == Modular.get<AuthStore>().user,
           child: FloatingActionButton.extended(
             isExtended: controller.buttonExtends,
             onPressed: () => true ? controller.redirect() : controller.redirect(),

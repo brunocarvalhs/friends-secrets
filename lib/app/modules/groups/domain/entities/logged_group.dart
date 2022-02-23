@@ -9,8 +9,9 @@ class LoggedGroup extends Equatable {
   final String? name;
   final String? description;
   final String? date;
-  final String? priceMin;
-  final String? priceMax;
+  final double? priceMin;
+  final double? priceMax;
+  final UserModel? author;
   final List<UserModel>? users;
   final String? created;
   final String? updated;
@@ -23,6 +24,7 @@ class LoggedGroup extends Equatable {
     required this.date,
     required this.priceMin,
     required this.priceMax,
+    required this.author,
     required this.users,
     required this.created,
     required this.updated,

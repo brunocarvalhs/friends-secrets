@@ -20,13 +20,13 @@ abstract class _GroupsReadControllerBase with Store {
   }
 
   @observable
-  GroupModel _groupModel = Modular.args.data;
+  GroupModel? _groupModel;
 
   @action
   void setGroup(GroupModel value) => _groupModel = value;
 
   @computed
-  GroupModel get getGroup => _groupModel;
+  GroupModel? get getGroup => _groupModel;
 
   @observable
   bool _buttonExtends = true;
@@ -37,10 +37,12 @@ abstract class _GroupsReadControllerBase with Store {
   @action
   void setExtendsButton(bool value) => _buttonExtends = value;
 
-  @observable
-  ObservableList<GroupModel> _groups = ObservableList<GroupModel>.of([]);
-
-  Future<void> request() async {}
+  Future<void> request() async {
+    var result = await readGroup(Modular.args.params["uuid"]);
+    result.fold((failure) {}, (group) {
+      setGroup(group as GroupModel);
+    });
+  }
 
   bool notificationPredicate(ScrollNotification scroll) {
     if (scroll.metrics.pixels == scroll.metrics.maxScrollExtent) {
