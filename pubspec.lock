@@ -330,20 +330,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.13"
-  firebase_in_app_messaging:
-    dependency: "direct main"
-    description:
-      name: firebase_in_app_messaging
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.0+7"
-  firebase_in_app_messaging_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_in_app_messaging_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0+7"
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -386,27 +372,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0+5"
-  firebase_remote_config:
-    dependency: "direct main"
-    description:
-      name: firebase_remote_config
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
-  firebase_remote_config_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_remote_config_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
-  firebase_remote_config_web:
-    dependency: transitive
-    description:
-      name: firebase_remote_config_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
   fixnum:
     dependency: transitive
     description:

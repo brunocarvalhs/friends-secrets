@@ -3,6 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -35,7 +36,6 @@ class AppModule extends Module {
     Bind.instance<FirebaseMessaging>(FirebaseMessaging.instance),
     Bind.instance<FirebasePerformance>(FirebasePerformance.instance),
     Bind.instance<FirebaseCrashlytics>(FirebaseCrashlytics.instance),
-    Bind.instance<FirebaseRemoteConfig>(FirebaseRemoteConfig.instance),
     Bind.instance<FirebaseAuth>(FirebaseAuth.instance),
     Bind.lazySingleton<FirebaseAnalyticsObserver>((i) => FirebaseAnalyticsObserver(analytics: i.get())),
     Bind.instance<Dio>(Dio(BaseOptions(

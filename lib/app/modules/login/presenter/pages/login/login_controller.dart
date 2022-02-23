@@ -26,7 +26,6 @@ abstract class _LoginControllerBase with Store {
   }
 
   enterGoogle() async {
-    await Modular.get<FirebaseAnalytics>().logEvent(name: "enterGoogle()");
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
     var result = await loginWithGoogleUsecase();
@@ -40,7 +39,6 @@ abstract class _LoginControllerBase with Store {
       } else {
         Modular.to.pushReplacementNamed("/login/phone");
       }
-      await Modular.get<FirebaseAnalytics>().setUserId(id: user.id);
     });
   }
 }
