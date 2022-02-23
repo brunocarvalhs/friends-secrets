@@ -25,7 +25,7 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
+                  child: Image.network(
                     loginBackground,
                     fit: BoxFit.cover,
                   ),
@@ -44,7 +44,6 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
         child: SocialLoginButtonWidget.google(
           label: "Entrar com Google",
           onTap: () => controller.enterGoogle(),
-          styleLabel: Theme.of(context).textTheme.button,
         ),
       ),
     );

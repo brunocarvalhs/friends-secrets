@@ -26,19 +26,21 @@ abstract class _LoginControllerBase with Store {
   }
 
   enterGoogle() async {
+    await Modular.get<FirebaseAnalytics>().logEvent(name: "enterGoogle()");
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
     var result = await loginWithGoogleUsecase();
     entry.remove();
-    result.fold((failure) {
+    result.fold((failure) async {
       asuka.AsukaSnackbar.warning(failure.message.toString()).show();
-    }, (user) {
+    }, (user) async {
       authStore.setUser(user);
       if (user.phone != null) {
         Modular.to.pushReplacementNamed("/home");
       } else {
         Modular.to.pushReplacementNamed("/login/phone");
       }
+      await Modular.get<FirebaseAnalytics>().setUserId(id: user.id);
     });
   }
 }
