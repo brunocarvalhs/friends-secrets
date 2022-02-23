@@ -1,4 +1,5 @@
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/domain/usecases/validation_phone.dart';
@@ -17,7 +18,13 @@ abstract class _NumberRegisterControllerBase with Store {
   final AuthStore authStore;
   final ValidationPhone validationPhone;
 
-  _NumberRegisterControllerBase(this.authStore, this.validationPhone);
+  _NumberRegisterControllerBase(this.authStore, this.validationPhone) {
+    analyticsDefines();
+  }
+
+  Future<void> analyticsDefines() async {
+    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Number Register');
+  }
 
   TextEditingController phone = TextEditingController();
   final maskFormatter = MaskTextInputFormatter(

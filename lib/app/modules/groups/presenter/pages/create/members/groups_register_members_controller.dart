@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/list_contacts.dart';
@@ -19,7 +20,12 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   final ListContacts listContacts;
 
   _GroupsRegisterMembersControllerBase(this.user, this.registerGroupStore, this.listContacts) {
+    analyticsDefines();
     request();
+  }
+
+  Future<void> analyticsDefines() async {
+    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Register Members');
   }
 
   @observable

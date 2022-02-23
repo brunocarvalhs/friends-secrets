@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/list_types.dart';
@@ -17,7 +18,12 @@ abstract class _GroupsRegisterTypeControllerBase with Store {
   final RegisterGroupStore registerGroupStore;
 
   _GroupsRegisterTypeControllerBase(this.user, this.listTypes, this.registerGroupStore) {
+    analyticsDefines();
     request();
+  }
+
+  Future<void> analyticsDefines() async {
+    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Register Type');
   }
 
   @observable

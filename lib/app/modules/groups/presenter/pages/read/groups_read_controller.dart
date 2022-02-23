@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,7 +17,15 @@ abstract class _GroupsReadControllerBase with Store {
   final ReadGroup readGroup;
 
   _GroupsReadControllerBase(this.user, this.readGroup) {
+    analyticsDefines();
     request();
+  }
+
+  Future<void> analyticsDefines() async {
+    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Read');
+    await Modular.get<FirebaseAnalytics>().logEvent(name: 'view_group', parameters: {
+      'group_id': Modular.args.params["uuid"],
+    });
   }
 
   @observable

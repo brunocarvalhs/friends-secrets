@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/domain/usecases/register_phone.dart';
@@ -14,7 +15,13 @@ abstract class _NumberValidationControllerBase with Store {
   final AuthStore authStore;
   final RegisterPhone registerPhone;
 
-  _NumberValidationControllerBase(this.authStore, this.registerPhone);
+  _NumberValidationControllerBase(this.authStore, this.registerPhone) {
+    analyticsDefines();
+  }
+
+  Future<void> analyticsDefines() async {
+    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Number Validation');
+  }
 
   final String? phone = Modular.args.queryParams["phone"] ?? "";
   final String verificadId = Modular.args.data;

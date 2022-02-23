@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
@@ -16,7 +17,13 @@ abstract class _GroupsRegisterInformationControllerBase with Store {
   final GetGroups getGroups;
   final RegisterGroupStore registerGroupStore;
 
-  _GroupsRegisterInformationControllerBase(this.user, this.getGroups, this.registerGroupStore);
+  _GroupsRegisterInformationControllerBase(this.user, this.getGroups, this.registerGroupStore) {
+    analyticsDefines();
+  }
+
+  Future<void> analyticsDefines() async {
+    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Register Information');
+  }
 
   Future<void> register() async {
     registerGroupStore.register().then((value) => Modular.to.pushNamed("/home"));

@@ -5,7 +5,6 @@ import 'package:friends_secrets/app/modules/groups/presenter/pages/read/groups_r
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/members_todo.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
-import 'package:friends_secrets/app/shared/widgets/app_bar_loading.dart';
 
 class GroupsReadPage extends StatefulWidget {
   final String id;
