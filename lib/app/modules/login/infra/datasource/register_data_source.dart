@@ -1,4 +1,4 @@
 abstract class RegisterDataSource {
-  Future<List<String>> register(String phone);
-  Future<bool> validation(String code);
+  Future<bool> register(String verificationId, String code);
+  Future<String?> validation(String phone);
 }

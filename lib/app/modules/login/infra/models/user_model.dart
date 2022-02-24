@@ -5,13 +5,13 @@ import 'package:friends_secrets/app/modules/login/domain/entities/logged_user_in
 
 class UserModel extends LoggedUser implements LoggedUserInfo {
   const UserModel({
-    required String uuid,
+    required String id,
     String? name,
     String? email,
     String? photoUrl,
     String? phone,
   }) : super(
-          uuid: uuid,
+    id: id,
           name: name,
           email: email,
           photoUrl: photoUrl,
@@ -26,7 +26,7 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
     String? phone,
   }) {
     return UserModel(
-      uuid: uuid,
+      id: id,
       email: email ?? this.email,
       name: name ?? this.name,
       photoUrl: photoUrl ?? this.photoUrl,
@@ -37,7 +37,7 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'uuid': uuid,
+      'id': id,
       'email': email,
       'name': name,
       'photoUrl': photoUrl,
@@ -47,7 +47,7 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      uuid: map['uuid'] as String,
+      id: map['id'] as String,
       email: map['email'] as String?,
       name: map['name'] as String?,
       photoUrl: map['photoUrl'] as String?,

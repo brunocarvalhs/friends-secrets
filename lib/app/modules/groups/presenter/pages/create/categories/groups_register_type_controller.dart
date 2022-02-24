@@ -1,7 +1,9 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/list_types.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:mobx/mobx.dart';
 
@@ -13,9 +15,15 @@ class GroupsRegisterTypeController = _GroupsRegisterTypeControllerBase with _$Gr
 abstract class _GroupsRegisterTypeControllerBase with Store {
   final AuthStore user;
   final ListTypes listTypes;
+  final RegisterGroupStore registerGroupStore;
 
-  _GroupsRegisterTypeControllerBase(this.user, this.listTypes) {
+  _GroupsRegisterTypeControllerBase(this.user, this.listTypes, this.registerGroupStore) {
+    analyticsDefines();
     request();
+  }
+
+  Future<void> analyticsDefines() async {
+    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Register Type');
   }
 
   @observable
@@ -66,6 +74,14 @@ abstract class _GroupsRegisterTypeControllerBase with Store {
   bool notificationPredicate(ScrollNotification scroll) {
     setExtendsButton(scroll.metrics.extentAfter > scroll.metrics.extentBefore);
     return true;
+  }
+
+  void selectType(TypeModel type) {
+    registerGroupStore.setType(type);
+  }
+
+  bool isSelectedType(TypeModel type) {
+    return registerGroupStore.getCategory == type;
   }
 
   void redirect() => Modular.to.pushNamed("/home/register/information");

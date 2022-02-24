@@ -1,22 +1,29 @@
+import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
+import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
+
 abstract class LoggedGroupInfo {
-  String? get uuid;
-  Object? get type;
+  String? get id;
+  TypeModel? get type;
   String? get name;
-  String? get describle;
+  String? get description;
   String? get date;
-  String? get priceMin;
-  String? get priceMax;
+  double? get priceMin;
+  double? get priceMax;
+  UserModel? get author;
+  List<UserModel>? get users;
   String? get created;
   String? get updated;
 
   Map<String, dynamic> toMap();
   String toJson();
   LoggedGroupInfo copyWith({
-    Object? type,
+    TypeModel? type,
     String? name,
-    String? describle,
+    String? description,
     String? date,
-    String? priceMin,
-    String? priceMax,
+    UserModel? author,
+    List<UserModel>? users,
+    double? priceMin,
+    double? priceMax,
   });
 }

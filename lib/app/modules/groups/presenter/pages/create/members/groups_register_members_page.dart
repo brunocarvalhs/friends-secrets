@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/widgets/contact_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/create/members/groups_register_members_controller.dart';
 
@@ -19,8 +20,9 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
           headerSliverBuilder: (_, b) => [
             const AppBarDefault(
               expandedHeight: 300,
-              title: "Registro de \nTelefone",
-              subtitle: "Cadastrando seu telefone, o organizador\ndo grupo, poderá te incluir no amigo\nsecreto.",
+              title: "Selecione\nos membros",
+              subtitle:
+                  "Com base na sua lista de contatos,\nlistamos os usuários que tem vinculo no aplicativo, assim facilitando ao selecionar seus membros do amigo secreto.",
             ),
           ],
           body: RefreshIndicator(
@@ -31,15 +33,12 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
                 Observer(
                   builder: (_) => SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) => Card(
-                        clipBehavior: Clip.antiAlias,
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: const CircleAvatar(),
-                              title: Text("${controller.allContacts[index].name}"),
-                            ),
-                          ],
+                      (BuildContext context, int index) => Observer(
+                        builder: (context) => ContactTodo(
+                          user: controller.allContacts[index],
+                          onSelect: (user) => controller.selectContact(user),
+                          onRemove: (user) => controller.removeContact(user),
+                          isSelected: controller.isSelectedContact(controller.allContacts[index]),
                         ),
                       ),
                       childCount: controller.countContacts,

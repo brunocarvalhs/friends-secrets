@@ -1,63 +1,80 @@
 import 'dart:convert';
 
+import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
+import 'package:friends_secrets/app/modules/login/domain/entities/logged_user_info.dart';
+import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
+
 import '../../domain/entities/logged_group.dart';
 import '../../domain/entities/logged_group_info.dart';
 
 class GroupModel extends LoggedGroup implements LoggedGroupInfo {
   const GroupModel({
-    String? uuid,
-    Object? type,
+    String? id,
+    TypeModel? type,
     String? name,
-    String? describle,
+    String? description,
     String? date,
-    String? priceMin,
-    String? priceMax,
+    double? priceMin,
+    double? priceMax,
+    UserModel? author,
+    List<UserModel>? users,
     String? created,
     String? updated,
   }) : super(
-          uuid: uuid,
+          id: id,
           type: type,
           name: name,
-          describle: describle,
+          description: description,
           date: date,
           priceMin: priceMin,
           priceMax: priceMax,
+          author: author,
+          users: users,
           created: created,
           updated: updated,
         );
 
   @override
   GroupModel copyWith({
-    Object? type,
+    String? id,
+    TypeModel? type,
     String? name,
-    String? describle,
+    String? description,
     String? date,
-    String? priceMin,
-    String? priceMax,
+    double? priceMin,
+    double? priceMax,
+    UserModel? author,
+    List<UserModel>? users,
+    String? created,
+    String? updated,
   }) {
     return GroupModel(
-      uuid: uuid,
+      id: id ?? this.id,
       type: type ?? this.type,
       name: name ?? this.name,
-      describle: describle ?? this.describle,
+      description: description ?? this.description,
       date: date ?? this.date,
       priceMin: priceMin ?? this.priceMin,
       priceMax: priceMax ?? this.priceMax,
-      created: created,
-      updated: updated,
+      author: author,
+      users: users ?? this.users,
+      created: created ?? this.created,
+      updated: updated ?? this.updated,
     );
   }
 
   @override
   Map<String, dynamic> toMap() {
     return {
-      "uuid": uuid,
-      "type": type,
+      "id": id,
+      "type": type?.toMap(),
       "name": name,
-      "describle": describle,
+      "description": description,
       "date": date,
       "priceMin": priceMin,
       "priceMax": priceMax,
+      "author": author?.toMap(),
+      'users': users?.map((x) => x.toMap()).toList(),
       "created": created,
       "updated": updated,
     };
@@ -65,15 +82,17 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
 
   factory GroupModel.fromMap(Map<String, dynamic> map) {
     return GroupModel(
-      uuid: map["uuid"] as String,
-      // type: map["types_id"] as String?,
+      id: map["id"] as String,
+      type: map['type'] != null ? TypeModel.fromMap(map['type']) : null,
       name: map["name"] as String,
-      describle: map["describle"] as String?,
+      description: map["description"] as String?,
       date: map["date"] as String?,
-      priceMin: map["price_min"] as String?,
-      priceMax: map["price_max"] as String?,
-      created: map["created_at"] as String,
-      updated: map["updated_at"] as String,
+      priceMin: map["priceMin"] as double?,
+      priceMax: map["priceMax"] as double?,
+      author: map['author'] != null ? UserModel.fromMap(map['author']) : null,
+      users: map['users'] != null ? List<UserModel>.from(map['users']?.map((x) => UserModel.fromMap(x))) : null,
+      created: map["createdAt"] as String,
+      updated: map["updatedAt"] as String,
     );
   }
 

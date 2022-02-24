@@ -4,7 +4,7 @@ import 'package:friends_secrets/app/modules/groups/domain/repositories/contacts_
 import '../../domain/errors/errors.dart';
 
 abstract class ListContacts {
-  Future<Either<Failure, List<dynamic>>> call();
+  Future<Either<Failure, List<dynamic>>> call(List<String> phones);
 }
 
 class ListContactsImpl extends ListContacts {
@@ -13,7 +13,7 @@ class ListContactsImpl extends ListContacts {
   ListContactsImpl(this.repository);
 
   @override
-  Future<Either<Failure, List<dynamic>>> call() async {
-    return await repository.all();
+  Future<Either<Failure, List<dynamic>>> call(List<String> phones) async {
+    return await repository.all(phones);
   }
 }

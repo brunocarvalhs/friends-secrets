@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,7 +17,12 @@ abstract class _GroupsListControllerBase with Store {
   final GetGroups getGroups;
 
   _GroupsListControllerBase(this.user, this.getGroups) {
+    analyticsDefines();
     request();
+  }
+
+  Future<void> analyticsDefines() async {
+    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Home');
   }
 
   @observable
@@ -59,9 +64,7 @@ abstract class _GroupsListControllerBase with Store {
   Future<void> request() async {
     setLoading(true);
     var result = await getGroups();
-    result.fold((failure) {
-      asuka.AsukaSnackbar.warning(failure.message.toString());
-    }, (list) {
+    result.fold((failure) {}, (list) {
       addAll(list as Iterable<GroupModel>);
     });
     setLoading(false);

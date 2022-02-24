@@ -10,22 +10,22 @@ class RegisterRepositoryImpl extends RegisterRepository {
   RegisterRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, List<String>>> register(String phone) async {
+  Future<Either<Failure, bool>> register(String verificationId, String code) async {
     try {
-      var register = await dataSource.register(phone);
-      return Right(register);
+      var result = await dataSource.register(verificationId, code);
+      return Right(result);
     } catch (e) {
-      return Left(ErrorGetLoggedUser(message: "Error ao tentar registrar seu número"));
+      return Left(ErrorGetLoggedUser(message: "Error ao tentar validar código"));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> validation(String code) async {
+  Future<Either<Failure, String?>> validation(String phone) async {
     try {
-      var validation = await dataSource.validation(code);
-      return Right(validation);
+      var register = await dataSource.validation(phone);
+      return Right(register);
     } catch (e) {
-      return Left(ErrorGetLoggedUser(message: "Error ao tentar validar código"));
+      return Left(ErrorGetLoggedUser(message: "Error ao tentar registrar seu número"));
     }
   }
 }

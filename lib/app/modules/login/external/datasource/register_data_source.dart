@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,23 +11,49 @@ class RegisterDataSourceImpl implements RegisterDataSource {
   final GoogleSignIn googleSignIn;
   final SharedPreferences secureStorage;
   final NetworkDataSource http;
+  final FirebaseAuth firebaseAuth;
 
-  RegisterDataSourceImpl(this.googleSignIn, this.secureStorage, this.http);
+  RegisterDataSourceImpl(
+    this.googleSignIn,
+    this.secureStorage,
+    this.http,
+    this.firebaseAuth,
+  );
 
   @override
-  Future<List<String>> register(String phone) async {
+  Future<bool> register(String verificationId, String code) async {
+    AuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: code);
+
+    final result = await firebaseAuth.signInWithCredential(credential);
+
     var params = {
-      "phone": phone,
+      "phone": result.user?.phoneNumber,
     };
 
     final response = await http.post("/phone", data: params);
 
-    return [""];
+    return response.statusCode == 200;
   }
 
   @override
-  Future<bool> validation(String code) async {
-    final response = await http.get("/phone/$code");
-    return response.data["status"];
+  Future<String?> validation(String phone) async {
+    final completer = Completer<String>();
+
+    await firebaseAuth.verifyPhoneNumber(
+      phoneNumber: '+55 $phone',
+      timeout: const Duration(seconds: 60),
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {
+        completer.completeError(e);
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        completer.complete(verificationId);
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        completer.complete(verificationId);
+      },
+    );
+
+    return completer.future;
   }
 }

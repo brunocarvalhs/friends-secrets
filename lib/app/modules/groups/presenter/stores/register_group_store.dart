@@ -1,11 +1,12 @@
-import 'dart:io';
-
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/register_group.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
+import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
 
 import 'package:mobx/mobx.dart';
 
@@ -18,7 +19,7 @@ abstract class _RegisterGroupStoreBase with Store {
 
   _RegisterGroupStoreBase(this.registersGroup);
 
-  // Type ---------------------------------------------
+  // Type ========================================================================
 
   @observable
   TypeModel? _type;
@@ -29,39 +30,31 @@ abstract class _RegisterGroupStoreBase with Store {
   @computed
   TypeModel? get getCategory => _type;
 
-  // Members ------------------------------------------
+  // users ========================================================================
 
   @observable
-  ObservableList<UserModel> _members = ObservableList<UserModel>.of([]);
+  ObservableList<UserModel> _users = ObservableList<UserModel>.of([]);
 
   @action
-  void addMember(UserModel value) => _members.add(value);
+  void addMember(UserModel value) => _users.add(value);
 
   @action
-  void removeMember(UserModel value) => _members.remove(value);
+  void removeMember(UserModel value) => _users.remove(value);
 
   @computed
-  List<UserModel>? get getMembers => _members;
+  List<UserModel>? get getUsers => _users.toList();
 
-  // Data ----------------------------------------------
+  // Data ========================================================================
 
-  @observable
-  String? _name;
+  // Name ------------------------------------------------------------------------
 
-  @action
-  void setName(String? value) => _name = value;
+  final TextEditingController controllerName = TextEditingController();
 
-  @computed
-  String get getName => _name ?? "";
+  // Discrible -------------------------------------------------------------------
 
-  @observable
-  String? _discrible;
+  final TextEditingController controllerdescription = TextEditingController();
 
-  @action
-  void setDiscrible(String? value) => _discrible = value;
-
-  @computed
-  String get getDiscrible => _discrible ?? "";
+  // Date -------------------------------------------------------------------
 
   @observable
   DateTime _date = DateTime.now();
@@ -81,27 +74,62 @@ abstract class _RegisterGroupStoreBase with Store {
         _date.microsecond,
       );
 
+  // Time -------------------------------------------------------------------
+
   @observable
   TimeOfDay _time = TimeOfDay.now();
 
   @action
   void setTime(TimeOfDay? time) => _time = time ?? TimeOfDay.now();
 
+  // Price -------------------------------------------------------------------
+
+  final TextEditingController controllerPriceMin = TextEditingController();
+  final TextEditingController controllerPriceMax = TextEditingController();
+
+  @observable
+  RangeValues rangeSliderDiscreteValues = const RangeValues(0, 100);
+
+  @action
+  void setPrice(RangeValues price) {
+    controllerPriceMax.text = price.end.toStringAsFixed(2);
+    controllerPriceMin.text = price.start.toStringAsFixed(2);
+    rangeSliderDiscreteValues = price;
+  }
+
+  // Functions ==================================================================
+
   Future<void> register() async {
+    var entry = OverlayEntry(builder: (context) => const LoadingDefault());
+    asuka.addOverlay(entry);
     var group = GroupModel(
-      name: getName,
-      describle: getDiscrible,
+      author: Modular.get<AuthStore>().user as UserModel,
+      name: controllerName.text,
+      description: controllerdescription.text,
       date: getDate.toIso8601String(),
+      type: getCategory,
+      users: getUsers,
+      priceMax: num.tryParse(controllerPriceMax.text)?.toDouble(),
+      priceMin: num.tryParse(controllerPriceMin.text)?.toDouble(),
     );
     var result = await registersGroup(group);
-    result.fold((failure) {}, (list) {
-      clear();
-      Modular.to.navigate("/home/");
+    entry.remove();
+    result.fold((failure) {
+      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
+    }, (list) {
+      clean();
+      Modular.to.pushReplacementNamed("/home/");
     });
   }
 
-  void clear() {
-    setName(null);
-    setDiscrible(null);
+  void clean() {
+    _users.clear();
+    _type = null;
+    controllerName.clear();
+    controllerdescription.clear();
+    controllerPriceMax.clear();
+    controllerPriceMin.clear();
+    _date = DateTime.now();
+    _time = TimeOfDay.now();
   }
 }

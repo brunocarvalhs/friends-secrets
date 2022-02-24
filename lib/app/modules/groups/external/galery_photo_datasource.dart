@@ -12,5 +12,6 @@ class GaleryPhotoDatasourceImpl extends GaleryPhotoDatasource {
   Future<File?> album() async {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) return File(image.path);
+    return null;
   }
 }

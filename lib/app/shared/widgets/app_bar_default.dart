@@ -4,7 +4,7 @@ import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 class AppBarDefault extends StatelessWidget {
   final bool automaticallyImplyLeading;
   final List<Widget>? actions;
-  final String title;
+  final String? title;
   final String? subtitle;
   final double? expandedHeight;
   const AppBarDefault({

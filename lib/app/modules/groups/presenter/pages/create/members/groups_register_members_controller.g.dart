@@ -7,7 +7,8 @@ part of 'groups_register_members_controller.dart';
 // **************************************************************************
 
 final $GroupsRegisterMembersController = BindInject(
-  (i) => GroupsRegisterMembersController(i<AuthStore>(), i<GetGroups>()),
+  (i) => GroupsRegisterMembersController(
+      i<AuthStore>(), i<RegisterGroupStore>(), i<ListContacts>()),
   isSingleton: true,
   isLazy: true,
 );

@@ -7,7 +7,8 @@ part of 'groups_register_type_controller.dart';
 // **************************************************************************
 
 final $GroupsRegisterTypeController = BindInject(
-  (i) => GroupsRegisterTypeController(i<AuthStore>(), i<ListTypes>()),
+  (i) => GroupsRegisterTypeController(
+      i<AuthStore>(), i<ListTypes>(), i<RegisterGroupStore>()),
   isSingleton: true,
   isLazy: true,
 );

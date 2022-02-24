@@ -16,26 +16,12 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
       (_$getCategoryComputed ??= Computed<TypeModel?>(() => super.getCategory,
               name: '_RegisterGroupStoreBase.getCategory'))
           .value;
-  Computed<List<UserModel>?>? _$getMembersComputed;
+  Computed<List<UserModel>?>? _$getUsersComputed;
 
   @override
-  List<UserModel>? get getMembers => (_$getMembersComputed ??=
-          Computed<List<UserModel>?>(() => super.getMembers,
-              name: '_RegisterGroupStoreBase.getMembers'))
-      .value;
-  Computed<String>? _$getNameComputed;
-
-  @override
-  String get getName =>
-      (_$getNameComputed ??= Computed<String>(() => super.getName,
-              name: '_RegisterGroupStoreBase.getName'))
-          .value;
-  Computed<String>? _$getDiscribleComputed;
-
-  @override
-  String get getDiscrible =>
-      (_$getDiscribleComputed ??= Computed<String>(() => super.getDiscrible,
-              name: '_RegisterGroupStoreBase.getDiscrible'))
+  List<UserModel>? get getUsers =>
+      (_$getUsersComputed ??= Computed<List<UserModel>?>(() => super.getUsers,
+              name: '_RegisterGroupStoreBase.getUsers'))
           .value;
   Computed<DateTime>? _$getDateComputed;
 
@@ -60,48 +46,18 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
     });
   }
 
-  final _$_membersAtom = Atom(name: '_RegisterGroupStoreBase._members');
+  final _$_usersAtom = Atom(name: '_RegisterGroupStoreBase._users');
 
   @override
-  ObservableList<UserModel> get _members {
-    _$_membersAtom.reportRead();
-    return super._members;
+  ObservableList<UserModel> get _users {
+    _$_usersAtom.reportRead();
+    return super._users;
   }
 
   @override
-  set _members(ObservableList<UserModel> value) {
-    _$_membersAtom.reportWrite(value, super._members, () {
-      super._members = value;
-    });
-  }
-
-  final _$_nameAtom = Atom(name: '_RegisterGroupStoreBase._name');
-
-  @override
-  String? get _name {
-    _$_nameAtom.reportRead();
-    return super._name;
-  }
-
-  @override
-  set _name(String? value) {
-    _$_nameAtom.reportWrite(value, super._name, () {
-      super._name = value;
-    });
-  }
-
-  final _$_discribleAtom = Atom(name: '_RegisterGroupStoreBase._discrible');
-
-  @override
-  String? get _discrible {
-    _$_discribleAtom.reportRead();
-    return super._discrible;
-  }
-
-  @override
-  set _discrible(String? value) {
-    _$_discribleAtom.reportWrite(value, super._discrible, () {
-      super._discrible = value;
+  set _users(ObservableList<UserModel> value) {
+    _$_usersAtom.reportWrite(value, super._users, () {
+      super._users = value;
     });
   }
 
@@ -132,6 +88,23 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
   set _time(TimeOfDay value) {
     _$_timeAtom.reportWrite(value, super._time, () {
       super._time = value;
+    });
+  }
+
+  final _$rangeSliderDiscreteValuesAtom =
+      Atom(name: '_RegisterGroupStoreBase.rangeSliderDiscreteValues');
+
+  @override
+  RangeValues get rangeSliderDiscreteValues {
+    _$rangeSliderDiscreteValuesAtom.reportRead();
+    return super.rangeSliderDiscreteValues;
+  }
+
+  @override
+  set rangeSliderDiscreteValues(RangeValues value) {
+    _$rangeSliderDiscreteValuesAtom
+        .reportWrite(value, super.rangeSliderDiscreteValues, () {
+      super.rangeSliderDiscreteValues = value;
     });
   }
 
@@ -172,28 +145,6 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
   }
 
   @override
-  void setName(String? value) {
-    final _$actionInfo = _$_RegisterGroupStoreBaseActionController.startAction(
-        name: '_RegisterGroupStoreBase.setName');
-    try {
-      return super.setName(value);
-    } finally {
-      _$_RegisterGroupStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setDiscrible(String? value) {
-    final _$actionInfo = _$_RegisterGroupStoreBaseActionController.startAction(
-        name: '_RegisterGroupStoreBase.setDiscrible');
-    try {
-      return super.setDiscrible(value);
-    } finally {
-      _$_RegisterGroupStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setDate(DateTime? date) {
     final _$actionInfo = _$_RegisterGroupStoreBaseActionController.startAction(
         name: '_RegisterGroupStoreBase.setDate');
@@ -216,12 +167,22 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
   }
 
   @override
+  void setPrice(RangeValues price) {
+    final _$actionInfo = _$_RegisterGroupStoreBaseActionController.startAction(
+        name: '_RegisterGroupStoreBase.setPrice');
+    try {
+      return super.setPrice(price);
+    } finally {
+      _$_RegisterGroupStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+rangeSliderDiscreteValues: ${rangeSliderDiscreteValues},
 getCategory: ${getCategory},
-getMembers: ${getMembers},
-getName: ${getName},
-getDiscrible: ${getDiscrible},
+getUsers: ${getUsers},
 getDate: ${getDate}
     ''';
   }

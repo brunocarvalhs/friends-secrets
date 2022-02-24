@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HeaderDefault extends StatelessWidget {
-  final String title;
+  final String? title;
   final String? subtitle;
   final double top;
   final double left;
@@ -9,7 +10,7 @@ class HeaderDefault extends StatelessWidget {
 
   const HeaderDefault({
     Key? key,
-    required this.title,
+    this.title,
     this.subtitle,
     this.top = 50,
     this.left = 20,
@@ -31,14 +32,23 @@ class HeaderDefault extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
+                    title != null
+                        ? Text(
+                            "$title",
+                            style: Theme.of(context).textTheme.headline4,
+                          )
+                        : Shimmer.fromColors(
+                            baseColor: Colors.grey.shade300,
+                            highlightColor: Colors.grey.shade100,
+                            enabled: title != null,
+                            child: Container(
+                              height: 20,
+                            ),
+                          ),
                     const SizedBox(height: 30),
                     Text(
                       subtitle!,
-                      style: Theme.of(context).textTheme.headline3,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
                 ),
@@ -57,10 +67,17 @@ class HeaderDefault extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
+                    title != null
+                        ? Text(
+                            title!,
+                            style: Theme.of(context).textTheme.headline4,
+                          )
+                        : Shimmer.fromColors(
+                            baseColor: Colors.grey.shade300,
+                            highlightColor: Colors.grey.shade100,
+                            enabled: title != null,
+                            child: Container(),
+                          ),
                   ],
                 ),
               ],

@@ -1,7 +1,5 @@
-import 'package:dio/src/response.dart';
-import 'package:dio/src/options.dart';
-import 'package:dio/src/cancel_token.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:friends_secrets/app/core/domain/repositories/network_repository.dart';
 import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
 

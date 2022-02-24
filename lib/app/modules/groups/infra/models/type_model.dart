@@ -5,16 +5,16 @@ import '../../domain/entities/logged_type_info.dart';
 
 class TypeModel extends LoggedType implements LoggedTypeInfo {
   const TypeModel({
-    required String? uuid,
+    required String? id,
     required String? name,
-    required String? describle,
+    required String? description,
     required bool? isDrawName,
     required String? created,
     required String? updated,
   }) : super(
-          uuid: uuid,
+          id: id,
           name: name,
-          describle: describle,
+          description: description,
           isDrawName: isDrawName,
           created: created,
           updated: updated,
@@ -23,13 +23,13 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
   @override
   TypeModel copyWith({
     String? name,
-    String? describle,
+    String? description,
     bool? isDrawName,
   }) {
     return TypeModel(
-      uuid: uuid,
+      id: id,
       name: name ?? this.name,
-      describle: describle ?? this.describle,
+      description: description ?? this.description,
       isDrawName: isDrawName ?? this.isDrawName,
       created: created,
       updated: updated,
@@ -39,9 +39,9 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
   @override
   Map<String, dynamic> toMap() {
     return {
-      "uuid": uuid,
+      "id": id,
       "name": name,
-      "describle": describle,
+      "description": description,
       "isDrawName": isDrawName,
       "created": created,
       "updated": updated,
@@ -50,12 +50,12 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
 
   factory TypeModel.fromMap(Map<String, dynamic> map) {
     return TypeModel(
-      uuid: map["uuid"] as String,
+      id: map["id"] as String,
       name: map["name"] as String,
-      describle: map["describle"] as String,
-      isDrawName: map["is_draw_name"] as bool,
-      created: map["created_at"] as String,
-      updated: map["updated_at"] as String,
+      description: map["description"] as String,
+      isDrawName: map["isDrawName"] as bool,
+      created: map["createdAt"] as String,
+      updated: map["updatedAt"] as String,
     );
   }
 
