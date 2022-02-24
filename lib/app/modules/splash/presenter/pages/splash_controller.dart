@@ -21,9 +21,9 @@ abstract class _SplashControllerBase with Store {
   void validationUserAuth() {
     Modular.get<AuthStore>().checkLogin().then((isLogged) async {
       if (isLogged) {
-        Modular.to.pushReplacementNamed(Modular.get<AuthStore>().user?.phone != null ? "/home" : "/login/phone");
+        Modular.to.pushReplacementNamed(Modular.get<AuthStore>().user?.phone != null ? "/home/" : "/login/phone");
       } else {
-        Modular.to.pushReplacementNamed("/login");
+        Modular.to.pushReplacementNamed("/login/");
       }
     });
   }

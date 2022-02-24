@@ -35,7 +35,7 @@ abstract class _LoginControllerBase with Store {
     }, (user) async {
       authStore.setUser(user);
       if (user.phone != null) {
-        Modular.to.pushReplacementNamed("/home");
+        Modular.to.pushReplacementNamed("/home/");
       } else {
         Modular.to.pushReplacementNamed("/login/phone");
       }

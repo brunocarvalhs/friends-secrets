@@ -5,14 +5,14 @@ import '../../domain/entities/logged_type_info.dart';
 
 class TypeModel extends LoggedType implements LoggedTypeInfo {
   const TypeModel({
-    required String? uuid,
+    required String? id,
     required String? name,
     required String? description,
     required bool? isDrawName,
     required String? created,
     required String? updated,
   }) : super(
-          uuid: uuid,
+          id: id,
           name: name,
           description: description,
           isDrawName: isDrawName,
@@ -27,7 +27,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
     bool? isDrawName,
   }) {
     return TypeModel(
-      uuid: uuid,
+      id: id,
       name: name ?? this.name,
       description: description ?? this.description,
       isDrawName: isDrawName ?? this.isDrawName,
@@ -39,7 +39,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
   @override
   Map<String, dynamic> toMap() {
     return {
-      "uuid": uuid,
+      "id": id,
       "name": name,
       "description": description,
       "isDrawName": isDrawName,
@@ -50,7 +50,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
 
   factory TypeModel.fromMap(Map<String, dynamic> map) {
     return TypeModel(
-      uuid: map["id"] as String,
+      id: map["id"] as String,
       name: map["name"] as String,
       description: map["description"] as String,
       isDrawName: map["isDrawName"] as bool,

@@ -26,7 +26,7 @@ abstract class _GroupsRegisterInformationControllerBase with Store {
   }
 
   Future<void> register() async {
-    registerGroupStore.register().then((value) => Modular.to.pushNamed("/home"));
+    registerGroupStore.register().then((value) => Modular.to.pushNamed("/home/"));
   }
 
   TextEditingController get controllerPriceMin => registerGroupStore.controllerPriceMin;

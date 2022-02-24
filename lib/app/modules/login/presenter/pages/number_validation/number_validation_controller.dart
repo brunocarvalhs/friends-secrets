@@ -54,6 +54,6 @@ abstract class _NumberValidationControllerBase with Store {
   }
 
   void redirect() {
-    Modular.to.pushReplacementNamed("/home");
+    Modular.to.pushReplacementNamed("/home/");
   }
 }

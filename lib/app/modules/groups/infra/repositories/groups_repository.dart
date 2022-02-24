@@ -13,13 +13,13 @@ class GroupsRepositoryImpl extends GroupsRepository {
   GroupsRepositoryImpl(this.datasource, this.authStore);
 
   @override
-  Future<Either<Failure, LoggedGroupInfo>> create(LoggedGroupInfo groups) async {
+  Future<Either<Failure, LoggedGroupInfo>> create(LoggedGroupInfo group) async {
     try {
-      final params = groups.toJson();
-      final response = await datasource.post("/group", data: params);
-      return Right(response.data);
+      final response = await datasource.post("/group", data: group.toMap());
+      final create = GroupModel.fromMap(response.data);
+      return Right(create);
     } catch (e) {
-      return Left(ErrorCreate());
+      return Left(ErrorCreate(message: e.toString()));
     }
   }
 
@@ -35,8 +35,8 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, bool>> remove(String id) async {
     try {
-      await datasource.get("/group");
-      return const Right(true);
+      final result = await datasource.delete("/group");
+      return Right(result.statusCode == 200);
     } catch (e) {
       return Left(ErrorRemove());
     }
@@ -65,12 +65,10 @@ class GroupsRepositoryImpl extends GroupsRepository {
   }
 
   @override
-  Future<Either<Failure, LoggedGroupInfo>> update(LoggedGroupInfo groups) async {
+  Future<Either<Failure, LoggedGroupInfo>> update(LoggedGroupInfo group) async {
     try {
-      await datasource.get("/group");
-      const group = GroupModel(id: "", name: "", created: "", updated: "");
-
-      return const Right(group);
+      final response = await datasource.put("/group", data: group.toMap());
+      return Right(response.data);
     } catch (e) {
       return Left(ErrorUpdate());
     }

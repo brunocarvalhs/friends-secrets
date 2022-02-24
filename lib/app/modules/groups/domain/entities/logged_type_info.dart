@@ -1,5 +1,5 @@
 abstract class LoggedTypeInfo {
-  String? get uuid;
+  String? get id;
   String? get name;
   String? get description;
   bool? get isDrawName;

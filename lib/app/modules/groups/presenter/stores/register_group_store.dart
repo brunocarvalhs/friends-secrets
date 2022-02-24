@@ -5,6 +5,7 @@ import 'package:friends_secrets/app/modules/groups/domain/usecases/register_grou
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
+import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
 
 import 'package:mobx/mobx.dart';
@@ -102,6 +103,7 @@ abstract class _RegisterGroupStoreBase with Store {
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
     var group = GroupModel(
+      author: Modular.get<AuthStore>().user as UserModel,
       name: controllerName.text,
       description: controllerdescription.text,
       date: getDate.toIso8601String(),

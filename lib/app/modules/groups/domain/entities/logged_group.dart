@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 
@@ -33,13 +32,11 @@ class LoggedGroup extends Equatable {
   @override
   List<Object?> get props => [
         id,
-        type,
         name,
         description,
         date,
         priceMin,
         priceMax,
-        users,
         created,
         updated,
       ];

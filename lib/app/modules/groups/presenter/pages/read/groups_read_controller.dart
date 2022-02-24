@@ -24,7 +24,7 @@ abstract class _GroupsReadControllerBase with Store {
   Future<void> analyticsDefines() async {
     await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Read');
     await Modular.get<FirebaseAnalytics>().logEvent(name: 'view_group', parameters: {
-      'group_id': Modular.args.params["uuid"],
+      'group_id': Modular.args.params["id"],
     });
   }
 
@@ -47,7 +47,7 @@ abstract class _GroupsReadControllerBase with Store {
   void setExtendsButton(bool value) => _buttonExtends = value;
 
   Future<void> request() async {
-    var result = await readGroup(Modular.args.params["uuid"]);
+    var result = await readGroup(Modular.args.params["id"]);
     result.fold((failure) {}, (group) {
       setGroup(group as GroupModel);
     });

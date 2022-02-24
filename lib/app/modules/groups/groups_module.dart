@@ -70,6 +70,6 @@ class GroupsModule extends Module {
     ChildRoute("/register/members", child: (_, args) => const GroupsRegisterMembersPage()),
     ChildRoute("/register/type", child: (_, args) => const GroupsRegisterTypePage()),
     ChildRoute("/register/information", child: (_, args) => const GroupsRegisterInformationPage()),
-    ChildRoute("/:uuid", child: (_, args) => GroupsReadPage(id: args.params['uuid']))
+    ChildRoute("/:id", child: (_, args) => GroupsReadPage(id: args.params['id']))
   ];
 }

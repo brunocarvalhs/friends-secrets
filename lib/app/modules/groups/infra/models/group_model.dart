@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
+import 'package:friends_secrets/app/modules/login/domain/entities/logged_user_info.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 
 import '../../domain/entities/logged_group.dart';
@@ -72,7 +73,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       "date": date,
       "priceMin": priceMin,
       "priceMax": priceMax,
-      "author": author,
+      "author": author?.toMap(),
       'users': users?.map((x) => x.toMap()).toList(),
       "created": created,
       "updated": updated,
@@ -88,7 +89,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       date: map["date"] as String?,
       priceMin: map["priceMin"] as double?,
       priceMax: map["priceMax"] as double?,
-      author: map["author"] != null ? UserModel.fromMap(map["author"]) : null,
+      author: map['author'] != null ? UserModel.fromMap(map['author']) : null,
       users: map['users'] != null ? List<UserModel>.from(map['users']?.map((x) => UserModel.fromMap(x))) : null,
       created: map["createdAt"] as String,
       updated: map["updatedAt"] as String,

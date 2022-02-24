@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class LoggedType extends Equatable {
-  final String? uuid;
+  final String? id;
   final String? name;
   final String? description;
   final bool? isDrawName;
@@ -9,7 +9,7 @@ class LoggedType extends Equatable {
   final String? updated;
 
   const LoggedType({
-    required this.uuid,
+    required this.id,
     required this.name,
     required this.description,
     required this.isDrawName,
@@ -19,7 +19,7 @@ class LoggedType extends Equatable {
 
   @override
   List<Object?> get props => [
-        uuid,
+        id,
         name,
         description,
         isDrawName,
