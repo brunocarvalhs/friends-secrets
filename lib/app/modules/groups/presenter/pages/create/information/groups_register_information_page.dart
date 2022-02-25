@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/create/information/groups_register_information_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
-import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
 
 class GroupsRegisterInformationPage extends StatefulWidget {

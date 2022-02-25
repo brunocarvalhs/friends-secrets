@@ -79,4 +79,6 @@ abstract class _GroupsListControllerBase with Store {
   }
 
   void redirect() => Modular.to.pushNamed("/home/register/members");
+
+  void profileRedirect() => Modular.to.pushNamed("/profile/");
 }

@@ -41,7 +41,9 @@ abstract class _AuthStoreBase with Store {
 
   Future<bool> checkLogin() async {
     var result = await getLoggedUser();
-    return result.fold((l) => false, (user) {
+    return result.fold((l) {
+      return false;
+    }, (user) {
       setUser(user);
       return true;
     });

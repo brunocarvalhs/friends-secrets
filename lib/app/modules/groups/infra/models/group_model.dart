@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
-import 'package:friends_secrets/app/modules/login/domain/entities/logged_user_info.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 
 import '../../domain/entities/logged_group.dart';

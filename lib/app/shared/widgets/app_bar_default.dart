@@ -5,6 +5,7 @@ class AppBarDefault extends StatelessWidget {
   final bool automaticallyImplyLeading;
   final List<Widget>? actions;
   final String? title;
+  final void Function()? onTapTitle;
   final String? subtitle;
   final double? expandedHeight;
   const AppBarDefault({
@@ -14,6 +15,7 @@ class AppBarDefault extends StatelessWidget {
     this.automaticallyImplyLeading = true,
     this.actions,
     this.expandedHeight,
+    this.onTapTitle,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class AppBarDefault extends StatelessWidget {
           background: HeaderDefault(
             title: title,
             subtitle: subtitle,
+            onTapTitle: onTapTitle,
             top: automaticallyImplyLeading ? 50 : 0,
             left: 20,
             right: 20,

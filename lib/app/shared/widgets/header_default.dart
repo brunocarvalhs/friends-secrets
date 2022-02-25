@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HeaderDefault extends StatelessWidget {
   final String? title;
   final String? subtitle;
+  final void Function()? onTapTitle;
   final double top;
   final double left;
   final double right;
@@ -15,73 +15,41 @@ class HeaderDefault extends StatelessWidget {
     this.top = 50,
     this.left = 20,
     this.right = 20,
+    this.onTapTitle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return subtitle != null
-        ? Padding(
-            padding: EdgeInsets.only(top: top, left: left, right: right),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    title != null
-                        ? Text(
-                            "$title",
-                            style: Theme.of(context).textTheme.headline4,
-                          )
-                        : Shimmer.fromColors(
-                            baseColor: Colors.grey.shade300,
-                            highlightColor: Colors.grey.shade100,
-                            enabled: title != null,
-                            child: Container(
-                              height: 20,
-                            ),
-                          ),
-                    const SizedBox(height: 30),
-                    Text(
-                      subtitle!,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ],
+    return Padding(
+      padding: EdgeInsets.only(top: top, left: left, right: right),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (title != null)
+                InkWell(
+                  onTap: onTapTitle,
+                  child: Text(
+                    "$title",
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
                 ),
-              ],
-            ),
-          )
-        : Padding(
-            padding: EdgeInsets.only(top: top, left: left, right: right),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    title != null
-                        ? Text(
-                            title!,
-                            style: Theme.of(context).textTheme.headline4,
-                          )
-                        : Shimmer.fromColors(
-                            baseColor: Colors.grey.shade300,
-                            highlightColor: Colors.grey.shade100,
-                            enabled: title != null,
-                            child: Container(),
-                          ),
-                  ],
+              if (subtitle != null) const SizedBox(height: 30),
+              if (subtitle != null)
+                Text(
+                  "$subtitle",
+                  style: Theme.of(context).textTheme.headline6,
                 ),
-              ],
-            ),
-          );
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

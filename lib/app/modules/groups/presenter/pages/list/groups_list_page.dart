@@ -42,6 +42,7 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
               ],
               automaticallyImplyLeading: false,
               expandedHeight: 150,
+              onTapTitle: () => controller.profileRedirect(),
               title:
                   "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
             ),
