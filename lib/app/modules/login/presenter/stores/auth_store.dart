@@ -1,3 +1,6 @@
+import 'package:asuka/asuka.dart' as asuka;
+import 'package:flutter/material.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
 import 'package:mobx/mobx.dart';
 import '../../domain/entities/logged_user_info.dart';
 import '../../domain/usecases/get_logged_user.dart';
@@ -50,7 +53,10 @@ abstract class _AuthStoreBase with Store {
   }
 
   Future<void> signOut() async {
+    var entry = OverlayEntry(builder: (context) => const LoadingDefault());
+    asuka.addOverlay(entry);
     var result = await logout();
+    entry.remove();
     result.fold((l) {}, (r) {
       setUser(null);
     });

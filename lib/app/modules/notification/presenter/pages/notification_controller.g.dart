@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profile_controller.dart';
+part of 'notification_controller.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $ProfileController = BindInject(
-  (i) => ProfileController(i<AuthStore>()),
+final $NotificationController = BindInject(
+  (i) => NotificationController(i<AuthStore>()),
   isSingleton: true,
   isLazy: true,
 );
@@ -18,7 +18,7 @@ final $ProfileController = BindInject(
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ProfileController on _ProfileControllerBase, Store {
+mixin _$NotificationController on _NotificationControllerBase, Store {
   @override
   String toString() {
     return '''

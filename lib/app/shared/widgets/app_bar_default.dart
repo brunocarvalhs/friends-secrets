@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 
 class AppBarDefault extends StatelessWidget {
+  final Widget? childTop;
+  final Widget? childBottom;
   final bool automaticallyImplyLeading;
   final List<Widget>? actions;
   final String? title;
@@ -16,6 +18,8 @@ class AppBarDefault extends StatelessWidget {
     this.actions,
     this.expandedHeight,
     this.onTapTitle,
+    this.childTop,
+    this.childBottom,
   }) : super(key: key);
 
   @override
@@ -38,6 +42,8 @@ class AppBarDefault extends StatelessWidget {
             top: automaticallyImplyLeading ? 50 : 0,
             left: 20,
             right: 20,
+            childTop: childTop,
+            childBottom: childBottom,
           ),
         ),
       ),

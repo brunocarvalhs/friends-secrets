@@ -20,32 +20,34 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
-            AppBarDefault(
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Badge(
-                      position: BadgePosition.topStart(),
-                      elevation: 0,
-                      badgeContent: const Text(
-                        '3',
-                        style: TextStyle(
-                          color: Colors.white,
+            Observer(builder: (context) {
+              return AppBarDefault(
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      onPressed: () => controller.notificationRedirect(),
+                      icon: Badge(
+                        position: BadgePosition.topStart(),
+                        elevation: 0,
+                        badgeContent: const Text(
+                          '3',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
+                        child: const Icon(Icons.notifications),
                       ),
-                      child: const Icon(Icons.notifications),
                     ),
                   ),
-                ),
-              ],
-              automaticallyImplyLeading: false,
-              expandedHeight: 150,
-              onTapTitle: () => controller.profileRedirect(),
-              title:
-                  "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
-            ),
+                ],
+                automaticallyImplyLeading: false,
+                expandedHeight: 150,
+                onTapTitle: () => controller.profileRedirect(),
+                title:
+                    "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
+              );
+            }),
           ],
           body: RefreshIndicator(
             onRefresh: () => controller.request(),

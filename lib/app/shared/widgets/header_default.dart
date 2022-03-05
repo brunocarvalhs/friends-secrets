@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HeaderDefault extends StatelessWidget {
+  final Widget? childTop;
+  final Widget? childBottom;
+
   final String? title;
   final String? subtitle;
   final void Function()? onTapTitle;
@@ -16,6 +19,8 @@ class HeaderDefault extends StatelessWidget {
     this.left = 20,
     this.right = 20,
     this.onTapTitle,
+    this.childTop,
+    this.childBottom,
   }) : super(key: key);
 
   @override
@@ -32,6 +37,7 @@ class HeaderDefault extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (childTop != null) childTop!,
               if (title != null)
                 InkWell(
                   onTap: onTapTitle,
@@ -46,6 +52,7 @@ class HeaderDefault extends StatelessWidget {
                   "$subtitle",
                   style: Theme.of(context).textTheme.headline6,
                 ),
+              if (childBottom != null) childBottom!,
             ],
           ),
         ],

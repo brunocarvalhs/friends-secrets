@@ -43,7 +43,7 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         child: SocialLoginButtonWidget.google(
           label: "Entrar com Google",
-          onTap: () => controller.enterGoogle(),
+          onTap: () => controller.enterGoogle(context),
         ),
       ),
     );

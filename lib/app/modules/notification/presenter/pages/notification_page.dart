@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
-import 'package:friends_secrets/app/modules/profile/presenter/pages/profile_controller.dart';
+import 'package:friends_secrets/app/modules/notification/presenter/pages/notification_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class NotificationPage extends StatefulWidget {
+  const NotificationPage({Key? key}) : super(key: key);
   @override
-  ProfilePageState createState() => ProfilePageState();
+  NotificationPageState createState() => NotificationPageState();
 }
 
-class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
+class NotificationPageState extends ModularState<NotificationPage, NotificationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

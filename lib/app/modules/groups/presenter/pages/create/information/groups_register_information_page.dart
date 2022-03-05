@@ -20,7 +20,7 @@ class GroupsRegisterInformationPageState
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
             const AppBarDefault(
-              expandedHeight: 240,
+              expandedHeight: 280,
               title: "Definir\nInformações",
               subtitle:
                   "Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo.",

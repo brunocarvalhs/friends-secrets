@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +15,7 @@ import 'package:friends_secrets/app/core/infra/datasources/network_datasource.da
 import 'package:friends_secrets/app/core/infra/repositories/network_repository_impl.dart';
 import 'package:friends_secrets/app/modules/groups/groups_module.dart';
 import 'package:friends_secrets/app/modules/login/login_module.dart';
+import 'package:friends_secrets/app/modules/notification/notification_module.dart';
 import 'package:friends_secrets/app/modules/profile/profile_module.dart';
 import 'package:friends_secrets/app/modules/splash/splash_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +46,7 @@ class AppModule extends Module {
     ))),
     Bind.lazySingleton<NetworkDataSource>((i) => DioDataSourceImpl(i.get(), i.get())),
     Bind.lazySingleton<NetworkRepository>((i) => NetworkRepositoryImpl(i.get())),
+    Bind.instance<Connectivity>(Connectivity()),
     AsyncBind<SharedPreferences>((i) => SharedPreferences.getInstance()),
   ];
 
@@ -53,5 +56,6 @@ class AppModule extends Module {
     ModuleRoute("/login", module: LoginModule()),
     ModuleRoute("/home", module: GroupsModule(), guards: [AuthGuard()]),
     ModuleRoute("/profile", module: ProfileModule(), guards: [AuthGuard()]),
+    ModuleRoute("/notification", module: NotificationModule(), guards: [AuthGuard()]),
   ];
 }

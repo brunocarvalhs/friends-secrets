@@ -3,6 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
+import 'package:edge_alerts/edge_alerts.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../domain/usecases/login_with_google.dart';
@@ -25,17 +26,23 @@ abstract class _LoginControllerBase with Store {
     await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Login');
   }
 
-  enterGoogle() async {
+  enterGoogle(BuildContext context) async {
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
     var result = await loginWithGoogleUsecase();
     entry.remove();
     result.fold((failure) async {
-      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
+      edgeAlert(
+        context,
+        title: failure.title.toString(),
+        description: failure.message.toString(),
+        backgroundColor: failure.color,
+        duration: const Duration(seconds: 10).inSeconds,
+      );
     }, (user) async {
       authStore.setUser(user);
       if (user.phone != null) {
-        Modular.to.pushReplacementNamed("/home/");
+        Modular.to.pop("/home/");
       } else {
         Modular.to.pushReplacementNamed("/login/phone");
       }

@@ -5,7 +5,7 @@ import 'package:friends_secrets/app/modules/profile/presenter/pages/profile_page
 class ProfileModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.factory((i) => ProfileController()),
+    Bind.factory((i) => ProfileController(i.get())),
   ];
 
   @override
