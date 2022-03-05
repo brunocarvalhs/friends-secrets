@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
+import 'package:friends_secrets/app/modules/notification/infra/models/notification_model.dart';
 import 'package:mobx/mobx.dart';
 
 part "notification_controller.g.dart";
@@ -12,6 +13,7 @@ abstract class _NotificationControllerBase with Store {
   final AuthStore authStore;
 
   _NotificationControllerBase(this.authStore) {
+    request();
     analyticsDefines();
   }
 
@@ -19,8 +21,33 @@ abstract class _NotificationControllerBase with Store {
     await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Notification');
   }
 
-  Future<void> signOut() async {
-    await authStore.signOut();
-    Modular.to.pop("/login/");
+  @observable
+  ObservableList<NotificationModel> _listNotifications = ObservableList<NotificationModel>.of([]);
+
+  @computed
+  bool get isNotifications => _listNotifications.isNotEmpty;
+
+  @computed
+  int get countNotifications => _listNotifications.length;
+
+  @computed
+  List<NotificationModel> get allNotifications => _listNotifications.toList();
+
+  @action
+  void add(NotificationModel value) => _listNotifications.add(value);
+
+  @action
+  void addAll(Iterable<NotificationModel> notifications) {
+    _listNotifications.clear();
+    _listNotifications.addAll(notifications);
+  }
+
+  Future<void> request() async {
+    var notifications = [
+      NotificationModel(id: "123213217398217", name: "Teste", description: "Teste", isNew: true, date: DateTime.now()),
+      NotificationModel(id: "123213217398217", name: "Teste", description: "Teste", isNew: true, date: DateTime.now()),
+      NotificationModel(id: "123213217398217", name: "Teste", description: "Teste", isNew: false, date: DateTime.now()),
+    ];
+    addAll(notifications);
   }
 }

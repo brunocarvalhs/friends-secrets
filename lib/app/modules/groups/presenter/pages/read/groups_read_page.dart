@@ -38,7 +38,7 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) => Observer(
                         builder: (context) => MembersTodo(
-                          user: controller.getGroup?.users![index],
+                          user: controller.getGroup?.users!.elementAt(index),
                         ),
                       ),
                       childCount: controller.getGroup?.users?.length ?? 0,

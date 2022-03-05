@@ -35,10 +35,10 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) => Observer(
                         builder: (context) => ContactTodo(
-                          user: controller.allContacts[index],
+                          user: controller.allContacts.elementAt(index),
                           onSelect: (user) => controller.selectContact(user),
                           onRemove: (user) => controller.removeContact(user),
-                          isSelected: controller.isSelectedContact(controller.allContacts[index]),
+                          isSelected: controller.isSelectedContact(controller.allContacts.elementAt(index)),
                         ),
                       ),
                       childCount: controller.countContacts,

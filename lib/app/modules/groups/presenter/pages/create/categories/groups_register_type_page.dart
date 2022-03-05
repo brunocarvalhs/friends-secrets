@@ -35,9 +35,9 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) => Observer(
                         builder: (context) => TypeTodo(
-                          type: controller.allType[index],
+                          type: controller.allType.elementAt(index),
                           onSelect: (user) => controller.selectType(user),
-                          isSelected: controller.isSelectedType(controller.allType[index]),
+                          isSelected: controller.isSelectedType(controller.allType.elementAt(index)),
                         ),
                       ),
                       childCount: controller.countType,
