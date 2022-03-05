@@ -57,7 +57,15 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                 Observer(
                   builder: (_) => SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) => GroupTodo(groupModel: controller.allGroups.elementAt(index)),
+                      (BuildContext context, int index) => Column(
+                        children: <Widget>[
+                          GroupTodo(groupModel: controller.allGroups.elementAt(index)),
+                          Divider(
+                            height: 5,
+                            color: Colors.grey.shade600,
+                          )
+                        ],
+                      ),
                       childCount: controller.countGroups,
                     ),
                   ),

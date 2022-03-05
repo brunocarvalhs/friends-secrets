@@ -33,13 +33,21 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
                 Observer(
                   builder: (_) => SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) => Observer(
-                        builder: (context) => ContactTodo(
-                          user: controller.allContacts.elementAt(index),
-                          onSelect: (user) => controller.selectContact(user),
-                          onRemove: (user) => controller.removeContact(user),
-                          isSelected: controller.isSelectedContact(controller.allContacts.elementAt(index)),
-                        ),
+                      (BuildContext context, int index) => Column(
+                        children: <Widget>[
+                          Observer(
+                            builder: (context) => ContactTodo(
+                              user: controller.allContacts.elementAt(index),
+                              onSelect: (user) => controller.selectContact(user),
+                              onRemove: (user) => controller.removeContact(user),
+                              isSelected: controller.isSelectedContact(controller.allContacts.elementAt(index)),
+                            ),
+                          ),
+                          Divider(
+                            height: 5,
+                            color: Colors.grey.shade600,
+                          )
+                        ],
                       ),
                       childCount: controller.countContacts,
                     ),
