@@ -59,7 +59,10 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) => Column(
                         children: <Widget>[
-                          GroupTodo(groupModel: controller.allGroups.elementAt(index)),
+                          GroupTodo(
+                            groupModel: controller.allGroups.elementAt(index),
+                            onTap: (group) => controller.readGroup(group),
+                          ),
                           Divider(
                             height: 5,
                             color: Colors.grey.shade600,

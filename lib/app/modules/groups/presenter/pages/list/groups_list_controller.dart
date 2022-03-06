@@ -83,4 +83,6 @@ abstract class _GroupsListControllerBase with Store {
   void profileRedirect() => Modular.to.pushNamed("/profile/");
 
   void notificationRedirect() => Modular.to.pushNamed("/notification/");
+
+  void readGroup(GroupModel groupModel) => Modular.to.pushNamed("/home/${groupModel.id}", arguments: groupModel);
 }

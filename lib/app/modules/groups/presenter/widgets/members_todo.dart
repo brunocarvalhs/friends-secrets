@@ -11,25 +11,15 @@ class MembersTodo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      borderOnForeground: true,
-      semanticContainer: false,
-      clipBehavior: Clip.antiAlias,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
+    return Column(
+      children: [
+        ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage("${user?.photoUrl}"),
+          ),
+          title: Text("${user?.name}"),
         ),
-        child: Column(
-          children: [
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage("${user?.photoUrl}"),
-              ),
-              title: Text("${user?.name}"),
-            ),
-          ],
-        ),
-      ),
+      ],
     );
   }
 }

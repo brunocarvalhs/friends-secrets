@@ -4,12 +4,13 @@ import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart
 
 class GroupTodo extends StatelessWidget {
   final GroupModel groupModel;
-  const GroupTodo({Key? key, required this.groupModel}) : super(key: key);
+  final Function(GroupModel) onTap;
+  const GroupTodo({Key? key, required this.groupModel, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Modular.to.pushNamed("/home/${groupModel.id}", arguments: groupModel),
+      onTap: () => onTap(groupModel),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

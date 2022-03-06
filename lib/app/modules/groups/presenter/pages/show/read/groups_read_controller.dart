@@ -62,4 +62,8 @@ abstract class _GroupsReadControllerBase with Store {
   }
 
   void redirect() {}
+
+  void redirectAddMembers() => Modular.to.pushNamed("/home/${Modular.args.params["id"]}/members", arguments: getGroup);
+
+  Future<void> drawMembers() async {}
 }

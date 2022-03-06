@@ -1,6 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/pages/read/groups_read_controller.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/pages/read/groups_read_page.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/show/members/groups_add_members_controller.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/show/members/groups_add_members_page.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_controller.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_page.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
 import './domain/repositories/albums_repository.dart';
 import './domain/repositories/contacts_repository.dart';
@@ -61,7 +63,8 @@ class GroupsModule extends Module {
     Bind.factory((i) => GroupsRegisterMembersController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterTypeController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterInformationController(i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsReadController(i.get(), i.get()))
+    Bind.factory((i) => GroupsReadController(i.get(), i.get())),
+    Bind.factory((i) => GroupsAddMembersController(i.get(), i.get())),
   ];
 
   @override
@@ -70,6 +73,7 @@ class GroupsModule extends Module {
     ChildRoute("/register/members", child: (_, args) => const GroupsRegisterMembersPage()),
     ChildRoute("/register/type", child: (_, args) => const GroupsRegisterTypePage()),
     ChildRoute("/register/information", child: (_, args) => const GroupsRegisterInformationPage()),
-    ChildRoute("/:id", child: (_, args) => GroupsReadPage(id: args.params['id']))
+    ChildRoute("/:id", child: (_, args) => GroupsReadPage(id: args.params['id'])),
+    ChildRoute("/:id/members", child: (_, args) => GroupsAddMembersPage(id: args.params['id'])),
   ];
 }
