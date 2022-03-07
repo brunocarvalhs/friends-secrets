@@ -23,14 +23,14 @@ class NotificationTodo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "${notification.date?.day}/${notification.date?.month}/${notification.date?.year}",
+                  "${notification.created?.day}/${notification.created?.month}/${notification.created?.year}",
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
-                if (notification.isNew)
+                if (notification.isVisualized)
                   const SizedBox(
                     width: 30,
                   ),
-                if (notification.isNew)
+                if (notification.isVisualized)
                   Container(
                     width: 5,
                     height: 5,
@@ -41,11 +41,11 @@ class NotificationTodo extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (notification.isNew)
+                if (notification.isVisualized)
                   const SizedBox(
                     width: 5,
                   ),
-                if (notification.isNew)
+                if (notification.isVisualized)
                   Text(
                     "Novo",
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(
@@ -55,13 +55,13 @@ class NotificationTodo extends StatelessWidget {
               ],
             ),
             subtitle: Text(
-              "${notification.name}",
+              "${notification.title}",
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            child: Text("${notification.description}"),
+            child: Text("${notification.body}"),
           ),
         ],
       ),

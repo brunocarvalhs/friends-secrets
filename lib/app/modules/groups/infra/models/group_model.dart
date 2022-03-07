@@ -17,8 +17,8 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
     double? priceMax,
     UserModel? author,
     List<UserModel>? users,
-    String? created,
-    String? updated,
+    DateTime? created,
+    DateTime? updated,
   }) : super(
           id: id,
           type: type,
@@ -44,8 +44,8 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
     double? priceMax,
     UserModel? author,
     List<UserModel>? users,
-    String? created,
-    String? updated,
+    DateTime? created,
+    DateTime? updated,
   }) {
     return GroupModel(
       id: id ?? this.id,
@@ -74,8 +74,8 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       "priceMax": priceMax,
       "author": author?.toMap(),
       'users': users?.map((x) => x.toMap()).toList(),
-      "created": created,
-      "updated": updated,
+      "createdAt": created?.toIso8601String(),
+      "updatedAt": updated?.toIso8601String(),
     };
   }
 
@@ -90,8 +90,8 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       priceMax: map["priceMax"] as double?,
       author: map['author'] != null ? UserModel.fromMap(map['author']) : null,
       users: map['users'] != null ? List<UserModel>.from(map['users']?.map((x) => UserModel.fromMap(x))) : null,
-      created: map["createdAt"] as String,
-      updated: map["updatedAt"] as String,
+      created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
+      updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
     );
   }
 

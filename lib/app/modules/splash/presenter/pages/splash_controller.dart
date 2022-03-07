@@ -14,11 +14,17 @@ abstract class _SplashControllerBase with Store {
 
   void validationUserAuth() {
     Modular.get<AuthStore>().checkLogin().then((isLogged) async {
+      String redirect = "/login/";
       if (isLogged) {
-        Modular.to.pushReplacementNamed(Modular.get<AuthStore>().user?.phone != null ? "/home/" : "/login/phone");
-      } else {
-        Modular.to.pushReplacementNamed("/login/");
+        if (Modular.get<AuthStore>().user?.phone != null && Modular.get<AuthStore>().user?.likers != null) {
+          redirect = "/home/";
+        } else if (Modular.get<AuthStore>().user?.phone == null) {
+          redirect = "/login/phone";
+        } else if (Modular.get<AuthStore>().user?.likers == null) {
+          redirect = "/profile/likers";
+        }
       }
+      Modular.to.pushReplacementNamed(redirect);
     });
   }
 }

@@ -44,9 +44,30 @@ abstract class _NotificationControllerBase with Store {
 
   Future<void> request() async {
     var notifications = [
-      NotificationModel(id: "123213217398217", name: "Teste", description: "Teste", isNew: true, date: DateTime.now()),
-      NotificationModel(id: "123213217398217", name: "Teste", description: "Teste", isNew: true, date: DateTime.now()),
-      NotificationModel(id: "123213217398217", name: "Teste", description: "Teste", isNew: false, date: DateTime.now()),
+      NotificationModel(
+        id: "123213217398217",
+        title: "Teste",
+        body: "Teste",
+        isVisualized: true,
+        created: DateTime.now(),
+        updated: DateTime.now(),
+      ),
+      NotificationModel(
+        id: "123213217398217",
+        title: "Teste",
+        body: "Teste",
+        isVisualized: true,
+        created: DateTime.now(),
+        updated: DateTime.now(),
+      ),
+      NotificationModel(
+        id: "123213217398217",
+        title: "Teste",
+        body: "Teste",
+        isVisualized: false,
+        created: DateTime.now(),
+        updated: DateTime.now(),
+      ),
     ];
     addAll(notifications);
   }

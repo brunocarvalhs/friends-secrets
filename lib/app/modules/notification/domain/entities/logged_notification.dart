@@ -2,17 +2,21 @@ import 'package:equatable/equatable.dart';
 
 class LoggedNotification extends Equatable {
   final String id;
-  final String? name;
-  final String? description;
-  final DateTime? date;
-  final bool isNew;
+  final String? title;
+  final String? body;
+  final String? image;
+  final bool isVisualized;
+  final DateTime? created;
+  final DateTime? updated;
 
   const LoggedNotification({
     required this.id,
-    this.name,
-    this.description,
-    this.date,
-    this.isNew = false,
+    this.title,
+    this.body,
+    this.image,
+    this.created,
+    this.updated,
+    this.isVisualized = false,
   });
 
   @override

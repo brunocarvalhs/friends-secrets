@@ -1,37 +1,44 @@
 import 'dart:convert';
 
 import 'package:friends_secrets/app/modules/notification/domain/entities/logged_notification.dart';
-import '../../domain/entities/logged_Notification_info.dart';
+import 'package:friends_secrets/app/modules/notification/domain/entities/logged_notification_info.dart';
 
 class NotificationModel extends LoggedNotification implements LoggedNotificationInfo {
   const NotificationModel({
     required String id,
-    String? name,
-    String? description,
-    DateTime? date,
-    bool isNew = false,
+    String? title,
+    String? body,
+    String? image,
+    DateTime? created,
+    DateTime? updated,
+    bool isVisualized = false,
   }) : super(
           id: id,
-          name: name,
-          description: description,
-          date: date,
-          isNew: isNew,
+          title: title,
+          body: body,
+          image: image,
+          created: created,
+          updated: updated,
+          isVisualized: isVisualized,
         );
 
   @override
   NotificationModel copyWith({
-    String? id,
-    String? name,
-    String? description,
-    DateTime? date,
-    bool? isNew,
+    String? title,
+    String? body,
+    String? image,
+    DateTime? created,
+    DateTime? updated,
+    bool? isVisualized,
   }) {
     return NotificationModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      description: description ?? this.description,
-      date: date ?? this.date,
-      isNew: isNew ?? this.isNew,
+      id: id,
+      title: title ?? this.title,
+      body: body ?? this.body,
+      image: image ?? this.image,
+      created: created ?? this.created,
+      updated: updated ?? this.updated,
+      isVisualized: isVisualized ?? this.isVisualized,
     );
   }
 
@@ -39,20 +46,24 @@ class NotificationModel extends LoggedNotification implements LoggedNotification
   Map<String, dynamic> toMap() {
     return {
       "id": id,
-      "name": name,
-      "description": description,
-      "date": date?.toIso8601String(),
-      "isNew": isNew,
+      "title": title,
+      "body": body,
+      "image": image,
+      "created": created?.toIso8601String(),
+      "updated": updated?.toIso8601String(),
+      "isVisualized": isVisualized,
     };
   }
 
   factory NotificationModel.fromMap(Map<String, dynamic> map) {
     return NotificationModel(
       id: map["id"] as String,
-      name: map["name"] as String,
-      description: map["description"] as String?,
-      date: map["date"] != null ? DateTime.parse(map["date"] as String) : null,
-      isNew: map["isNew"] as bool,
+      title: map["title"] as String,
+      body: map["body"] as String,
+      image: map["image"] as String,
+      created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
+      updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
+      isVisualized: map["isVisualized"] as bool,
     );
   }
 

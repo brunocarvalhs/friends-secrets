@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
-import 'package:friends_secrets/app/modules/profile/presenter/pages/profile_controller.dart';
+import 'package:friends_secrets/app/modules/profile/presenter/pages/profile/profile_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 
 class ProfilePage extends StatefulWidget {

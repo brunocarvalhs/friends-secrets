@@ -12,8 +12,8 @@ class LoggedGroup extends Equatable {
   final double? priceMax;
   final UserModel? author;
   final List<UserModel>? users;
-  final String? created;
-  final String? updated;
+  final DateTime? created;
+  final DateTime? updated;
 
   const LoggedGroup({
     required this.id,

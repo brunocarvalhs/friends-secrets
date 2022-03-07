@@ -11,8 +11,8 @@ abstract class LoggedGroupInfo {
   double? get priceMax;
   UserModel? get author;
   List<UserModel>? get users;
-  String? get created;
-  String? get updated;
+  DateTime? get created;
+  DateTime? get updated;
 
   Map<String, dynamic> toMap();
   String toJson();
