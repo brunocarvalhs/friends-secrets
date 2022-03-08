@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
 
@@ -29,18 +30,22 @@ class TypeTodo extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                image: type.image != null
-                    ? DecorationImage(
-                        image: NetworkImage('${type.image}'),
-                        fit: BoxFit.contain,
-                        alignment: Alignment.center,
-                      )
-                    : null,
+            if (type.image != null)
+              CachedNetworkImage(
+                imageUrl: "${type.image}",
+                imageBuilder: (context, imageProvider) => Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.contain,
+                      alignment: Alignment.center,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-            ),
             ListTile(
               title: Text(
                 "${type.name}",
