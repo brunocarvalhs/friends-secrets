@@ -31,13 +31,14 @@ class TypeTodo extends StatelessWidget {
           children: [
             Container(
               height: 200,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      'https://static.wikia.nocookie.net/dragonball/images/8/84/KrillinDragonBallDebut.png/revision/latest?cb=20150109224457&path-prefix=pt-br'),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
-                ),
+              decoration: BoxDecoration(
+                image: type.image != null
+                    ? DecorationImage(
+                        image: NetworkImage('${type.image}'),
+                        fit: BoxFit.contain,
+                        alignment: Alignment.center,
+                      )
+                    : null,
               ),
             ),
             ListTile(

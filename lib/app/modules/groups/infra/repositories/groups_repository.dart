@@ -15,7 +15,11 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedGroupInfo>> create(LoggedGroupInfo group) async {
     try {
-      final response = await datasource.post("/group", data: group.toMap());
+      final response = await datasource.post(
+        "/group",
+        data: group.toMap(),
+        options: datasource.buildCache(),
+      );
       final create = GroupModel.fromMap(response.data);
       return Right(create);
     } catch (e) {

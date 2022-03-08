@@ -20,6 +20,7 @@ import 'package:friends_secrets/app/modules/profile/profile_module.dart';
 import 'package:friends_secrets/app/modules/splash/splash_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:tf_dio_cache/dio_http_cache.dart';
 
 class AppModule extends Module {
   @override
@@ -39,12 +40,13 @@ class AppModule extends Module {
     Bind.instance<FirebaseCrashlytics>(FirebaseCrashlytics.instance),
     Bind.instance<FirebaseAuth>(FirebaseAuth.instance),
     Bind.lazySingleton<FirebaseAnalyticsObserver>((i) => FirebaseAnalyticsObserver(analytics: i.get())),
+    Bind.instance<DioCacheManager>(DioCacheManager(CacheConfig(baseUrl: dotenv.env['BASE_URL'].toString()))),
     Bind.instance<Dio>(Dio(BaseOptions(
       baseUrl: dotenv.env['BASE_URL'].toString(),
       connectTimeout: 60 * 1000, // 60 seconds
       receiveTimeout: 60 * 1000, // 60 seconds
     ))),
-    Bind.lazySingleton<NetworkDataSource>((i) => DioDataSourceImpl(i.get(), i.get())),
+    Bind.lazySingleton<NetworkDataSource>((i) => DioDataSourceImpl(i.get(), i.get(), i.get())),
     Bind.lazySingleton<NetworkRepository>((i) => NetworkRepositoryImpl(i.get())),
     Bind.instance<Connectivity>(Connectivity()),
     AsyncBind<SharedPreferences>((i) => SharedPreferences.getInstance()),

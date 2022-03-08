@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 abstract class NetworkDataSource {
   void setToken(String token);
   String getToken();
+  Options buildCache();
 
   Future<Response<T>> get<T>(
     String path, {

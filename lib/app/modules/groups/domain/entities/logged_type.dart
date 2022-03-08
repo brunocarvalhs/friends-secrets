@@ -4,6 +4,7 @@ class LoggedType extends Equatable {
   final String? id;
   final String? name;
   final String? description;
+  final String? image;
   final bool? isDrawName;
   final String? created;
   final String? updated;
@@ -12,6 +13,7 @@ class LoggedType extends Equatable {
     required this.id,
     required this.name,
     required this.description,
+    this.image,
     required this.isDrawName,
     required this.created,
     required this.updated,

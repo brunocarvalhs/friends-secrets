@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/list_contacts.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';

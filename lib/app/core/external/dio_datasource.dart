@@ -4,14 +4,22 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tf_dio_cache/dio_http_cache.dart';
 
 class DioDataSourceImpl extends NetworkDataSource {
   final Dio http;
   final SharedPreferences sharedPreferences;
+  final DioCacheManager dioCacheManager;
 
-  DioDataSourceImpl(this.http, this.sharedPreferences);
+  DioDataSourceImpl(this.http, this.sharedPreferences, this.dioCacheManager) {
+    setupCache();
+  }
 
   late String token = 'Bearer ';
+
+  void setupCache() {
+    http.interceptors.add(dioCacheManager.interceptor);
+  }
 
   @override
   Future<Response<T>> delete<T>(
@@ -42,6 +50,7 @@ class DioDataSourceImpl extends NetworkDataSource {
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) {
+    http.interceptors.add(DioCacheManager(CacheConfig(baseUrl: "http://www.google.com")).interceptor);
     return http.get<T>(
       path,
       queryParameters: queryParameters,
@@ -161,4 +170,7 @@ class DioDataSourceImpl extends NetworkDataSource {
   String getToken() {
     return token;
   }
+
+  @override
+  Options buildCache() => buildCacheOptions(const Duration(days: 7));
 }

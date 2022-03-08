@@ -23,6 +23,15 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
             Observer(
               builder: (_) => AppBarDefault(
                 expandedHeight: 300,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.edit),
+                    ),
+                  ),
+                ],
                 title: controller.getGroup?.name,
                 subtitle: controller.getGroup?.description,
               ),

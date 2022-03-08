@@ -41,11 +41,11 @@ abstract class _LoginControllerBase with Store {
       );
     }, (user) async {
       authStore.setUser(user);
-      if (user.phone != null && user.likers != null) {
+      if (user.phone != null && user.likers!.isNotEmpty) {
         Modular.to.pop("/home/");
       } else if (user.phone == null) {
         Modular.to.pushReplacementNamed("/login/phone");
-      } else if (user.likers == null) {
+      } else if (user.likers == null || user.likers!.isEmpty) {
         Modular.to.pushReplacementNamed("/profile/likers");
       }
     });

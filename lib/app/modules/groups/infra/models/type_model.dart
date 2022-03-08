@@ -8,6 +8,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
     required String? id,
     required String? name,
     required String? description,
+    required String? image,
     required bool? isDrawName,
     required String? created,
     required String? updated,
@@ -15,6 +16,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
           id: id,
           name: name,
           description: description,
+          image: image,
           isDrawName: isDrawName,
           created: created,
           updated: updated,
@@ -24,12 +26,14 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
   TypeModel copyWith({
     String? name,
     String? description,
+    String? image,
     bool? isDrawName,
   }) {
     return TypeModel(
       id: id,
       name: name ?? this.name,
       description: description ?? this.description,
+      image: image ?? this.image,
       isDrawName: isDrawName ?? this.isDrawName,
       created: created,
       updated: updated,
@@ -42,6 +46,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
       "id": id,
       "name": name,
       "description": description,
+      "image": image,
       "isDrawName": isDrawName,
       "created": created,
       "updated": updated,
@@ -52,6 +57,7 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
     return TypeModel(
       id: map["id"] as String,
       name: map["name"] as String,
+      image: map["image"] as String?,
       description: map["description"] as String,
       isDrawName: map["isDrawName"] as bool,
       created: map["createdAt"] as String,

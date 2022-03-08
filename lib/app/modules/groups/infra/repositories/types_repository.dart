@@ -13,7 +13,10 @@ class TypesRepositoryImpl extends TypesRepository {
   @override
   Future<Either<Failure, Iterable<LoggedTypeInfo>>> all() async {
     try {
-      final response = await datasource.get<List<dynamic>>("/type");
+      final response = await datasource.get<List<dynamic>>(
+        "/type",
+        options: datasource.buildCache(),
+      );
       final types = response.data?.map((e) => TypeModel.fromMap(e)) ?? [];
       return Right(types);
     } catch (_) {
