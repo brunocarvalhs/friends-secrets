@@ -14,7 +14,7 @@ class RegisterRepositoryImpl extends RegisterRepository {
     try {
       var result = await dataSource.register(verificationId, code);
       return Right(result);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorGetLoggedUser(
         message: "Error ao tentar validar código",
       ));
@@ -26,7 +26,7 @@ class RegisterRepositoryImpl extends RegisterRepository {
     try {
       var register = await dataSource.validation(phone);
       return Right(register);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorGetLoggedUser(
         message: "Error ao tentar registrar seu número",
       ));

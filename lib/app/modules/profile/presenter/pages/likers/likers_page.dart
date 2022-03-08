@@ -27,25 +27,26 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
           body: RefreshIndicator(
             onRefresh: () => controller.request(),
             notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
-            child: CustomScrollView(
-              slivers: <Widget>[
-                Observer(
-                  builder: (_) => SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) => Column(
-                        children: <Widget>[
-                          Observer(builder: (context) => Column()),
-                          Divider(
-                            height: 5,
-                            color: Colors.grey.shade600,
-                          )
-                        ],
-                      ),
-                      childCount: controller.countLikers,
-                    ),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Observer(
+                  builder: (_) => Wrap(
+                    spacing: 10,
+                    children: controller.allItems
+                        .map((item) => Observer(builder: (context) {
+                              return FilterChip(
+                                label: Text('${item.name}'),
+                                padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+                                selected: controller.isSelectedLike(item),
+                                onSelected: (select) =>
+                                    select ? controller.selecLike(item) : controller.removeLike(item),
+                              );
+                            }))
+                        .toList(),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -53,7 +54,7 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
       floatingActionButton: Observer(
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
-          onPressed: () => controller.save(),
+          onPressed: () => controller.save(context),
           label: const Text("Salvar"),
           icon: const Icon(Icons.save),
         ),

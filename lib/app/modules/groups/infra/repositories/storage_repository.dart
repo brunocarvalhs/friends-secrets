@@ -13,7 +13,7 @@
 //           as firebase_storage.TaskSnapshot;
 //       final uri = await result.ref.getDownloadURL();
 //       return Right(uri);
-//     } catch (e) {
+//     } catch (_) {
 //       return Left(ErrorCreate(message: "Error ao tentar criar Groupo"));
 //     }
 //   }

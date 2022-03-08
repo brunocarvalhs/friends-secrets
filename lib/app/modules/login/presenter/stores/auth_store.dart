@@ -61,4 +61,11 @@ abstract class _AuthStoreBase with Store {
       setUser(null);
     });
   }
+
+  Future<void> refresh() async {
+    var result = await getLoggedUser();
+    return result.fold((l) {}, (user) {
+      setUser(user);
+    });
+  }
 }

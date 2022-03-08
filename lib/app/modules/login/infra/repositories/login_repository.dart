@@ -25,7 +25,7 @@ class LoginRepositoryImpl extends LoginRepository {
         title: "Servidor",
         message: "Erro ao tentar conectar ao servidor, caso o erro persista, entre em contato ao suporte.",
       ));
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorGetLoggedUser(
         title: "Usuário",
         message: "Error ao tentar recuperar usuario atual logado",
@@ -38,7 +38,7 @@ class LoginRepositoryImpl extends LoginRepository {
     try {
       await dataSource.logout();
       return const Right(unit);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorLogout(message: "Error ao tentar fazer logout"));
     }
   }
@@ -62,7 +62,7 @@ class LoginRepositoryImpl extends LoginRepository {
         title: "Conexão",
         message: "Erro ao tentar conectar ao servidor, verifique sua conexão de internet.",
       ));
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorGetLoggedUser(
         message: "Error ao tentar recuperar usuario atual logado",
       ));

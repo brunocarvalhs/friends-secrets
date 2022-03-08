@@ -13,6 +13,7 @@ abstract class _ProfileControllerBase with Store {
 
   _ProfileControllerBase(this.authStore) {
     analyticsDefines();
+    authStore.refresh();
   }
 
   Future<void> analyticsDefines() async {

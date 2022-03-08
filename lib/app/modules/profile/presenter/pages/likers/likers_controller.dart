@@ -1,8 +1,11 @@
+import 'package:edge_alerts/edge_alerts.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
+import 'package:friends_secrets/app/modules/profile/domain/entities/logged_likers_info.dart';
+import 'package:friends_secrets/app/modules/profile/domain/usecases/list_likers.dart';
+import 'package:friends_secrets/app/modules/profile/domain/usecases/save_list_likes.dart';
 import 'package:mobx/mobx.dart';
 
 part "likers_controller.g.dart";
@@ -12,9 +15,12 @@ class LikersController = _LikersControllerBase with _$LikersController;
 
 abstract class _LikersControllerBase with Store {
   final AuthStore authStore;
+  final ListLikers listLikers;
+  final SaveListLikes saveListLikes;
 
-  _LikersControllerBase(this.authStore) {
+  _LikersControllerBase(this.authStore, this.listLikers, this.saveListLikes) {
     analyticsDefines();
+    request();
   }
 
   Future<void> analyticsDefines() async {
@@ -35,38 +41,61 @@ abstract class _LikersControllerBase with Store {
     return true;
   }
 
+  // Likes -------------------------------------------------------------------------
+
   @observable
-  ObservableList<dynamic> _likers = ObservableList<dynamic>.of((Modular.args.data as UserModel).likers?.toList() ?? []);
+  ObservableList<LoggedLikersInfo> _likers =
+      ObservableList<LoggedLikersInfo>.of(Modular.get<AuthStore>().user?.likers?.toList() ?? []);
 
   @action
-  void addMember(dynamic value) => _likers.add(value);
+  void selecLike(LoggedLikersInfo value) => _likers.add(value);
 
   @action
-  void removeMember(dynamic value) => _likers.remove(value);
+  void removeLike(LoggedLikersInfo value) => _likers.remove(value);
 
-  bool isSelectedContact(dynamic user) {
-    return _likers.contains(user);
+  bool isSelectedLike(LoggedLikersInfo item) {
+    return _likers.contains(item);
   }
 
-  @computed
-  bool get isLikers => _likers.isNotEmpty;
+  // Item --------------------------------------------------------------------------
+
+  @observable
+  ObservableList<LoggedLikersInfo> _item = ObservableList<LoggedLikersInfo>.of([]);
 
   @computed
-  int get countLikers => _likers.length;
+  bool get isLikers => _item.isNotEmpty;
 
   @computed
-  List<dynamic> get allLikers => _likers.toList();
+  int get countLikers => _item.length;
+
+  @computed
+  List<LoggedLikersInfo> get allItems => _item.toList();
 
   @action
-  void add(dynamic value) => _likers.add(value);
-
-  @action
-  void addAll(Iterable<dynamic> contacts) {
-    _likers.clear();
-    _likers.addAll(contacts);
+  void addAll(Iterable<LoggedLikersInfo> likers) {
+    _item.clear();
+    _item.addAll(likers);
   }
 
-  Future<void> request() async {}
+  Future<void> request() async {
+    final result = await listLikers();
+    result.fold((l) {}, (list) {
+      addAll(list as Iterable<LoggedLikersInfo>);
+    });
+  }
 
-  Future<void> save() async {}
+  Future<void> save(BuildContext context) async {
+    final result = await saveListLikes(_likers.toList());
+    result.fold((failure) {
+      edgeAlert(
+        context,
+        title: failure.title.toString(),
+        description: failure.message.toString(),
+        backgroundColor: failure.color,
+        duration: const Duration(seconds: 10).inSeconds,
+      );
+    }, (save) {
+      Modular.to.pushNamed("/home");
+    });
+  }
 }

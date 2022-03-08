@@ -17,7 +17,7 @@ class LikersRepositoryImpl extends LikersRepository {
     try {
       final result = await datasource.delete("/likers");
       return Right(result.statusCode == 200);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorLikersDelete());
     }
   }
@@ -25,11 +25,26 @@ class LikersRepositoryImpl extends LikersRepository {
   @override
   Future<Either<Failure, Iterable<LoggedLikersInfo>>> all() async {
     try {
-      final response = await datasource.get<List<dynamic>>("/notification");
-      final notifications = response.data?.map((e) => LikersModel.fromMap(e)) ?? [];
-      return Right(notifications as Iterable<LoggedLikersInfo>);
-    } catch (e) {
+      final response = await datasource.get<List<dynamic>>("/item");
+      final likers = response.data?.map((e) => LikersModel.fromMap(e)) ?? [];
+      return Right(likers as Iterable<LoggedLikersInfo>);
+    } catch (_) {
       return Left(ErrorLikersSelectAll());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> save(List<LoggedLikersInfo> listLikes) async {
+    try {
+      final params = listLikes.map((element) => element.toMap()).toList();
+      final result = await datasource.post("/user/likes", data: params);
+      return Right(result.statusCode == 200);
+    } catch (_) {
+      return Left(ErrorLikersSave(
+        title: "Salvar",
+        message:
+            "Erro ao tentar salvar todos os seus gostos, tente novamente e caso o erro persista pode entrar em contato com suporte.",
+      ));
     }
   }
 }

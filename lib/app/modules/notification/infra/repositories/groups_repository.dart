@@ -17,7 +17,7 @@ class NotificationRepositoryImpl extends NotificationRepository {
     try {
       final result = await datasource.delete("/notification");
       return Right(result.statusCode == 200);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorNotificationDelete());
     }
   }
@@ -28,7 +28,7 @@ class NotificationRepositoryImpl extends NotificationRepository {
       final response = await datasource.get<List<dynamic>>("/notification");
       final notifications = response.data?.map((e) => NotificationModel.fromMap(e)) ?? [];
       return Right(notifications as Iterable<LoggedNotificationInfo>);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorNotificationSelectAll());
     }
   }

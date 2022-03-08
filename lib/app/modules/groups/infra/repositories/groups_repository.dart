@@ -27,7 +27,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
   Future<Either<Failure, bool>> exit(String id) async {
     try {
       return const Right(true);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorRemove());
     }
   }
@@ -37,7 +37,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
     try {
       final result = await datasource.delete("/group");
       return Right(result.statusCode == 200);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorRemove());
     }
   }
@@ -48,7 +48,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final response = await datasource.get("/group/$id");
       final group = GroupModel.fromMap(response.data);
       return Right(group);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorSelect());
     }
   }
@@ -59,7 +59,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final response = await datasource.get<List<dynamic>>("/group");
       final groups = response.data?.map((e) => GroupModel.fromMap(e)) ?? [];
       return Right(groups);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorSelectAll());
     }
   }
@@ -69,7 +69,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
     try {
       final response = await datasource.put("/group", data: group.toMap());
       return Right(response.data);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorUpdate());
     }
   }

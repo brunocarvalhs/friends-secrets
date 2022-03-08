@@ -16,7 +16,7 @@ class TypesRepositoryImpl extends TypesRepository {
       final response = await datasource.get<List<dynamic>>("/type");
       final types = response.data?.map((e) => TypeModel.fromMap(e)) ?? [];
       return Right(types);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorCreate(message: "Error ao tentar criar Groupo"));
     }
   }

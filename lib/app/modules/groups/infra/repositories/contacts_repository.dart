@@ -16,7 +16,7 @@ class ContactsRepositoryImpl extends ContactsRepository {
       final response = await datasource.post<List<dynamic>>("/user/contacts", data: params);
       final contacts = response.data?.map((e) => UserModel.fromMap(e)).toList() ?? [];
       return Right(contacts);
-    } catch (e) {
+    } catch (_) {
       return Left(ErrorCreate(message: "Error ao tentar criar Groupo"));
     }
   }

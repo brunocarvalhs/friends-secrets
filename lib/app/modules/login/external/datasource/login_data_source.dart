@@ -41,7 +41,7 @@ class LoginDataSourceImpl implements LoginDataSource {
         final user = UserModel.fromMap(response.data);
         await secureStorage.setString("auth", user.toJson());
         return user;
-      } catch (e) {
+      } catch (_) {
         throw ServerConnectError();
       }
     }
@@ -84,7 +84,7 @@ class LoginDataSourceImpl implements LoginDataSource {
       await secureStorage.setString("token", token);
 
       return user;
-    } catch (e) {
+    } catch (_) {
       throw ServerConnectError();
     }
   }
