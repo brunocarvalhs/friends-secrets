@@ -32,27 +32,14 @@ class GroupTodo extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(15),
             child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 40),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage("${groupModel.users?.last.photoUrl}"),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage("${groupModel.author?.photoUrl}"),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: CircleAvatar(
-                    child: Text("+${groupModel.users?.length}"),
-                  ),
-                ),
-              ],
-            ),
+                children: groupModel.users
+                    ?.map((member) => Padding(
+                          padding: EdgeInsets.only(left: groupModel.users!.indexOf(member) * 20),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage("${member.photoUrl}"),
+                          ),
+                        ))
+                    .toList() as List<Widget>),
           ),
         ],
       ),
