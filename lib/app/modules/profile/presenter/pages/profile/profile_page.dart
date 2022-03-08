@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,34 +20,40 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.edit),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                      onPressed: () => controller.signOut(),
-                      icon: const Icon(Icons.exit_to_app),
-                    ),
-                  ),
-                ],
-                expandedHeight: 400,
-                title:
-                    "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
-                childTop: Padding(
+              actions: [
+                Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Center(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.edit),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    onPressed: () => controller.signOut(),
+                    icon: const Icon(Icons.exit_to_app),
+                  ),
+                ),
+              ],
+              expandedHeight: 400,
+              title:
+                  "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
+              childTop: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CachedNetworkImage(
+                  imageUrl: "${Modular.get<AuthStore>().getPhoto}",
+                  imageBuilder: (context, imageProvider) => Center(
                     child: CircleAvatar(
-                      backgroundImage: NetworkImage("${Modular.get<AuthStore>().getPhoto}"),
+                      backgroundImage: imageProvider,
                       radius: 60,
                     ),
                   ),
-                )),
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
+              ),
+            ),
           ],
           body: SingleChildScrollView(
             child: Column(
