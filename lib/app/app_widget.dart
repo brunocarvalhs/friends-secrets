@@ -11,22 +11,24 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    Modular.setObservers([
+      asuka.asukaHeroController,
+      Modular.get<FirebaseAnalyticsObserver>(),
+    ]);
+    return MaterialApp.router(
       title: Modular.get<DotEnv>().env["APP_NAME"].toString(),
       theme: Themes.light(),
       darkTheme: Themes.dark(),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       builder: asuka.builder,
-      navigatorObservers: [
-        asuka.asukaHeroController,
-        Modular.get<FirebaseAnalyticsObserver>(),
-      ],
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-    ).modular();
+    );
   }
 }

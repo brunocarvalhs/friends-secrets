@@ -35,31 +35,44 @@ class NotificationPageState extends ModularState<NotificationPage, NotificationC
               title: "Notificação",
             ),
           ],
-          body: RefreshIndicator(
-            onRefresh: () => controller.request(),
-            child: CustomScrollView(
-              slivers: <Widget>[
-                Observer(
-                  builder: (_) => SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) => Column(
-                        children: <Widget>[
-                          NotificationTodo(
-                            notification: controller.allNotifications.elementAt(index),
+          body: FutureBuilder(
+            future: controller.request(),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  return RefreshIndicator(
+                    onRefresh: () => controller.request(),
+                    child: CustomScrollView(
+                      slivers: <Widget>[
+                        Observer(
+                          builder: (_) => SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (BuildContext context, int index) => Column(
+                                children: <Widget>[
+                                  NotificationTodo(
+                                    notification: controller.allNotifications.elementAt(index),
+                                  ),
+                                  Divider(
+                                    height: 10,
+                                    color: Colors.grey.shade400,
+                                    indent: 10,
+                                  )
+                                ],
+                              ),
+                              childCount: controller.countNotifications,
+                            ),
                           ),
-                          Divider(
-                            height: 10,
-                            color: Colors.grey.shade400,
-                            indent: 10,
-                          )
-                        ],
-                      ),
-                      childCount: controller.countNotifications,
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
+                  );
+              }
+            },
           ),
         ),
       ),

@@ -10,6 +10,8 @@ class AppBarDefault extends StatelessWidget {
   final void Function()? onTapTitle;
   final String? subtitle;
   final double? expandedHeight;
+  final bool forceBackButton;
+
   const AppBarDefault({
     Key? key,
     required this.title,
@@ -20,6 +22,7 @@ class AppBarDefault extends StatelessWidget {
     this.onTapTitle,
     this.childTop,
     this.childBottom,
+    this.forceBackButton = false,
   }) : super(key: key);
 
   @override
@@ -27,6 +30,12 @@ class AppBarDefault extends StatelessWidget {
     return SliverPadding(
       padding: EdgeInsets.only(top: !automaticallyImplyLeading ? 50 : 0),
       sliver: SliverAppBar(
+        leading: forceBackButton
+            ? IconButton(
+                icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         expandedHeight: expandedHeight,

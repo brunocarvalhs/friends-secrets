@@ -49,32 +49,45 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
               );
             }),
           ],
-          body: RefreshIndicator(
-            onRefresh: () => controller.request(),
-            notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
-            child: CustomScrollView(
-              slivers: <Widget>[
-                Observer(
-                  builder: (_) => SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) => Column(
-                        children: <Widget>[
-                          GroupTodo(
-                            groupModel: controller.allGroups.elementAt(index),
-                            onTap: (group) => controller.readGroup(group),
+          body: FutureBuilder(
+            future: controller.request(),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  return RefreshIndicator(
+                    onRefresh: () => controller.request(),
+                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+                    child: CustomScrollView(
+                      slivers: <Widget>[
+                        Observer(
+                          builder: (_) => SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (BuildContext context, int index) => Column(
+                                children: <Widget>[
+                                  GroupTodo(
+                                    groupModel: controller.allGroups.elementAt(index),
+                                    onTap: (group) => controller.readGroup(group),
+                                  ),
+                                  Divider(
+                                    height: 5,
+                                    color: Colors.grey.shade600,
+                                  )
+                                ],
+                              ),
+                              childCount: controller.countGroups,
+                            ),
                           ),
-                          Divider(
-                            height: 5,
-                            color: Colors.grey.shade600,
-                          )
-                        ],
-                      ),
-                      childCount: controller.countGroups,
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
+                  );
+              }
+            },
           ),
         ),
       ),

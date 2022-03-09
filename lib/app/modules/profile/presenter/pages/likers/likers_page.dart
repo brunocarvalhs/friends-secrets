@@ -24,30 +24,43 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
                   "Para que seu amigo secreto saiba seus\ngostos, nos disponibilizamos uma lista\nde coisas que gosta.",
             ),
           ],
-          body: RefreshIndicator(
-            onRefresh: () => controller.request(),
-            notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Observer(
-                  builder: (_) => Wrap(
-                    spacing: 10,
-                    children: controller.allItems
-                        .map((item) => Observer(builder: (context) {
-                              return FilterChip(
-                                label: Text('${item.name}'),
-                                padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
-                                selected: controller.isSelectedLike(item),
-                                onSelected: (select) =>
-                                    select ? controller.selecLike(item) : controller.removeLike(item),
-                              );
-                            }))
-                        .toList(),
-                  ),
-                ),
-              ),
-            ),
+          body: FutureBuilder(
+            future: controller.request(),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  return RefreshIndicator(
+                    onRefresh: () => controller.request(),
+                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Observer(
+                          builder: (_) => Wrap(
+                            spacing: 10,
+                            children: controller.allItems
+                                .map((item) => Observer(builder: (context) {
+                                      return FilterChip(
+                                        label: Text('${item.name}'),
+                                        padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+                                        selected: controller.isSelectedLike(item),
+                                        onSelected: (select) =>
+                                            select ? controller.selecLike(item) : controller.removeLike(item),
+                                      );
+                                    }))
+                                .toList(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+              }
+            },
           ),
         ),
       ),
