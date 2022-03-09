@@ -1,3 +1,4 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -20,7 +21,7 @@ class GroupsRegisterInformationPageState
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
             const AppBarDefault(
-              expandedHeight: 280,
+              expandedHeight: 300,
               title: "Definir\nInformações",
               subtitle:
                   "Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo.",
@@ -43,7 +44,7 @@ class GroupsRegisterInformationPageState
                         controller: controller.controllerName,
                         keyboardType: TextInputType.name,
                         filled: true,
-                        hintText: "Nome",
+                        hintText: "Ex.: Grupo do Trabalho",
                         labelText: "Nome",
                       ),
                       const SizedBox(
@@ -110,7 +111,7 @@ class GroupsRegisterInformationPageState
                               filled: true,
                               hintText: "Min",
                               labelText: "Min",
-                              prefixText: "R\$ ",
+                              inputFormatters: [CurrencyTextInputFormatter(symbol: "R\$ ")],
                             ),
                           ),
                           SizedBox(
@@ -119,20 +120,13 @@ class GroupsRegisterInformationPageState
                               controller: controller.controllerPriceMax,
                               keyboardType: TextInputType.number,
                               filled: true,
-                              hintText: "Max",
-                              labelText: "Max",
+                              hintText: "Ex.: 200.00",
+                              labelText: "Máx",
                               prefixText: "R\$ ",
+                              inputFormatters: [CurrencyTextInputFormatter(symbol: "R\$ ")],
                             ),
                           ),
                         ],
-                      ),
-                      Observer(
-                        builder: (context) => RangeSlider(
-                          values: controller.rangeSliderDiscreteValues,
-                          min: 0,
-                          max: 100,
-                          onChanged: (price) => controller.setPrice(price),
-                        ),
                       ),
                       const SizedBox(
                         height: 14,
