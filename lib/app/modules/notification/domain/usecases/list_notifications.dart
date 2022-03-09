@@ -7,10 +7,10 @@ abstract class ListNotifiactions {
   Future<Either<Failure, Iterable<dynamic>>> call();
 }
 
-class ListContactsImpl extends ListNotifiactions {
+class ListNotifiactionsImpl extends ListNotifiactions {
   final NotificationRepository repository;
 
-  ListContactsImpl(this.repository);
+  ListNotifiactionsImpl(this.repository);
 
   @override
   Future<Either<Failure, Iterable<dynamic>>> call() async {

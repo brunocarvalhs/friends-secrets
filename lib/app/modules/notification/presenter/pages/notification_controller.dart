@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
+import 'package:friends_secrets/app/modules/notification/domain/usecases/list_notifications.dart';
 import 'package:friends_secrets/app/modules/notification/infra/models/notification_model.dart';
 import 'package:mobx/mobx.dart';
 
@@ -11,8 +12,9 @@ class NotificationController = _NotificationControllerBase with _$NotificationCo
 
 abstract class _NotificationControllerBase with Store {
   final AuthStore authStore;
+  final ListNotifiactions listNotifiactions;
 
-  _NotificationControllerBase(this.authStore) {
+  _NotificationControllerBase(this.authStore, this.listNotifiactions) {
     analyticsDefines();
   }
 
@@ -42,32 +44,9 @@ abstract class _NotificationControllerBase with Store {
   }
 
   Future<void> request() async {
-    var notifications = [
-      NotificationModel(
-        id: "123213217398217",
-        title: "Teste",
-        body: "Teste",
-        isVisualized: true,
-        created: DateTime.now(),
-        updated: DateTime.now(),
-      ),
-      NotificationModel(
-        id: "123213217398217",
-        title: "Teste",
-        body: "Teste",
-        isVisualized: true,
-        created: DateTime.now(),
-        updated: DateTime.now(),
-      ),
-      NotificationModel(
-        id: "123213217398217",
-        title: "Teste",
-        body: "Teste",
-        isVisualized: false,
-        created: DateTime.now(),
-        updated: DateTime.now(),
-      ),
-    ];
-    addAll(notifications);
+    var result = await listNotifiactions();
+    result.fold((failure) {}, (list) {
+      addAll(list as Iterable<NotificationModel>);
+    });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:edge_alerts/edge_alerts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/register_group.dart';
@@ -115,9 +116,22 @@ abstract class _RegisterGroupStoreBase with Store {
     var result = await registersGroup(group);
     entry.remove();
     result.fold((failure) {
-      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
-    }, (list) {
+      edgeAlert(
+        context,
+        title: failure.title.toString(),
+        description: failure.message.toString(),
+        backgroundColor: failure.color,
+        duration: const Duration(seconds: 10).inSeconds,
+      );
+    }, (group) {
       clear();
+      edgeAlert(
+        context,
+        title: "Sucesso",
+        description: "${group.name} foi criado com sucesso.",
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 5).inSeconds,
+      );
       Modular.to.pushReplacementNamed("/home/");
     });
   }
