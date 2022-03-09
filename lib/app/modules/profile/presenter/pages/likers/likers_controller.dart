@@ -95,6 +95,13 @@ abstract class _LikersControllerBase with Store {
         duration: const Duration(seconds: 10).inSeconds,
       );
     }, (save) {
+      edgeAlert(
+        context,
+        title: "Sucesso",
+        description: "Gostos salvos com sucesso.",
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 5).inSeconds,
+      );
       Modular.to.pushNamed("/home");
     });
   }
