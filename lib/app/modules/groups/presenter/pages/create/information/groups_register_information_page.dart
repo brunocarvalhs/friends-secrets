@@ -155,7 +155,7 @@ class GroupsRegisterInformationPageState
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => controller.register(),
+        onPressed: () => controller.register(context),
         label: const Text("Registrar"),
         icon: const Icon(Icons.save),
       ),

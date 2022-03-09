@@ -13,6 +13,18 @@ class GroupsRegisterMembersPage extends StatefulWidget {
 
 class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersPage, GroupsRegisterMembersController> {
   @override
+  void initState() {
+    controller.request();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

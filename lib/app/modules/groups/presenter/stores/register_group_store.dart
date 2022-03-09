@@ -99,7 +99,7 @@ abstract class _RegisterGroupStoreBase with Store {
 
   // Functions ==================================================================
 
-  Future<void> register() async {
+  Future<void> register(BuildContext context) async {
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
     var group = GroupModel(
@@ -117,19 +117,19 @@ abstract class _RegisterGroupStoreBase with Store {
     result.fold((failure) {
       asuka.AsukaSnackbar.warning(failure.message.toString()).show();
     }, (list) {
-      clean();
+      clear();
       Modular.to.pushReplacementNamed("/home/");
     });
   }
 
-  void clean() {
+  void clear() {
     _users.clear();
     _type = null;
+    _date = DateTime.now();
+    _time = TimeOfDay.now();
     controllerName.clear();
     controllerdescription.clear();
     controllerPriceMax.clear();
     controllerPriceMin.clear();
-    _date = DateTime.now();
-    _time = TimeOfDay.now();
   }
 }

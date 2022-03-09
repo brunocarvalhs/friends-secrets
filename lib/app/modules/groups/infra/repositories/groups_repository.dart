@@ -15,11 +15,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedGroupInfo>> create(LoggedGroupInfo group) async {
     try {
-      final response = await datasource.post(
-        "/group",
-        data: group.toMap(),
-        options: datasource.buildCache(),
-      );
+      final response = await datasource.post("/group", data: group.toMap());
       final create = GroupModel.fromMap(response.data);
       return Right(create);
     } catch (e) {
@@ -49,7 +45,10 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedGroupInfo>> select(String id) async {
     try {
-      final response = await datasource.get("/group/$id");
+      final response = await datasource.get(
+        "/group/$id",
+        options: datasource.buildCache(),
+      );
       final group = GroupModel.fromMap(response.data);
       return Right(group);
     } catch (_) {
@@ -60,7 +59,10 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, Iterable<LoggedGroupInfo>>> selectAll() async {
     try {
-      final response = await datasource.get<List<dynamic>>("/group");
+      final response = await datasource.get<List<dynamic>>(
+        "/group",
+        options: datasource.buildCache(),
+      );
       final groups = response.data?.map((e) => GroupModel.fromMap(e)) ?? [];
       return Right(groups);
     } catch (_) {

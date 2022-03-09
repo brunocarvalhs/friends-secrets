@@ -25,8 +25,8 @@ abstract class _GroupsRegisterInformationControllerBase with Store {
     await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Register Information');
   }
 
-  Future<void> register() async {
-    registerGroupStore.register().then((value) => Modular.to.pushNamed("/home/"));
+  Future<void> register(BuildContext context) async {
+    await registerGroupStore.register(context);
   }
 
   TextEditingController get controllerPriceMin => registerGroupStore.controllerPriceMin;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/modules/notification/presenter/pages/notification_controller.dart';
 import 'package:friends_secrets/app/modules/notification/presenter/widgets/notification_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
@@ -13,6 +12,18 @@ class NotificationPage extends StatefulWidget {
 }
 
 class NotificationPageState extends ModularState<NotificationPage, NotificationController> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

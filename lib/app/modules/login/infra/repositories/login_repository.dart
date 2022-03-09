@@ -48,9 +48,10 @@ class LoginRepositoryImpl extends LoginRepository {
     try {
       var user = await dataSource.login();
       return Right(user);
-    } on ErrorGetLoggedUser catch (_) {
-      return Left(ErrorGetLoggedUser(
-        message: "Error ao tentar recuperar usuario atual logado",
+    } on ErrorLogin catch (_) {
+      return Left(ErrorLogin(
+        title: "Social Autenticação",
+        message: "Error ao tentar recuperar usuario via social autenticação",
       ));
     } on ServerConnectError catch (_) {
       return Left(ServerConnectError(

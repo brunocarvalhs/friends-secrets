@@ -13,7 +13,6 @@ abstract class _NotificationControllerBase with Store {
   final AuthStore authStore;
 
   _NotificationControllerBase(this.authStore) {
-    request();
     analyticsDefines();
   }
 

@@ -21,7 +21,6 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
 
   _GroupsRegisterMembersControllerBase(this.user, this.registerGroupStore, this.listContacts) {
     analyticsDefines();
-    request();
   }
 
   Future<void> analyticsDefines() async {
@@ -106,4 +105,6 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   }
 
   void redirect() => Modular.to.pushNamed("/home/register/type");
+
+  void clear() => registerGroupStore.clear();
 }

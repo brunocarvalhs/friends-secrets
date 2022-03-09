@@ -25,7 +25,10 @@ class NotificationRepositoryImpl extends NotificationRepository {
   @override
   Future<Either<Failure, Iterable<LoggedNotificationInfo>>> all() async {
     try {
-      final response = await datasource.get<List<dynamic>>("/notification");
+      final response = await datasource.get<List<dynamic>>(
+        "/notification",
+        options: datasource.buildCache(),
+      );
       final notifications = response.data?.map((e) => NotificationModel.fromMap(e)) ?? [];
       return Right(notifications as Iterable<LoggedNotificationInfo>);
     } catch (_) {

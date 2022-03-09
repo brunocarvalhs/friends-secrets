@@ -172,5 +172,5 @@ class DioDataSourceImpl extends NetworkDataSource {
   }
 
   @override
-  Options buildCache() => buildCacheOptions(const Duration(days: 7));
+  Options buildCache() => buildCacheOptions(const Duration(days: 7), forceRefresh: true);
 }
