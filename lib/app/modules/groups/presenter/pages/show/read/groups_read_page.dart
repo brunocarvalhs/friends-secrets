@@ -37,74 +37,88 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
               ),
             ),
           ],
-          body: RefreshIndicator(
-            onRefresh: () => controller.request(),
-            notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 20,
-                      horizontal: 10,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Membros",
+          body: FutureBuilder(
+            future: controller.request(context),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  return RefreshIndicator(
+                    onRefresh: () => controller.request(context),
+                    notificationPredicate: (scrollNotification) =>
+                        controller.notificationPredicate(scrollNotification, context),
+                    child: CustomScrollView(
+                      slivers: <Widget>[
+                        SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 20,
+                              horizontal: 10,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Membros",
+                                ),
+                                Observer(builder: (context) {
+                                  return Text(
+                                    "Total ${controller.getGroup?.users?.length ?? 0}",
+                                  );
+                                }),
+                              ],
+                            ),
+                          ),
                         ),
-                        Observer(builder: (context) {
-                          return Text(
-                            "Total ${controller.getGroup?.users?.length ?? 0}",
-                          );
-                        }),
+                        SliverToBoxAdapter(
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () => controller.redirectAddMembers(),
+                                child: ListTile(
+                                  leading: CircleAvatar(
+                                    child: const Icon(
+                                      Icons.group_add_rounded,
+                                      color: Colors.white,
+                                    ),
+                                    backgroundColor: Theme.of(context).colorScheme.primary,
+                                  ),
+                                  title: const Text("Adicionar novos membros"),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Observer(
+                          builder: (_) => SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (BuildContext context, int index) => Column(
+                                children: <Widget>[
+                                  Observer(
+                                    builder: (context) => MembersTodo(
+                                      user: controller.getGroup?.users!.elementAt(index),
+                                    ),
+                                  ),
+                                  Divider(
+                                    height: 5,
+                                    color: Colors.grey.shade600,
+                                  )
+                                ],
+                              ),
+                              childCount: controller.getGroup?.users?.length ?? 0,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () => controller.redirectAddMembers(),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            child: const Icon(
-                              Icons.group_add_rounded,
-                              color: Colors.white,
-                            ),
-                            backgroundColor: Theme.of(context).colorScheme.primary,
-                          ),
-                          title: const Text("Adicionar novos membros"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Observer(
-                  builder: (_) => SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) => Column(
-                        children: <Widget>[
-                          Observer(
-                            builder: (context) => MembersTodo(
-                              user: controller.getGroup?.users!.elementAt(index),
-                            ),
-                          ),
-                          Divider(
-                            height: 5,
-                            color: Colors.grey.shade600,
-                          )
-                        ],
-                      ),
-                      childCount: controller.getGroup?.users?.length ?? 0,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                  );
+              }
+            },
           ),
         ),
       ),

@@ -50,7 +50,6 @@ class DioDataSourceImpl extends NetworkDataSource {
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) {
-    http.interceptors.add(DioCacheManager(CacheConfig(baseUrl: "http://www.google.com")).interceptor);
     return http.get<T>(
       path,
       queryParameters: queryParameters,
@@ -172,5 +171,5 @@ class DioDataSourceImpl extends NetworkDataSource {
   }
 
   @override
-  Options buildCache() => buildCacheOptions(const Duration(days: 7), forceRefresh: true);
+  Options buildCache() => buildCacheOptions(const Duration(hours: 1), forceRefresh: true);
 }

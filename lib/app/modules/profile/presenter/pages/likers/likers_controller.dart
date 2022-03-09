@@ -20,7 +20,6 @@ abstract class _LikersControllerBase with Store {
 
   _LikersControllerBase(this.authStore, this.listLikers, this.saveListLikes) {
     analyticsDefines();
-    request();
   }
 
   Future<void> analyticsDefines() async {
@@ -77,7 +76,7 @@ abstract class _LikersControllerBase with Store {
     _item.addAll(likers);
   }
 
-  Future<void> request() async {
+  Future<void> request(BuildContext context) async {
     final result = await listLikers();
     result.fold((l) {}, (list) {
       addAll(list as Iterable<LoggedLikersInfo>);

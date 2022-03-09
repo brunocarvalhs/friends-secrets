@@ -37,7 +37,7 @@ class LoginDataSourceImpl implements LoginDataSource {
     if (storage != null && token != null) {
       http.setToken(token);
       try {
-        final response = await http.get("/user");
+        final response = await http.get("/user", options: http.buildCache());
         final user = UserModel.fromMap(response.data);
         await secureStorage.setString("auth", user.toJson());
         return user;

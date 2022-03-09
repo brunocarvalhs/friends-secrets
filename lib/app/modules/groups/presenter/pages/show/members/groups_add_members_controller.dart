@@ -20,7 +20,6 @@ abstract class _GroupsAddMembersControllerBase with Store {
 
   _GroupsAddMembersControllerBase(this.user, this.listContacts) {
     analyticsDefines();
-    request();
   }
 
   Future<void> analyticsDefines() async {
@@ -64,7 +63,7 @@ abstract class _GroupsAddMembersControllerBase with Store {
     return _members.contains(user);
   }
 
-  Future<void> request() async {
+  Future<void> request(BuildContext context) async {
     final contacts = await _requestListContact();
     final result = await listContacts(contacts);
     result.fold((l) {}, (users) {

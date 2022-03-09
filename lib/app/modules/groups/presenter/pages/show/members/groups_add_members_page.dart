@@ -27,7 +27,7 @@ class GroupsAddMembersPageState extends ModularState<GroupsAddMembersPage, Group
             ),
           ],
           body: FutureBuilder(
-            future: controller.request(),
+            future: controller.request(context),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -37,7 +37,7 @@ class GroupsAddMembersPageState extends ModularState<GroupsAddMembersPage, Group
                   );
                 default:
                   return RefreshIndicator(
-                    onRefresh: () => controller.request(),
+                    onRefresh: () => controller.request(context),
                     notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
                     child: CustomScrollView(
                       slivers: <Widget>[

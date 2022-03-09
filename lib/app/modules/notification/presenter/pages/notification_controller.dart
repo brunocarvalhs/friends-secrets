@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/modules/notification/domain/usecases/list_notifications.dart';
@@ -43,7 +44,7 @@ abstract class _NotificationControllerBase with Store {
     _listNotifications.addAll(notifications);
   }
 
-  Future<void> request() async {
+  Future<void> request(BuildContext context) async {
     var result = await listNotifiactions();
     result.fold((failure) {}, (list) {
       addAll(list as Iterable<NotificationModel>);

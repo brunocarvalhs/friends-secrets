@@ -50,7 +50,7 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
             }),
           ],
           body: FutureBuilder(
-            future: controller.request(),
+            future: controller.request(context),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -60,8 +60,9 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                   );
                 default:
                   return RefreshIndicator(
-                    onRefresh: () => controller.request(),
-                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+                    onRefresh: () => controller.request(context),
+                    notificationPredicate: (scrollNotification) =>
+                        controller.notificationPredicate(scrollNotification, context),
                     child: CustomScrollView(
                       slivers: <Widget>[
                         Observer(

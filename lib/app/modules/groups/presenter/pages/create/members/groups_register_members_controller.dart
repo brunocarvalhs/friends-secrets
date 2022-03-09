@@ -60,7 +60,7 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
     return registerGroupStore.getUsers?.contains(user) ?? false;
   }
 
-  Future<void> request() async {
+  Future<void> request(BuildContext context) async {
     final contacts = await _requestListContact();
     final result = await listContacts(contacts);
     result.fold((l) {}, (users) {

@@ -18,7 +18,6 @@ abstract class _GroupsReadControllerBase with Store {
 
   _GroupsReadControllerBase(this.user, this.readGroup) {
     analyticsDefines();
-    request();
   }
 
   Future<void> analyticsDefines() async {
@@ -46,17 +45,14 @@ abstract class _GroupsReadControllerBase with Store {
   @action
   void setExtendsButton(bool value) => _buttonExtends = value;
 
-  Future<void> request() async {
+  Future<void> request(BuildContext context) async {
     var result = await readGroup(Modular.args.params["id"]);
     result.fold((failure) {}, (group) {
       setGroup(group as GroupModel);
     });
   }
 
-  bool notificationPredicate(ScrollNotification scroll) {
-    if (scroll.metrics.pixels == scroll.metrics.maxScrollExtent) {
-      request();
-    }
+  bool notificationPredicate(ScrollNotification scroll, BuildContext context) {
     setExtendsButton(scroll.metrics.extentAfter > scroll.metrics.extentBefore);
     return true;
   }

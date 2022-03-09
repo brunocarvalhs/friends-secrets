@@ -19,7 +19,6 @@ abstract class _GroupsRegisterTypeControllerBase with Store {
 
   _GroupsRegisterTypeControllerBase(this.user, this.listTypes, this.registerGroupStore) {
     analyticsDefines();
-    request();
   }
 
   Future<void> analyticsDefines() async {
@@ -53,7 +52,7 @@ abstract class _GroupsRegisterTypeControllerBase with Store {
   @action
   void setLoading(bool value) => loading = value;
 
-  Future<void> request() async {
+  Future<void> request(BuildContext context) async {
     setLoading(true);
     var result = await listTypes();
     result.fold((failure) {}, (list) {

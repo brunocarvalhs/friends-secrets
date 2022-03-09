@@ -18,7 +18,6 @@ abstract class _GroupsListControllerBase with Store {
 
   _GroupsListControllerBase(this.user, this.getGroups) {
     analyticsDefines();
-    request();
   }
 
   Future<void> analyticsDefines() async {
@@ -61,7 +60,7 @@ abstract class _GroupsListControllerBase with Store {
   @action
   void setLoading(bool value) => loading = value;
 
-  Future<void> request() async {
+  Future<void> request(BuildContext context) async {
     setLoading(true);
     var result = await getGroups();
     result.fold((failure) {}, (list) {
@@ -70,9 +69,9 @@ abstract class _GroupsListControllerBase with Store {
     setLoading(false);
   }
 
-  bool notificationPredicate(ScrollNotification scroll) {
+  bool notificationPredicate(ScrollNotification scroll, BuildContext context) {
     if (scroll.metrics.pixels == scroll.metrics.maxScrollExtent) {
-      request();
+      request(context);
     }
     setExtendsButton(scroll.metrics.extentAfter > scroll.metrics.extentBefore);
     return true;

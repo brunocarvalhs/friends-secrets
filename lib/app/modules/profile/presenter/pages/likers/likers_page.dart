@@ -25,7 +25,7 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
             ),
           ],
           body: FutureBuilder(
-            future: controller.request(),
+            future: controller.request(context),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -35,7 +35,7 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
                   );
                 default:
                   return RefreshIndicator(
-                    onRefresh: () => controller.request(),
+                    onRefresh: () => controller.request(context),
                     notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
                     child: SingleChildScrollView(
                       child: Padding(
