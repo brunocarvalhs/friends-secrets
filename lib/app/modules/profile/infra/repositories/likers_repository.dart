@@ -25,7 +25,10 @@ class LikersRepositoryImpl extends LikersRepository {
   @override
   Future<Either<Failure, Iterable<LoggedLikersInfo>>> all() async {
     try {
-      final response = await datasource.get<List<dynamic>>("/item");
+      final response = await datasource.get<List<dynamic>>(
+        "/item",
+        options: datasource.buildCache(forceRefresh: true),
+      );
       final likers = response.data?.map((e) => LikersModel.fromMap(e)) ?? [];
       return Right(likers as Iterable<LoggedLikersInfo>);
     } catch (_) {

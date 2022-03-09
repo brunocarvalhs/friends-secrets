@@ -27,7 +27,7 @@ class NotificationRepositoryImpl extends NotificationRepository {
     try {
       final response = await datasource.get<List<dynamic>>(
         "/notification",
-        options: datasource.buildCache(),
+        options: datasource.buildCache(forceRefresh: true),
       );
       final notifications = response.data?.map((e) => NotificationModel.fromMap(e)) ?? [];
       return Right(notifications as Iterable<LoggedNotificationInfo>);
