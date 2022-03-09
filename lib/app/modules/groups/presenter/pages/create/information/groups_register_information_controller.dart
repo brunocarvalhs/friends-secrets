@@ -1,3 +1,4 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -29,16 +30,13 @@ abstract class _GroupsRegisterInformationControllerBase with Store {
     await registerGroupStore.register(context);
   }
 
+  CurrencyTextInputFormatter get filterPriceMin => registerGroupStore.filterPriceMin;
+  CurrencyTextInputFormatter get filterPriceMax => registerGroupStore.filterPriceMax;
   TextEditingController get controllerPriceMin => registerGroupStore.controllerPriceMin;
-  TextEditingController get controllerName => registerGroupStore.controllerName;
   TextEditingController get controllerPriceMax => registerGroupStore.controllerPriceMax;
+
+  TextEditingController get controllerName => registerGroupStore.controllerName;
   TextEditingController get controllerDescription => registerGroupStore.controllerdescription;
-
-  @computed
-  RangeValues get rangeSliderDiscreteValues => registerGroupStore.rangeSliderDiscreteValues;
-
-  @action
-  void setPrice(RangeValues value) => registerGroupStore.setPrice(value);
 
   @observable
   bool _buttonExtends = true;

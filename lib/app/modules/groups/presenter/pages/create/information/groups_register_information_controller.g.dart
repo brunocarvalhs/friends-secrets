@@ -21,15 +21,6 @@ final $GroupsRegisterInformationController = BindInject(
 
 mixin _$GroupsRegisterInformationController
     on _GroupsRegisterInformationControllerBase, Store {
-  Computed<RangeValues>? _$rangeSliderDiscreteValuesComputed;
-
-  @override
-  RangeValues get rangeSliderDiscreteValues =>
-      (_$rangeSliderDiscreteValuesComputed ??= Computed<RangeValues>(
-              () => super.rangeSliderDiscreteValues,
-              name:
-                  '_GroupsRegisterInformationControllerBase.rangeSliderDiscreteValues'))
-          .value;
   Computed<bool>? _$buttonExtendsComputed;
 
   @override
@@ -93,19 +84,6 @@ mixin _$GroupsRegisterInformationController
       ActionController(name: '_GroupsRegisterInformationControllerBase');
 
   @override
-  void setPrice(RangeValues value) {
-    final _$actionInfo =
-        _$_GroupsRegisterInformationControllerBaseActionController.startAction(
-            name: '_GroupsRegisterInformationControllerBase.setPrice');
-    try {
-      return super.setPrice(value);
-    } finally {
-      _$_GroupsRegisterInformationControllerBaseActionController
-          .endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setExtendsButton(bool value) {
     final _$actionInfo =
         _$_GroupsRegisterInformationControllerBaseActionController.startAction(
@@ -121,7 +99,6 @@ mixin _$GroupsRegisterInformationController
   @override
   String toString() {
     return '''
-rangeSliderDiscreteValues: ${rangeSliderDiscreteValues},
 buttonExtends: ${buttonExtends},
 getDay: ${getDay},
 getMonth: ${getMonth},

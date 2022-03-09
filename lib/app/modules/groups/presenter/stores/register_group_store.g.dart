@@ -91,23 +91,6 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
     });
   }
 
-  final _$rangeSliderDiscreteValuesAtom =
-      Atom(name: '_RegisterGroupStoreBase.rangeSliderDiscreteValues');
-
-  @override
-  RangeValues get rangeSliderDiscreteValues {
-    _$rangeSliderDiscreteValuesAtom.reportRead();
-    return super.rangeSliderDiscreteValues;
-  }
-
-  @override
-  set rangeSliderDiscreteValues(RangeValues value) {
-    _$rangeSliderDiscreteValuesAtom
-        .reportWrite(value, super.rangeSliderDiscreteValues, () {
-      super.rangeSliderDiscreteValues = value;
-    });
-  }
-
   final _$_RegisterGroupStoreBaseActionController =
       ActionController(name: '_RegisterGroupStoreBase');
 
@@ -167,20 +150,8 @@ mixin _$RegisterGroupStore on _RegisterGroupStoreBase, Store {
   }
 
   @override
-  void setPrice(RangeValues price) {
-    final _$actionInfo = _$_RegisterGroupStoreBaseActionController.startAction(
-        name: '_RegisterGroupStoreBase.setPrice');
-    try {
-      return super.setPrice(price);
-    } finally {
-      _$_RegisterGroupStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
-rangeSliderDiscreteValues: ${rangeSliderDiscreteValues},
 getCategory: ${getCategory},
 getUsers: ${getUsers},
 getDate: ${getDate}

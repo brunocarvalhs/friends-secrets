@@ -60,8 +60,8 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
       image: map["image"] as String?,
       description: map["description"] as String,
       isDrawName: map["isDrawName"] as bool,
-      created: map["createdAt"] as String,
-      updated: map["updatedAt"] as String,
+      created: map["createdAt"] as String?,
+      updated: map["updatedAt"] as String?,
     );
   }
 

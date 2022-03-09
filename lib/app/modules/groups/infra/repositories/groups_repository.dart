@@ -61,7 +61,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
     try {
       final response = await datasource.get<List<dynamic>>(
         "/group",
-        options: datasource.buildCache(),
+        options: datasource.buildCache(forceRefresh: true),
       );
       final groups = response.data?.map((e) => GroupModel.fromMap(e)) ?? [];
       return Right(groups);

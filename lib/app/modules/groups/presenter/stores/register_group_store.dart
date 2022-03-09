@@ -1,4 +1,5 @@
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:edge_alerts/edge_alerts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -86,17 +87,10 @@ abstract class _RegisterGroupStoreBase with Store {
   // Price -------------------------------------------------------------------
 
   final TextEditingController controllerPriceMin = TextEditingController();
+  final CurrencyTextInputFormatter filterPriceMin = CurrencyTextInputFormatter(symbol: "");
+
   final TextEditingController controllerPriceMax = TextEditingController();
-
-  @observable
-  RangeValues rangeSliderDiscreteValues = const RangeValues(0, 100);
-
-  @action
-  void setPrice(RangeValues price) {
-    controllerPriceMax.text = price.end.toStringAsFixed(2);
-    controllerPriceMin.text = price.start.toStringAsFixed(2);
-    rangeSliderDiscreteValues = price;
-  }
+  final CurrencyTextInputFormatter filterPriceMax = CurrencyTextInputFormatter(symbol: "");
 
   // Functions ==================================================================
 
@@ -110,8 +104,8 @@ abstract class _RegisterGroupStoreBase with Store {
       date: getDate.toIso8601String(),
       type: getCategory,
       users: getUsers,
-      priceMax: num.tryParse(controllerPriceMax.text)?.toDouble(),
-      priceMin: num.tryParse(controllerPriceMin.text)?.toDouble(),
+      priceMax: num.tryParse(filterPriceMax.getFormattedValue())?.toDouble(),
+      priceMin: num.tryParse(filterPriceMin.getFormattedValue())?.toDouble(),
     );
     var result = await registersGroup(group);
     entry.remove();
@@ -132,7 +126,7 @@ abstract class _RegisterGroupStoreBase with Store {
         backgroundColor: Colors.green,
         duration: const Duration(seconds: 5).inSeconds,
       );
-      Modular.to.pushReplacementNamed("/home/");
+      Modular.to.popAndPushNamed("/home/");
     });
   }
 
