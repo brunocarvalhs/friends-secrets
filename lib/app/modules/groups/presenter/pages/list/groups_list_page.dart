@@ -63,8 +63,7 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),
-                    notificationPredicate: (scrollNotification) =>
-                        controller.notificationPredicate(scrollNotification, context),
+                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
                     child: CustomScrollView(
                       slivers: <Widget>[
                         Observer(

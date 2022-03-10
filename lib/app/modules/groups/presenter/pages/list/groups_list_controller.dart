@@ -69,10 +69,7 @@ abstract class _GroupsListControllerBase with Store {
     setLoading(false);
   }
 
-  bool notificationPredicate(ScrollNotification scroll, BuildContext context) {
-    if (scroll.metrics.pixels == scroll.metrics.maxScrollExtent) {
-      request(context);
-    }
+  bool notificationPredicate(ScrollNotification scroll) {
     setExtendsButton(scroll.metrics.extentAfter > scroll.metrics.extentBefore);
     return true;
   }

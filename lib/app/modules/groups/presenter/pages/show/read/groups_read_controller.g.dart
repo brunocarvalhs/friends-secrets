@@ -7,7 +7,8 @@ part of 'groups_read_controller.dart';
 // **************************************************************************
 
 final $GroupsReadController = BindInject(
-  (i) => GroupsReadController(i<AuthStore>(), i<ReadGroup>()),
+  (i) => GroupsReadController(
+      i<AuthStore>(), i<ReadGroup>(), i<DrawnGroup>(), i<ShowUserDrawnGroup>()),
   isSingleton: true,
   isLazy: true,
 );
@@ -33,6 +34,19 @@ mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
       (_$buttonExtendsComputed ??= Computed<bool>(() => super.buttonExtends,
               name: '_GroupsReadControllerBase.buttonExtends'))
           .value;
+  Computed<bool>? _$isVisibilityDrawnComputed;
+
+  @override
+  bool get isVisibilityDrawn => (_$isVisibilityDrawnComputed ??= Computed<bool>(
+          () => super.isVisibilityDrawn,
+          name: '_GroupsReadControllerBase.isVisibilityDrawn'))
+      .value;
+  Computed<bool>? _$isDrawnComputed;
+
+  @override
+  bool get isDrawn => (_$isDrawnComputed ??= Computed<bool>(() => super.isDrawn,
+          name: '_GroupsReadControllerBase.isDrawn'))
+      .value;
 
   final _$_groupModelAtom = Atom(name: '_GroupsReadControllerBase._groupModel');
 
@@ -94,7 +108,9 @@ mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
   String toString() {
     return '''
 getGroup: ${getGroup},
-buttonExtends: ${buttonExtends}
+buttonExtends: ${buttonExtends},
+isVisibilityDrawn: ${isVisibilityDrawn},
+isDrawn: ${isDrawn}
     ''';
   }
 }

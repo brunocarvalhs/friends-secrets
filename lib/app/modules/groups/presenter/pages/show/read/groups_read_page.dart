@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/members_todo.dart';
-import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 
 class GroupsReadPage extends StatefulWidget {
@@ -75,25 +74,26 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                             ),
                           ),
                         ),
-                        SliverToBoxAdapter(
-                          child: Column(
-                            children: [
-                              InkWell(
-                                onTap: () => controller.redirectAddMembers(),
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                    child: const Icon(
-                                      Icons.group_add_rounded,
-                                      color: Colors.white,
+                        if (controller.isVisibilityDrawn && !controller.isDrawn)
+                          SliverToBoxAdapter(
+                            child: Column(
+                              children: [
+                                InkWell(
+                                  onTap: () => controller.redirectAddMembers(),
+                                  child: ListTile(
+                                    leading: CircleAvatar(
+                                      child: const Icon(
+                                        Icons.group_add_rounded,
+                                        color: Colors.white,
+                                      ),
+                                      backgroundColor: Theme.of(context).colorScheme.primary,
                                     ),
-                                    backgroundColor: Theme.of(context).colorScheme.primary,
+                                    title: const Text("Adicionar novos membros"),
                                   ),
-                                  title: const Text("Adicionar novos membros"),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
                         Observer(
                           builder: (_) => SliverList(
                             delegate: SliverChildBuilderDelegate(
@@ -122,16 +122,51 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
           ),
         ),
       ),
-      floatingActionButton: Observer(
-        builder: (_) => Visibility(
-          visible: controller.isVisibilityDrawn,
-          child: FloatingActionButton.extended(
-            isExtended: controller.buttonExtends,
-            onPressed: () => controller.isNotDrawn ? controller.drawMembers() : controller.redirect(),
-            label: Text(controller.isNotDrawn ? "Sortear" : "Ver amigo secreto"),
-            icon: Icon(controller.isNotDrawn ? Icons.people_rounded : Icons.person),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (controller.isDrawn)
+            Observer(
+              builder: (_) => FloatingActionButton.extended(
+                isExtended: controller.buttonExtends,
+                onPressed: () => controller.redirectShowDrawn(),
+                label: const Text("Ver amigo secreto"),
+                icon: const Icon(Icons.person),
+              ),
+            ),
+          const SizedBox(
+            height: 10,
           ),
-        ),
+          if (controller.isVisibilityDrawn && !controller.isDrawn)
+            Observer(
+              builder: (_) => FloatingActionButton.extended(
+                isExtended: controller.buttonExtends,
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("Realização do sorteio"),
+                    content: const Text(
+                        "O sorteio e realizado uma unica vez por grupo, esse processo não pode ser desfeito, deseja continuar o sorteio?"),
+                    actions: [
+                      TextButton(
+                        child: const Text("Cancelar"),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                      TextButton(
+                        child: const Text("Continar"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          controller.drawMembers(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                label: const Text("Sortear"),
+                icon: const Icon(Icons.people_rounded),
+              ),
+            ),
+        ],
       ),
     );
   }

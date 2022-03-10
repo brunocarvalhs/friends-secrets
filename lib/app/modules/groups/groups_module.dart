@@ -1,6 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/drawn_group.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/show_user_drawn_group.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/members/groups_add_members_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/members/groups_add_members_page.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/show/profile/drawn_controller.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/show/profile/drawn_page.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_page.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
@@ -58,13 +62,16 @@ class GroupsModule extends Module {
     Bind.factory<ListTypes>((i) => ListTypesImpl(i.get())),
     Bind.factory<ListContacts>((i) => ListContactsImpl(i.get())),
     Bind.factory<RegisterImage>((i) => RegisterImageImpl(i.get())),
+    Bind.factory<DrawnGroup>((i) => DrawnGroupImpl(i.get())),
+    Bind.factory<ShowUserDrawnGroup>((i) => ShowUserDrawnGroupImpl(i.get())),
     // Controllers -------------------------------------------------------------------------------
     Bind.factory((i) => GroupsListController(i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterMembersController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterTypeController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterInformationController(i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsReadController(i.get(), i.get())),
+    Bind.factory((i) => GroupsReadController(i.get(), i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsAddMembersController(i.get(), i.get())),
+    Bind.factory((i) => DrawnController(i.get())),
   ];
 
   @override
@@ -74,6 +81,7 @@ class GroupsModule extends Module {
     ChildRoute("/register/type", child: (_, args) => const GroupsRegisterTypePage()),
     ChildRoute("/register/information", child: (_, args) => const GroupsRegisterInformationPage()),
     ChildRoute("/:id", child: (_, args) => GroupsReadPage(id: args.params['id'])),
+    ChildRoute("/:id/drawn", child: (_, args) => DrawnPage(id: args.params['id'])),
     ChildRoute("/:id/members", child: (_, args) => GroupsAddMembersPage(id: args.params['id'])),
   ];
 }

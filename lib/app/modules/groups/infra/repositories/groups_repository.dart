@@ -3,6 +3,8 @@ import 'package:friends_secrets/app/modules/groups/domain/errors/errors.dart';
 import 'package:friends_secrets/app/modules/groups/domain/entities/logged_group_info.dart';
 import 'package:friends_secrets/app/modules/groups/domain/repositories/groups_repository.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
+import 'package:friends_secrets/app/modules/login/domain/entities/logged_user_info.dart';
+import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:dartz/dartz.dart';
 
@@ -77,6 +79,27 @@ class GroupsRepositoryImpl extends GroupsRepository {
       return Right(response.data);
     } catch (_) {
       return Left(ErrorUpdate());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> drawnOfGroup(String id) async {
+    try {
+      final response = await datasource.post("/group/$id/drawn");
+      return Right(response.statusCode == 200);
+    } catch (_) {
+      return Left(ErrorSelect());
+    }
+  }
+
+  @override
+  Future<Either<Failure, LoggedUserInfo>> userDrawn(String id) async {
+    try {
+      final response = await datasource.get("/group/$id/drawn");
+      final group = UserModel.fromMap(response.data);
+      return Right(group);
+    } catch (_) {
+      return Left(ErrorSelect());
     }
   }
 }
