@@ -26,11 +26,11 @@ class NotificationTodo extends StatelessWidget {
                   "${notification.created?.day}/${notification.created?.month}/${notification.created?.year}",
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
-                if (notification.isVisualized)
+                if (!notification.isVisualized)
                   const SizedBox(
                     width: 30,
                   ),
-                if (notification.isVisualized)
+                if (!notification.isVisualized)
                   Container(
                     width: 5,
                     height: 5,
@@ -41,11 +41,11 @@ class NotificationTodo extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (notification.isVisualized)
+                if (!notification.isVisualized)
                   const SizedBox(
                     width: 5,
                   ),
-                if (notification.isVisualized)
+                if (!notification.isVisualized)
                   Text(
                     "Novo",
                     style: Theme.of(context).textTheme.bodyText2?.copyWith(

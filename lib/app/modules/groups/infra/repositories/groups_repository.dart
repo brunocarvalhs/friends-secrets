@@ -95,7 +95,10 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedUserInfo>> userDrawn(String id) async {
     try {
-      final response = await datasource.get("/group/$id/drawn");
+      final response = await datasource.get(
+        "/group/$id/drawn",
+        options: datasource.buildCache(),
+      );
       final group = UserModel.fromMap(response.data);
       return Right(group);
     } catch (_) {

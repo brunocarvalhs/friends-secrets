@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
+import 'package:friends_secrets/app/modules/notification/domain/usecases/list_notifications.dart';
 import 'package:mobx/mobx.dart';
 
 part "groups_list_controller.g.dart";
@@ -15,8 +16,9 @@ class GroupsListController = _GroupsListControllerBase with _$GroupsListControll
 abstract class _GroupsListControllerBase with Store {
   final AuthStore user;
   final GetGroups getGroups;
+  final ListNotifiactions notifiactions;
 
-  _GroupsListControllerBase(this.user, this.getGroups) {
+  _GroupsListControllerBase(this.user, this.getGroups, this.notifiactions) {
     analyticsDefines();
   }
 
@@ -55,18 +57,22 @@ abstract class _GroupsListControllerBase with Store {
   }
 
   @observable
-  bool loading = false;
-
-  @action
-  void setLoading(bool value) => loading = value;
+  int? notification;
 
   Future<void> request(BuildContext context) async {
-    setLoading(true);
     var result = await getGroups();
     result.fold((failure) {}, (list) {
       addAll(list as Iterable<GroupModel>);
     });
-    setLoading(false);
+  }
+
+  Future<void> notificationCheck(BuildContext context) async {
+    var result = await notifiactions();
+    result.fold((failure) {}, (list) {
+      notification = list.map((notification) {
+        if (notification.isVisualized) return notification;
+      }).length;
+    });
   }
 
   bool notificationPredicate(ScrollNotification scroll) {

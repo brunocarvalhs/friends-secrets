@@ -60,7 +60,7 @@ class NotificationModel extends LoggedNotification implements LoggedNotification
       id: map["id"] as String,
       title: map["title"] as String,
       body: map["body"] as String,
-      image: map["image"] as String,
+      image: map["image"] as String?,
       created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
       updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
       isVisualized: map["isVisualized"] as bool,

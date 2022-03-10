@@ -65,7 +65,7 @@ class GroupsModule extends Module {
     Bind.factory<DrawnGroup>((i) => DrawnGroupImpl(i.get())),
     Bind.factory<ShowUserDrawnGroup>((i) => ShowUserDrawnGroupImpl(i.get())),
     // Controllers -------------------------------------------------------------------------------
-    Bind.factory((i) => GroupsListController(i.get(), i.get())),
+    Bind.factory((i) => GroupsListController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterMembersController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterTypeController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterInformationController(i.get(), i.get(), i.get())),

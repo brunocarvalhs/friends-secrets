@@ -30,7 +30,7 @@ class NotificationRepositoryImpl extends NotificationRepository {
         options: datasource.buildCache(forceRefresh: true),
       );
       final notifications = response.data?.map((e) => NotificationModel.fromMap(e)) ?? [];
-      return Right(notifications as Iterable<LoggedNotificationInfo>);
+      return Right(notifications);
     } catch (_) {
       return Left(ErrorNotificationSelectAll());
     }

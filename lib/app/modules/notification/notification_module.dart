@@ -9,9 +9,9 @@ class NotificationModule extends Module {
   @override
   final List<Bind> binds = [
     // Repositories -----------------------------------------------------------------------------
-    Bind.factory<NotificationRepository>((i) => NotificationRepositoryImpl(i.get(), i.get())),
+    Bind.factory<NotificationRepository>((i) => NotificationRepositoryImpl(i.get(), i.get()), export: true),
     // Use Case ---------------------------------------------------------------------------------
-    Bind.factory<ListNotifiactions>((i) => ListNotifiactionsImpl(i.get())),
+    Bind.factory<ListNotifiactions>((i) => ListNotifiactionsImpl(i.get()), export: true),
     // Controllers -------------------------------------------------------------------------------
     Bind.factory((i) => NotificationController(i.get(), i.get())),
   ];

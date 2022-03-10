@@ -28,6 +28,8 @@ class AppModule extends Module {
         SplashModule(),
         LoginModule(),
         GroupsModule(),
+        ProfileModule(),
+        NotificationModule(),
       ];
 
   @override

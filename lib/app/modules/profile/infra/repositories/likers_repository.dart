@@ -30,7 +30,7 @@ class LikersRepositoryImpl extends LikersRepository {
         options: datasource.buildCache(forceRefresh: true),
       );
       final likers = response.data?.map((e) => LikersModel.fromMap(e)) ?? [];
-      return Right(likers as Iterable<LoggedLikersInfo>);
+      return Right(likers);
     } catch (_) {
       return Left(ErrorLikersSelectAll());
     }

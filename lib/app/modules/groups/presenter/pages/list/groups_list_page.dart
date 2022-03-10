@@ -27,19 +27,30 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton(
                       onPressed: () => controller.notificationRedirect(),
-                      icon: (Modular.get<AuthStore>().user?.notifications ?? 0) > 0
-                          ? Badge(
-                              position: BadgePosition.topStart(),
-                              elevation: 0,
-                              badgeContent: Text(
-                                '${Modular.get<AuthStore>().user?.notifications}',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              child: const Icon(Icons.notifications_active),
-                            )
-                          : const Icon(Icons.notifications),
+                      icon: FutureBuilder(
+                        future: controller.notificationCheck(context),
+                        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                            case ConnectionState.waiting:
+                              return const Icon(Icons.notifications);
+                            default:
+                              return (controller.notification ?? 0) > 0
+                                  ? Badge(
+                                      position: BadgePosition.topStart(),
+                                      elevation: 0,
+                                      badgeContent: Text(
+                                        '${controller.notification}',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      child: const Icon(Icons.notifications_active),
+                                    )
+                                  : const Icon(Icons.notifications);
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ],

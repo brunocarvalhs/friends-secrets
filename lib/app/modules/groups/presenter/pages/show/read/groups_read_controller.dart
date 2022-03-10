@@ -1,7 +1,6 @@
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:edge_alerts/edge_alerts.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/drawn_group.dart';
