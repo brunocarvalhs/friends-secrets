@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:mobx/mobx.dart';
@@ -13,16 +14,17 @@ abstract class _ProfileControllerBase with Store {
 
   _ProfileControllerBase(this.authStore) {
     analyticsDefines();
-    authStore.refresh();
   }
 
   Future<void> analyticsDefines() async {
     await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Profile');
   }
 
-  Future<void> signOut() async {
-    await authStore.signOut().then((_) {
+  Future<void> signOut(BuildContext context) async {
+    await authStore.signOut(context).then((_) {
       Modular.to.pushReplacementNamed("/login/");
     });
   }
+
+  Future<void> request(BuildContext context) async => await authStore.refresh(context);
 }

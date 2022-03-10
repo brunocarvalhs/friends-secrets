@@ -52,7 +52,7 @@ abstract class _AuthStoreBase with Store {
     });
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut(BuildContext context) async {
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
     var result = await logout();
@@ -62,7 +62,7 @@ abstract class _AuthStoreBase with Store {
     });
   }
 
-  Future<void> refresh() async {
+  Future<void> refresh(BuildContext context) async {
     var result = await getLoggedUser();
     return result.fold((l) {}, (user) {
       setUser(user);

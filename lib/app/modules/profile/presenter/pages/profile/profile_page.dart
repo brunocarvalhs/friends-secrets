@@ -31,7 +31,7 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
-                    onPressed: () => controller.signOut(),
+                    onPressed: () => controller.signOut(context),
                     icon: const Icon(Icons.exit_to_app),
                   ),
                 ),
@@ -55,33 +55,46 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
               ),
             ),
           ],
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                  child: Observer(builder: (context) {
-                    return Wrap(
-                      spacing: 10,
-                      children: Modular.get<AuthStore>()
-                              .user
-                              ?.likers
-                              ?.map(
-                                (item) => Chip(
-                                  label: Text('${item.name}'),
-                                  padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
-                                ),
-                              )
-                              .toList() ??
-                          [],
-                    );
-                  }),
-                ),
-              ],
-            ),
+          body: FutureBuilder(
+            future: controller.request(context),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  return SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                          child: Observer(builder: (context) {
+                            return Wrap(
+                              spacing: 10,
+                              children: Modular.get<AuthStore>()
+                                      .user
+                                      ?.likers
+                                      ?.map(
+                                        (item) => Chip(
+                                          label: Text('${item.name}'),
+                                          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+                                        ),
+                                      )
+                                      .toList() ??
+                                  [],
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+                  );
+              }
+            },
           ),
         ),
       ),

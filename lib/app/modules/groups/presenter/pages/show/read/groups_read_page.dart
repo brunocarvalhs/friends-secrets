@@ -124,12 +124,12 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
       ),
       floatingActionButton: Observer(
         builder: (_) => Visibility(
-          visible: controller.getGroup?.author == Modular.get<AuthStore>().user,
+          visible: controller.isVisibilityDrawn,
           child: FloatingActionButton.extended(
             isExtended: controller.buttonExtends,
-            onPressed: () => true ? controller.drawMembers() : controller.redirect(),
-            label: const Text(true ? "Sortear" : "Ver amigo secreto"),
-            icon: const Icon(true ? Icons.people_rounded : Icons.person),
+            onPressed: () => controller.isNotDrawn ? controller.drawMembers() : controller.redirect(),
+            label: Text(controller.isNotDrawn ? "Sortear" : "Ver amigo secreto"),
+            icon: Icon(controller.isNotDrawn ? Icons.people_rounded : Icons.person),
           ),
         ),
       ),

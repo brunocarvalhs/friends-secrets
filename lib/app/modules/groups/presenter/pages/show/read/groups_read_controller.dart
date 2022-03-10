@@ -42,6 +42,12 @@ abstract class _GroupsReadControllerBase with Store {
   @computed
   bool get buttonExtends => _buttonExtends;
 
+  @computed
+  bool get isVisibilityDrawn => getGroup?.author == Modular.get<AuthStore>().user && getGroup!.users!.length >= 3;
+
+  @computed
+  bool get isNotDrawn => true;
+
   @action
   void setExtendsButton(bool value) => _buttonExtends = value;
 
