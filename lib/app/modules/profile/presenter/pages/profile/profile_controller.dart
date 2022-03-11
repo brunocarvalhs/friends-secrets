@@ -22,7 +22,7 @@ abstract class _ProfileControllerBase with Store {
 
   Future<void> signOut(BuildContext context) async {
     await authStore.signOut(context).then((_) {
-      Modular.to.pushReplacementNamed("/login/");
+      Modular.to.pushNamedAndRemoveUntil("/login/", ModalRoute.withName('/'));
     });
   }
 

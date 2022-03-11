@@ -75,7 +75,7 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                               ),
                             ),
                           ),
-                          if (controller.isVisibilityDrawn && controller.isDrawn)
+                          if (controller.isNotDrawn)
                             SliverToBoxAdapter(
                               child: Column(
                                 children: [

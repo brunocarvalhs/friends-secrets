@@ -60,6 +60,9 @@ abstract class _GroupsReadControllerBase with Store {
   @computed
   bool get isDrawn => _drawn;
 
+  @computed
+  bool get isNotDrawn => !_drawn;
+
   @action
   void setExtendsButton(bool value) => _buttonExtends = value;
 
