@@ -46,9 +46,8 @@ class NotificationPageState extends ModularState<NotificationPage, NotificationC
                                     notification: controller.allNotifications.elementAt(index),
                                   ),
                                   Divider(
-                                    height: 10,
+                                    height: 2,
                                     color: Colors.grey.shade400,
-                                    indent: 10,
                                   )
                                 ],
                               ),

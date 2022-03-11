@@ -87,8 +87,8 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                                     onTap: (group) => controller.readGroup(group),
                                   ),
                                   Divider(
-                                    height: 5,
-                                    color: Colors.grey.shade600,
+                                    height: 2,
+                                    color: Colors.grey.shade400,
                                   )
                                 ],
                               ),
