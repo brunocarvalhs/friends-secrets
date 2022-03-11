@@ -19,6 +19,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
     List<UserModel>? users,
     DateTime? created,
     DateTime? updated,
+    bool isDrawns = false,
   }) : super(
           id: id,
           type: type,
@@ -31,6 +32,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
           users: users,
           created: created,
           updated: updated,
+          isDrawns: isDrawns,
         );
 
   @override
@@ -46,6 +48,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
     List<UserModel>? users,
     DateTime? created,
     DateTime? updated,
+    bool? isDrawns,
   }) {
     return GroupModel(
       id: id ?? this.id,
@@ -59,6 +62,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       users: users ?? this.users,
       created: created ?? this.created,
       updated: updated ?? this.updated,
+      isDrawns: isDrawns ?? this.isDrawns,
     );
   }
 
@@ -76,6 +80,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       'users': users?.map((x) => x.toMap()).toList(),
       "createdAt": created?.toIso8601String(),
       "updatedAt": updated?.toIso8601String(),
+      "isDrawns": isDrawns
     };
   }
 
@@ -92,6 +97,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       users: map['users'] != null ? List<UserModel>.from(map['users']?.map((x) => UserModel.fromMap(x))) : null,
       created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
       updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
+      isDrawns: map["isDrawns"] as bool? ?? false,
     );
   }
 

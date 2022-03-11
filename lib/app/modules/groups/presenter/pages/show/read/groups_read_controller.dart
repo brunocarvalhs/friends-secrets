@@ -51,15 +51,30 @@ abstract class _GroupsReadControllerBase with Store {
   @computed
   bool get isVisibilityDrawn => getGroup?.author == Modular.get<AuthStore>().user && getGroup!.users!.length >= 3;
 
+  @observable
+  bool _drawn = false;
+
+  @action
+  void setDrawn(bool value) => _drawn = value;
+
   @computed
-  bool get isDrawn => false;
+  bool get isDrawn => _drawn;
 
   @action
   void setExtendsButton(bool value) => _buttonExtends = value;
 
   Future<void> request(BuildContext context) async {
     var result = await readGroup(Modular.args.params["id"]);
-    result.fold((failure) {}, (group) {
+    result.fold((failure) {
+      edgeAlert(
+        context,
+        title: failure.title.toString(),
+        description: failure.message.toString(),
+        backgroundColor: failure.color,
+        duration: const Duration(seconds: 10).inSeconds,
+      );
+    }, (group) {
+      setDrawn(group.isDrawns);
       setGroup(group as GroupModel);
     });
   }
@@ -87,6 +102,7 @@ abstract class _GroupsReadControllerBase with Store {
         duration: const Duration(seconds: 10).inSeconds,
       );
     }, (success) {
+      request(context);
       edgeAlert(
         context,
         title: "Sucesso",

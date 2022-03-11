@@ -14,6 +14,7 @@ class LoggedGroup extends Equatable {
   final List<UserModel>? users;
   final DateTime? created;
   final DateTime? updated;
+  final bool isDrawns;
 
   const LoggedGroup({
     required this.id,
@@ -27,6 +28,7 @@ class LoggedGroup extends Equatable {
     required this.users,
     required this.created,
     required this.updated,
+    required this.isDrawns,
   });
 
   @override

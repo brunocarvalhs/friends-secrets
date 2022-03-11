@@ -13,6 +13,7 @@ abstract class LoggedGroupInfo {
   List<UserModel>? get users;
   DateTime? get created;
   DateTime? get updated;
+  bool get isDrawns;
 
   Map<String, dynamic> toMap();
   String toJson();
@@ -25,5 +26,6 @@ abstract class LoggedGroupInfo {
     List<UserModel>? users,
     double? priceMin,
     double? priceMax,
+    bool? isDrawns,
   });
 }

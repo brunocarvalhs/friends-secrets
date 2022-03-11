@@ -79,6 +79,21 @@ mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
     });
   }
 
+  final _$_drawnAtom = Atom(name: '_GroupsReadControllerBase._drawn');
+
+  @override
+  bool get _drawn {
+    _$_drawnAtom.reportRead();
+    return super._drawn;
+  }
+
+  @override
+  set _drawn(bool value) {
+    _$_drawnAtom.reportWrite(value, super._drawn, () {
+      super._drawn = value;
+    });
+  }
+
   final _$_GroupsReadControllerBaseActionController =
       ActionController(name: '_GroupsReadControllerBase');
 
@@ -88,6 +103,17 @@ mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
         .startAction(name: '_GroupsReadControllerBase.setGroup');
     try {
       return super.setGroup(value);
+    } finally {
+      _$_GroupsReadControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setDrawn(bool value) {
+    final _$actionInfo = _$_GroupsReadControllerBaseActionController
+        .startAction(name: '_GroupsReadControllerBase.setDrawn');
+    try {
+      return super.setDrawn(value);
     } finally {
       _$_GroupsReadControllerBaseActionController.endAction(_$actionInfo);
     }

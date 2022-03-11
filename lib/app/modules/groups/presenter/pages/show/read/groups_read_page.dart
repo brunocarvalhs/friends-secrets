@@ -50,124 +50,131 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                     onRefresh: () => controller.request(context),
                     notificationPredicate: (scrollNotification) =>
                         controller.notificationPredicate(scrollNotification, context),
-                    child: CustomScrollView(
-                      slivers: <Widget>[
-                        SliverToBoxAdapter(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 20,
-                              horizontal: 10,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Membros",
-                                ),
-                                Observer(builder: (context) {
-                                  return Text(
-                                    "Total ${controller.getGroup?.users?.length ?? 0}",
-                                  );
-                                }),
-                              ],
-                            ),
-                          ),
-                        ),
-                        if (controller.isVisibilityDrawn && !controller.isDrawn)
+                    child: Observer(builder: (context) {
+                      return CustomScrollView(
+                        slivers: <Widget>[
                           SliverToBoxAdapter(
-                            child: Column(
-                              children: [
-                                InkWell(
-                                  onTap: () => controller.redirectAddMembers(),
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      child: const Icon(
-                                        Icons.group_add_rounded,
-                                        color: Colors.white,
-                                      ),
-                                      backgroundColor: Theme.of(context).colorScheme.primary,
-                                    ),
-                                    title: const Text("Adicionar novos membros"),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 20,
+                                horizontal: 10,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "Membros",
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        Observer(
-                          builder: (_) => SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) => Column(
-                                children: <Widget>[
-                                  Observer(
-                                    builder: (context) => MembersTodo(
-                                      user: controller.getGroup?.users!.elementAt(index),
-                                    ),
-                                  ),
-                                  Divider(
-                                    height: 5,
-                                    color: Colors.grey.shade600,
-                                  )
+                                  Observer(builder: (context) {
+                                    return Text(
+                                      "Total ${controller.getGroup?.users?.length ?? 0}",
+                                    );
+                                  }),
                                 ],
                               ),
-                              childCount: controller.getGroup?.users?.length ?? 0,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                          if (controller.isVisibilityDrawn && controller.isDrawn)
+                            SliverToBoxAdapter(
+                              child: Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () => controller.redirectAddMembers(),
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                        child: const Icon(
+                                          Icons.group_add_rounded,
+                                          color: Colors.white,
+                                        ),
+                                        backgroundColor: Theme.of(context).colorScheme.primary,
+                                      ),
+                                      title: const Text("Adicionar novos membros"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          Observer(
+                            builder: (_) => SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (BuildContext context, int index) => Column(
+                                  children: <Widget>[
+                                    Observer(
+                                      builder: (context) => MembersTodo(
+                                        user: controller.getGroup?.users!.elementAt(index),
+                                      ),
+                                    ),
+                                    Divider(
+                                      height: 5,
+                                      color: Colors.grey.shade600,
+                                    )
+                                  ],
+                                ),
+                                childCount: controller.getGroup?.users?.length ?? 0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
                   );
               }
             },
           ),
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          if (controller.isDrawn)
-            Observer(
-              builder: (_) => FloatingActionButton.extended(
-                isExtended: controller.buttonExtends,
-                onPressed: () => controller.redirectShowDrawn(),
-                label: const Text("Ver amigo secreto"),
-                icon: const Icon(Icons.person),
-              ),
-            ),
-          const SizedBox(
-            height: 10,
-          ),
-          if (controller.isVisibilityDrawn && !controller.isDrawn)
-            Observer(
-              builder: (_) => FloatingActionButton.extended(
-                isExtended: controller.buttonExtends,
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text("Realização do sorteio"),
-                    content: const Text(
-                        "O sorteio e realizado uma unica vez por grupo, esse processo não pode ser desfeito, deseja continuar o sorteio?"),
-                    actions: [
-                      TextButton(
-                        child: const Text("Cancelar"),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                      TextButton(
-                        child: const Text("Continar"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          controller.drawMembers(context);
-                        },
-                      ),
-                    ],
+      floatingActionButton: Observer(builder: (context) {
+        return Visibility(
+          visible: controller.getGroup != null,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              if (controller.isDrawn)
+                Observer(
+                  builder: (_) => FloatingActionButton.extended(
+                    isExtended: controller.buttonExtends,
+                    onPressed: () => controller.redirectShowDrawn(),
+                    label: const Text("Ver amigo secreto"),
+                    icon: const Icon(Icons.person),
                   ),
                 ),
-                label: const Text("Sortear"),
-                icon: const Icon(Icons.people_rounded),
+              const SizedBox(
+                height: 10,
               ),
-            ),
-        ],
-      ),
+              if (controller.isVisibilityDrawn && !controller.isDrawn)
+                Observer(
+                  builder: (_) => FloatingActionButton.extended(
+                    isExtended: controller.buttonExtends,
+                    onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text("Realização do sorteio"),
+                        content: const Text(
+                            "O sorteio e realizado uma unica vez por grupo, esse processo não pode ser desfeito, deseja continuar o sorteio?"),
+                        actions: [
+                          TextButton(
+                            child: const Text("Cancelar"),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                          TextButton(
+                            child: const Text("Continar"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              controller.drawMembers(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    label: const Text("Sortear"),
+                    icon: const Icon(Icons.people_rounded),
+                  ),
+                ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
