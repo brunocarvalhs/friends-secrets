@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:badges/badges.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/group_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/list/groups_list_controller.dart';
@@ -108,7 +109,7 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.redirect(),
-          label: const Text("Criar Grupo"),
+          label: Text(Modular.get<I10n>().groups_groupsListPage_floatingActionButton_label),
           icon: const Icon(Icons.add),
         ),
       ),

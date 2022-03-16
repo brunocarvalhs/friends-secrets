@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: ^0.17.0
   cupertino_icons: ^1.0.2
   # Modular
   flutter_modular: ^4.2.0
@@ -62,7 +63,15 @@ dev_dependencies:
   modular_test: ^1.0.1+1
   flutter_dotenv: ^5.0.2
 
+flutter_intl:
+  enabled: true
+  class_name: I10n
+  main_locale: pt
+  arb_dir: lib/app/core/localization/l10n
+  output_dir: lib/app/core/localization/generated
+
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - .env

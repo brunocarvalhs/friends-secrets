@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/notification/presenter/pages/notification_controller.dart';
 import 'package:friends_secrets/app/modules/notification/presenter/widgets/notification_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
@@ -18,9 +19,9 @@ class NotificationPageState extends ModularState<NotificationPage, NotificationC
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
-            const AppBarDefault(
+            AppBarDefault(
               expandedHeight: 100,
-              title: "Notificação",
+              title: Modular.get<I10n>().notification_notificationPage_appBarDefault_title,
             ),
           ],
           body: FutureBuilder(

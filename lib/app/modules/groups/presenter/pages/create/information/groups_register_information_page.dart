@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/create/information/groups_register_information_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
@@ -19,11 +20,10 @@ class GroupsRegisterInformationPageState
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
-            const AppBarDefault(
+            AppBarDefault(
               expandedHeight: 300,
-              title: "Definir\nInformações",
-              subtitle:
-                  "Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo.",
+              title: Modular.get<I10n>().groups_groupsRegisterInformationPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>().groups_groupsRegisterInformationPage_appBarDefault_subtitle,
             ),
           ],
           body: SingleChildScrollView(
@@ -43,8 +43,10 @@ class GroupsRegisterInformationPageState
                         controller: controller.controllerName,
                         keyboardType: TextInputType.name,
                         filled: true,
-                        hintText: "Ex.: Grupo do Trabalho",
-                        labelText: "Nome",
+                        hintText:
+                            Modular.get<I10n>().groups_groupsRegisterInformationPage_textFieldDefault_name_hintText,
+                        labelText:
+                            Modular.get<I10n>().groups_groupsRegisterInformationPage_textFieldDefault_name_labelText,
                       ),
                       const SizedBox(
                         height: 14,
@@ -59,11 +61,13 @@ class GroupsRegisterInformationPageState
                               onTap: () => controller.defineDate(context),
                               child: Observer(
                                 builder: (context) => InputDecorator(
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
+                                  decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
                                     filled: true,
-                                    hintText: "Data",
-                                    labelText: "Data",
+                                    hintText: Modular.get<I10n>()
+                                        .groups_groupsRegisterInformationPage_inputDecoration_date_hintText,
+                                    labelText: Modular.get<I10n>()
+                                        .groups_groupsRegisterInformationPage_inputDecoration_date_labelText,
                                   ),
                                   child: Text(
                                     "${controller.getDay} / ${controller.getMonth} / ${controller.getYear}",
@@ -79,11 +83,13 @@ class GroupsRegisterInformationPageState
                               onTap: () => controller.defineTime(context),
                               child: Observer(
                                 builder: (context) => InputDecorator(
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
+                                  decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
                                     filled: true,
-                                    hintText: "Horário",
-                                    labelText: "Horário",
+                                    hintText: Modular.get<I10n>()
+                                        .groups_groupsRegisterInformationPage_inputDecoration_hour_hintText,
+                                    labelText: Modular.get<I10n>()
+                                        .groups_groupsRegisterInformationPage_inputDecoration_hour_labelText,
                                   ),
                                   child: Text(
                                     "${controller.getHour} : ${controller.getMinute}",
@@ -108,9 +114,12 @@ class GroupsRegisterInformationPageState
                               controller: controller.controllerPriceMin,
                               keyboardType: TextInputType.number,
                               filled: true,
-                              hintText: "Ex.: 2.00",
-                              labelText: "Preço Minímo",
-                              prefixText: "R\$ ",
+                              hintText: Modular.get<I10n>()
+                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMin_hintText,
+                              labelText: Modular.get<I10n>()
+                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMin_labelText,
+                              prefixText: Modular.get<I10n>()
+                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMin_prefixText,
                               inputFormatters: [controller.filterPriceMin],
                             ),
                           ),
@@ -120,9 +129,12 @@ class GroupsRegisterInformationPageState
                               controller: controller.controllerPriceMax,
                               keyboardType: TextInputType.number,
                               filled: true,
-                              hintText: "Ex.: 200.00",
-                              labelText: "Preço Máximo",
-                              prefixText: "R\$ ",
+                              hintText: Modular.get<I10n>()
+                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMax_hintText,
+                              labelText: Modular.get<I10n>()
+                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMax_labelText,
+                              prefixText: Modular.get<I10n>()
+                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMax_prefixText,
                               inputFormatters: [controller.filterPriceMax],
                             ),
                           ),
@@ -137,7 +149,8 @@ class GroupsRegisterInformationPageState
                         maxLength: 120,
                         maxLines: 4,
                         filled: true,
-                        labelText: "Descrição",
+                        labelText: Modular.get<I10n>()
+                            .groups_groupsRegisterInformationPage_textFieldDefault_description_labelText,
                       ),
                     ],
                   ),
@@ -149,7 +162,7 @@ class GroupsRegisterInformationPageState
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => controller.register(context),
-        label: const Text("Registrar"),
+        label: Text(Modular.get<I10n>().groups_groupsRegisterInformationPage_floatingActionButton_label),
         icon: const Icon(Icons.save),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/contact_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/create/members/groups_register_members_controller.dart';
@@ -24,11 +25,10 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
-            const AppBarDefault(
+            AppBarDefault(
               expandedHeight: 300,
-              title: "Selecione\nos membros",
-              subtitle:
-                  "Com base na sua lista de contatos,\nlistamos os usuários que tem vinculo no aplicativo, assim facilitando ao selecionar seus membros do amigo secreto.",
+              title: Modular.get<I10n>().groups_groupsRegisterMembersPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>().groups_groupsRegisterMembersPage_appBarDefault_subtitle,
             ),
           ],
           body: FutureBuilder(
@@ -81,7 +81,7 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.redirect(),
-          label: const Text("Continuar"),
+          label: Text(Modular.get<I10n>().groups_groupsRegisterMembersPage_floatingActionButton_label),
           icon: const Icon(Icons.arrow_right),
         ),
       ),

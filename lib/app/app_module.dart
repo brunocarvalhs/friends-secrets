@@ -7,20 +7,22 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/app_guard.dart';
-import 'package:friends_secrets/app/core/domain/guards/auth_guard.dart';
-import 'package:friends_secrets/app/core/domain/repositories/network_repository.dart';
-import 'package:friends_secrets/app/core/external/dio_datasource.dart';
-import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
-import 'package:friends_secrets/app/core/infra/repositories/network_repository_impl.dart';
-import 'package:friends_secrets/app/modules/groups/groups_module.dart';
-import 'package:friends_secrets/app/modules/login/login_module.dart';
-import 'package:friends_secrets/app/modules/notification/notification_module.dart';
-import 'package:friends_secrets/app/modules/profile/profile_module.dart';
-import 'package:friends_secrets/app/modules/splash/splash_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tf_dio_cache/dio_http_cache.dart';
+
+import './core/localization/generated/l10n.dart';
+import './app_guard.dart';
+import './core/domain/guards/auth_guard.dart';
+import './core/domain/repositories/network_repository.dart';
+import './core/external/dio_datasource.dart';
+import './core/infra/datasources/network_datasource.dart';
+import './core/infra/repositories/network_repository_impl.dart';
+import './modules/groups/groups_module.dart';
+import './modules/login/login_module.dart';
+import './modules/notification/notification_module.dart';
+import './modules/profile/profile_module.dart';
+import './modules/splash/splash_module.dart';
 
 class AppModule extends Module {
   @override
@@ -51,6 +53,7 @@ class AppModule extends Module {
     Bind.lazySingleton<NetworkDataSource>((i) => DioDataSourceImpl(i.get(), i.get(), i.get())),
     Bind.lazySingleton<NetworkRepository>((i) => NetworkRepositoryImpl(i.get())),
     Bind.instance<Connectivity>(Connectivity()),
+    Bind.instance<I10n>(I10n()),
     AsyncBind<SharedPreferences>((i) => SharedPreferences.getInstance()),
   ];
 

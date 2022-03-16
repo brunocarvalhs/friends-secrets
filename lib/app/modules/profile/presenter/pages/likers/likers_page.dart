@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/profile/presenter/pages/likers/likers_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 
@@ -17,11 +18,10 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
-            const AppBarDefault(
+            AppBarDefault(
               expandedHeight: 300,
-              title: "Criação de\ngostos",
-              subtitle:
-                  "Para que seu amigo secreto saiba seus\ngostos, nos disponibilizamos uma lista\nde coisas que gosta.",
+              title: Modular.get<I10n>().profile_likersPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>().profile_likersPage_appBarDefault_subtitle,
             ),
           ],
           body: FutureBuilder(
@@ -68,7 +68,7 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.save(context),
-          label: const Text("Salvar"),
+          label: Text(Modular.get<I10n>().profile_likersPage_floatingActionButton_label),
           icon: const Icon(Icons.save),
         ),
       ),

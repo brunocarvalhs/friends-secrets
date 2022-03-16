@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/members_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
@@ -63,14 +64,14 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "Membros",
+                                  Text(
+                                    Modular.get<I10n>().groups_groupsReadPage_text_labelMembers,
                                   ),
-                                  Observer(builder: (context) {
-                                    return Text(
-                                      "Total ${controller.getGroup?.users?.length ?? 0}",
-                                    );
-                                  }),
+                                  Observer(
+                                    builder: (context) => Text(
+                                      "${Modular.get<I10n>().groups_groupsReadPage_text_descriptionMembers} ${controller.getGroup?.users?.length ?? 0}",
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -89,7 +90,7 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                                         ),
                                         backgroundColor: Theme.of(context).colorScheme.primary,
                                       ),
-                                      title: const Text("Adicionar novos membros"),
+                                      title: Text(Modular.get<I10n>().groups_groupsReadPage_text_addMembersTitle),
                                     ),
                                   ),
                                 ],
@@ -135,7 +136,7 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                   builder: (_) => FloatingActionButton.extended(
                     isExtended: controller.buttonExtends,
                     onPressed: () => controller.redirectShowDrawn(),
-                    label: const Text("Ver amigo secreto"),
+                    label: Text(Modular.get<I10n>().groups_groupsReadPage_text_showDrawnMembersLabel),
                     icon: const Icon(Icons.person),
                   ),
                 ),
@@ -149,16 +150,15 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                     onPressed: () => showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: const Text("Realização do sorteio"),
-                        content: const Text(
-                            "O sorteio e realizado uma unica vez por grupo, esse processo não pode ser desfeito, deseja continuar o sorteio?"),
+                        title: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_title),
+                        content: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_content),
                         actions: [
                           TextButton(
-                            child: const Text("Cancelar"),
+                            child: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_textButton_cancel),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                           TextButton(
-                            child: const Text("Continar"),
+                            child: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_textButton_next),
                             onPressed: () {
                               Navigator.of(context).pop();
                               controller.drawMembers(context);
@@ -167,7 +167,7 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                         ],
                       ),
                     ),
-                    label: const Text("Sortear"),
+                    label: Text(Modular.get<I10n>().groups_groupsReadPage_floatingActionButton_label),
                     icon: const Icon(Icons.people_rounded),
                   ),
                 ),
