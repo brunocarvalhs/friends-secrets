@@ -1,7 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/core/domain/repositories/network_repository.dart';
 import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
+import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 
 class NetworkRepositoryImpl implements NetworkRepository {
   final NetworkDataSource dataSource;
@@ -21,6 +24,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
       );
       return Right(result);
     } catch (e) {
+      _exception(e);
       return Left(Exception(e));
     }
   }
@@ -41,6 +45,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
       );
       return Right(result);
     } catch (e) {
+      _exception(e);
       return Left(Exception(e));
     }
   }
@@ -58,6 +63,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
       );
       return Right(result);
     } catch (e) {
+      _exception(e);
       return Left(Exception(e));
     }
   }
@@ -82,6 +88,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
       );
       return Right(result);
     } catch (e) {
+      _exception(e);
       return Left(Exception(e));
     }
   }
@@ -106,6 +113,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
       );
       return Right(result);
     } catch (e) {
+      _exception(e);
       return Left(Exception(e));
     }
   }
@@ -130,6 +138,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
       );
       return Right(result);
     } catch (e) {
+      _exception(e);
       return Left(Exception(e));
     }
   }
@@ -140,7 +149,15 @@ class NetworkRepositoryImpl implements NetworkRepository {
       final result = dataSource.setToken(token);
       return Right(result);
     } catch (e) {
+      _exception(e);
       return Left(Exception(e));
+    }
+  }
+
+  void _exception(exception) {
+    if (Modular.get<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled) {
+      Modular.get<FirebaseCrashlytics>().setCustomKey("Exception", exception.toString());
+      Modular.get<FirebaseCrashlytics>().setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
     }
   }
 }

@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
 import 'package:friends_secrets/app/modules/profile/domain/entities/logged_likers_info.dart';
 import 'package:friends_secrets/app/modules/profile/domain/errors/errors.dart';
@@ -17,7 +19,8 @@ class LikersRepositoryImpl extends LikersRepository {
     try {
       final result = await datasource.delete("/likers");
       return Right(result.statusCode == 200);
-    } catch (_) {
+    } catch (e) {
+      _exception(e);
       return Left(ErrorLikersDelete());
     }
   }
@@ -31,7 +34,8 @@ class LikersRepositoryImpl extends LikersRepository {
       );
       final likers = response.data?.map((e) => LikersModel.fromMap(e)) ?? [];
       return Right(likers);
-    } catch (_) {
+    } catch (e) {
+      _exception(e);
       return Left(ErrorLikersSelectAll());
     }
   }
@@ -42,12 +46,20 @@ class LikersRepositoryImpl extends LikersRepository {
       final params = listLikes.map((element) => element.toMap()).toList();
       final result = await datasource.post("/user/likes", data: params);
       return Right(result.statusCode == 200);
-    } catch (_) {
+    } catch (e) {
+      _exception(e);
       return Left(ErrorLikersSave(
         title: "Salvar",
         message:
             "Erro ao tentar salvar todos os seus gostos, tente novamente e caso o erro persista pode entrar em contato com suporte.",
       ));
+    }
+  }
+
+  void _exception(exception) {
+    if (Modular.get<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled) {
+      Modular.get<FirebaseCrashlytics>().setCustomKey("Exception", exception.toString());
+      Modular.get<FirebaseCrashlytics>().setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
     }
   }
 }

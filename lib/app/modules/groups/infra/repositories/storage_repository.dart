@@ -13,8 +13,16 @@
 //           as firebase_storage.TaskSnapshot;
 //       final uri = await result.ref.getDownloadURL();
 //       return Right(uri);
-//     } catch (_) {
+//     } catch (e) {
+          // _exception(e)
 //       return Left(ErrorCreate(message: "Error ao tentar criar Groupo"));
+//     }
+//   }
+
+// void _exception(exception) {
+//     if (Modular.get<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled) {
+//       Modular.get<FirebaseCrashlytics>().setCustomKey("Exception", exception.toString());
+//       Modular.get<FirebaseCrashlytics>().setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
 //     }
 //   }
 // }
