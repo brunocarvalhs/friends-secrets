@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_validation/number_validation_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NumberValidationPage extends StatefulWidget {
   final String? verificadId;

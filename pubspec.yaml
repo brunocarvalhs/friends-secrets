@@ -66,7 +66,7 @@ dev_dependencies:
 flutter_intl:
   enabled: true
   class_name: I10n
-  main_locale: pt
+  main_locale: pt_BR
   arb_dir: lib/app/core/localization/l10n
   output_dir: lib/app/core/localization/generated
 

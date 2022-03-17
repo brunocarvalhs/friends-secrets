@@ -1,3 +1,0 @@
-arb-dir: lib/app/core/localization/l10n
-template-arb-file: intl_pt.arb
-output-localization-file: app_localizations.dart

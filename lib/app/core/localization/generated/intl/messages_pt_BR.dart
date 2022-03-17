@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a pt_BR locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,7 +18,7 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'pt_BR';
 
   static String m0(day, month, year) => "${day}/${month}/${year}";
 
@@ -28,115 +28,115 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "groups_groupsAddMembersPage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "Based on your contact list,\n list the users who are linked in the app, thus making it easier to select your secret buddy members."),
+                "Com base na sua lista de contatos,\nlistamos os usuários que tem vinculo no aplicativo, assim facilitando ao selecionar seus membros do amigo secreto."),
         "groups_groupsAddMembersPage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Select\n members"),
+            MessageLookupByLibrary.simpleMessage("Selecione\nos membros"),
         "groups_groupsAddMembersPage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Add"),
+            MessageLookupByLibrary.simpleMessage("Adicionar"),
         "groups_groupsListPage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Create group"),
+            MessageLookupByLibrary.simpleMessage("Criar Grupo"),
         "groups_groupsReadPage_alertDialog_content":
             MessageLookupByLibrary.simpleMessage(
-                "The draw is carried out only once per group, this process cannot be undone, do you want to continue the draw?"),
+                "O sorteio e realizado uma unica vez por grupo, esse processo não pode ser desfeito, deseja continuar o sorteio?"),
         "groups_groupsReadPage_alertDialog_textButton_cancel":
-            MessageLookupByLibrary.simpleMessage("Cancel"),
+            MessageLookupByLibrary.simpleMessage("Cancelar"),
         "groups_groupsReadPage_alertDialog_textButton_next":
-            MessageLookupByLibrary.simpleMessage("Next"),
+            MessageLookupByLibrary.simpleMessage("Continuar"),
         "groups_groupsReadPage_alertDialog_title":
-            MessageLookupByLibrary.simpleMessage("Conducting the draw"),
+            MessageLookupByLibrary.simpleMessage("Realização do sorteio"),
         "groups_groupsReadPage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Draw"),
+            MessageLookupByLibrary.simpleMessage("Sortear"),
         "groups_groupsReadPage_text_addMembersTitle":
-            MessageLookupByLibrary.simpleMessage("Add new members"),
+            MessageLookupByLibrary.simpleMessage("Adicionar novos membros"),
         "groups_groupsReadPage_text_descriptionMembers":
             MessageLookupByLibrary.simpleMessage("Total"),
         "groups_groupsReadPage_text_labelMembers":
-            MessageLookupByLibrary.simpleMessage("Members"),
+            MessageLookupByLibrary.simpleMessage("Membros"),
         "groups_groupsReadPage_text_showDrawnMembersLabel":
-            MessageLookupByLibrary.simpleMessage("See secret friend"),
+            MessageLookupByLibrary.simpleMessage("Ver amigo secreto"),
         "groups_groupsRegisterInformationPage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "To finish creating the secret friend\'s group, we need to define some data about the group."),
+                "Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo."),
         "groups_groupsRegisterInformationPage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Set\nInformation"),
+            MessageLookupByLibrary.simpleMessage("Definir\nInformações"),
         "groups_groupsRegisterInformationPage_floatingActionButton_label":
             MessageLookupByLibrary.simpleMessage("Registrar"),
         "groups_groupsRegisterInformationPage_inputDecoration_date_hintText":
-            MessageLookupByLibrary.simpleMessage("Date"),
+            MessageLookupByLibrary.simpleMessage("Data"),
         "groups_groupsRegisterInformationPage_inputDecoration_date_labelText":
-            MessageLookupByLibrary.simpleMessage("Date"),
+            MessageLookupByLibrary.simpleMessage("Data"),
         "groups_groupsRegisterInformationPage_inputDecoration_hour_hintText":
-            MessageLookupByLibrary.simpleMessage("Hour"),
+            MessageLookupByLibrary.simpleMessage("Horário"),
         "groups_groupsRegisterInformationPage_inputDecoration_hour_labelText":
-            MessageLookupByLibrary.simpleMessage("Hour"),
+            MessageLookupByLibrary.simpleMessage("Horário"),
         "groups_groupsRegisterInformationPage_textFieldDefault_date_child": m0,
         "groups_groupsRegisterInformationPage_textFieldDefault_description_labelText":
-            MessageLookupByLibrary.simpleMessage("Description"),
+            MessageLookupByLibrary.simpleMessage("Descrição"),
         "groups_groupsRegisterInformationPage_textFieldDefault_hour_child": m1,
         "groups_groupsRegisterInformationPage_textFieldDefault_name_hintText":
-            MessageLookupByLibrary.simpleMessage("Ex.: Working Group"),
+            MessageLookupByLibrary.simpleMessage("Ex.: Grupo do Trabalho"),
         "groups_groupsRegisterInformationPage_textFieldDefault_name_labelText":
-            MessageLookupByLibrary.simpleMessage("Name"),
+            MessageLookupByLibrary.simpleMessage("Nome"),
         "groups_groupsRegisterInformationPage_textFieldDefault_priceMax_hintText":
             MessageLookupByLibrary.simpleMessage("Ex.: 200.00"),
         "groups_groupsRegisterInformationPage_textFieldDefault_priceMax_labelText":
-            MessageLookupByLibrary.simpleMessage("Ceiling price"),
+            MessageLookupByLibrary.simpleMessage("Preço Máximo"),
         "groups_groupsRegisterInformationPage_textFieldDefault_priceMax_prefixText":
             MessageLookupByLibrary.simpleMessage("R\$ "),
         "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_hintText":
             MessageLookupByLibrary.simpleMessage("Ex.: 2.00"),
         "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_labelText":
-            MessageLookupByLibrary.simpleMessage("Best price"),
+            MessageLookupByLibrary.simpleMessage("Preço Minímo"),
         "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_prefixText":
             MessageLookupByLibrary.simpleMessage("R\$ "),
         "groups_groupsRegisterMembersPage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "Based on your contact list,\n list the users who are linked in the app, thus making it easier to select your secret buddy members."),
+                "Com base na sua lista de contatos,\nlistamos os usuários que tem vinculo no aplicativo, assim facilitando ao selecionar seus membros do amigo secreto."),
         "groups_groupsRegisterMembersPage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Select\n members"),
+            MessageLookupByLibrary.simpleMessage("Selecione\nos membros"),
         "groups_groupsRegisterMembersPage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Next"),
+            MessageLookupByLibrary.simpleMessage("Continuar"),
         "groups_groupsRegisterTypePage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "We define types of secret friends that our platform makes available for our users to have fun in different ways."),
+                "Definimos tipos de amigos secretos que nossa plataforma disponibiliza para nossos usuários poderem se divertir de diversas maneiras diferentes."),
         "groups_groupsRegisterTypePage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Select\n the category"),
+            MessageLookupByLibrary.simpleMessage("Selecione\na categoria"),
         "groups_groupsRegisterTypePage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Next"),
+            MessageLookupByLibrary.simpleMessage("Continuar"),
         "login_loginPage_headerDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "Create groups to make your friend\nsecret with your friends"),
+                "Crie grupos para realizar seu amigo\nsecreto com seus amigos"),
         "login_loginPage_headerDefault_title":
             MessageLookupByLibrary.simpleMessage(
-                "Organize your\nsecret friends\nin a place"),
+                "Organize seus\namigos secretos\nem um lugar"),
         "login_loginPage_socialLoginButton_label":
-            MessageLookupByLibrary.simpleMessage("Login with Google"),
+            MessageLookupByLibrary.simpleMessage("Entrar com Google"),
         "login_numberRegisterPage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Register"),
+            MessageLookupByLibrary.simpleMessage("Registrar"),
         "login_numberRegisterPage_headerDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "By registering your phone, the group\norganiser will be able to include you in the secret\nfriend."),
+                "Cadastrando seu telefone, o organizador\ndo grupo, poderá te incluir no amigo\nsecreto."),
         "login_numberRegisterPage_headerDefault_title":
-            MessageLookupByLibrary.simpleMessage("Phone\nregistration"),
+            MessageLookupByLibrary.simpleMessage("Registro de \nTelefone"),
         "login_numberRegisterPage_textFieldDefault_hintText":
             MessageLookupByLibrary.simpleMessage("(00) 0 0000-0000"),
         "login_numberRegisterPage_textFieldDefault_labelText":
-            MessageLookupByLibrary.simpleMessage("Cell phone"),
+            MessageLookupByLibrary.simpleMessage("Celular"),
         "login_numberValidationPage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Register"),
+            MessageLookupByLibrary.simpleMessage("Registrar"),
         "login_numberValidationPage_headerDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "A code has been sent to the registered\nphone to validate your number"),
+                "Um código foi enviado para o telefone\nregistrado para validar seu número"),
         "login_numberValidationPage_headerDefault_title":
-            MessageLookupByLibrary.simpleMessage("Validating\nPhone"),
+            MessageLookupByLibrary.simpleMessage("Validando\nTelefone"),
         "notification_notificationPage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Notification"),
+            MessageLookupByLibrary.simpleMessage("Notificação"),
         "profile_likersPage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "So that your secret friend knows your\nlikes, we provide a list\ndof things he/she likes."),
+                "Para que seu amigo secreto saiba seus\ngostos, nos disponibilizamos uma lista\nde coisas que gosta."),
         "profile_likersPage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Creation of\nlikes"),
+            MessageLookupByLibrary.simpleMessage("Criação de\ngostos"),
         "profile_likersPage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Save")
+            MessageLookupByLibrary.simpleMessage("Salvar")
       };
 }
