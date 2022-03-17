@@ -1,0 +1,77 @@
+{
+    "login_loginPage_headerDefault_title": "Organize your\nsecret friends\nin a place",
+    "login_loginPage_headerDefault_subtitle": "Create groups to make your friend\nsecret with your friends",
+    "login_loginPage_socialLoginButton_label": "Login with Google",
+    "login_numberRegisterPage_headerDefault_title": "Phone\nregistration",
+    "login_numberRegisterPage_headerDefault_subtitle": "By registering your phone, the group\norganiser will be able to include you in the secret\nfriend.",
+    "login_numberRegisterPage_textFieldDefault_labelText": "Cell phone",
+    "login_numberRegisterPage_textFieldDefault_hintText": "(00) 0 0000-0000",
+    "login_numberRegisterPage_floatingActionButton_label": "Register",
+    "login_numberValidationPage_headerDefault_title": "Validating\nPhone",
+    "login_numberValidationPage_headerDefault_subtitle": "A code has been sent to the registered\nphone to validate your number",
+    "login_numberValidationPage_floatingActionButton_label": "Register",
+    "profile_likersPage_appBarDefault_title": "Creation of\nlikes",
+    "profile_likersPage_appBarDefault_subtitle": "So that your secret friend knows your\nlikes, we provide a list\ndof things he/she likes.",
+    "profile_likersPage_floatingActionButton_label": "Save",
+    "notification_notificationPage_appBarDefault_title": "Notification",
+    "groups_groupsReadPage_text_labelMembers": "Members",
+    "groups_groupsReadPage_text_descriptionMembers": "Total",
+    "groups_groupsReadPage_text_addMembersTitle": "Add new members",
+    "groups_groupsReadPage_text_showDrawnMembersLabel": "See secret friend",
+    "groups_groupsReadPage_alertDialog_title": "Conducting the draw",
+    "groups_groupsReadPage_alertDialog_content": "The draw is carried out only once per group, this process cannot be undone, do you want to continue the draw?",
+    "groups_groupsReadPage_alertDialog_textButton_cancel": "Cancel",
+    "groups_groupsReadPage_alertDialog_textButton_next": "Next",
+    "groups_groupsReadPage_floatingActionButton_label": "Draw",
+    "groups_groupsAddMembersPage_appBarDefault_title": "Select\n members",
+    "groups_groupsAddMembersPage_appBarDefault_subtitle": "Based on your contact list,\n list the users who are linked in the app, thus making it easier to select your secret buddy members.",
+    "groups_groupsAddMembersPage_floatingActionButton_label": "Add",
+    "groups_groupsListPage_floatingActionButton_label": "Create group",
+    "groups_groupsRegisterMembersPage_appBarDefault_title": "Select\n members",
+    "groups_groupsRegisterMembersPage_appBarDefault_subtitle": "Based on your contact list,\n list the users who are linked in the app, thus making it easier to select your secret buddy members.",
+    "groups_groupsRegisterMembersPage_floatingActionButton_label": "Next",
+    "groups_groupsRegisterInformationPage_appBarDefault_title": "Set\nInformation",
+    "groups_groupsRegisterInformationPage_appBarDefault_subtitle": "To finish creating the secret friend's group, we need to define some data about the group.",
+    "groups_groupsRegisterInformationPage_textFieldDefault_name_labelText": "Name",
+    "groups_groupsRegisterInformationPage_textFieldDefault_name_hintText": "Ex.: Working Group",
+    "groups_groupsRegisterInformationPage_inputDecoration_date_hintText": "Date",
+    "groups_groupsRegisterInformationPage_inputDecoration_date_labelText": "Date",
+    "groups_groupsRegisterInformationPage_textFieldDefault_date_child": "{day}/{month}/{year}",
+    "@groups_groupsRegisterInformationPage_textFieldDefault_date_child": {
+        "placeholders": {
+            "day": {
+                "type": "String"
+            },
+            "month": {
+                "type": "String"
+            },
+            "year": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsRegisterInformationPage_inputDecoration_hour_hintText": "Hour",
+    "groups_groupsRegisterInformationPage_inputDecoration_hour_labelText": "Hour",
+    "groups_groupsRegisterInformationPage_textFieldDefault_hour_child": "{hour}:{minute}",
+    "@groups_groupsRegisterInformationPage_textFieldDefault_hour_child": {
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            },
+            "minute": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_labelText": "Best price",
+    "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_hintText": "Ex.: 2.00",
+    "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_prefixText": "R$ ",
+    "groups_groupsRegisterInformationPage_textFieldDefault_priceMax_labelText": "Ceiling price",
+    "groups_groupsRegisterInformationPage_textFieldDefault_priceMax_hintText": "Ex.: 200.00",
+    "groups_groupsRegisterInformationPage_textFieldDefault_priceMax_prefixText": "R$ ",
+    "groups_groupsRegisterInformationPage_textFieldDefault_description_labelText": "Description",
+    "groups_groupsRegisterInformationPage_floatingActionButton_label": "Registrar",
+    "groups_groupsRegisterTypePage_appBarDefault_title": "Select\n the category",
+    "groups_groupsRegisterTypePage_appBarDefault_subtitle": "We define types of secret friends that our platform makes available for our users to have fun in different ways.",
+    "groups_groupsRegisterTypePage_floatingActionButton_label": "Next"
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/create/categories/groups_register_type_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/type_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
@@ -18,11 +19,10 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
-            const AppBarDefault(
+            AppBarDefault(
               expandedHeight: 300,
-              title: "Selecione\na categoria",
-              subtitle:
-                  "Definimos tipos de amigos secretos que nossa plataforma disponibiliza para nossos usuários poderem se divertir de diversas maneiras diferentes.",
+              title: Modular.get<I10n>().groups_groupsRegisterTypePage_appBarDefault_title,
+              subtitle: Modular.get<I10n>().groups_groupsRegisterTypePage_appBarDefault_subtitle,
             ),
           ],
           body: FutureBuilder(
@@ -74,7 +74,7 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.redirect(),
-          label: const Text("Continuar"),
+          label: Text(Modular.get<I10n>().groups_groupsRegisterTypePage_floatingActionButton_label),
           icon: const Icon(Icons.arrow_right),
         ),
       ),

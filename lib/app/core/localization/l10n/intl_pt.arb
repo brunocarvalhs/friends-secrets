@@ -21,7 +21,7 @@
     "groups_groupsReadPage_alertDialog_title": "Realização do sorteio",
     "groups_groupsReadPage_alertDialog_content": "O sorteio e realizado uma unica vez por grupo, esse processo não pode ser desfeito, deseja continuar o sorteio?",
     "groups_groupsReadPage_alertDialog_textButton_cancel": "Cancelar",
-    "groups_groupsReadPage_alertDialog_textButton_next": "Continar",
+    "groups_groupsReadPage_alertDialog_textButton_next": "Continuar",
     "groups_groupsReadPage_floatingActionButton_label": "Sortear",
     "groups_groupsAddMembersPage_appBarDefault_title": "Selecione\nos membros",
     "groups_groupsAddMembersPage_appBarDefault_subtitle": "Com base na sua lista de contatos,\nlistamos os usuários que tem vinculo no aplicativo, assim facilitando ao selecionar seus membros do amigo secreto.",
@@ -36,8 +36,33 @@
     "groups_groupsRegisterInformationPage_textFieldDefault_name_hintText": "Ex.: Grupo do Trabalho",
     "groups_groupsRegisterInformationPage_inputDecoration_date_hintText": "Data",
     "groups_groupsRegisterInformationPage_inputDecoration_date_labelText": "Data",
+    "groups_groupsRegisterInformationPage_textFieldDefault_date_child": "{day}/{month}/{year}",
+    "@groups_groupsRegisterInformationPage_textFieldDefault_date_child": {
+        "placeholders": {
+            "day": {
+                "type": "String"
+            },
+            "month": {
+                "type": "String"
+            },
+            "year": {
+                "type": "String"
+            }
+        }
+    },
     "groups_groupsRegisterInformationPage_inputDecoration_hour_hintText": "Horário",
     "groups_groupsRegisterInformationPage_inputDecoration_hour_labelText": "Horário",
+    "groups_groupsRegisterInformationPage_textFieldDefault_hour_child": "{hour}:{minute}",
+    "@groups_groupsRegisterInformationPage_textFieldDefault_hour_child": {
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            },
+            "minute": {
+                "type": "String"
+            }
+        }
+    },
     "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_labelText": "Preço Minímo",
     "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_hintText": "Ex.: 2.00",
     "groups_groupsRegisterInformationPage_textFieldDefault_priceMin_prefixText": "R$ ",
@@ -45,5 +70,8 @@
     "groups_groupsRegisterInformationPage_textFieldDefault_priceMax_hintText": "Ex.: 200.00",
     "groups_groupsRegisterInformationPage_textFieldDefault_priceMax_prefixText": "R$ ",
     "groups_groupsRegisterInformationPage_textFieldDefault_description_labelText": "Descrição",
-    "groups_groupsRegisterInformationPage_floatingActionButton_label": "Registrar"
+    "groups_groupsRegisterInformationPage_floatingActionButton_label": "Registrar",
+    "groups_groupsRegisterTypePage_appBarDefault_title": "Selecione\na categoria",
+    "groups_groupsRegisterTypePage_appBarDefault_subtitle": "Definimos tipos de amigos secretos que nossa plataforma disponibiliza para nossos usuários poderem se divertir de diversas maneiras diferentes.",
+    "groups_groupsRegisterTypePage_floatingActionButton_label": "Continuar"
 }

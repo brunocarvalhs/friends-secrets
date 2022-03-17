@@ -70,7 +70,12 @@ class GroupsRegisterInformationPageState
                                         .groups_groupsRegisterInformationPage_inputDecoration_date_labelText,
                                   ),
                                   child: Text(
-                                    "${controller.getDay} / ${controller.getMonth} / ${controller.getYear}",
+                                    Modular.get<I10n>()
+                                        .groups_groupsRegisterInformationPage_textFieldDefault_date_child(
+                                      controller.getDay,
+                                      controller.getMonth,
+                                      controller.getYear,
+                                    ),
                                     style: Theme.of(context).inputDecorationTheme.counterStyle,
                                   ),
                                 ),
@@ -92,7 +97,11 @@ class GroupsRegisterInformationPageState
                                         .groups_groupsRegisterInformationPage_inputDecoration_hour_labelText,
                                   ),
                                   child: Text(
-                                    "${controller.getHour} : ${controller.getMinute}",
+                                    Modular.get<I10n>()
+                                        .groups_groupsRegisterInformationPage_textFieldDefault_hour_child(
+                                      controller.getHour,
+                                      controller.getMinute,
+                                    ),
                                     style: Theme.of(context).inputDecorationTheme.counterStyle,
                                   ),
                                 ),

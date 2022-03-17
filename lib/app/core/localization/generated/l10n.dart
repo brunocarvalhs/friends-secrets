@@ -270,10 +270,10 @@ class I10n {
     );
   }
 
-  /// `Continar`
+  /// `Continuar`
   String get groups_groupsReadPage_alertDialog_textButton_next {
     return Intl.message(
-      'Continar',
+      'Continuar',
       name: 'groups_groupsReadPage_alertDialog_textButton_next',
       desc: '',
       args: [],
@@ -428,6 +428,17 @@ class I10n {
     );
   }
 
+  /// `{day}/{month}/{year}`
+  String groups_groupsRegisterInformationPage_textFieldDefault_date_child(
+      String day, String month, String year) {
+    return Intl.message(
+      '$day/$month/$year',
+      name: 'groups_groupsRegisterInformationPage_textFieldDefault_date_child',
+      desc: '',
+      args: [day, month, year],
+    );
+  }
+
   /// `Horário`
   String
       get groups_groupsRegisterInformationPage_inputDecoration_hour_hintText {
@@ -449,6 +460,17 @@ class I10n {
           'groups_groupsRegisterInformationPage_inputDecoration_hour_labelText',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `{hour}:{minute}`
+  String groups_groupsRegisterInformationPage_textFieldDefault_hour_child(
+      String hour, String minute) {
+    return Intl.message(
+      '$hour:$minute',
+      name: 'groups_groupsRegisterInformationPage_textFieldDefault_hour_child',
+      desc: '',
+      args: [hour, minute],
     );
   }
 
@@ -545,6 +567,36 @@ class I10n {
       args: [],
     );
   }
+
+  /// `Selecione\na categoria`
+  String get groups_groupsRegisterTypePage_appBarDefault_title {
+    return Intl.message(
+      'Selecione\na categoria',
+      name: 'groups_groupsRegisterTypePage_appBarDefault_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Definimos tipos de amigos secretos que nossa plataforma disponibiliza para nossos usuários poderem se divertir de diversas maneiras diferentes.`
+  String get groups_groupsRegisterTypePage_appBarDefault_subtitle {
+    return Intl.message(
+      'Definimos tipos de amigos secretos que nossa plataforma disponibiliza para nossos usuários poderem se divertir de diversas maneiras diferentes.',
+      name: 'groups_groupsRegisterTypePage_appBarDefault_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continuar`
+  String get groups_groupsRegisterTypePage_floatingActionButton_label {
+    return Intl.message(
+      'Continuar',
+      name: 'groups_groupsRegisterTypePage_floatingActionButton_label',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<I10n> {
@@ -553,6 +605,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<I10n> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'pt'),
+      Locale.fromSubtags(languageCode: 'en'),
     ];
   }
 
