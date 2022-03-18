@@ -5,6 +5,7 @@ import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/members_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_present.dart';
 
 class GroupsReadPage extends StatefulWidget {
   final String id;
@@ -43,9 +44,7 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const LoadingPresent();
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),

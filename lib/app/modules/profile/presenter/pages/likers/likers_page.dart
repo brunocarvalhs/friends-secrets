@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/profile/presenter/pages/likers/likers_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_present.dart';
 
 class LikersPage extends StatefulWidget {
   const LikersPage({Key? key}) : super(key: key);
@@ -30,9 +31,7 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const LoadingPresent();
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),

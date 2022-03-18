@@ -2,7 +2,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/delete_group.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/exit_group.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/shared_group.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/modules/notification/domain/usecases/list_notifications.dart';
@@ -17,8 +20,18 @@ abstract class _GroupsListControllerBase with Store {
   final AuthStore user;
   final GetGroups getGroups;
   final ListNotifiactions notifiactions;
+  final ExitGroup exitGroup;
+  final DeleteGroup deleteGroup;
+  final SharedGroup sharedGroup;
 
-  _GroupsListControllerBase(this.user, this.getGroups, this.notifiactions) {
+  _GroupsListControllerBase(
+    this.user,
+    this.getGroups,
+    this.notifiactions,
+    this.deleteGroup,
+    this.sharedGroup,
+    this.exitGroup,
+  ) {
     analyticsDefines();
   }
 
@@ -60,14 +73,14 @@ abstract class _GroupsListControllerBase with Store {
   int? notification;
 
   Future<void> request(BuildContext context) async {
-    var result = await getGroups();
+    final result = await getGroups();
     result.fold((failure) {}, (list) {
       addAll(list as Iterable<GroupModel>);
     });
   }
 
   Future<void> notificationCheck(BuildContext context) async {
-    var result = await notifiactions();
+    final result = await notifiactions();
     result.fold((failure) {}, (list) {
       notification = list.map((notification) {
         if (notification.isVisualized) return notification;
@@ -87,4 +100,16 @@ abstract class _GroupsListControllerBase with Store {
   void notificationRedirect() => Modular.to.pushNamed("/notification/");
 
   void readGroup(GroupModel groupModel) => Modular.to.pushNamed("/home/${groupModel.id}", arguments: groupModel);
+
+  Future<void> delete(GroupModel groupModel) async {
+    final result = groupModel.author == Modular.get<AuthStore>().user
+        ? await deleteGroup(groupModel.id!)
+        : await exitGroup(groupModel.id!);
+    result.fold((failure) {}, (seccess) {});
+  }
+
+  Future<void> shared(GroupModel groupModel) async {
+    final result = await sharedGroup(groupModel.id!);
+    result.fold((failure) {}, (seccess) {});
+  }
 }

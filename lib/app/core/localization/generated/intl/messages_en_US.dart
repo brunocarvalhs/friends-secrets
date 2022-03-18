@@ -28,9 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "groups_groupsAddMembersPage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "Based on your contact list,\n list the users who are linked in the app, thus making it easier to select your secret buddy members."),
+                "Based on your contact list,\nlist the users who are linked in the app, thus making it easier to select your secret buddy members."),
         "groups_groupsAddMembersPage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Select\n members"),
+            MessageLookupByLibrary.simpleMessage("Select\nmembers"),
         "groups_groupsAddMembersPage_floatingActionButton_label":
             MessageLookupByLibrary.simpleMessage("Add"),
         "groups_groupsListPage_floatingActionButton_label":
@@ -91,16 +91,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("R\$ "),
         "groups_groupsRegisterMembersPage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
-                "Based on your contact list,\n list the users who are linked in the app, thus making it easier to select your secret buddy members."),
+                "Based on your contact list,\nlist the users who are linked in the app, thus making it easier to select your secret buddy members."),
         "groups_groupsRegisterMembersPage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Select\n members"),
+            MessageLookupByLibrary.simpleMessage("Select\nmembers"),
         "groups_groupsRegisterMembersPage_floatingActionButton_label":
             MessageLookupByLibrary.simpleMessage("Next"),
         "groups_groupsRegisterTypePage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
                 "We define types of secret friends that our platform makes available for our users to have fun in different ways."),
         "groups_groupsRegisterTypePage_appBarDefault_title":
-            MessageLookupByLibrary.simpleMessage("Select\n the category"),
+            MessageLookupByLibrary.simpleMessage("Select\nthe category"),
         "groups_groupsRegisterTypePage_floatingActionButton_label":
             MessageLookupByLibrary.simpleMessage("Next"),
         "login_loginPage_headerDefault_subtitle":

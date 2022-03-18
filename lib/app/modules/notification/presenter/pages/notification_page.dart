@@ -5,6 +5,7 @@ import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/notification/presenter/pages/notification_controller.dart';
 import 'package:friends_secrets/app/modules/notification/presenter/widgets/notification_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_present.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -30,9 +31,7 @@ class NotificationPageState extends ModularState<NotificationPage, NotificationC
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const LoadingPresent();
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),

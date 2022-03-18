@@ -1,5 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/drawn_group.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/exit_group.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/shared_group.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/show_user_drawn_group.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/members/groups_add_members_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/members/groups_add_members_page.dart';
@@ -51,7 +53,7 @@ class GroupsModule extends Module {
     // Repositories -----------------------------------------------------------------------------
     Bind.factory<GroupsRepository>((i) => GroupsRepositoryImpl(i.get(), i.get())),
     Bind.factory<TypesRepository>((i) => TypesRepositoryImpl(i.get())),
-    Bind.factory<ContactsRepository>((i) => ContactsRepositoryImpl(i.get())),
+    Bind.factory<ContactsRepository>((i) => ContactsRepositoryImpl(i.get(), i.get())),
     Bind.factory<AlbumsRepository>((i) => AlbumsRepositoryImpl(i.get())),
     // Use Case ---------------------------------------------------------------------------------
     Bind.factory<ReadGroup>((i) => ReadGroupImpl(i.get())),
@@ -64,9 +66,11 @@ class GroupsModule extends Module {
     Bind.factory<RegisterImage>((i) => RegisterImageImpl(i.get())),
     Bind.factory<DrawnGroup>((i) => DrawnGroupImpl(i.get())),
     Bind.factory<ShowUserDrawnGroup>((i) => ShowUserDrawnGroupImpl(i.get())),
+    Bind.factory<SharedGroup>((i) => SharedGroupImpl(i.get())),
+    Bind.factory<ExitGroup>((i) => ExitGroupImpl(i.get())),
     // Controllers -------------------------------------------------------------------------------
-    Bind.factory((i) => GroupsListController(i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsRegisterMembersController(i.get(), i.get(), i.get())),
+    Bind.factory((i) => GroupsListController(i.get(), i.get(), i.get(), i.get(), i.get(), i.get())),
+    Bind.factory((i) => GroupsRegisterMembersController(i.get(), i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterTypeController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterInformationController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsReadController(i.get(), i.get(), i.get(), i.get())),

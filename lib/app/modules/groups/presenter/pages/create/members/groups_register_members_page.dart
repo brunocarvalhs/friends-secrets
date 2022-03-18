@@ -5,6 +5,7 @@ import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/contact_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/create/members/groups_register_members_controller.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_present.dart';
 
 class GroupsRegisterMembersPage extends StatefulWidget {
   const GroupsRegisterMembersPage({Key? key}) : super(key: key);
@@ -37,9 +38,7 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const LoadingPresent();
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),

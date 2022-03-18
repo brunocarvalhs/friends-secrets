@@ -5,7 +5,16 @@ import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart
 class GroupTodo extends StatelessWidget {
   final GroupModel groupModel;
   final Function(GroupModel) onTap;
-  const GroupTodo({Key? key, required this.groupModel, required this.onTap}) : super(key: key);
+  final Function(GroupModel)? onDelete;
+  final Function(GroupModel)? onShared;
+
+  const GroupTodo({
+    Key? key,
+    required this.groupModel,
+    required this.onTap,
+    this.onDelete,
+    this.onShared,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +22,22 @@ class GroupTodo extends StatelessWidget {
       endActionPane: ActionPane(
         motion: const ScrollMotion(),
         children: [
-          SlidableAction(
-            onPressed: (context) {},
-            backgroundColor: const Color(0xFFFE4A49),
-            foregroundColor: Colors.white,
-            icon: Icons.delete,
-            label: 'Delete',
-          ),
+          if (onDelete != null)
+            SlidableAction(
+              onPressed: (context) => onDelete!(groupModel),
+              backgroundColor: const Color(0xFFFE4A49),
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Delete',
+            ),
+          if (onShared != null)
+            SlidableAction(
+              onPressed: (context) => onShared!(groupModel),
+              backgroundColor: const Color.fromARGB(255, 98, 155, 219),
+              foregroundColor: Colors.white,
+              icon: Icons.share_rounded,
+              label: 'Shared',
+            ),
         ],
       ),
       child: InkWell(

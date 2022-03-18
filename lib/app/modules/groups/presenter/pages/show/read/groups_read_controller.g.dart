@@ -47,6 +47,13 @@ mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
   bool get isDrawn => (_$isDrawnComputed ??= Computed<bool>(() => super.isDrawn,
           name: '_GroupsReadControllerBase.isDrawn'))
       .value;
+  Computed<bool>? _$isNotDrawnComputed;
+
+  @override
+  bool get isNotDrawn =>
+      (_$isNotDrawnComputed ??= Computed<bool>(() => super.isNotDrawn,
+              name: '_GroupsReadControllerBase.isNotDrawn'))
+          .value;
 
   final _$_groupModelAtom = Atom(name: '_GroupsReadControllerBase._groupModel');
 
@@ -136,7 +143,8 @@ mixin _$GroupsReadController on _GroupsReadControllerBase, Store {
 getGroup: ${getGroup},
 buttonExtends: ${buttonExtends},
 isVisibilityDrawn: ${isVisibilityDrawn},
-isDrawn: ${isDrawn}
+isDrawn: ${isDrawn},
+isNotDrawn: ${isNotDrawn}
     ''';
   }
 }

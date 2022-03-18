@@ -5,6 +5,7 @@ import 'package:friends_secrets/app/shared/utils/assets_utils.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/login/login_controller.dart';
 import 'package:friends_secrets/app/modules/login/presenter/widgets/social_login_button/social_login_button_widget.dart';
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -26,9 +27,9 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
+                  child: Lottie.asset(
                     loginBackground,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),

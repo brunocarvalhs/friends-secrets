@@ -1,13 +1,12 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/modules/groups/domain/repositories/contacts_repository.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/list_contacts.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:mobx/mobx.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 part "groups_register_members_controller.g.dart";
 
@@ -18,8 +17,14 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   final AuthStore user;
   final RegisterGroupStore registerGroupStore;
   final ListContacts listContacts;
+  final ContactsRepository contactsRepository;
 
-  _GroupsRegisterMembersControllerBase(this.user, this.registerGroupStore, this.listContacts) {
+  _GroupsRegisterMembersControllerBase(
+    this.user,
+    this.registerGroupStore,
+    this.listContacts,
+    this.contactsRepository,
+  ) {
     analyticsDefines();
   }
 
@@ -69,25 +74,8 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   }
 
   Future<List<String>> _requestListContact() async {
-    if (await Permission.contacts.request().isGranted) {
-      List<Contact> contacts = await FlutterContacts.getContacts(withPhoto: true, withProperties: true);
-
-      final list = contacts
-          .map((e) => e.phones.map((e) => e.number.replaceAll(RegExp(r"/(?<!^)\+|[^\d+]+"), "")).toList())
-          .toList();
-
-      List<String> phones = [];
-
-      for (var contact in list) {
-        for (var number in contact) {
-          phones.add(number);
-        }
-      }
-
-      return phones;
-    } else {
-      return [];
-    }
+    final result = await contactsRepository.getContacts();
+    return result.fold((l) => [], (r) => r);
   }
 
   @observable
