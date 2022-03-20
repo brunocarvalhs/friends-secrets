@@ -17,20 +17,18 @@ part "groups_list_controller.g.dart";
 class GroupsListController = _GroupsListControllerBase with _$GroupsListController;
 
 abstract class _GroupsListControllerBase with Store {
-  final AuthStore user;
-  final GetGroups getGroups;
-  final ListNotifiactions notifiactions;
-  final ExitGroup exitGroup;
-  final DeleteGroup deleteGroup;
-  final SharedGroup sharedGroup;
+  final GetGroups _getGroups;
+  final ListNotifiactions _notifiactions;
+  final ExitGroup _exitGroup;
+  final DeleteGroup _deleteGroup;
+  final SharedGroup _sharedGroup;
 
   _GroupsListControllerBase(
-    this.user,
-    this.getGroups,
-    this.notifiactions,
-    this.deleteGroup,
-    this.sharedGroup,
-    this.exitGroup,
+    this._getGroups,
+    this._notifiactions,
+    this._deleteGroup,
+    this._sharedGroup,
+    this._exitGroup,
   ) {
     analyticsDefines();
   }
@@ -73,14 +71,14 @@ abstract class _GroupsListControllerBase with Store {
   int? notification;
 
   Future<void> request(BuildContext context) async {
-    final result = await getGroups();
+    final result = await _getGroups();
     result.fold((failure) {}, (list) {
       addAll(list as Iterable<GroupModel>);
     });
   }
 
   Future<void> notificationCheck(BuildContext context) async {
-    final result = await notifiactions();
+    final result = await _notifiactions();
     result.fold((failure) {}, (list) {
       notification = list.map((notification) {
         if (notification.isVisualized) return notification;
@@ -93,23 +91,37 @@ abstract class _GroupsListControllerBase with Store {
     return true;
   }
 
-  void redirect() => Modular.to.pushNamed("/home/register/members");
+  void redirect() => Modular.to.pushNamed("/home/register/members").then(((value) => update()));
 
-  void profileRedirect() => Modular.to.pushNamed("/profile/");
+  void profileRedirect() => Modular.to.pushNamed("/profile/").then(((value) => update()));
 
-  void notificationRedirect() => Modular.to.pushNamed("/notification/");
+  void notificationRedirect() => Modular.to.pushNamed("/notification/").then(((value) => update()));
 
-  void readGroup(GroupModel groupModel) => Modular.to.pushNamed("/home/${groupModel.id}", arguments: groupModel);
+  void readGroup(GroupModel groupModel) =>
+      Modular.to.pushNamed("/home/${groupModel.id}", arguments: groupModel).then(((value) => update()));
+
+  Future<void> update() async {
+    final groups = await _getGroups();
+    groups.fold((failure) {}, (list) {
+      addAll(list as Iterable<GroupModel>);
+    });
+    final notifications = await _notifiactions();
+    notifications.fold((failure) {}, (list) {
+      notification = list.map((notification) {
+        if (notification.isVisualized) return notification;
+      }).length;
+    });
+  }
 
   Future<void> delete(GroupModel groupModel) async {
     final result = groupModel.author == Modular.get<AuthStore>().user
-        ? await deleteGroup(groupModel.id!)
-        : await exitGroup(groupModel.id!);
+        ? await _deleteGroup(groupModel.id!)
+        : await _exitGroup(groupModel.id!);
     result.fold((failure) {}, (seccess) {});
   }
 
   Future<void> shared(GroupModel groupModel) async {
-    final result = await sharedGroup(groupModel.id!);
+    final result = await _sharedGroup(groupModel.id!);
     result.fold((failure) {}, (seccess) {});
   }
 }

@@ -73,5 +73,46 @@
     "groups_groupsRegisterInformationPage_floatingActionButton_label": "Registrar",
     "groups_groupsRegisterTypePage_appBarDefault_title": "Selecione\na categoria",
     "groups_groupsRegisterTypePage_appBarDefault_subtitle": "Definimos tipos de amigos secretos que nossa plataforma disponibiliza para nossos usuários poderem se divertir de diversas maneiras diferentes.",
-    "groups_groupsRegisterTypePage_floatingActionButton_label": "Continuar"
+    "groups_groupsRegisterTypePage_floatingActionButton_label": "Continuar",
+    "groups_groupsUpdateInformationPage_appBarDefault_title": "Definir\nInformações",
+    "groups_groupsUpdateInformationPage_appBarDefault_subtitle": "Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo.",
+    "groups_groupsUpdateInformationPage_textFieldDefault_name_labelText": "Nome",
+    "groups_groupsUpdateInformationPage_textFieldDefault_name_hintText": "Ex.: Grupo do Trabalho",
+    "groups_groupsUpdateInformationPage_inputDecoration_date_hintText": "Data",
+    "groups_groupsUpdateInformationPage_inputDecoration_date_labelText": "Data",
+    "groups_groupsUpdateInformationPage_textFieldDefault_date_child": "{day}/{month}/{year}",
+    "@groups_groupsUpdateInformationPage_textFieldDefault_date_child": {
+        "placeholders": {
+            "day": {
+                "type": "String"
+            },
+            "month": {
+                "type": "String"
+            },
+            "year": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsUpdateInformationPage_inputDecoration_hour_hintText": "Horário",
+    "groups_groupsUpdateInformationPage_inputDecoration_hour_labelText": "Horário",
+    "groups_groupsUpdateInformationPage_textFieldDefault_hour_child": "{hour}:{minute}",
+    "@groups_groupsUpdateInformationPage_textFieldDefault_hour_child": {
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            },
+            "minute": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_labelText": "Preço Minímo",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_hintText": "Ex.: 2.00",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_prefixText": "R$ ",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_labelText": "Preço Máximo",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_hintText": "Ex.: 200.00",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_prefixText": "R$ ",
+    "groups_groupsUpdateInformationPage_textFieldDefault_description_labelText": "Descrição",
+    "groups_groupsUpdateInformationPage_floatingActionButton_label": "Salvar alteração"
 }

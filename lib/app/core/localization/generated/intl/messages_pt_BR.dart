@@ -24,6 +24,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(hour, minute) => "${hour}:${minute}";
 
+  static String m2(day, month, year) => "${day}/${month}/${year}";
+
+  static String m3(hour, minute) => "${hour}:${minute}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "groups_groupsAddMembersPage_appBarDefault_subtitle":
@@ -103,6 +107,41 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Selecione\na categoria"),
         "groups_groupsRegisterTypePage_floatingActionButton_label":
             MessageLookupByLibrary.simpleMessage("Continuar"),
+        "groups_groupsUpdateInformationPage_appBarDefault_subtitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo."),
+        "groups_groupsUpdateInformationPage_appBarDefault_title":
+            MessageLookupByLibrary.simpleMessage("Definir\nInformações"),
+        "groups_groupsUpdateInformationPage_floatingActionButton_label":
+            MessageLookupByLibrary.simpleMessage("Salvar alteração"),
+        "groups_groupsUpdateInformationPage_inputDecoration_date_hintText":
+            MessageLookupByLibrary.simpleMessage("Data"),
+        "groups_groupsUpdateInformationPage_inputDecoration_date_labelText":
+            MessageLookupByLibrary.simpleMessage("Data"),
+        "groups_groupsUpdateInformationPage_inputDecoration_hour_hintText":
+            MessageLookupByLibrary.simpleMessage("Horário"),
+        "groups_groupsUpdateInformationPage_inputDecoration_hour_labelText":
+            MessageLookupByLibrary.simpleMessage("Horário"),
+        "groups_groupsUpdateInformationPage_textFieldDefault_date_child": m2,
+        "groups_groupsUpdateInformationPage_textFieldDefault_description_labelText":
+            MessageLookupByLibrary.simpleMessage("Descrição"),
+        "groups_groupsUpdateInformationPage_textFieldDefault_hour_child": m3,
+        "groups_groupsUpdateInformationPage_textFieldDefault_name_hintText":
+            MessageLookupByLibrary.simpleMessage("Ex.: Grupo do Trabalho"),
+        "groups_groupsUpdateInformationPage_textFieldDefault_name_labelText":
+            MessageLookupByLibrary.simpleMessage("Nome"),
+        "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_hintText":
+            MessageLookupByLibrary.simpleMessage("Ex.: 200.00"),
+        "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_labelText":
+            MessageLookupByLibrary.simpleMessage("Preço Máximo"),
+        "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_prefixText":
+            MessageLookupByLibrary.simpleMessage("R\$ "),
+        "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_hintText":
+            MessageLookupByLibrary.simpleMessage("Ex.: 2.00"),
+        "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_labelText":
+            MessageLookupByLibrary.simpleMessage("Preço Minímo"),
+        "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_prefixText":
+            MessageLookupByLibrary.simpleMessage("R\$ "),
         "login_loginPage_headerDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
                 "Crie grupos para realizar seu amigo\nsecreto com seus amigos"),

@@ -7,8 +7,7 @@ part of 'group_edit_information_controller.dart';
 // **************************************************************************
 
 final $GroupsUpdateInformationController = BindInject(
-  (i) => GroupsUpdateInformationController(
-      i<AuthStore>(), i<GetGroups>(), i<UpdateGroupStore>()),
+  (i) => GroupsUpdateInformationController(i<UpdateGroup>()),
   isSingleton: true,
   isLazy: true,
 );
@@ -21,21 +20,12 @@ final $GroupsUpdateInformationController = BindInject(
 
 mixin _$GroupsUpdateInformationController
     on _GroupsUpdateInformationControllerBase, Store {
-  Computed<RangeValues>? _$rangeSliderDiscreteValuesComputed;
+  Computed<DateTime>? _$getDateComputed;
 
   @override
-  RangeValues get rangeSliderDiscreteValues =>
-      (_$rangeSliderDiscreteValuesComputed ??= Computed<RangeValues>(
-              () => super.rangeSliderDiscreteValues,
-              name:
-                  '_GroupsUpdateInformationControllerBase.rangeSliderDiscreteValues'))
-          .value;
-  Computed<bool>? _$buttonExtendsComputed;
-
-  @override
-  bool get buttonExtends =>
-      (_$buttonExtendsComputed ??= Computed<bool>(() => super.buttonExtends,
-              name: '_GroupsUpdateInformationControllerBase.buttonExtends'))
+  DateTime get getDate =>
+      (_$getDateComputed ??= Computed<DateTime>(() => super.getDate,
+              name: '_GroupsUpdateInformationControllerBase.getDate'))
           .value;
   Computed<String>? _$getDayComputed;
 
@@ -72,6 +62,45 @@ mixin _$GroupsUpdateInformationController
       (_$getMinuteComputed ??= Computed<String>(() => super.getMinute,
               name: '_GroupsUpdateInformationControllerBase.getMinute'))
           .value;
+  Computed<bool>? _$buttonExtendsComputed;
+
+  @override
+  bool get buttonExtends =>
+      (_$buttonExtendsComputed ??= Computed<bool>(() => super.buttonExtends,
+              name: '_GroupsUpdateInformationControllerBase.buttonExtends'))
+          .value;
+
+  final _$_dateAtom =
+      Atom(name: '_GroupsUpdateInformationControllerBase._date');
+
+  @override
+  DateTime get _date {
+    _$_dateAtom.reportRead();
+    return super._date;
+  }
+
+  @override
+  set _date(DateTime value) {
+    _$_dateAtom.reportWrite(value, super._date, () {
+      super._date = value;
+    });
+  }
+
+  final _$_timeAtom =
+      Atom(name: '_GroupsUpdateInformationControllerBase._time');
+
+  @override
+  TimeOfDay get _time {
+    _$_timeAtom.reportRead();
+    return super._time;
+  }
+
+  @override
+  set _time(TimeOfDay value) {
+    _$_timeAtom.reportWrite(value, super._time, () {
+      super._time = value;
+    });
+  }
 
   final _$_buttonExtendsAtom =
       Atom(name: '_GroupsUpdateInformationControllerBase._buttonExtends');
@@ -93,12 +122,25 @@ mixin _$GroupsUpdateInformationController
       ActionController(name: '_GroupsUpdateInformationControllerBase');
 
   @override
-  void setPrice(RangeValues value) {
+  void setDate(DateTime? date) {
     final _$actionInfo =
         _$_GroupsUpdateInformationControllerBaseActionController.startAction(
-            name: '_GroupsUpdateInformationControllerBase.setPrice');
+            name: '_GroupsUpdateInformationControllerBase.setDate');
     try {
-      return super.setPrice(value);
+      return super.setDate(date);
+    } finally {
+      _$_GroupsUpdateInformationControllerBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setTime(TimeOfDay? time) {
+    final _$actionInfo =
+        _$_GroupsUpdateInformationControllerBaseActionController.startAction(
+            name: '_GroupsUpdateInformationControllerBase.setTime');
+    try {
+      return super.setTime(time);
     } finally {
       _$_GroupsUpdateInformationControllerBaseActionController
           .endAction(_$actionInfo);
@@ -121,13 +163,13 @@ mixin _$GroupsUpdateInformationController
   @override
   String toString() {
     return '''
-rangeSliderDiscreteValues: ${rangeSliderDiscreteValues},
-buttonExtends: ${buttonExtends},
+getDate: ${getDate},
 getDay: ${getDay},
 getMonth: ${getMonth},
 getYear: ${getYear},
 getHour: ${getHour},
-getMinute: ${getMinute}
+getMinute: ${getMinute},
+buttonExtends: ${buttonExtends}
     ''';
   }
 }

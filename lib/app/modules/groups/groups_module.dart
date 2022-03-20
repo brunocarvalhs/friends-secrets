@@ -3,13 +3,17 @@ import 'package:friends_secrets/app/modules/groups/domain/usecases/drawn_group.d
 import 'package:friends_secrets/app/modules/groups/domain/usecases/exit_group.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/shared_group.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/show_user_drawn_group.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/pages/show/members/groups_add_members_controller.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/pages/show/members/groups_add_members_page.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/update_group.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/edit/information/group_edit_information_controller.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/edit/information/group_edit_information_page.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/edit/members/groups_add_members_controller.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/edit/members/groups_add_members_page.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/profile/drawn_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/profile/drawn_page.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_page.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/stores/update_group_store.dart';
 import './domain/repositories/albums_repository.dart';
 import './domain/repositories/contacts_repository.dart';
 import './domain/repositories/groups_repository.dart';
@@ -68,14 +72,16 @@ class GroupsModule extends Module {
     Bind.factory<ShowUserDrawnGroup>((i) => ShowUserDrawnGroupImpl(i.get())),
     Bind.factory<SharedGroup>((i) => SharedGroupImpl(i.get())),
     Bind.factory<ExitGroup>((i) => ExitGroupImpl(i.get())),
+    Bind.factory<UpdateGroup>((i) => UpdateGroupImpl(i.get())),
     // Controllers -------------------------------------------------------------------------------
-    Bind.factory((i) => GroupsListController(i.get(), i.get(), i.get(), i.get(), i.get(), i.get())),
+    Bind.factory((i) => GroupsListController(i.get(), i.get(), i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterMembersController(i.get(), i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterTypeController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsRegisterInformationController(i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsReadController(i.get(), i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsAddMembersController(i.get(), i.get())),
+    Bind.factory((i) => GroupsReadController(i.get(), i.get(), i.get())),
+    Bind.factory((i) => GroupsAddMembersController(i.get(), i.get(), i.get())),
     Bind.factory((i) => DrawnController(i.get())),
+    Bind.factory((i) => GroupsUpdateInformationController(i.get())),
   ];
 
   @override
@@ -87,5 +93,6 @@ class GroupsModule extends Module {
     ChildRoute("/:id", child: (_, args) => GroupsReadPage(id: args.params['id'])),
     ChildRoute("/:id/drawn", child: (_, args) => DrawnPage(id: args.params['id'])),
     ChildRoute("/:id/members", child: (_, args) => GroupsAddMembersPage(id: args.params['id'])),
+    ChildRoute("/:id/edit", child: (_, args) => GroupsUpdateInformationPage(id: args.params['id'])),
   ];
 }

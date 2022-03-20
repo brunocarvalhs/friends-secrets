@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/profile/drawn_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_present.dart';
 
 class DrawnPage extends StatefulWidget {
   final String id;
@@ -23,9 +24,7 @@ class DrawnPageState extends ModularState<DrawnPage, DrawnController> {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.waiting:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const LoadingPresent();
               default:
                 return NestedScrollView(
                   headerSliverBuilder: (_, b) => [

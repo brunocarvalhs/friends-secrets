@@ -17,13 +17,13 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   final AuthStore user;
   final RegisterGroupStore registerGroupStore;
   final ListContacts listContacts;
-  final ContactsRepository contactsRepository;
+  final ContactsRepository _contactsRepository;
 
   _GroupsRegisterMembersControllerBase(
     this.user,
     this.registerGroupStore,
     this.listContacts,
-    this.contactsRepository,
+    this._contactsRepository,
   ) {
     analyticsDefines();
   }
@@ -74,7 +74,7 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   }
 
   Future<List<String>> _requestListContact() async {
-    final result = await contactsRepository.getContacts();
+    final result = await _contactsRepository.getContacts();
     return result.fold((l) => [], (r) => r);
   }
 

@@ -52,10 +52,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, LoggedGroupInfo>> select(String id) async {
     try {
-      final response = await datasource.get(
-        "/group/$id",
-        options: datasource.buildCache(),
-      );
+      final response = await datasource.get("/group/$id");
       final group = GroupModel.fromMap(response.data);
       return Right(group);
     } catch (e) {
@@ -80,10 +77,11 @@ class GroupsRepositoryImpl extends GroupsRepository {
   }
 
   @override
-  Future<Either<Failure, LoggedGroupInfo>> update(LoggedGroupInfo group) async {
+  Future<Either<Failure, LoggedGroupInfo>> update(String id, LoggedGroupInfo group) async {
     try {
-      final response = await datasource.put("/group", data: group.toMap());
-      return Right(response.data);
+      final response = await datasource.put("/group/$id", data: group.toMap());
+      final data = GroupModel.fromMap(response.data);
+      return Right(data);
     } catch (e) {
       _exception(e);
       return Left(ErrorUpdate());

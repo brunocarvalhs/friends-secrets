@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/widgets/members_todo.dart';
+import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/shared/widgets/loading_present.dart';
 
@@ -17,36 +18,37 @@ class GroupsReadPage extends StatefulWidget {
 class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: NestedScrollView(
-          headerSliverBuilder: (_, b) => [
-            Observer(
-              builder: (_) => AppBarDefault(
-                expandedHeight: 300,
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.edit),
+    return FutureBuilder(
+      future: controller.request(context),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return const LoadingPresent();
+          default:
+            return Scaffold(
+              body: SafeArea(
+                child: NestedScrollView(
+                  headerSliverBuilder: (_, b) => [
+                    Observer(
+                      builder: (_) => AppBarDefault(
+                        expandedHeight: 300,
+                        actions: [
+                          if (controller.getGroup?.author == Modular.get<AuthStore>().user)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: IconButton(
+                                onPressed: () => controller.redirectEdit(),
+                                icon: const Icon(Icons.edit),
+                              ),
+                            ),
+                        ],
+                        title: controller.getGroup?.name,
+                        subtitle: controller.getGroup?.description,
+                      ),
                     ),
-                  ),
-                ],
-                title: controller.getGroup?.name,
-                subtitle: controller.getGroup?.description,
-              ),
-            ),
-          ],
-          body: FutureBuilder(
-            future: controller.request(context),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.waiting:
-                  return const LoadingPresent();
-                default:
-                  return RefreshIndicator(
+                  ],
+                  body: RefreshIndicator(
                     onRefresh: () => controller.request(context),
                     notificationPredicate: (scrollNotification) =>
                         controller.notificationPredicate(scrollNotification, context),
@@ -118,62 +120,63 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                         ],
                       );
                     }),
-                  );
-              }
-            },
-          ),
-        ),
-      ),
-      floatingActionButton: Observer(builder: (context) {
-        return Visibility(
-          visible: controller.getGroup != null,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              if (controller.isDrawn)
-                Observer(
-                  builder: (_) => FloatingActionButton.extended(
-                    isExtended: controller.buttonExtends,
-                    onPressed: () => controller.redirectShowDrawn(),
-                    label: Text(Modular.get<I10n>().groups_groupsReadPage_text_showDrawnMembersLabel),
-                    icon: const Icon(Icons.person),
                   ),
                 ),
-              const SizedBox(
-                height: 10,
               ),
-              if (controller.isVisibilityDrawn && !controller.isDrawn)
-                Observer(
-                  builder: (_) => FloatingActionButton.extended(
-                    isExtended: controller.buttonExtends,
-                    onPressed: () => showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_title),
-                        content: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_content),
-                        actions: [
-                          TextButton(
-                            child: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_textButton_cancel),
-                            onPressed: () => Navigator.of(context).pop(),
+              floatingActionButton: Observer(builder: (context) {
+                return Visibility(
+                  visible: controller.getGroup != null,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (controller.isDrawn)
+                        Observer(
+                          builder: (_) => FloatingActionButton.extended(
+                            isExtended: controller.buttonExtends,
+                            onPressed: () => controller.redirectShowDrawn(),
+                            label: Text(Modular.get<I10n>().groups_groupsReadPage_text_showDrawnMembersLabel),
+                            icon: const Icon(Icons.person),
                           ),
-                          TextButton(
-                            child: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_textButton_next),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              controller.drawMembers(context);
-                            },
-                          ),
-                        ],
+                        ),
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    label: Text(Modular.get<I10n>().groups_groupsReadPage_floatingActionButton_label),
-                    icon: const Icon(Icons.people_rounded),
+                      if (controller.isVisibilityDrawn && !controller.isDrawn)
+                        Observer(
+                          builder: (_) => FloatingActionButton.extended(
+                            isExtended: controller.buttonExtends,
+                            onPressed: () => showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_title),
+                                content: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_content),
+                                actions: [
+                                  TextButton(
+                                    child:
+                                        Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_textButton_cancel),
+                                    onPressed: () => Navigator.of(context).pop(),
+                                  ),
+                                  TextButton(
+                                    child: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_textButton_next),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      controller.drawMembers(context);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            label: Text(Modular.get<I10n>().groups_groupsReadPage_floatingActionButton_label),
+                            icon: const Icon(Icons.people_rounded),
+                          ),
+                        ),
+                    ],
                   ),
-                ),
-            ],
-          ),
-        );
-      }),
+                );
+              }),
+            );
+        }
+      },
     );
   }
 }

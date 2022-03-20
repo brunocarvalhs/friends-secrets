@@ -20,18 +20,12 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Center(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  width: MediaQuery.of(context).size.width,
-                  child: Lottie.asset(
-                    loginBackground,
-                    fit: BoxFit.contain,
-                  ),
-                ),
+              Lottie.asset(
+                loginBackground,
+                fit: BoxFit.contain,
               ),
               HeaderDefault(
                 title: Modular.get<I10n>().login_loginPage_headerDefault_title,

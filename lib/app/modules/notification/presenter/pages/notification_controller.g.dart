@@ -7,7 +7,7 @@ part of 'notification_controller.dart';
 // **************************************************************************
 
 final $NotificationController = BindInject(
-  (i) => NotificationController(i<AuthStore>(), i<ListNotifiactions>()),
+  (i) => NotificationController(i<ListNotifiactions>()),
   isSingleton: true,
   isLazy: true,
 );

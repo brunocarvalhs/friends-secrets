@@ -15,10 +15,10 @@ part "login_controller.g.dart";
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
-  final LoginWithGoogle loginWithGoogleUsecase;
-  final AuthStore authStore;
+  final LoginWithGoogle _loginWithGoogleUsecase;
+  final AuthStore _authStore;
 
-  _LoginControllerBase(this.loginWithGoogleUsecase, this.authStore) {
+  _LoginControllerBase(this._loginWithGoogleUsecase, this._authStore) {
     analyticsDefines();
   }
 
@@ -29,7 +29,7 @@ abstract class _LoginControllerBase with Store {
   enterGoogle(BuildContext context) async {
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
-    var result = await loginWithGoogleUsecase();
+    var result = await _loginWithGoogleUsecase();
     entry.remove();
     result.fold((failure) async {
       edgeAlert(
@@ -40,7 +40,7 @@ abstract class _LoginControllerBase with Store {
         duration: const Duration(seconds: 10).inSeconds,
       );
     }, (user) async {
-      authStore.setUser(user);
+      _authStore.setUser(user);
       String redirect = "/home";
       if (user.phone == null) {
         redirect = "/login/phone";

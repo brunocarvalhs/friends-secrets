@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/pages/create/categories/groups_register_type_controller.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/widgets/type_todo.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/pages/edit/members/groups_add_members_controller.dart';
+import 'package:friends_secrets/app/modules/groups/presenter/widgets/contact_todo.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/shared/widgets/loading_present.dart';
 
-class GroupsRegisterTypePage extends StatefulWidget {
-  const GroupsRegisterTypePage({Key? key}) : super(key: key);
+class GroupsAddMembersPage extends StatefulWidget {
+  final String id;
+  const GroupsAddMembersPage({Key? key, required this.id}) : super(key: key);
   @override
-  GroupsRegisterTypePageState createState() => GroupsRegisterTypePageState();
+  GroupsAddMembersPageState createState() => GroupsAddMembersPageState();
 }
 
-class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, GroupsRegisterTypeController> {
+class GroupsAddMembersPageState extends ModularState<GroupsAddMembersPage, GroupsAddMembersController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +23,8 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
               expandedHeight: 300,
-              title: Modular.get<I10n>().groups_groupsRegisterTypePage_appBarDefault_title,
-              subtitle: Modular.get<I10n>().groups_groupsRegisterTypePage_appBarDefault_subtitle,
+              title: Modular.get<I10n>().groups_groupsAddMembersPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>().groups_groupsAddMembersPage_appBarDefault_subtitle,
             ),
           ],
           body: FutureBuilder(
@@ -45,10 +46,11 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
                               (BuildContext context, int index) => Column(
                                 children: <Widget>[
                                   Observer(
-                                    builder: (context) => TypeTodo(
-                                      type: controller.allType.elementAt(index),
-                                      onSelect: (user) => controller.selectType(user),
-                                      isSelected: controller.isSelectedType(controller.allType.elementAt(index)),
+                                    builder: (context) => ContactTodo(
+                                      user: controller.allContacts.elementAt(index),
+                                      onSelect: (user) => controller.addMember(user),
+                                      onRemove: (user) => controller.removeMember(user),
+                                      isSelected: controller.isSelectedContact(controller.allContacts.elementAt(index)),
                                     ),
                                   ),
                                   Divider(
@@ -57,7 +59,7 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
                                   )
                                 ],
                               ),
-                              childCount: controller.countType,
+                              childCount: controller.countContacts,
                             ),
                           ),
                         ),
@@ -72,9 +74,9 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
       floatingActionButton: Observer(
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
-          onPressed: () => controller.redirect(),
-          label: Text(Modular.get<I10n>().groups_groupsRegisterTypePage_floatingActionButton_label),
-          icon: const Icon(Icons.arrow_right),
+          onPressed: () => controller.update(context),
+          label: Text(Modular.get<I10n>().groups_groupsAddMembersPage_floatingActionButton_label),
+          icon: const Icon(Icons.save),
         ),
       ),
     );

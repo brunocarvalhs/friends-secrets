@@ -8,7 +8,7 @@ abstract class GroupsRepository {
   Future<Either<Failure, LoggedGroupInfo>> select(String id);
   Future<Either<Failure, Iterable<LoggedGroupInfo>>> selectAll();
   Future<Either<Failure, LoggedGroupInfo>> create(LoggedGroupInfo group);
-  Future<Either<Failure, LoggedGroupInfo>> update(LoggedGroupInfo group);
+  Future<Either<Failure, LoggedGroupInfo>> update(String id, LoggedGroupInfo group);
   Future<Either<Failure, bool>> remove(String id);
   Future<Either<Failure, bool>> exit(String id);
   Future<Either<Failure, bool>> drawnOfGroup(String id);

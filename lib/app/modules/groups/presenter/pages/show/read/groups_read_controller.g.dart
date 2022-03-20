@@ -8,7 +8,7 @@ part of 'groups_read_controller.dart';
 
 final $GroupsReadController = BindInject(
   (i) => GroupsReadController(
-      i<AuthStore>(), i<ReadGroup>(), i<DrawnGroup>(), i<ShowUserDrawnGroup>()),
+      i<ReadGroup>(), i<DrawnGroup>(), i<ShowUserDrawnGroup>()),
   isSingleton: true,
   isLazy: true,
 );

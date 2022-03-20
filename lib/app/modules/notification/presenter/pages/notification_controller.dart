@@ -12,10 +12,9 @@ part "notification_controller.g.dart";
 class NotificationController = _NotificationControllerBase with _$NotificationController;
 
 abstract class _NotificationControllerBase with Store {
-  final AuthStore authStore;
-  final ListNotifiactions listNotifiactions;
+  final ListNotifiactions _listNotifiactions;
 
-  _NotificationControllerBase(this.authStore, this.listNotifiactions) {
+  _NotificationControllerBase(this._listNotifiactions) {
     analyticsDefines();
   }
 
@@ -45,7 +44,7 @@ abstract class _NotificationControllerBase with Store {
   }
 
   Future<void> request(BuildContext context) async {
-    var result = await listNotifiactions();
+    var result = await _listNotifiactions();
     result.fold((failure) {}, (list) {
       addAll(list as Iterable<NotificationModel>);
     });

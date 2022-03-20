@@ -1,13 +1,14 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/modules/groups/domain/repositories/contacts_repository.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/list_contacts.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/update_group.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
-import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
 import 'package:mobx/mobx.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 part 'groups_add_members_controller.g.dart';
 
@@ -15,10 +16,11 @@ part 'groups_add_members_controller.g.dart';
 class GroupsAddMembersController = _GroupsAddMembersControllerBase with _$GroupsAddMembersController;
 
 abstract class _GroupsAddMembersControllerBase with Store {
-  final AuthStore user;
   final ListContacts listContacts;
+  final UpdateGroup _updateGroup;
+  final ContactsRepository _contactsRepository;
 
-  _GroupsAddMembersControllerBase(this.user, this.listContacts) {
+  _GroupsAddMembersControllerBase(this.listContacts, this._updateGroup, this._contactsRepository) {
     analyticsDefines();
   }
 
@@ -72,25 +74,8 @@ abstract class _GroupsAddMembersControllerBase with Store {
   }
 
   Future<List<String>> _requestListContact() async {
-    if (await Permission.contacts.request().isGranted) {
-      List<Contact> contacts = await FlutterContacts.getContacts(withPhoto: true, withProperties: true);
-
-      final list = contacts
-          .map((e) => e.phones.map((e) => e.number.replaceAll(RegExp(r"/(?<!^)\+|[^\d+]+"), "")).toList())
-          .toList();
-
-      List<String> phones = [];
-
-      for (var contact in list) {
-        for (var number in contact) {
-          phones.add(number);
-        }
-      }
-
-      return phones;
-    } else {
-      return [];
-    }
+    final result = await _contactsRepository.getContacts();
+    return result.fold((l) => [], (r) => r);
   }
 
   @observable
@@ -107,5 +92,14 @@ abstract class _GroupsAddMembersControllerBase with Store {
     return true;
   }
 
-  Future<void> save() async {}
+  Future<void> update(BuildContext context) async {
+    var entry = OverlayEntry(builder: (context) => const LoadingDefault());
+    asuka.addOverlay(entry);
+    var group = (Modular.args.data as GroupModel).copyWith(users: allContacts);
+    var result = await _updateGroup(Modular.args.params["id"], group);
+    entry.remove();
+    result.fold((failure) {
+      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
+    }, (r) => Modular.to.pop());
+  }
 }

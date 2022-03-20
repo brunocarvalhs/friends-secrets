@@ -17,12 +17,11 @@ part "groups_read_controller.g.dart";
 class GroupsReadController = _GroupsReadControllerBase with _$GroupsReadController;
 
 abstract class _GroupsReadControllerBase with Store {
-  final AuthStore user;
   final ReadGroup readGroup;
   final DrawnGroup drawnGroup;
   final ShowUserDrawnGroup showUserDrawnGroup;
 
-  _GroupsReadControllerBase(this.user, this.readGroup, this.drawnGroup, this.showUserDrawnGroup) {
+  _GroupsReadControllerBase(this.readGroup, this.drawnGroup, this.showUserDrawnGroup) {
     analyticsDefines();
   }
 
@@ -87,9 +86,22 @@ abstract class _GroupsReadControllerBase with Store {
     return true;
   }
 
-  void redirectShowDrawn() => Modular.to.pushNamed("/home/${Modular.args.params["id"]}/drawn", arguments: getGroup);
+  void redirectShowDrawn() =>
+      Modular.to.pushNamed("/home/${Modular.args.params["id"]}/drawn", arguments: getGroup).then((value) => update());
 
-  void redirectAddMembers() => Modular.to.pushNamed("/home/${Modular.args.params["id"]}/members", arguments: getGroup);
+  void redirectAddMembers() =>
+      Modular.to.pushNamed("/home/${Modular.args.params["id"]}/members", arguments: getGroup).then((value) => update());
+
+  void redirectEdit() =>
+      Modular.to.pushNamed("/home/${Modular.args.params["id"]}/edit", arguments: getGroup).then((value) => update());
+
+  Future<void> update() async {
+    var result = await readGroup(Modular.args.params["id"]);
+    result.fold((failure) {}, (group) {
+      setDrawn(group.isDrawns);
+      setGroup(group as GroupModel);
+    });
+  }
 
   Future<void> drawMembers(BuildContext context) async {
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());

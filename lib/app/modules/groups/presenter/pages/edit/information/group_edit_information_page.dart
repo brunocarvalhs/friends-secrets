@@ -7,7 +7,8 @@ import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
 import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
 
 class GroupsUpdateInformationPage extends StatefulWidget {
-  const GroupsUpdateInformationPage({Key? key}) : super(key: key);
+  final String id;
+  const GroupsUpdateInformationPage({Key? key, required this.id}) : super(key: key);
   @override
   GroupsUpdateInformationPageState createState() => GroupsUpdateInformationPageState();
 }
@@ -21,9 +22,9 @@ class GroupsUpdateInformationPageState
         child: NestedScrollView(
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
-              expandedHeight: 280,
-              title: Modular.get<I10n>().groups_groupsRegisterInformationPage_appBarDefault_title,
-              subtitle: Modular.get<I10n>().groups_groupsRegisterInformationPage_appBarDefault_subtitle,
+              expandedHeight: 300,
+              title: Modular.get<I10n>().groups_groupsUpdateInformationPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>().groups_groupsUpdateInformationPage_appBarDefault_subtitle,
             ),
           ],
           body: SingleChildScrollView(
@@ -43,10 +44,9 @@ class GroupsUpdateInformationPageState
                         controller: controller.controllerName,
                         keyboardType: TextInputType.name,
                         filled: true,
-                        hintText:
-                            Modular.get<I10n>().groups_groupsRegisterInformationPage_textFieldDefault_name_hintText,
+                        hintText: Modular.get<I10n>().groups_groupsUpdateInformationPage_textFieldDefault_name_hintText,
                         labelText:
-                            Modular.get<I10n>().groups_groupsRegisterInformationPage_textFieldDefault_name_labelText,
+                            Modular.get<I10n>().groups_groupsUpdateInformationPage_textFieldDefault_name_labelText,
                       ),
                       const SizedBox(
                         height: 14,
@@ -65,13 +65,12 @@ class GroupsUpdateInformationPageState
                                     border: const OutlineInputBorder(),
                                     filled: true,
                                     hintText: Modular.get<I10n>()
-                                        .groups_groupsRegisterInformationPage_inputDecoration_date_hintText,
+                                        .groups_groupsUpdateInformationPage_inputDecoration_date_hintText,
                                     labelText: Modular.get<I10n>()
-                                        .groups_groupsRegisterInformationPage_inputDecoration_date_labelText,
+                                        .groups_groupsUpdateInformationPage_inputDecoration_date_labelText,
                                   ),
                                   child: Text(
-                                    Modular.get<I10n>()
-                                        .groups_groupsRegisterInformationPage_textFieldDefault_date_child(
+                                    Modular.get<I10n>().groups_groupsUpdateInformationPage_textFieldDefault_date_child(
                                       controller.getDay,
                                       controller.getMonth,
                                       controller.getYear,
@@ -92,13 +91,12 @@ class GroupsUpdateInformationPageState
                                     border: const OutlineInputBorder(),
                                     filled: true,
                                     hintText: Modular.get<I10n>()
-                                        .groups_groupsRegisterInformationPage_inputDecoration_hour_hintText,
+                                        .groups_groupsUpdateInformationPage_inputDecoration_hour_hintText,
                                     labelText: Modular.get<I10n>()
-                                        .groups_groupsRegisterInformationPage_inputDecoration_hour_labelText,
+                                        .groups_groupsUpdateInformationPage_inputDecoration_hour_labelText,
                                   ),
                                   child: Text(
-                                    Modular.get<I10n>()
-                                        .groups_groupsRegisterInformationPage_textFieldDefault_hour_child(
+                                    Modular.get<I10n>().groups_groupsUpdateInformationPage_textFieldDefault_hour_child(
                                       controller.getHour,
                                       controller.getMinute,
                                     ),
@@ -124,11 +122,12 @@ class GroupsUpdateInformationPageState
                               keyboardType: TextInputType.number,
                               filled: true,
                               hintText: Modular.get<I10n>()
-                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMin_hintText,
+                                  .groups_groupsUpdateInformationPage_textFieldDefault_priceMin_hintText,
                               labelText: Modular.get<I10n>()
-                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMin_labelText,
+                                  .groups_groupsUpdateInformationPage_textFieldDefault_priceMin_labelText,
                               prefixText: Modular.get<I10n>()
-                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMin_prefixText,
+                                  .groups_groupsUpdateInformationPage_textFieldDefault_priceMin_prefixText,
+                              inputFormatters: [controller.filterPriceMin],
                             ),
                           ),
                           SizedBox(
@@ -138,22 +137,15 @@ class GroupsUpdateInformationPageState
                               keyboardType: TextInputType.number,
                               filled: true,
                               hintText: Modular.get<I10n>()
-                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMax_hintText,
+                                  .groups_groupsUpdateInformationPage_textFieldDefault_priceMax_hintText,
                               labelText: Modular.get<I10n>()
-                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMax_labelText,
+                                  .groups_groupsUpdateInformationPage_textFieldDefault_priceMax_labelText,
                               prefixText: Modular.get<I10n>()
-                                  .groups_groupsRegisterInformationPage_textFieldDefault_priceMax_prefixText,
+                                  .groups_groupsUpdateInformationPage_textFieldDefault_priceMax_prefixText,
+                              inputFormatters: [controller.filterPriceMax],
                             ),
                           ),
                         ],
-                      ),
-                      Observer(
-                        builder: (context) => RangeSlider(
-                          values: controller.rangeSliderDiscreteValues,
-                          min: 0,
-                          max: 100,
-                          onChanged: (price) => controller.setPrice(price),
-                        ),
                       ),
                       const SizedBox(
                         height: 14,
@@ -165,7 +157,7 @@ class GroupsUpdateInformationPageState
                         maxLines: 4,
                         filled: true,
                         labelText: Modular.get<I10n>()
-                            .groups_groupsRegisterInformationPage_textFieldDefault_description_labelText,
+                            .groups_groupsUpdateInformationPage_textFieldDefault_description_labelText,
                       ),
                     ],
                   ),
@@ -176,8 +168,8 @@ class GroupsUpdateInformationPageState
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => controller.register(),
-        label: Text(Modular.get<I10n>().groups_groupsRegisterInformationPage_floatingActionButton_label),
+        onPressed: () => controller.update(context),
+        label: Text(Modular.get<I10n>().groups_groupsUpdateInformationPage_floatingActionButton_label),
         icon: const Icon(Icons.save),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

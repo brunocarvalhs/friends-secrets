@@ -7,13 +7,8 @@ part of 'groups_list_controller.dart';
 // **************************************************************************
 
 final $GroupsListController = BindInject(
-  (i) => GroupsListController(
-      i<AuthStore>(),
-      i<GetGroups>(),
-      i<ListNotifiactions>(),
-      i<DeleteGroup>(),
-      i<SharedGroup>(),
-      i<ExitGroup>()),
+  (i) => GroupsListController(i<GetGroups>(), i<ListNotifiactions>(),
+      i<DeleteGroup>(), i<SharedGroup>(), i<ExitGroup>()),
   isSingleton: true,
   isLazy: true,
 );

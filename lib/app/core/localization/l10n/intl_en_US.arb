@@ -73,5 +73,46 @@
     "groups_groupsRegisterInformationPage_floatingActionButton_label": "Registrar",
     "groups_groupsRegisterTypePage_appBarDefault_title": "Select\nthe category",
     "groups_groupsRegisterTypePage_appBarDefault_subtitle": "We define types of secret friends that our platform makes available for our users to have fun in different ways.",
-    "groups_groupsRegisterTypePage_floatingActionButton_label": "Next"
+    "groups_groupsRegisterTypePage_floatingActionButton_label": "Next",
+    "groups_groupsUpdateInformationPage_appBarDefault_title": "Set\nInformation",
+    "groups_groupsUpdateInformationPage_appBarDefault_subtitle": "To finish creating the secret friend's group, we need to define some data about the group.",
+    "groups_groupsUpdateInformationPage_textFieldDefault_name_labelText": "Name",
+    "groups_groupsUpdateInformationPage_textFieldDefault_name_hintText": "Ex.: Working Group",
+    "groups_groupsUpdateInformationPage_inputDecoration_date_hintText": "Date",
+    "groups_groupsUpdateInformationPage_inputDecoration_date_labelText": "Date",
+    "groups_groupsUpdateInformationPage_textFieldDefault_date_child": "{day}/{month}/{year}",
+    "@groups_groupsUpdateInformationPage_textFieldDefault_date_child": {
+        "placeholders": {
+            "day": {
+                "type": "String"
+            },
+            "month": {
+                "type": "String"
+            },
+            "year": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsUpdateInformationPage_inputDecoration_hour_hintText": "Hour",
+    "groups_groupsUpdateInformationPage_inputDecoration_hour_labelText": "Hour",
+    "groups_groupsUpdateInformationPage_textFieldDefault_hour_child": "{hour}:{minute}",
+    "@groups_groupsUpdateInformationPage_textFieldDefault_hour_child": {
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            },
+            "minute": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_labelText": "Best price",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_hintText": "Ex.: 2.00",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMin_prefixText": "R$ ",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_labelText": "Ceiling price",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_hintText": "Ex.: 200.00",
+    "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_prefixText": "R$ ",
+    "groups_groupsUpdateInformationPage_textFieldDefault_description_labelText": "Description",
+    "groups_groupsUpdateInformationPage_floatingActionButton_label": "Save update"
 }

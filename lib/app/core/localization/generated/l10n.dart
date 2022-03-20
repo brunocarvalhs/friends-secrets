@@ -597,6 +597,204 @@ class I10n {
       args: [],
     );
   }
+
+  /// `Definir\nInformações`
+  String get groups_groupsUpdateInformationPage_appBarDefault_title {
+    return Intl.message(
+      'Definir\nInformações',
+      name: 'groups_groupsUpdateInformationPage_appBarDefault_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo.`
+  String get groups_groupsUpdateInformationPage_appBarDefault_subtitle {
+    return Intl.message(
+      'Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo.',
+      name: 'groups_groupsUpdateInformationPage_appBarDefault_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nome`
+  String
+      get groups_groupsUpdateInformationPage_textFieldDefault_name_labelText {
+    return Intl.message(
+      'Nome',
+      name:
+          'groups_groupsUpdateInformationPage_textFieldDefault_name_labelText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ex.: Grupo do Trabalho`
+  String get groups_groupsUpdateInformationPage_textFieldDefault_name_hintText {
+    return Intl.message(
+      'Ex.: Grupo do Trabalho',
+      name: 'groups_groupsUpdateInformationPage_textFieldDefault_name_hintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data`
+  String get groups_groupsUpdateInformationPage_inputDecoration_date_hintText {
+    return Intl.message(
+      'Data',
+      name: 'groups_groupsUpdateInformationPage_inputDecoration_date_hintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data`
+  String get groups_groupsUpdateInformationPage_inputDecoration_date_labelText {
+    return Intl.message(
+      'Data',
+      name: 'groups_groupsUpdateInformationPage_inputDecoration_date_labelText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{day}/{month}/{year}`
+  String groups_groupsUpdateInformationPage_textFieldDefault_date_child(
+      String day, String month, String year) {
+    return Intl.message(
+      '$day/$month/$year',
+      name: 'groups_groupsUpdateInformationPage_textFieldDefault_date_child',
+      desc: '',
+      args: [day, month, year],
+    );
+  }
+
+  /// `Horário`
+  String get groups_groupsUpdateInformationPage_inputDecoration_hour_hintText {
+    return Intl.message(
+      'Horário',
+      name: 'groups_groupsUpdateInformationPage_inputDecoration_hour_hintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Horário`
+  String get groups_groupsUpdateInformationPage_inputDecoration_hour_labelText {
+    return Intl.message(
+      'Horário',
+      name: 'groups_groupsUpdateInformationPage_inputDecoration_hour_labelText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{hour}:{minute}`
+  String groups_groupsUpdateInformationPage_textFieldDefault_hour_child(
+      String hour, String minute) {
+    return Intl.message(
+      '$hour:$minute',
+      name: 'groups_groupsUpdateInformationPage_textFieldDefault_hour_child',
+      desc: '',
+      args: [hour, minute],
+    );
+  }
+
+  /// `Preço Minímo`
+  String
+      get groups_groupsUpdateInformationPage_textFieldDefault_priceMin_labelText {
+    return Intl.message(
+      'Preço Minímo',
+      name:
+          'groups_groupsUpdateInformationPage_textFieldDefault_priceMin_labelText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ex.: 2.00`
+  String
+      get groups_groupsUpdateInformationPage_textFieldDefault_priceMin_hintText {
+    return Intl.message(
+      'Ex.: 2.00',
+      name:
+          'groups_groupsUpdateInformationPage_textFieldDefault_priceMin_hintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `R$ `
+  String
+      get groups_groupsUpdateInformationPage_textFieldDefault_priceMin_prefixText {
+    return Intl.message(
+      'R\$ ',
+      name:
+          'groups_groupsUpdateInformationPage_textFieldDefault_priceMin_prefixText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preço Máximo`
+  String
+      get groups_groupsUpdateInformationPage_textFieldDefault_priceMax_labelText {
+    return Intl.message(
+      'Preço Máximo',
+      name:
+          'groups_groupsUpdateInformationPage_textFieldDefault_priceMax_labelText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ex.: 200.00`
+  String
+      get groups_groupsUpdateInformationPage_textFieldDefault_priceMax_hintText {
+    return Intl.message(
+      'Ex.: 200.00',
+      name:
+          'groups_groupsUpdateInformationPage_textFieldDefault_priceMax_hintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `R$ `
+  String
+      get groups_groupsUpdateInformationPage_textFieldDefault_priceMax_prefixText {
+    return Intl.message(
+      'R\$ ',
+      name:
+          'groups_groupsUpdateInformationPage_textFieldDefault_priceMax_prefixText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Descrição`
+  String
+      get groups_groupsUpdateInformationPage_textFieldDefault_description_labelText {
+    return Intl.message(
+      'Descrição',
+      name:
+          'groups_groupsUpdateInformationPage_textFieldDefault_description_labelText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Salvar alteração`
+  String get groups_groupsUpdateInformationPage_floatingActionButton_label {
+    return Intl.message(
+      'Salvar alteração',
+      name: 'groups_groupsUpdateInformationPage_floatingActionButton_label',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<I10n> {

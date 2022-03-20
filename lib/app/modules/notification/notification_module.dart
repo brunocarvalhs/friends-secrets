@@ -13,7 +13,7 @@ class NotificationModule extends Module {
     // Use Case ---------------------------------------------------------------------------------
     Bind.factory<ListNotifiactions>((i) => ListNotifiactionsImpl(i.get()), export: true),
     // Controllers -------------------------------------------------------------------------------
-    Bind.factory((i) => NotificationController(i.get(), i.get())),
+    Bind.factory((i) => NotificationController(i.get())),
   ];
 
   @override

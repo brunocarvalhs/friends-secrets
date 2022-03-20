@@ -1,10 +1,15 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/stores/update_group_store.dart';
+import 'package:friends_secrets/app/modules/groups/domain/usecases/update_group.dart';
+import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
+import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
 import 'package:mobx/mobx.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 part "group_edit_information_controller.g.dart";
 
@@ -13,11 +18,9 @@ class GroupsUpdateInformationController = _GroupsUpdateInformationControllerBase
     with _$GroupsUpdateInformationController;
 
 abstract class _GroupsUpdateInformationControllerBase with Store {
-  final AuthStore user;
-  final GetGroups getGroups;
-  final UpdateGroupStore updateGroupStore;
+  final UpdateGroup _updateGroup;
 
-  _GroupsUpdateInformationControllerBase(this.user, this.getGroups, this.updateGroupStore) {
+  _GroupsUpdateInformationControllerBase(this._updateGroup) {
     analyticsDefines();
   }
 
@@ -25,20 +28,88 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
     await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Update Information');
   }
 
-  Future<void> register() async {
-    updateGroupStore.register().then((value) => Modular.to.pushNamed("/home/"));
+  Future<void> update(BuildContext context) async {
+    var entry = OverlayEntry(builder: (context) => const LoadingDefault());
+    asuka.addOverlay(entry);
+    var group = (Modular.args.data as GroupModel).copyWith(
+      author: Modular.get<AuthStore>().user as UserModel,
+      name: controllerName.text,
+      description: controllerDescription.text,
+      date: getDate.toIso8601String(),
+      priceMax: num.tryParse(controllerPriceMax.text)?.toDouble(),
+      priceMin: num.tryParse(controllerPriceMin.text)?.toDouble(),
+    );
+    var result = await _updateGroup(Modular.args.params["id"], group);
+    entry.remove();
+    result.fold((failure) {
+      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
+    }, (r) => Modular.to.pop());
   }
 
-  TextEditingController get controllerPriceMin => updateGroupStore.controllerPriceMin;
-  TextEditingController get controllerName => updateGroupStore.controllerName;
-  TextEditingController get controllerPriceMax => updateGroupStore.controllerPriceMax;
-  TextEditingController get controllerDescription => updateGroupStore.controllerdescription;
+  // Name ------------------------------------------------------------------------
 
-  @computed
-  RangeValues get rangeSliderDiscreteValues => updateGroupStore.rangeSliderDiscreteValues;
+  final TextEditingController controllerName = TextEditingController(text: (Modular.args.data as GroupModel).name);
+
+  // Discrible -------------------------------------------------------------------
+
+  final TextEditingController controllerDescription =
+      TextEditingController(text: (Modular.args.data as GroupModel).description);
+
+  // Date -------------------------------------------------------------------
+
+  @observable
+  DateTime _date = DateTime.parse((Modular.args.data as GroupModel).date!);
 
   @action
-  void setPrice(RangeValues value) => updateGroupStore.setPrice(value);
+  void setDate(DateTime? date) => _date = date ?? DateTime.now();
+
+  @computed
+  DateTime get getDate => DateTime(
+        _date.year,
+        _date.month,
+        _date.day,
+        _time.hour,
+        _time.minute,
+        _date.second,
+        _date.millisecond,
+        _date.microsecond,
+      );
+
+  @computed
+  String get getDay => getDate.day.toString();
+
+  @computed
+  String get getMonth => getDate.month.toString();
+
+  @computed
+  String get getYear => getDate.year.toString();
+
+  // Time -------------------------------------------------------------------
+
+  @observable
+  TimeOfDay _time = TimeOfDay.now();
+
+  @action
+  void setTime(TimeOfDay? time) => _time = time ?? TimeOfDay.now();
+
+  @computed
+  String get getHour => getDate.hour.toString();
+
+  @computed
+  String get getMinute => getDate.minute.toString();
+
+  // Price -------------------------------------------------------------------
+
+  final TextEditingController controllerPriceMin =
+      TextEditingController(text: (Modular.args.data as GroupModel).priceMin.toString());
+  final TextEditingController controllerPriceMax =
+      TextEditingController(text: (Modular.args.data as GroupModel).priceMax.toString());
+
+  final CurrencyTextInputFormatter filterPriceMin = CurrencyTextInputFormatter(symbol: "");
+
+  final CurrencyTextInputFormatter filterPriceMax = CurrencyTextInputFormatter(symbol: "");
+
+  // Functions ==================================================================
 
   @observable
   bool _buttonExtends = true;
@@ -54,21 +125,6 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
     return true;
   }
 
-  @computed
-  String get getDay => updateGroupStore.getDate.day.toString();
-
-  @computed
-  String get getMonth => updateGroupStore.getDate.month.toString();
-
-  @computed
-  String get getYear => updateGroupStore.getDate.year.toString();
-
-  @computed
-  String get getHour => updateGroupStore.getDate.hour.toString();
-
-  @computed
-  String get getMinute => updateGroupStore.getDate.minute.toString();
-
   Future<void> defineDate(BuildContext context) async {
     final current = await showDatePicker(
       context: context,
@@ -76,7 +132,7 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
       initialDate: DateTime.now(),
       lastDate: DateTime(DateTime.now().year + 3),
     );
-    updateGroupStore.setDate(current);
+    setDate(current);
   }
 
   Future<void> defineTime(BuildContext context) async {
@@ -84,6 +140,6 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
       context: context,
       initialTime: TimeOfDay.fromDateTime(DateTime.now()),
     );
-    updateGroupStore.setTime(current ?? TimeOfDay.fromDateTime(DateTime.now()));
+    setTime(current ?? TimeOfDay.fromDateTime(DateTime.now()));
   }
 }
