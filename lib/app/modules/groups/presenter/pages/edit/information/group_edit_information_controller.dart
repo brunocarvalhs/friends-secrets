@@ -2,7 +2,6 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/groups/domain/usecases/get_groups.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/update_group.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';

@@ -1,7 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/modules/notification/domain/usecases/list_notifications.dart';
 import 'package:friends_secrets/app/modules/notification/infra/models/notification_model.dart';
 import 'package:mobx/mobx.dart';
