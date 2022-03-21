@@ -43,6 +43,7 @@ abstract class _LikersControllerBase with Store {
   // Likes -------------------------------------------------------------------------
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<LoggedLikersInfo> _likers =
       ObservableList<LoggedLikersInfo>.of(Modular.get<AuthStore>().user?.likers?.toList() ?? []);
 
@@ -59,6 +60,7 @@ abstract class _LikersControllerBase with Store {
   // Item --------------------------------------------------------------------------
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<LoggedLikersInfo> _item = ObservableList<LoggedLikersInfo>.of([]);
 
   @computed

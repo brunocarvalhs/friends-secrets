@@ -34,7 +34,7 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
       author: Modular.get<AuthStore>().user as UserModel,
       name: controllerName.text,
       description: controllerDescription.text,
-      date: getDate.toIso8601String(),
+      date: getDate,
       priceMax: num.tryParse(controllerPriceMax.text)?.toDouble(),
       priceMin: num.tryParse(controllerPriceMin.text)?.toDouble(),
     );
@@ -57,7 +57,7 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
   // Date -------------------------------------------------------------------
 
   @observable
-  DateTime _date = DateTime.parse((Modular.args.data as GroupModel).date!);
+  DateTime _date = (Modular.args.data as GroupModel).date!;
 
   @action
   void setDate(DateTime? date) => _date = date ?? DateTime.now();
@@ -100,9 +100,9 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
   // Price -------------------------------------------------------------------
 
   final TextEditingController controllerPriceMin =
-      TextEditingController(text: (Modular.args.data as GroupModel).priceMin.toString());
+      TextEditingController(text: (Modular.args.data as GroupModel).priceMin.toString() ?? null);
   final TextEditingController controllerPriceMax =
-      TextEditingController(text: (Modular.args.data as GroupModel).priceMax.toString());
+      TextEditingController(text: (Modular.args.data as GroupModel).priceMax.toString() ?? null);
 
   final CurrencyTextInputFormatter filterPriceMin = CurrencyTextInputFormatter(symbol: "");
 

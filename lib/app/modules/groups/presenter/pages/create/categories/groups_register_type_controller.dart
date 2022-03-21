@@ -26,6 +26,7 @@ abstract class _GroupsRegisterTypeControllerBase with Store {
   }
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<TypeModel> _listType = ObservableList<TypeModel>.of([]);
 
   @computed

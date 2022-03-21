@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -55,6 +56,81 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                     child: Observer(builder: (context) {
                       return CustomScrollView(
                         slivers: <Widget>[
+                          SliverToBoxAdapter(
+                            child: ExpansionTile(
+                              title: Text(
+                                Modular.get<I10n>().groups_groupsReadPage_text_labelDatails,
+                                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                              ),
+                              children: <Widget>[
+                                if (controller.getGroup?.date != null)
+                                  ListTile(
+                                    title: Text(
+                                      Modular.get<I10n>().groups_groupsReadPage_text_dataDatails(
+                                        controller.getGroup!.date!.day.toString(),
+                                        controller.getGroup!.date!.month.toString(),
+                                        controller.getGroup!.date!.year.toString(),
+                                        controller.getGroup!.date!.hour.toString(),
+                                        controller.getGroup!.date!.minute.toString(),
+                                      ),
+                                    ),
+                                  ),
+                                if (controller.getGroup?.priceMin != null)
+                                  ListTile(
+                                    title: Text(
+                                      Modular.get<I10n>().groups_groupsReadPage_text_priceMinDatails(
+                                        controller.getGroup!.priceMin.toString(),
+                                      ),
+                                    ),
+                                  ),
+                                if (controller.getGroup?.priceMax != null)
+                                  ListTile(
+                                    title: Text(
+                                      Modular.get<I10n>().groups_groupsReadPage_text_priceMaxDatails(
+                                        controller.getGroup!.priceMax.toString(),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          SliverToBoxAdapter(
+                            child: Column(
+                              children: [
+                                ExpansionTile(
+                                  title: Text(
+                                    "Tipo: ${controller.getGroup?.type?.name}",
+                                    style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                                  ),
+                                  children: <Widget>[
+                                    if (controller.getGroup?.type?.image != null)
+                                      CachedNetworkImage(
+                                        imageUrl: "${controller.getGroup?.type?.image}",
+                                        imageBuilder: (context, imageProvider) => Container(
+                                          height: 200,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.contain,
+                                              alignment: Alignment.center,
+                                            ),
+                                          ),
+                                        ),
+                                        placeholder: (context, url) => const CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Text(
+                                        "${controller.getGroup?.type?.description}",
+                                        style: Theme.of(context).textTheme.bodyText1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                           SliverToBoxAdapter(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

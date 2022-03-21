@@ -33,6 +33,7 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   }
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<UserModel> _listContacts = ObservableList<UserModel>.of([]);
 
   @computed

@@ -6,16 +6,14 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/shared/res/themes/themes.dart';
+import 'package:uni_links/uni_links.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Modular.setObservers([
-      asuka.asukaHeroController,
-      Modular.get<FirebaseAnalyticsObserver>(),
-    ]);
+    initObservers();
     return MaterialApp.router(
       title: Modular.get<DotEnv>().env["APP_NAME"].toString(),
       theme: Themes.light(),
@@ -36,5 +34,17 @@ class AppWidget extends StatelessWidget {
         Locale("pt", "BR"),
       ],
     );
+  }
+
+  Future<void> initDeeplink() async {
+    final result = await getInitialLink();
+    if (result != null) Modular.setInitialRoute(result);
+  }
+
+  void initObservers() {
+    Modular.setObservers([
+      asuka.asukaHeroController,
+      Modular.get<FirebaseAnalyticsObserver>(),
+    ]);
   }
 }

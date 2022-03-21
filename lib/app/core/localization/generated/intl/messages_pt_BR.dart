@@ -20,13 +20,22 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'pt_BR';
 
-  static String m0(day, month, year) => "${day}/${month}/${year}";
+  static String m0(day, month, year, hour, minute) =>
+      "Data: ${day}/${month}/${year} ás ${hour}:${minute}";
 
-  static String m1(hour, minute) => "${hour}:${minute}";
+  static String m1(price) => "Valor Maxímo: R\$ ${price}";
 
-  static String m2(day, month, year) => "${day}/${month}/${year}";
+  static String m2(price) => "Valor Mínimo: R\$ ${price}";
 
-  static String m3(hour, minute) => "${hour}:${minute}";
+  static String m3(type) => "Tipo: ${type}";
+
+  static String m4(day, month, year) => "${day}/${month}/${year}";
+
+  static String m5(hour, minute) => "${hour}:${minute}";
+
+  static String m6(day, month, year) => "${day}/${month}/${year}";
+
+  static String m7(hour, minute) => "${hour}:${minute}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -52,12 +61,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sortear"),
         "groups_groupsReadPage_text_addMembersTitle":
             MessageLookupByLibrary.simpleMessage("Adicionar novos membros"),
+        "groups_groupsReadPage_text_dataDatails": m0,
         "groups_groupsReadPage_text_descriptionMembers":
             MessageLookupByLibrary.simpleMessage("Total"),
+        "groups_groupsReadPage_text_labelDatails":
+            MessageLookupByLibrary.simpleMessage("Detalhes"),
         "groups_groupsReadPage_text_labelMembers":
             MessageLookupByLibrary.simpleMessage("Membros"),
+        "groups_groupsReadPage_text_priceMaxDatails": m1,
+        "groups_groupsReadPage_text_priceMinDatails": m2,
         "groups_groupsReadPage_text_showDrawnMembersLabel":
             MessageLookupByLibrary.simpleMessage("Ver amigo secreto"),
+        "groups_groupsReadPage_text_type": m3,
         "groups_groupsRegisterInformationPage_appBarDefault_subtitle":
             MessageLookupByLibrary.simpleMessage(
                 "Para finalizar a criação do grupo do amigo secreto, precisamos definir alguns dados sobre o grupo."),
@@ -73,10 +88,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Horário"),
         "groups_groupsRegisterInformationPage_inputDecoration_hour_labelText":
             MessageLookupByLibrary.simpleMessage("Horário"),
-        "groups_groupsRegisterInformationPage_textFieldDefault_date_child": m0,
+        "groups_groupsRegisterInformationPage_textFieldDefault_date_child": m4,
         "groups_groupsRegisterInformationPage_textFieldDefault_description_labelText":
             MessageLookupByLibrary.simpleMessage("Descrição"),
-        "groups_groupsRegisterInformationPage_textFieldDefault_hour_child": m1,
+        "groups_groupsRegisterInformationPage_textFieldDefault_hour_child": m5,
         "groups_groupsRegisterInformationPage_textFieldDefault_name_hintText":
             MessageLookupByLibrary.simpleMessage("Ex.: Grupo do Trabalho"),
         "groups_groupsRegisterInformationPage_textFieldDefault_name_labelText":
@@ -122,10 +137,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Horário"),
         "groups_groupsUpdateInformationPage_inputDecoration_hour_labelText":
             MessageLookupByLibrary.simpleMessage("Horário"),
-        "groups_groupsUpdateInformationPage_textFieldDefault_date_child": m2,
+        "groups_groupsUpdateInformationPage_textFieldDefault_date_child": m6,
         "groups_groupsUpdateInformationPage_textFieldDefault_description_labelText":
             MessageLookupByLibrary.simpleMessage("Descrição"),
-        "groups_groupsUpdateInformationPage_textFieldDefault_hour_child": m3,
+        "groups_groupsUpdateInformationPage_textFieldDefault_hour_child": m7,
         "groups_groupsUpdateInformationPage_textFieldDefault_name_hintText":
             MessageLookupByLibrary.simpleMessage("Ex.: Grupo do Trabalho"),
         "groups_groupsUpdateInformationPage_textFieldDefault_name_labelText":

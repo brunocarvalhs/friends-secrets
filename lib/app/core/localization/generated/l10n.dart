@@ -220,6 +220,47 @@ class I10n {
     );
   }
 
+  /// `Detalhes`
+  String get groups_groupsReadPage_text_labelDatails {
+    return Intl.message(
+      'Detalhes',
+      name: 'groups_groupsReadPage_text_labelDatails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data: {day}/{month}/{year} ás {hour}:{minute}`
+  String groups_groupsReadPage_text_dataDatails(
+      String day, String month, String year, String hour, String minute) {
+    return Intl.message(
+      'Data: $day/$month/$year ás $hour:$minute',
+      name: 'groups_groupsReadPage_text_dataDatails',
+      desc: '',
+      args: [day, month, year, hour, minute],
+    );
+  }
+
+  /// `Valor Mínimo: R$ {price}`
+  String groups_groupsReadPage_text_priceMinDatails(String price) {
+    return Intl.message(
+      'Valor Mínimo: R\$ $price',
+      name: 'groups_groupsReadPage_text_priceMinDatails',
+      desc: '',
+      args: [price],
+    );
+  }
+
+  /// `Valor Maxímo: R$ {price}`
+  String groups_groupsReadPage_text_priceMaxDatails(String price) {
+    return Intl.message(
+      'Valor Maxímo: R\$ $price',
+      name: 'groups_groupsReadPage_text_priceMaxDatails',
+      desc: '',
+      args: [price],
+    );
+  }
+
   /// `Adicionar novos membros`
   String get groups_groupsReadPage_text_addMembersTitle {
     return Intl.message(
@@ -227,6 +268,16 @@ class I10n {
       name: 'groups_groupsReadPage_text_addMembersTitle',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Tipo: {type}`
+  String groups_groupsReadPage_text_type(String type) {
+    return Intl.message(
+      'Tipo: $type',
+      name: 'groups_groupsReadPage_text_type',
+      desc: '',
+      args: [type],
     );
   }
 

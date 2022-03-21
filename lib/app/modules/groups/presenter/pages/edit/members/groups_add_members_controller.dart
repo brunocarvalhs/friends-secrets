@@ -29,6 +29,7 @@ abstract class _GroupsAddMembersControllerBase with Store {
   }
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<UserModel> _listContacts = ObservableList<UserModel>.of([]);
 
   @computed
@@ -52,6 +53,7 @@ abstract class _GroupsAddMembersControllerBase with Store {
   // users ========================================================================
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<UserModel> _members =
       ObservableList<UserModel>.of((Modular.args.data as GroupModel).users?.toList() ?? []);
 

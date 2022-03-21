@@ -26,6 +26,7 @@ dependencies:
   firebase_auth: ^3.3.7
   firebase_performance: ^0.8.0+5
   firebase_crashlytics: ^2.5.1
+  firebase_dynamic_links: ^4.1.1
   # Google
   google_fonts: ^2.1.0
   google_sign_in: ^5.1.0
@@ -43,6 +44,7 @@ dependencies:
   flutter_svg: ^1.0.2
   cached_network_image: ^3.2.0
   # Android
+  uni_links: ^0.5.1
   flutter_contacts: ^1.1.2
   permission_handler: ^9.2.0
   mask_text_input_formatter: ^2.1.0

@@ -6,7 +6,7 @@ abstract class LoggedGroupInfo {
   TypeModel? get type;
   String? get name;
   String? get description;
-  String? get date;
+  DateTime? get date;
   double? get priceMin;
   double? get priceMax;
   UserModel? get author;
@@ -21,7 +21,7 @@ abstract class LoggedGroupInfo {
     TypeModel? type,
     String? name,
     String? description,
-    String? date,
+    DateTime? date,
     UserModel? author,
     List<UserModel>? users,
     double? priceMin,

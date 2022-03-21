@@ -4,12 +4,14 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tf_dio_cache/dio_http_cache.dart';
+import 'package:uni_links/uni_links.dart';
 
 import './core/localization/generated/l10n.dart';
 import './app_guard.dart';
@@ -43,6 +45,7 @@ class AppModule extends Module {
     Bind.instance<FirebasePerformance>(FirebasePerformance.instance),
     Bind.instance<FirebaseCrashlytics>(FirebaseCrashlytics.instance),
     Bind.instance<FirebaseAuth>(FirebaseAuth.instance),
+    Bind.instance<FirebaseDynamicLinks>(FirebaseDynamicLinks.instance),
     Bind.lazySingleton<FirebaseAnalyticsObserver>((i) => FirebaseAnalyticsObserver(analytics: i.get())),
     Bind.instance<DioCacheManager>(DioCacheManager(CacheConfig(baseUrl: dotenv.env['BASE_URL'].toString()))),
     Bind.instance<Dio>(Dio(BaseOptions(

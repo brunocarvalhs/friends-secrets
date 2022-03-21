@@ -47,6 +47,7 @@ abstract class _GroupsListControllerBase with Store {
   void setExtendsButton(bool value) => _buttonExtends = value;
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<GroupModel> _groups = ObservableList<GroupModel>.of([]);
 
   @computed

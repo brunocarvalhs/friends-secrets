@@ -16,7 +16,52 @@
     "notification_notificationPage_appBarDefault_title": "Notificação",
     "groups_groupsReadPage_text_labelMembers": "Membros",
     "groups_groupsReadPage_text_descriptionMembers": "Total",
+    "groups_groupsReadPage_text_labelDatails": "Detalhes",
+    "groups_groupsReadPage_text_dataDatails": "Data: {day}/{month}/{year} ás {hour}:{minute}",
+    "@groups_groupsReadPage_text_dataDatails": {
+        "placeholders": {
+            "day": {
+                "type": "String"
+            },
+            "month": {
+                "type": "String"
+            },
+            "year": {
+                "type": "String"
+            },
+            "hour": {
+                "type": "String"
+            },
+            "minute": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsReadPage_text_priceMinDatails": "Valor Mínimo: R$ {price}",
+    "@groups_groupsReadPage_text_priceMinDatails": {
+        "placeholders": {
+            "price": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsReadPage_text_priceMaxDatails": "Valor Maxímo: R$ {price}",
+    "@groups_groupsReadPage_text_priceMaxDatails": {
+        "placeholders": {
+            "price": {
+                "type": "String"
+            }
+        }
+    },
     "groups_groupsReadPage_text_addMembersTitle": "Adicionar novos membros",
+    "groups_groupsReadPage_text_type": "Tipo: {type}",
+    "@groups_groupsReadPage_text_type": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
     "groups_groupsReadPage_text_showDrawnMembersLabel": "Ver amigo secreto",
     "groups_groupsReadPage_alertDialog_title": "Realização do sorteio",
     "groups_groupsReadPage_alertDialog_content": "O sorteio e realizado uma unica vez por grupo, esse processo não pode ser desfeito, deseja continuar o sorteio?",

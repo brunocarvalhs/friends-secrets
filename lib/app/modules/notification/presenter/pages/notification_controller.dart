@@ -22,6 +22,7 @@ abstract class _NotificationControllerBase with Store {
   }
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<NotificationModel> _listNotifications = ObservableList<NotificationModel>.of([]);
 
   @computed

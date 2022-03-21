@@ -15,8 +15,53 @@
     "profile_likersPage_floatingActionButton_label": "Save",
     "notification_notificationPage_appBarDefault_title": "Notification",
     "groups_groupsReadPage_text_labelMembers": "Members",
-    "groups_groupsReadPage_text_descriptionMembers": "Total",
+    "groups_groupsReadPage_text_descriptionMembers": "All",
+    "groups_groupsReadPage_text_labelDatails": "Datails",
+    "groups_groupsReadPage_text_dataDatails": "Date: {day}/{month}/{year} ás {hour}:{minute}",
+    "@groups_groupsReadPage_text_dataDatails": {
+        "placeholders": {
+            "day": {
+                "type": "String"
+            },
+            "month": {
+                "type": "String"
+            },
+            "year": {
+                "type": "String"
+            },
+            "hour": {
+                "type": "String"
+            },
+            "minute": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsReadPage_text_priceMinDatails": "Best price: R$ {price}",
+    "@groups_groupsReadPage_text_priceMinDatails": {
+        "placeholders": {
+            "price": {
+                "type": "String"
+            }
+        }
+    },
+    "groups_groupsReadPage_text_priceMaxDatails": "Ceiling price: R$ {price}",
+    "@groups_groupsReadPage_text_priceMaxDatails": {
+        "placeholders": {
+            "price": {
+                "type": "String"
+            }
+        }
+    },
     "groups_groupsReadPage_text_addMembersTitle": "Add new members",
+    "groups_groupsReadPage_text_type": "Type: {type}",
+    "@groups_groupsReadPage_text_type": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
     "groups_groupsReadPage_text_showDrawnMembersLabel": "See secret friend",
     "groups_groupsReadPage_alertDialog_title": "Conducting the draw",
     "groups_groupsReadPage_alertDialog_content": "The draw is carried out only once per group, this process cannot be undone, do you want to continue the draw?",

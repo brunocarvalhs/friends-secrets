@@ -13,7 +13,6 @@ import 'package:friends_secrets/app/modules/groups/presenter/pages/show/profile/
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_controller.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/pages/show/read/groups_read_page.dart';
 import 'package:friends_secrets/app/modules/groups/presenter/stores/register_group_store.dart';
-import 'package:friends_secrets/app/modules/groups/presenter/stores/update_group_store.dart';
 import './domain/repositories/albums_repository.dart';
 import './domain/repositories/contacts_repository.dart';
 import './domain/repositories/groups_repository.dart';

@@ -35,6 +35,7 @@ abstract class _RegisterGroupStoreBase with Store {
   // users ========================================================================
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<UserModel> _users = ObservableList<UserModel>.of([]);
 
   @action
@@ -101,7 +102,7 @@ abstract class _RegisterGroupStoreBase with Store {
       author: Modular.get<AuthStore>().user as UserModel,
       name: controllerName.text,
       description: controllerdescription.text,
-      date: getDate.toIso8601String(),
+      date: getDate,
       type: getCategory,
       users: getUsers,
       priceMax: num.tryParse(filterPriceMax.getFormattedValue())?.toDouble(),

@@ -7,7 +7,7 @@ class LoggedGroup extends Equatable {
   final TypeModel? type;
   final String? name;
   final String? description;
-  final String? date;
+  final DateTime? date;
   final double? priceMin;
   final double? priceMax;
   final UserModel? author;

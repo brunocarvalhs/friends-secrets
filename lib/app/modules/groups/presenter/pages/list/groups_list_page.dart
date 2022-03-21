@@ -85,8 +85,6 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                                   GroupTodo(
                                     groupModel: controller.allGroups.elementAt(index),
                                     onTap: (group) => controller.readGroup(group),
-                                    onDelete: (group) => controller.delete(group),
-                                    onShared: (group) => controller.shared(group),
                                   ),
                                   Divider(
                                     height: 2,
