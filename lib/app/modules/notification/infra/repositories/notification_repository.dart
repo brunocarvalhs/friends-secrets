@@ -20,7 +20,6 @@ class NotificationRepositoryImpl extends NotificationRepository {
       final result = await datasource.delete("/notification");
       return Right(result.statusCode == 200);
     } catch (e) {
-      _exception(e);
       return Left(ErrorNotificationDelete());
     }
   }
@@ -35,15 +34,7 @@ class NotificationRepositoryImpl extends NotificationRepository {
       final notifications = response.data?.map((e) => NotificationModel.fromMap(e)) ?? [];
       return Right(notifications);
     } catch (e) {
-      _exception(e);
       return Left(ErrorNotificationSelectAll());
-    }
-  }
-
-  void _exception(exception) {
-    if (Modular.get<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled) {
-      Modular.get<FirebaseCrashlytics>().setCustomKey("Exception", exception.toString());
-      Modular.get<FirebaseCrashlytics>().setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
     }
   }
 }

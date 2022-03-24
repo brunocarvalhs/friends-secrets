@@ -1,5 +1,3 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
 import 'package:friends_secrets/app/modules/groups/domain/errors/errors.dart';
 import 'package:friends_secrets/app/modules/groups/domain/entities/logged_group_info.dart';
@@ -23,7 +21,6 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final create = GroupModel.fromMap(response.data);
       return Right(create);
     } catch (e) {
-      _exception(e);
       return Left(ErrorCreate(message: e.toString()));
     }
   }
@@ -33,7 +30,6 @@ class GroupsRepositoryImpl extends GroupsRepository {
     try {
       return const Right(true);
     } catch (e) {
-      _exception(e);
       return Left(ErrorRemove());
     }
   }
@@ -44,7 +40,6 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final result = await datasource.delete("/group");
       return Right(result.statusCode == 200);
     } catch (e) {
-      _exception(e);
       return Left(ErrorRemove());
     }
   }
@@ -56,7 +51,6 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final group = GroupModel.fromMap(response.data);
       return Right(group);
     } catch (e) {
-      _exception(e);
       return Left(ErrorSelect());
     }
   }
@@ -71,7 +65,6 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final groups = response.data?.map((e) => GroupModel.fromMap(e)) ?? [];
       return Right(groups);
     } catch (e) {
-      _exception(e);
       return Left(ErrorSelectAll());
     }
   }
@@ -83,7 +76,6 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final data = GroupModel.fromMap(response.data);
       return Right(data);
     } catch (e) {
-      _exception(e);
       return Left(ErrorUpdate());
     }
   }
@@ -94,7 +86,6 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final response = await datasource.post("/group/$id/drawn");
       return Right(response.statusCode == 200);
     } catch (e) {
-      _exception(e);
       return Left(ErrorSelect());
     }
   }
@@ -109,15 +100,7 @@ class GroupsRepositoryImpl extends GroupsRepository {
       final group = UserModel.fromMap(response.data);
       return Right(group);
     } catch (e) {
-      _exception(e);
       return Left(ErrorSelect());
-    }
-  }
-
-  void _exception(exception) {
-    if (Modular.get<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled) {
-      Modular.get<FirebaseCrashlytics>().setCustomKey("Exception", exception.toString());
-      Modular.get<FirebaseCrashlytics>().setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
     }
   }
 }

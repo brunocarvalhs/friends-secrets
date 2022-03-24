@@ -20,7 +20,6 @@ class LikersRepositoryImpl extends LikersRepository {
       final result = await datasource.delete("/likers");
       return Right(result.statusCode == 200);
     } catch (e) {
-      _exception(e);
       return Left(ErrorLikersDelete());
     }
   }
@@ -35,7 +34,6 @@ class LikersRepositoryImpl extends LikersRepository {
       final likers = response.data?.map((e) => LikersModel.fromMap(e)) ?? [];
       return Right(likers);
     } catch (e) {
-      _exception(e);
       return Left(ErrorLikersSelectAll());
     }
   }
@@ -47,19 +45,11 @@ class LikersRepositoryImpl extends LikersRepository {
       final result = await datasource.post("/user/likes", data: params);
       return Right(result.statusCode == 200);
     } catch (e) {
-      _exception(e);
       return Left(ErrorLikersSave(
         title: "Salvar",
         message:
             "Erro ao tentar salvar todos os seus gostos, tente novamente e caso o erro persista pode entrar em contato com suporte.",
       ));
-    }
-  }
-
-  void _exception(exception) {
-    if (Modular.get<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled) {
-      Modular.get<FirebaseCrashlytics>().setCustomKey("Exception", exception.toString());
-      Modular.get<FirebaseCrashlytics>().setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
     }
   }
 }
