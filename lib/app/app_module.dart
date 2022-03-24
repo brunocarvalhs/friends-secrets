@@ -11,7 +11,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tf_dio_cache/dio_http_cache.dart';
-import 'package:uni_links/uni_links.dart';
 
 import './core/localization/generated/l10n.dart';
 import './app_guard.dart';

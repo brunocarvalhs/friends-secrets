@@ -100,9 +100,9 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
   // Price -------------------------------------------------------------------
 
   final TextEditingController controllerPriceMin =
-      TextEditingController(text: (Modular.args.data as GroupModel).priceMin.toString() ?? null);
+      TextEditingController(text: (Modular.args.data as GroupModel).priceMin.toString());
   final TextEditingController controllerPriceMax =
-      TextEditingController(text: (Modular.args.data as GroupModel).priceMax.toString() ?? null);
+      TextEditingController(text: (Modular.args.data as GroupModel).priceMax.toString());
 
   final CurrencyTextInputFormatter filterPriceMin = CurrencyTextInputFormatter(symbol: "");
 
