@@ -2,72 +2,156 @@ name: pipeline
 
 on:
   push:
-    branches: [develop, master, releases/**]
+    branches: [develop, master, releases/**, hotfix/**]
 
 jobs:
   preparing_environment:
     runs-on: ubuntu-latest
     name: Preparação do Ambiente
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
+      - name: Create google-services file
+        run: |
+          touch ./android/app/google-services.json
+          echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
+
+      - name: Create key.properties file
+        run: |
+          touch ./android/key.properties
+          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
+      - name: Git Version
+        uses: codacy/git-version@2.2.0
+
+      - name: Create version.txt with nuGetVersion
+        run: echo ${{ steps.gitversion.outputs.nuGetVersion  }} > version.txt
+
+      - name: Upload version.txt
+        uses: actions/upload-artifact@v2
+        with:
+          name: gitversion
+          path: version.txt
 
   build_ios:
     runs-on: macos-latest
     needs: [preparing_environment]
     name: Build iOS
+    steps:
+      - name: Install pub Dependencies
+        run: flutter pub get
+
+      # - name: Build iOS App
+      #   run: |
+      #     flutter build ios --no-codesign
 
   build_android:
     runs-on: ubuntu-latest
     needs: [preparing_environment]
     name: Build Android
+    steps:
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "8"
+          distribution: "adopt"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: ${{ env.flutter_channel }}
+
+      - name: Install pub Dependencies
+        run: flutter pub get
 
   quality:
     runs-on: ubuntu-latest
     needs: [build_ios, build_android]
     name: Qualidade
+    steps:
+      - name: test
+        run: echo "quality"
 
   checkstyle:
     runs-on: ubuntu-latest
     needs: [build_ios, build_android]
     name: Check Style
+    steps:
+      - name: test
+        run: echo "quality"
 
   lint:
     runs-on: ubuntu-latest
     needs: [checkstyle]
     name: Lint
+    steps:
+      - name: test
+        run: echo "quality"
 
   detekt:
     runs-on: ubuntu-latest
     needs: [checkstyle]
     name: Detekt
+    steps:
+      - name: test
+        run: echo "quality"
 
   unit_test:
     runs-on: ubuntu-latest
     needs: [build_ios, build_android]
     name: Unit Test
+    steps:
+      - name: test
+        run: echo "quality"
 
   coverage:
     runs-on: ubuntu-latest
     needs: [unit_test]
     name: Cobertura
+    steps:
+      - name: test
+        run: echo "quality"
 
   preparing_delivery:
     runs-on: ubuntu-latest
     needs: [quality, detekt, coverage]
     name: Preparando Delivery
+    steps:
+      - name: test
+        run: echo "quality"
 
   alpha:
     runs-on: ubuntu-latest
     if: github.repository == 'develop'
     needs: [preparing_delivery]
     name: Preparando Delivery
+    steps:
+      - name: test
+        run: echo "quality"
 
   beta:
-    if: github.repository == 'releases/**'
+    if: github.repository == 'releases/**' || github.repository == 'hotfix/**'
     runs-on: ubuntu-latest
     needs: [preparing_delivery]
     name: Preparando Delivery
+    steps:
+      - name: test
+        run: echo "quality"
 
   play Store:
     if: github.repository == 'master'
     runs-on: ubuntu-latest
     needs: [preparing_delivery]
     name: Preparando Delivery
+    steps:
+      - name: test
+        run: echo "quality"
