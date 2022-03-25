@@ -107,6 +107,16 @@ jobs:
           touch .env
           echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
 
+      - name: Create google-services file
+        run: |
+          touch ./android/app/google-services.json
+          echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
+
+      - name: Create key.properties file
+        run: |
+          touch ./android/app/key.properties
+          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
+
       - name: Install pub Dependencies
         run: flutter pub get
 
