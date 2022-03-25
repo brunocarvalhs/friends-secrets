@@ -1,7 +1,9 @@
-name: pipeline
+name: Pipeline
 
 on:
   push:
+    branches: [develop, master, releases/**, hotfix/**]
+  pull_request:
     branches: [develop, master, releases/**, hotfix/**]
 
 jobs:
@@ -9,8 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Preparação do Ambiente
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
@@ -46,6 +47,8 @@ jobs:
     needs: [preparing_environment]
     name: Build iOS
     steps:
+      - uses: actions/checkout@v2
+
       - name: Install pub Dependencies
         run: flutter pub get
 
@@ -58,6 +61,8 @@ jobs:
     needs: [preparing_environment]
     name: Build Android
     steps:
+      - uses: actions/checkout@v2
+
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
@@ -78,6 +83,8 @@ jobs:
     needs: [build_ios, build_android]
     name: Qualidade
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -86,6 +93,8 @@ jobs:
     needs: [build_ios, build_android]
     name: Check Style
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -94,6 +103,8 @@ jobs:
     needs: [checkstyle]
     name: Lint
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -102,6 +113,8 @@ jobs:
     needs: [checkstyle]
     name: Detekt
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -110,6 +123,8 @@ jobs:
     needs: [build_ios, build_android]
     name: Unit Test
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -118,6 +133,8 @@ jobs:
     needs: [unit_test]
     name: Cobertura
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -126,6 +143,8 @@ jobs:
     needs: [quality, detekt, coverage]
     name: Preparando Delivery
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -135,6 +154,8 @@ jobs:
     needs: [preparing_delivery]
     name: Preparando Delivery
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -144,6 +165,8 @@ jobs:
     needs: [preparing_delivery]
     name: Preparando Delivery
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
 
@@ -153,5 +176,7 @@ jobs:
     needs: [preparing_delivery]
     name: Preparando Delivery
     steps:
+      - uses: actions/checkout@v2
+
       - name: test
         run: echo "quality"
