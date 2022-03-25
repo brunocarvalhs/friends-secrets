@@ -152,7 +152,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'develop'
     needs: [preparing_delivery]
-    name: Preparando Delivery
+    name: Alpha
     steps:
       - uses: actions/checkout@v2
 
@@ -162,19 +162,19 @@ jobs:
   beta:
     if: github.repository == 'releases/**' || github.repository == 'hotfix/**'
     runs-on: ubuntu-latest
-    needs: [preparing_delivery]
-    name: Preparando Delivery
+    needs: [alpha]
+    name: Beta
     steps:
       - uses: actions/checkout@v2
 
       - name: test
         run: echo "quality"
 
-  play Store:
+  play_store:
     if: github.repository == 'master'
     runs-on: ubuntu-latest
-    needs: [preparing_delivery]
-    name: Preparando Delivery
+    needs: [beta]
+    name: play Store
     steps:
       - uses: actions/checkout@v2
 
