@@ -20,33 +20,6 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - name: Create env file
-        run: |
-          touch .env
-          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
-
-      - name: Upload env file
-        uses: actions/upload-artifact@v3
-        with:
-          name: env
-          path: .env
-
-      - name: Create google-services file
-        run: |
-          touch ./android/app/google-services.json
-          echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
-
-      - name: Upload google-services file
-        uses: actions/upload-artifact@v3
-        with:
-          name: googleservice
-          path: ./android/app/google-services.json
-
-      - name: Create key.properties file
-        run: |
-          touch ./android/key.properties
-          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
-
       - uses: olegtarasov/get-tag@v2
         id: tagName
         with:
@@ -64,6 +37,21 @@ jobs:
     name: Build iOS
     steps:
       - uses: actions/checkout@v2
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
+      - name: Create google-services file
+        run: |
+          touch ./android/app/google-services.json
+          echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
+
+      - name: Create key.properties file
+        run: |
+          touch ./android/key.properties
+          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
 
       - name: Set up Java
         uses: actions/setup-java@v2
@@ -84,11 +72,11 @@ jobs:
       #   run: |
       #     flutter build ios --no-codesign
 
-      - name: Upload math result for Android
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.GIT_TAG_NAME }}
-          path: "build/ios/iphoneos/*.ipa"
+      # - name: Upload math result for Android
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{ env.GIT_TAG_NAME }}
+      #     path: "build/ios/iphoneos/*.ipa"
 
   build_android:
     runs-on: ubuntu-latest
@@ -96,6 +84,21 @@ jobs:
     name: Build Android
     steps:
       - uses: actions/checkout@v2
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
+      - name: Create google-services file
+        run: |
+          touch ./android/app/google-services.json
+          echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
+
+      - name: Create key.properties file
+        run: |
+          touch ./android/key.properties
+          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
 
       - name: Set up Java
         uses: actions/setup-java@v2
