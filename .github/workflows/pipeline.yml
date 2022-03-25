@@ -94,6 +94,11 @@ jobs:
       - name: Install pub Dependencies
         run: flutter pub get
 
+      - name: Build Android App
+        run: |
+          flutter build appbundle
+          flutter build apk
+
   quality:
     runs-on: ubuntu-latest
     needs: [build_ios, build_android]
