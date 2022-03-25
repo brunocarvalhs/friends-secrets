@@ -114,7 +114,7 @@ jobs:
 
       - name: Create key.properties file
         run: |
-          touch ./android/app/key.properties
+          touch ./android/key.properties
           echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
 
       - name: Install pub Dependencies
