@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:friends_secrets/app/modules/login/domain/entities/logged_user.dart';
 import 'package:friends_secrets/app/modules/login/domain/entities/logged_user_info.dart';
+import 'package:friends_secrets/app/modules/profile/domain/entities/logged_likers_info.dart';
+import 'package:friends_secrets/app/modules/profile/infra/models/likers_model.dart';
 
 class UserModel extends LoggedUser implements LoggedUserInfo {
   const UserModel({
@@ -10,12 +12,20 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
     String? email,
     String? photoUrl,
     String? phone,
+    List<LoggedLikersInfo>? likers,
+    int? notifications,
+    DateTime? created,
+    DateTime? updated,
   }) : super(
-    id: id,
+          id: id,
           name: name,
           email: email,
           photoUrl: photoUrl,
           phone: phone,
+          likers: likers,
+          notifications: notifications,
+          created: created,
+          updated: updated,
         );
 
   @override
@@ -24,6 +34,8 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
     String? name,
     String? photoUrl,
     String? phone,
+    List<LoggedLikersInfo>? likers,
+    int? notifications,
   }) {
     return UserModel(
       id: id,
@@ -31,6 +43,8 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
       name: name ?? this.name,
       photoUrl: photoUrl ?? this.photoUrl,
       phone: phone ?? this.phone,
+      likers: likers ?? this.likers,
+      notifications: notifications ?? this.notifications,
     );
   }
 
@@ -42,6 +56,9 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
       'name': name,
       'photoUrl': photoUrl,
       'phone': phone,
+      'items': likers?.map((x) => x.toMap()).toList(),
+      'createdAt': created?.toIso8601String(),
+      'updatedAt': updated?.toIso8601String(),
     };
   }
 
@@ -52,6 +69,10 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
       name: map['name'] as String?,
       photoUrl: map['photoUrl'] as String?,
       phone: map['phone'] as String?,
+      notifications: map['notifications'] as int?,
+      likers: map['items'] != null ? List<LikersModel>.from(map['items']?.map((x) => LikersModel.fromMap(x))) : null,
+      created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
+      updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
     );
   }
 

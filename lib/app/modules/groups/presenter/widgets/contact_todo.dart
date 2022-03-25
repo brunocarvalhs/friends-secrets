@@ -17,39 +17,33 @@ class ContactTodo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      borderOnForeground: true,
-      semanticContainer: false,
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () => isSelected ? onRemove(user) : onSelect(user),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            border: isSelected
-                ? Border.all(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: 1,
-                  )
-                : null,
-            color: isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.1) : null,
-          ),
-          child: Column(
-            children: [
-              ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage("${user.photoUrl}"),
-                ),
-                title: Text("${user.name}"),
-                trailing: isSelected
-                    ? Icon(
-                        Icons.check,
-                        color: Theme.of(context).primaryColor,
-                      )
-                    : null,
+    return InkWell(
+      onTap: () => isSelected ? onRemove(user) : onSelect(user),
+      child: Container(
+        decoration: BoxDecoration(
+          border: isSelected
+              ? Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 1,
+                )
+              : null,
+          color: isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.1) : null,
+        ),
+        child: Column(
+          children: [
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage("${user.photoUrl}"),
               ),
-            ],
-          ),
+              title: Text("${user.name}"),
+              trailing: isSelected
+                  ? Icon(
+                      Icons.check,
+                      color: Theme.of(context).primaryColor,
+                    )
+                  : null,
+            ),
+          ],
         ),
       ),
     );

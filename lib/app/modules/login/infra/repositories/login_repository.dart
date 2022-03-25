@@ -15,8 +15,21 @@ class LoginRepositoryImpl extends LoginRepository {
     try {
       var user = await dataSource.currentUser();
       return Right(user);
+    } on ConnectError catch (_) {
+      return Left(ConnectError(
+        title: "Conexão",
+        message: "Erro ao tentar conectar ao servidor, verifique sua conexão de internet.",
+      ));
+    } on ServerConnectError catch (_) {
+      return Left(ServerConnectError(
+        title: "Servidor",
+        message: "Erro ao tentar conectar ao servidor, caso o erro persista, entre em contato ao suporte.",
+      ));
     } catch (e) {
-      return Left(ErrorGetLoggedUser(message: "Error ao tentar recuperar usuario atual logado"));
+      return Left(ErrorGetLoggedUser(
+        title: "Usuário",
+        message: "Error ao tentar recuperar usuario atual logado",
+      ));
     }
   }
 
@@ -35,8 +48,25 @@ class LoginRepositoryImpl extends LoginRepository {
     try {
       var user = await dataSource.login();
       return Right(user);
+    } on ErrorLogin catch (_) {
+      return Left(ErrorLogin(
+        title: "Social Autenticação",
+        message: "Error ao tentar recuperar usuario via social autenticação",
+      ));
+    } on ServerConnectError catch (_) {
+      return Left(ServerConnectError(
+        title: "Servidor",
+        message: "Erro ao tentar conectar ao servidor, caso o erro persista, entre em contato ao suporte.",
+      ));
+    } on ConnectError catch (_) {
+      return Left(ConnectError(
+        title: "Conexão",
+        message: "Erro ao tentar conectar ao servidor, verifique sua conexão de internet.",
+      ));
     } catch (e) {
-      return Left(ErrorLogin(message: "Error login with Email"));
+      return Left(ErrorGetLoggedUser(
+        message: "Error ao tentar recuperar usuario atual logado",
+      ));
     }
   }
 }

@@ -1,4 +1,6 @@
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:edge_alerts/edge_alerts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/modules/groups/domain/usecases/register_group.dart';
@@ -33,6 +35,7 @@ abstract class _RegisterGroupStoreBase with Store {
   // users ========================================================================
 
   @observable
+  // ignore: prefer_final_fields
   ObservableList<UserModel> _users = ObservableList<UserModel>.of([]);
 
   @action
@@ -85,51 +88,57 @@ abstract class _RegisterGroupStoreBase with Store {
   // Price -------------------------------------------------------------------
 
   final TextEditingController controllerPriceMin = TextEditingController();
+  final CurrencyTextInputFormatter filterPriceMin = CurrencyTextInputFormatter(symbol: "");
+
   final TextEditingController controllerPriceMax = TextEditingController();
-
-  @observable
-  RangeValues rangeSliderDiscreteValues = const RangeValues(0, 100);
-
-  @action
-  void setPrice(RangeValues price) {
-    controllerPriceMax.text = price.end.toStringAsFixed(2);
-    controllerPriceMin.text = price.start.toStringAsFixed(2);
-    rangeSliderDiscreteValues = price;
-  }
+  final CurrencyTextInputFormatter filterPriceMax = CurrencyTextInputFormatter(symbol: "");
 
   // Functions ==================================================================
 
-  Future<void> register() async {
+  Future<void> register(BuildContext context) async {
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
     var group = GroupModel(
       author: Modular.get<AuthStore>().user as UserModel,
       name: controllerName.text,
       description: controllerdescription.text,
-      date: getDate.toIso8601String(),
+      date: getDate,
       type: getCategory,
       users: getUsers,
-      priceMax: num.tryParse(controllerPriceMax.text)?.toDouble(),
-      priceMin: num.tryParse(controllerPriceMin.text)?.toDouble(),
+      priceMax: num.tryParse(filterPriceMax.getFormattedValue())?.toDouble(),
+      priceMin: num.tryParse(filterPriceMin.getFormattedValue())?.toDouble(),
     );
     var result = await registersGroup(group);
     entry.remove();
     result.fold((failure) {
-      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
-    }, (list) {
-      clean();
-      Modular.to.pushReplacementNamed("/home/");
+      edgeAlert(
+        context,
+        title: failure.title.toString(),
+        description: failure.message.toString(),
+        backgroundColor: failure.color,
+        duration: const Duration(seconds: 10).inSeconds,
+      );
+    }, (group) {
+      clear();
+      edgeAlert(
+        context,
+        title: "Sucesso",
+        description: "${group.name} foi criado com sucesso.",
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 5).inSeconds,
+      );
+      Modular.to.popAndPushNamed("/home/");
     });
   }
 
-  void clean() {
+  void clear() {
     _users.clear();
     _type = null;
+    _date = DateTime.now();
+    _time = TimeOfDay.now();
     controllerName.clear();
     controllerdescription.clear();
     controllerPriceMax.clear();
     controllerPriceMin.clear();
-    _date = DateTime.now();
-    _time = TimeOfDay.now();
   }
 }

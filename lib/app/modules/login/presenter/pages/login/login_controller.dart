@@ -3,6 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
+import 'package:edge_alerts/edge_alerts.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../domain/usecases/login_with_google.dart';
@@ -14,10 +15,10 @@ part "login_controller.g.dart";
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
-  final LoginWithGoogle loginWithGoogleUsecase;
-  final AuthStore authStore;
+  final LoginWithGoogle _loginWithGoogleUsecase;
+  final AuthStore _authStore;
 
-  _LoginControllerBase(this.loginWithGoogleUsecase, this.authStore) {
+  _LoginControllerBase(this._loginWithGoogleUsecase, this._authStore) {
     analyticsDefines();
   }
 
@@ -25,20 +26,28 @@ abstract class _LoginControllerBase with Store {
     await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Login');
   }
 
-  enterGoogle() async {
+  enterGoogle(BuildContext context) async {
     var entry = OverlayEntry(builder: (context) => const LoadingDefault());
     asuka.addOverlay(entry);
-    var result = await loginWithGoogleUsecase();
+    var result = await _loginWithGoogleUsecase();
     entry.remove();
     result.fold((failure) async {
-      asuka.AsukaSnackbar.warning(failure.message.toString()).show();
+      edgeAlert(
+        context,
+        title: failure.title.toString(),
+        description: failure.message.toString(),
+        backgroundColor: failure.color,
+        duration: const Duration(seconds: 10).inSeconds,
+      );
     }, (user) async {
-      authStore.setUser(user);
-      if (user.phone != null) {
-        Modular.to.pushReplacementNamed("/home/");
-      } else {
-        Modular.to.pushReplacementNamed("/login/phone");
+      _authStore.setUser(user);
+      String redirect = "/home";
+      if (user.phone == null) {
+        redirect = "/login/phone";
+      } else if (user.likers == null || user.likers!.isEmpty) {
+        redirect = "/profile/likers";
       }
+      Modular.to.pushReplacementNamed(redirect);
     });
   }
 }

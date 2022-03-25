@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/login/presenter/pages/number_register/number_register_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
@@ -21,9 +22,9 @@ class NumberRegisterPageState extends ModularState<NumberRegisterPage, NumberReg
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const HeaderDefault(
-                title: "Registro de \nTelefone",
-                subtitle: "Cadastrando seu telefone, o organizador\ndo grupo, poderá te incluir no amigo\nsecreto.",
+              HeaderDefault(
+                title: Modular.get<I10n>().login_numberRegisterPage_headerDefault_title,
+                subtitle: Modular.get<I10n>().login_numberRegisterPage_headerDefault_subtitle,
               ),
               const SizedBox(height: 50),
               Padding(
@@ -39,8 +40,8 @@ class NumberRegisterPageState extends ModularState<NumberRegisterPage, NumberReg
                         controller: controller.phone,
                         validator: (text) => controller.validateNumber(text),
                         keyboardType: TextInputType.phone,
-                        labelText: 'Celular',
-                        hintText: '(00) 0 0000-0000',
+                        labelText: Modular.get<I10n>().login_numberRegisterPage_textFieldDefault_labelText,
+                        hintText: Modular.get<I10n>().login_numberRegisterPage_textFieldDefault_hintText,
                         inputFormatters: <TextInputFormatter>[controller.maskFormatter],
                       ),
                     ],
@@ -53,7 +54,7 @@ class NumberRegisterPageState extends ModularState<NumberRegisterPage, NumberReg
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => controller.postPhone(),
-        label: const Text("Registrar"),
+        label: Text(Modular.get<I10n>().login_numberRegisterPage_floatingActionButton_label),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );

@@ -6,6 +6,7 @@ class AppGuard extends RouteGuard {
   AppGuard(String? guardedRoute) : super(redirectTo: guardedRoute);
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Future<bool> canActivate(String path, ModularRoute router) async {
     await Modular.isModuleReady<AppModule>();
     await Modular.get<FirebaseMessaging>().requestPermission();

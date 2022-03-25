@@ -1,8 +1,11 @@
 abstract class ContactsDataSource {
-  Future<List<dynamic>> get();
-  Future<dynamic> add(dynamic contact);
-  Future<dynamic> delete(dynamic contact);
-  Future<dynamic> update(dynamic contact);
-  Future<dynamic> openContactForm();
-  Future<dynamic> openExisting(dynamic contact);
+  Future<List<dynamic>> getContacts({
+    bool withProperties = false,
+    bool withThumbnail = false,
+    bool withPhoto = false,
+    bool withGroups = false,
+    bool withAccounts = false,
+    bool sorted = true,
+    bool deduplicateProperties = true,
+  });
 }

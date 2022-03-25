@@ -1,52 +1,27 @@
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:friends_secrets/app/modules/groups/infra/datasource/contacts_datasource.dart';
 
 class ContactServiceDatasource implements ContactsDataSource {
-  // final ContactsService contactsService;
-
-  // ContactServiceDatasource(this.contactsService);
+  ContactServiceDatasource();
 
   @override
-  Future<void> add(contact) async {
-    // return await ContactsService.addContact(contact);
-  }
-
-  @override
-  Future<void> delete(contact) async {
-    // return await ContactsService.deleteContact(contact);
-  }
-
-  @override
-  Future<List<dynamic>> get({
-    String? query,
-    bool withThumbnails = true,
-    bool photoHighResolution = true,
-    bool orderByGivenName = true,
-    bool iOSLocalizedLabels = true,
-    bool androidLocalizedLabels = true,
+  Future<List<Contact>> getContacts({
+    bool withProperties = true,
+    bool withThumbnail = false,
+    bool withPhoto = true,
+    bool withGroups = false,
+    bool withAccounts = false,
+    bool sorted = true,
+    bool deduplicateProperties = true,
   }) async {
-    // return await ContactsService.getContacts(
-    // query: query,
-    // withThumbnails: withThumbnails,
-    // photoHighResolution: photoHighResolution,
-    // orderByGivenName: orderByGivenName,
-    // iOSLocalizedLabels: iOSLocalizedLabels,
-    // androidLocalizedLabels: androidLocalizedLabels,
-    // );
-    return [];
-  }
-
-  @override
-  Future<void> openContactForm() async {
-    // await ContactsService.openContactForm();
-  }
-
-  @override
-  Future<dynamic> openExisting(contact) async {
-    // return await ContactsService.openExistingContact(contact);
-  }
-
-  @override
-  Future<void> update(contact) async {
-    // return await ContactsService.updateContact(contact);
+    return await FlutterContacts.getContacts(
+      withProperties: withProperties,
+      withThumbnail: withThumbnail,
+      withPhoto: withPhoto,
+      withGroups: withGroups,
+      withAccounts: withAccounts,
+      sorted: sorted,
+      deduplicateProperties: deduplicateProperties,
+    );
   }
 }

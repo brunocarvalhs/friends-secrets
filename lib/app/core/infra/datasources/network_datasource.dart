@@ -4,6 +4,14 @@ abstract class NetworkDataSource {
   void setToken(String token);
   String getToken();
 
+  Options buildCache({
+    Duration? maxStale,
+    String? primaryKey,
+    String? subKey,
+    Options? options,
+    bool? forceRefresh,
+  });
+
   Future<Response<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,

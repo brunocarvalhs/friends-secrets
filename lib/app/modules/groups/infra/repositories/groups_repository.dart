@@ -3,6 +3,8 @@ import 'package:friends_secrets/app/modules/groups/domain/errors/errors.dart';
 import 'package:friends_secrets/app/modules/groups/domain/entities/logged_group_info.dart';
 import 'package:friends_secrets/app/modules/groups/domain/repositories/groups_repository.dart';
 import 'package:friends_secrets/app/modules/groups/infra/models/group_model.dart';
+import 'package:friends_secrets/app/modules/login/domain/entities/logged_user_info.dart';
+import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:dartz/dartz.dart';
 
@@ -56,7 +58,10 @@ class GroupsRepositoryImpl extends GroupsRepository {
   @override
   Future<Either<Failure, Iterable<LoggedGroupInfo>>> selectAll() async {
     try {
-      final response = await datasource.get<List<dynamic>>("/group");
+      final response = await datasource.get<List<dynamic>>(
+        "/group",
+        options: datasource.buildCache(forceRefresh: true),
+      );
       final groups = response.data?.map((e) => GroupModel.fromMap(e)) ?? [];
       return Right(groups);
     } catch (e) {
@@ -65,12 +70,37 @@ class GroupsRepositoryImpl extends GroupsRepository {
   }
 
   @override
-  Future<Either<Failure, LoggedGroupInfo>> update(LoggedGroupInfo group) async {
+  Future<Either<Failure, LoggedGroupInfo>> update(String id, LoggedGroupInfo group) async {
     try {
-      final response = await datasource.put("/group", data: group.toMap());
-      return Right(response.data);
+      final response = await datasource.put("/group/$id", data: group.toMap());
+      final data = GroupModel.fromMap(response.data);
+      return Right(data);
     } catch (e) {
       return Left(ErrorUpdate());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> drawnOfGroup(String id) async {
+    try {
+      final response = await datasource.post("/group/$id/drawn");
+      return Right(response.statusCode == 200);
+    } catch (e) {
+      return Left(ErrorSelect());
+    }
+  }
+
+  @override
+  Future<Either<Failure, LoggedUserInfo>> userDrawn(String id) async {
+    try {
+      final response = await datasource.get(
+        "/group/$id/drawn",
+        options: datasource.buildCache(),
+      );
+      final group = UserModel.fromMap(response.data);
+      return Right(group);
+    } catch (e) {
+      return Left(ErrorSelect());
     }
   }
 }

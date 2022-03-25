@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:friends_secrets/app/modules/groups/infra/models/type_model.dart';
-import 'package:friends_secrets/app/modules/login/domain/entities/logged_user_info.dart';
 import 'package:friends_secrets/app/modules/login/infra/models/user_model.dart';
 
 import '../../domain/entities/logged_group.dart';
@@ -13,13 +12,14 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
     TypeModel? type,
     String? name,
     String? description,
-    String? date,
+    DateTime? date,
     double? priceMin,
     double? priceMax,
     UserModel? author,
     List<UserModel>? users,
-    String? created,
-    String? updated,
+    DateTime? created,
+    DateTime? updated,
+    bool isDrawns = false,
   }) : super(
           id: id,
           type: type,
@@ -32,6 +32,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
           users: users,
           created: created,
           updated: updated,
+          isDrawns: isDrawns,
         );
 
   @override
@@ -40,13 +41,14 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
     TypeModel? type,
     String? name,
     String? description,
-    String? date,
+    DateTime? date,
     double? priceMin,
     double? priceMax,
     UserModel? author,
     List<UserModel>? users,
-    String? created,
-    String? updated,
+    DateTime? created,
+    DateTime? updated,
+    bool? isDrawns,
   }) {
     return GroupModel(
       id: id ?? this.id,
@@ -60,6 +62,7 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       users: users ?? this.users,
       created: created ?? this.created,
       updated: updated ?? this.updated,
+      isDrawns: isDrawns ?? this.isDrawns,
     );
   }
 
@@ -70,13 +73,14 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       "type": type?.toMap(),
       "name": name,
       "description": description,
-      "date": date,
+      "date": date?.toIso8601String(),
       "priceMin": priceMin,
       "priceMax": priceMax,
       "author": author?.toMap(),
       'users': users?.map((x) => x.toMap()).toList(),
-      "created": created,
-      "updated": updated,
+      "createdAt": created?.toIso8601String(),
+      "updatedAt": updated?.toIso8601String(),
+      "isDrawns": isDrawns
     };
   }
 
@@ -86,13 +90,14 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       type: map['type'] != null ? TypeModel.fromMap(map['type']) : null,
       name: map["name"] as String,
       description: map["description"] as String?,
-      date: map["date"] as String?,
+      date: map["date"] != null ? DateTime.parse(map["date"] as String) : null,
       priceMin: map["priceMin"] as double?,
       priceMax: map["priceMax"] as double?,
       author: map['author'] != null ? UserModel.fromMap(map['author']) : null,
       users: map['users'] != null ? List<UserModel>.from(map['users']?.map((x) => UserModel.fromMap(x))) : null,
-      created: map["createdAt"] as String,
-      updated: map["updatedAt"] as String,
+      created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
+      updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
+      isDrawns: map["isDrawns"] as bool? ?? false,
     );
   }
 

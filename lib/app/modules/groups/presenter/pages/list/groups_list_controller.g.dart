@@ -7,7 +7,8 @@ part of 'groups_list_controller.dart';
 // **************************************************************************
 
 final $GroupsListController = BindInject(
-  (i) => GroupsListController(i<AuthStore>(), i<GetGroups>()),
+  (i) => GroupsListController(i<GetGroups>(), i<ListNotifiactions>(),
+      i<DeleteGroup>(), i<SharedGroup>(), i<ExitGroup>()),
   isSingleton: true,
   isLazy: true,
 );
@@ -79,18 +80,19 @@ mixin _$GroupsListController on _GroupsListControllerBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_GroupsListControllerBase.loading');
+  final _$notificationAtom =
+      Atom(name: '_GroupsListControllerBase.notification');
 
   @override
-  bool get loading {
-    _$loadingAtom.reportRead();
-    return super.loading;
+  int? get notification {
+    _$notificationAtom.reportRead();
+    return super.notification;
   }
 
   @override
-  set loading(bool value) {
-    _$loadingAtom.reportWrite(value, super.loading, () {
-      super.loading = value;
+  set notification(int? value) {
+    _$notificationAtom.reportWrite(value, super.notification, () {
+      super.notification = value;
     });
   }
 
@@ -131,20 +133,9 @@ mixin _$GroupsListController on _GroupsListControllerBase, Store {
   }
 
   @override
-  void setLoading(bool value) {
-    final _$actionInfo = _$_GroupsListControllerBaseActionController
-        .startAction(name: '_GroupsListControllerBase.setLoading');
-    try {
-      return super.setLoading(value);
-    } finally {
-      _$_GroupsListControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
-loading: ${loading},
+notification: ${notification},
 buttonExtends: ${buttonExtends},
 isGroups: ${isGroups},
 countGroups: ${countGroups},
