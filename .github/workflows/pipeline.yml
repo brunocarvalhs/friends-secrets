@@ -110,7 +110,7 @@ jobs:
 
   detekt:
     runs-on: ubuntu-latest
-    needs: [checkstyle]
+    needs: [lint]
     name: Detekt
     steps:
       - uses: actions/checkout@v2
