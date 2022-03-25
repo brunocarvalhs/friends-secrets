@@ -10,7 +10,8 @@ class RegisterRepositoryImpl extends RegisterRepository {
   RegisterRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, bool>> register(String verificationId, String code) async {
+  Future<Either<Failure, bool>> register(
+      String verificationId, String code) async {
     try {
       var result = await dataSource.register(verificationId, code);
       return Right(result);

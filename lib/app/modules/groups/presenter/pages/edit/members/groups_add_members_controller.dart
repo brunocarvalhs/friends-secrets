@@ -13,19 +13,22 @@ import 'package:asuka/asuka.dart' as asuka;
 part 'groups_add_members_controller.g.dart';
 
 @Injectable()
-class GroupsAddMembersController = _GroupsAddMembersControllerBase with _$GroupsAddMembersController;
+class GroupsAddMembersController = _GroupsAddMembersControllerBase
+    with _$GroupsAddMembersController;
 
 abstract class _GroupsAddMembersControllerBase with Store {
   final ListContacts listContacts;
   final UpdateGroup _updateGroup;
   final ContactsRepository _contactsRepository;
 
-  _GroupsAddMembersControllerBase(this.listContacts, this._updateGroup, this._contactsRepository) {
+  _GroupsAddMembersControllerBase(
+      this.listContacts, this._updateGroup, this._contactsRepository) {
     analyticsDefines();
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Add Members');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Group Add Members');
   }
 
   @observable
@@ -54,8 +57,8 @@ abstract class _GroupsAddMembersControllerBase with Store {
 
   @observable
   // ignore: prefer_final_fields
-  ObservableList<UserModel> _members =
-      ObservableList<UserModel>.of((Modular.args.data as GroupModel).users?.toList() ?? []);
+  ObservableList<UserModel> _members = ObservableList<UserModel>.of(
+      (Modular.args.data as GroupModel).users?.toList() ?? []);
 
   @action
   void addMember(UserModel value) => _members.add(value);

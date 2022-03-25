@@ -51,12 +51,15 @@ class GroupsModule extends Module {
     // Stores -----------------------------------------------------------------------------------
     Bind.lazySingleton<RegisterGroupStore>((i) => RegisterGroupStore(i.get())),
     // Datasource -------------------------------------------------------------------------------
-    Bind.factory<GaleryPhotoDatasource>((i) => GaleryPhotoDatasourceImpl(i.get())),
+    Bind.factory<GaleryPhotoDatasource>(
+        (i) => GaleryPhotoDatasourceImpl(i.get())),
     Bind.factory<ContactsDataSource>((i) => ContactServiceDatasource()),
     // Repositories -----------------------------------------------------------------------------
-    Bind.factory<GroupsRepository>((i) => GroupsRepositoryImpl(i.get(), i.get())),
+    Bind.factory<GroupsRepository>(
+        (i) => GroupsRepositoryImpl(i.get(), i.get())),
     Bind.factory<TypesRepository>((i) => TypesRepositoryImpl(i.get())),
-    Bind.factory<ContactsRepository>((i) => ContactsRepositoryImpl(i.get(), i.get())),
+    Bind.factory<ContactsRepository>(
+        (i) => ContactsRepositoryImpl(i.get(), i.get())),
     Bind.factory<AlbumsRepository>((i) => AlbumsRepositoryImpl(i.get())),
     // Use Case ---------------------------------------------------------------------------------
     Bind.factory<ReadGroup>((i) => ReadGroupImpl(i.get())),
@@ -73,10 +76,14 @@ class GroupsModule extends Module {
     Bind.factory<ExitGroup>((i) => ExitGroupImpl(i.get())),
     Bind.factory<UpdateGroup>((i) => UpdateGroupImpl(i.get())),
     // Controllers -------------------------------------------------------------------------------
-    Bind.factory((i) => GroupsListController(i.get(), i.get(), i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsRegisterMembersController(i.get(), i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsRegisterTypeController(i.get(), i.get(), i.get())),
-    Bind.factory((i) => GroupsRegisterInformationController(i.get(), i.get(), i.get())),
+    Bind.factory((i) =>
+        GroupsListController(i.get(), i.get(), i.get(), i.get(), i.get())),
+    Bind.factory((i) =>
+        GroupsRegisterMembersController(i.get(), i.get(), i.get(), i.get())),
+    Bind.factory(
+        (i) => GroupsRegisterTypeController(i.get(), i.get(), i.get())),
+    Bind.factory(
+        (i) => GroupsRegisterInformationController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsReadController(i.get(), i.get(), i.get())),
     Bind.factory((i) => GroupsAddMembersController(i.get(), i.get(), i.get())),
     Bind.factory((i) => DrawnController(i.get())),
@@ -85,13 +92,21 @@ class GroupsModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, args) => const GroupsListPage()),
-    ChildRoute("/register/members", child: (_, args) => const GroupsRegisterMembersPage()),
-    ChildRoute("/register/type", child: (_, args) => const GroupsRegisterTypePage()),
-    ChildRoute("/register/information", child: (_, args) => const GroupsRegisterInformationPage()),
-    ChildRoute("/:id", child: (_, args) => GroupsReadPage(id: args.params['id'])),
-    ChildRoute("/:id/drawn", child: (_, args) => DrawnPage(id: args.params['id'])),
-    ChildRoute("/:id/members", child: (_, args) => GroupsAddMembersPage(id: args.params['id'])),
-    ChildRoute("/:id/edit", child: (_, args) => GroupsUpdateInformationPage(id: args.params['id'])),
+    ChildRoute(Modular.initialRoute,
+        child: (_, args) => const GroupsListPage()),
+    ChildRoute("/register/members",
+        child: (_, args) => const GroupsRegisterMembersPage()),
+    ChildRoute("/register/type",
+        child: (_, args) => const GroupsRegisterTypePage()),
+    ChildRoute("/register/information",
+        child: (_, args) => const GroupsRegisterInformationPage()),
+    ChildRoute("/:id",
+        child: (_, args) => GroupsReadPage(id: args.params['id'])),
+    ChildRoute("/:id/drawn",
+        child: (_, args) => DrawnPage(id: args.params['id'])),
+    ChildRoute("/:id/members",
+        child: (_, args) => GroupsAddMembersPage(id: args.params['id'])),
+    ChildRoute("/:id/edit",
+        child: (_, args) => GroupsUpdateInformationPage(id: args.params['id'])),
   ];
 }

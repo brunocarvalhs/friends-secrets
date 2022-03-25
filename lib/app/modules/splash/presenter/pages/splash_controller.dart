@@ -18,7 +18,8 @@ abstract class _SplashControllerBase with Store {
     Modular.get<AuthStore>().checkLogin().then((isLogged) async {
       String redirect = "/login/";
       if (isLogged) {
-        if (Modular.get<AuthStore>().user?.phone != null && Modular.get<AuthStore>().user?.likers != null) {
+        if (Modular.get<AuthStore>().user?.phone != null &&
+            Modular.get<AuthStore>().user?.likers != null) {
           redirect = "/home/";
         } else if (Modular.get<AuthStore>().user?.phone == null) {
           redirect = "/login/phone";

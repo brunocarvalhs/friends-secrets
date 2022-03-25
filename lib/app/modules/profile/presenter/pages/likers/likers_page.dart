@@ -22,7 +22,8 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
             AppBarDefault(
               expandedHeight: 300,
               title: Modular.get<I10n>().profile_likersPage_appBarDefault_title,
-              subtitle: Modular.get<I10n>().profile_likersPage_appBarDefault_subtitle,
+              subtitle:
+                  Modular.get<I10n>().profile_likersPage_appBarDefault_subtitle,
             ),
           ],
           body: FutureBuilder(
@@ -35,7 +36,8 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),
-                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+                    notificationPredicate: (scrollNotification) =>
+                        controller.notificationPredicate(scrollNotification),
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -46,10 +48,13 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
                                 .map((item) => Observer(builder: (context) {
                                       return FilterChip(
                                         label: Text('${item.name}'),
-                                        padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
-                                        selected: controller.isSelectedLike(item),
-                                        onSelected: (select) =>
-                                            select ? controller.selecLike(item) : controller.removeLike(item),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 10),
+                                        selected:
+                                            controller.isSelectedLike(item),
+                                        onSelected: (select) => select
+                                            ? controller.selecLike(item)
+                                            : controller.removeLike(item),
                                       );
                                     }))
                                 .toList(),
@@ -67,7 +72,8 @@ class LikersPageState extends ModularState<LikersPage, LikersController> {
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.save(context),
-          label: Text(Modular.get<I10n>().profile_likersPage_floatingActionButton_label),
+          label: Text(Modular.get<I10n>()
+              .profile_likersPage_floatingActionButton_label),
           icon: const Icon(Icons.save),
         ),
       ),

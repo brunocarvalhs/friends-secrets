@@ -1,4 +1,3 @@
-
 // class StorageRepositoryImpl extends StorageRepository {
 //   final StorageDatasource datasource;
 //   final String collection = "Groups";
@@ -14,7 +13,7 @@
 //       final uri = await result.ref.getDownloadURL();
 //       return Right(uri);
 //     } catch (e) {
-          // _exception(e)
+// _exception(e)
 //       return Left(ErrorCreate(message: "Error ao tentar criar Groupo"));
 //     }
 //   }

@@ -29,7 +29,8 @@ class RegisterDataSourceImpl implements RegisterDataSource {
     final connect = await connectivity.checkConnectivity();
     if (connect == ConnectivityResult.none) throw ConnectError();
 
-    AuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: code);
+    AuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId, smsCode: code);
 
     final result = await firebaseAuth.signInWithCredential(credential);
 

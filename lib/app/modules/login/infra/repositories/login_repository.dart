@@ -18,12 +18,14 @@ class LoginRepositoryImpl extends LoginRepository {
     } on ConnectError catch (_) {
       return Left(ConnectError(
         title: "Conexão",
-        message: "Erro ao tentar conectar ao servidor, verifique sua conexão de internet.",
+        message:
+            "Erro ao tentar conectar ao servidor, verifique sua conexão de internet.",
       ));
     } on ServerConnectError catch (_) {
       return Left(ServerConnectError(
         title: "Servidor",
-        message: "Erro ao tentar conectar ao servidor, caso o erro persista, entre em contato ao suporte.",
+        message:
+            "Erro ao tentar conectar ao servidor, caso o erro persista, entre em contato ao suporte.",
       ));
     } catch (e) {
       return Left(ErrorGetLoggedUser(
@@ -56,12 +58,14 @@ class LoginRepositoryImpl extends LoginRepository {
     } on ServerConnectError catch (_) {
       return Left(ServerConnectError(
         title: "Servidor",
-        message: "Erro ao tentar conectar ao servidor, caso o erro persista, entre em contato ao suporte.",
+        message:
+            "Erro ao tentar conectar ao servidor, caso o erro persista, entre em contato ao suporte.",
       ));
     } on ConnectError catch (_) {
       return Left(ConnectError(
         title: "Conexão",
-        message: "Erro ao tentar conectar ao servidor, verifique sua conexão de internet.",
+        message:
+            "Erro ao tentar conectar ao servidor, verifique sua conexão de internet.",
       ));
     } catch (e) {
       return Left(ErrorGetLoggedUser(

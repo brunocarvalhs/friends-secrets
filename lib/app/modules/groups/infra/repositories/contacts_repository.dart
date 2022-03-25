@@ -21,7 +21,8 @@ class ContactsRepositoryImpl extends ContactsRepository {
         data: params,
         options: datasource.buildCache(),
       );
-      final contacts = response.data?.map((e) => UserModel.fromMap(e)).toList() ?? [];
+      final contacts =
+          response.data?.map((e) => UserModel.fromMap(e)).toList() ?? [];
       return Right(contacts);
     } catch (e) {
       return Left(ErrorCreate(message: "Error ao tentar criar Groupo"));
@@ -35,7 +36,9 @@ class ContactsRepositoryImpl extends ContactsRepository {
 
       final result = await contactsDataSource.getContacts();
       final list = result
-          .map((e) => e.phones.map((e) => e.number.replaceAll(RegExp(r"/(?<!^)\+|[^\d+]+"), "")).toList())
+          .map((e) => e.phones
+              .map((e) => e.number.replaceAll(RegExp(r"/(?<!^)\+|[^\d+]+"), ""))
+              .toList())
           .toList();
       List<String> phones = [];
       for (var contact in list) {

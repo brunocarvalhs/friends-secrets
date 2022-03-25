@@ -30,7 +30,8 @@ class DrawnPageState extends ModularState<DrawnPage, DrawnController> {
                   headerSliverBuilder: (_, b) => [
                     AppBarDefault(
                       expandedHeight: 400,
-                      title: "${controller.user?.name?.split(" ").first}\n${controller.user?.name?.split(" ").last}",
+                      title:
+                          "${controller.user?.name?.split(" ").first}\n${controller.user?.name?.split(" ").last}",
                       childTop: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CachedNetworkImage(
@@ -41,8 +42,10 @@ class DrawnPageState extends ModularState<DrawnPage, DrawnController> {
                               radius: 60,
                             ),
                           ),
-                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
                         ),
                       ),
                     ),
@@ -54,7 +57,8 @@ class DrawnPageState extends ModularState<DrawnPage, DrawnController> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 20),
                           child: Observer(builder: (context) {
                             return Wrap(
                               spacing: 10,
@@ -62,7 +66,8 @@ class DrawnPageState extends ModularState<DrawnPage, DrawnController> {
                                       ?.map(
                                         (item) => Chip(
                                           label: Text('${item.name}'),
-                                          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 7, horizontal: 10),
                                         ),
                                       )
                                       .toList() ??

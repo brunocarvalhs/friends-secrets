@@ -14,7 +14,8 @@ import 'package:mobx/mobx.dart';
 part "groups_list_controller.g.dart";
 
 @Injectable()
-class GroupsListController = _GroupsListControllerBase with _$GroupsListController;
+class GroupsListController = _GroupsListControllerBase
+    with _$GroupsListController;
 
 abstract class _GroupsListControllerBase with Store {
   final GetGroups _getGroups;
@@ -92,14 +93,19 @@ abstract class _GroupsListControllerBase with Store {
     return true;
   }
 
-  void redirect() => Modular.to.pushNamed("/home/register/members").then(((value) => update()));
+  void redirect() => Modular.to
+      .pushNamed("/home/register/members")
+      .then(((value) => update()));
 
-  void profileRedirect() => Modular.to.pushNamed("/profile/").then(((value) => update()));
+  void profileRedirect() =>
+      Modular.to.pushNamed("/profile/").then(((value) => update()));
 
-  void notificationRedirect() => Modular.to.pushNamed("/notification/").then(((value) => update()));
+  void notificationRedirect() =>
+      Modular.to.pushNamed("/notification/").then(((value) => update()));
 
-  void readGroup(GroupModel groupModel) =>
-      Modular.to.pushNamed("/home/${groupModel.id}", arguments: groupModel).then(((value) => update()));
+  void readGroup(GroupModel groupModel) => Modular.to
+      .pushNamed("/home/${groupModel.id}", arguments: groupModel)
+      .then(((value) => update()));
 
   Future<void> update() async {
     final groups = await _getGroups();

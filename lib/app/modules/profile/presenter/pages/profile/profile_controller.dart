@@ -17,7 +17,8 @@ abstract class _ProfileControllerBase with Store {
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Profile');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Profile');
   }
 
   Future<void> signOut(BuildContext context) async {
@@ -26,5 +27,6 @@ abstract class _ProfileControllerBase with Store {
     });
   }
 
-  Future<void> request(BuildContext context) async => await authStore.refresh(context);
+  Future<void> request(BuildContext context) async =>
+      await authStore.refresh(context);
 }

@@ -23,7 +23,8 @@ abstract class _LoginControllerBase with Store {
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Login');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Login');
   }
 
   enterGoogle(BuildContext context) async {

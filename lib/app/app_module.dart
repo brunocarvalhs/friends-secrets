@@ -45,15 +45,19 @@ class AppModule extends Module {
     Bind.instance<FirebaseCrashlytics>(FirebaseCrashlytics.instance),
     Bind.instance<FirebaseAuth>(FirebaseAuth.instance),
     Bind.instance<FirebaseDynamicLinks>(FirebaseDynamicLinks.instance),
-    Bind.lazySingleton<FirebaseAnalyticsObserver>((i) => FirebaseAnalyticsObserver(analytics: i.get())),
-    Bind.instance<DioCacheManager>(DioCacheManager(CacheConfig(baseUrl: dotenv.env['BASE_URL'].toString()))),
+    Bind.lazySingleton<FirebaseAnalyticsObserver>(
+        (i) => FirebaseAnalyticsObserver(analytics: i.get())),
+    Bind.instance<DioCacheManager>(DioCacheManager(
+        CacheConfig(baseUrl: dotenv.env['BASE_URL'].toString()))),
     Bind.instance<Dio>(Dio(BaseOptions(
       baseUrl: dotenv.env['BASE_URL'].toString(),
       connectTimeout: 60 * 1000, // 60 seconds
       receiveTimeout: 60 * 1000, // 60 seconds
     ))),
-    Bind.lazySingleton<NetworkDataSource>((i) => DioDataSourceImpl(i.get(), i.get(), i.get())),
-    Bind.lazySingleton<NetworkRepository>((i) => NetworkRepositoryImpl(i.get())),
+    Bind.lazySingleton<NetworkDataSource>(
+        (i) => DioDataSourceImpl(i.get(), i.get(), i.get())),
+    Bind.lazySingleton<NetworkRepository>(
+        (i) => NetworkRepositoryImpl(i.get())),
     Bind.instance<Connectivity>(Connectivity()),
     Bind.instance<I10n>(I10n()),
     AsyncBind<SharedPreferences>((i) => SharedPreferences.getInstance()),
@@ -61,10 +65,12 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ModuleRoute(Modular.initialRoute, module: SplashModule(), guards: [AppGuard(Modular.initialRoute)]),
+    ModuleRoute(Modular.initialRoute,
+        module: SplashModule(), guards: [AppGuard(Modular.initialRoute)]),
     ModuleRoute("/login", module: LoginModule()),
     ModuleRoute("/home", module: GroupsModule(), guards: [AuthGuard()]),
     ModuleRoute("/profile", module: ProfileModule(), guards: [AuthGuard()]),
-    ModuleRoute("/notification", module: NotificationModule(), guards: [AuthGuard()]),
+    ModuleRoute("/notification",
+        module: NotificationModule(), guards: [AuthGuard()]),
   ];
 }

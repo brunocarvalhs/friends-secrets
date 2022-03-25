@@ -26,7 +26,9 @@ class TypeTodo extends StatelessWidget {
                   width: 1,
                 )
               : null,
-          color: isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.1) : null,
+          color: isSelected
+              ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
+              : null,
         ),
         child: Column(
           children: [
@@ -43,7 +45,8 @@ class TypeTodo extends StatelessWidget {
                     ),
                   ),
                 ),
-                placeholder: (context, url) => const CircularProgressIndicator(),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ListTile(

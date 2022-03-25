@@ -44,13 +44,18 @@ class LikersModel extends LoggedLikers implements LoggedLikersInfo {
     return LikersModel(
       id: map["id"] as String,
       name: map["name"] as String,
-      createdAt: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
-      updatedAt: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
+      createdAt: map["createdAt"] != null
+          ? DateTime.parse(map["createdAt"] as String)
+          : null,
+      updatedAt: map["updatedAt"] != null
+          ? DateTime.parse(map["updatedAt"] as String)
+          : null,
     );
   }
 
   @override
   String toJson() => json.encode(toMap());
 
-  factory LikersModel.fromJson(String source) => LikersModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory LikersModel.fromJson(String source) =>
+      LikersModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

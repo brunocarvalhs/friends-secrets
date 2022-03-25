@@ -18,25 +18,32 @@ abstract class _GroupsRegisterInformationControllerBase with Store {
   final GetGroups getGroups;
   final RegisterGroupStore registerGroupStore;
 
-  _GroupsRegisterInformationControllerBase(this.user, this.getGroups, this.registerGroupStore) {
+  _GroupsRegisterInformationControllerBase(
+      this.user, this.getGroups, this.registerGroupStore) {
     analyticsDefines();
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Register Information');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Group Register Information');
   }
 
   Future<void> register(BuildContext context) async {
     await registerGroupStore.register(context);
   }
 
-  CurrencyTextInputFormatter get filterPriceMin => registerGroupStore.filterPriceMin;
-  CurrencyTextInputFormatter get filterPriceMax => registerGroupStore.filterPriceMax;
-  TextEditingController get controllerPriceMin => registerGroupStore.controllerPriceMin;
-  TextEditingController get controllerPriceMax => registerGroupStore.controllerPriceMax;
+  CurrencyTextInputFormatter get filterPriceMin =>
+      registerGroupStore.filterPriceMin;
+  CurrencyTextInputFormatter get filterPriceMax =>
+      registerGroupStore.filterPriceMax;
+  TextEditingController get controllerPriceMin =>
+      registerGroupStore.controllerPriceMin;
+  TextEditingController get controllerPriceMax =>
+      registerGroupStore.controllerPriceMax;
 
   TextEditingController get controllerName => registerGroupStore.controllerName;
-  TextEditingController get controllerDescription => registerGroupStore.controllerdescription;
+  TextEditingController get controllerDescription =>
+      registerGroupStore.controllerdescription;
 
   @observable
   bool _buttonExtends = true;
@@ -82,6 +89,7 @@ abstract class _GroupsRegisterInformationControllerBase with Store {
       context: context,
       initialTime: TimeOfDay.fromDateTime(DateTime.now()),
     );
-    registerGroupStore.setTime(current ?? TimeOfDay.fromDateTime(DateTime.now()));
+    registerGroupStore
+        .setTime(current ?? TimeOfDay.fromDateTime(DateTime.now()));
   }
 }

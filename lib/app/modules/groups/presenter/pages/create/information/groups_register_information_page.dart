@@ -9,11 +9,12 @@ import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
 class GroupsRegisterInformationPage extends StatefulWidget {
   const GroupsRegisterInformationPage({Key? key}) : super(key: key);
   @override
-  GroupsRegisterInformationPageState createState() => GroupsRegisterInformationPageState();
+  GroupsRegisterInformationPageState createState() =>
+      GroupsRegisterInformationPageState();
 }
 
-class GroupsRegisterInformationPageState
-    extends ModularState<GroupsRegisterInformationPage, GroupsRegisterInformationController> {
+class GroupsRegisterInformationPageState extends ModularState<
+    GroupsRegisterInformationPage, GroupsRegisterInformationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +23,10 @@ class GroupsRegisterInformationPageState
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
               expandedHeight: 300,
-              title: Modular.get<I10n>().groups_groupsRegisterInformationPage_appBarDefault_title,
-              subtitle: Modular.get<I10n>().groups_groupsRegisterInformationPage_appBarDefault_subtitle,
+              title: Modular.get<I10n>()
+                  .groups_groupsRegisterInformationPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>()
+                  .groups_groupsRegisterInformationPage_appBarDefault_subtitle,
             ),
           ],
           body: SingleChildScrollView(
@@ -43,10 +46,10 @@ class GroupsRegisterInformationPageState
                         controller: controller.controllerName,
                         keyboardType: TextInputType.name,
                         filled: true,
-                        hintText:
-                            Modular.get<I10n>().groups_groupsRegisterInformationPage_textFieldDefault_name_hintText,
-                        labelText:
-                            Modular.get<I10n>().groups_groupsRegisterInformationPage_textFieldDefault_name_labelText,
+                        hintText: Modular.get<I10n>()
+                            .groups_groupsRegisterInformationPage_textFieldDefault_name_hintText,
+                        labelText: Modular.get<I10n>()
+                            .groups_groupsRegisterInformationPage_textFieldDefault_name_labelText,
                       ),
                       const SizedBox(
                         height: 14,
@@ -76,7 +79,9 @@ class GroupsRegisterInformationPageState
                                       controller.getMonth,
                                       controller.getYear,
                                     ),
-                                    style: Theme.of(context).inputDecorationTheme.counterStyle,
+                                    style: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .counterStyle,
                                   ),
                                 ),
                               ),
@@ -102,7 +107,9 @@ class GroupsRegisterInformationPageState
                                       controller.getHour,
                                       controller.getMinute,
                                     ),
-                                    style: Theme.of(context).inputDecorationTheme.counterStyle,
+                                    style: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .counterStyle,
                                   ),
                                 ),
                               ),
@@ -171,7 +178,8 @@ class GroupsRegisterInformationPageState
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => controller.register(context),
-        label: Text(Modular.get<I10n>().groups_groupsRegisterInformationPage_floatingActionButton_label),
+        label: Text(Modular.get<I10n>()
+            .groups_groupsRegisterInformationPage_floatingActionButton_label),
         icon: const Icon(Icons.save),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

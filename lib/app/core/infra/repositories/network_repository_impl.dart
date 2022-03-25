@@ -13,7 +13,10 @@ class NetworkRepositoryImpl implements NetworkRepository {
 
   @override
   Future<Either<Exception, Response<T>>> delete<T>(String path,
-      {data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) async {
+      {data,
+      Map<String, dynamic>? queryParameters,
+      Options? options,
+      CancelToken? cancelToken}) async {
     try {
       final result = await dataSource.delete<T>(
         path,
@@ -52,7 +55,10 @@ class NetworkRepositoryImpl implements NetworkRepository {
 
   @override
   Future<Either<Exception, Response<T>>> head<T>(String path,
-      {data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) async {
+      {data,
+      Map<String, dynamic>? queryParameters,
+      Options? options,
+      CancelToken? cancelToken}) async {
     try {
       final result = await dataSource.head<T>(
         path,
@@ -156,8 +162,10 @@ class NetworkRepositoryImpl implements NetworkRepository {
 
   void _exception(exception) {
     if (Modular.get<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled) {
-      Modular.get<FirebaseCrashlytics>().setCustomKey("Exception", exception.toString());
-      Modular.get<FirebaseCrashlytics>().setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
+      Modular.get<FirebaseCrashlytics>()
+          .setCustomKey("Exception", exception.toString());
+      Modular.get<FirebaseCrashlytics>()
+          .setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
     }
   }
 }

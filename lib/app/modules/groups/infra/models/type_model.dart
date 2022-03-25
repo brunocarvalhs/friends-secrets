@@ -68,5 +68,6 @@ class TypeModel extends LoggedType implements LoggedTypeInfo {
   @override
   String toJson() => json.encode(toMap());
 
-  factory TypeModel.fromJson(String source) => TypeModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory TypeModel.fromJson(String source) =>
+      TypeModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

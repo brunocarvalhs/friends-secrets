@@ -88,10 +88,12 @@ abstract class _RegisterGroupStoreBase with Store {
   // Price -------------------------------------------------------------------
 
   final TextEditingController controllerPriceMin = TextEditingController();
-  final CurrencyTextInputFormatter filterPriceMin = CurrencyTextInputFormatter(symbol: "");
+  final CurrencyTextInputFormatter filterPriceMin =
+      CurrencyTextInputFormatter(symbol: "");
 
   final TextEditingController controllerPriceMax = TextEditingController();
-  final CurrencyTextInputFormatter filterPriceMax = CurrencyTextInputFormatter(symbol: "");
+  final CurrencyTextInputFormatter filterPriceMax =
+      CurrencyTextInputFormatter(symbol: "");
 
   // Functions ==================================================================
 

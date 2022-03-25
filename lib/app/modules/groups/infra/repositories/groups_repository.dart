@@ -70,7 +70,8 @@ class GroupsRepositoryImpl extends GroupsRepository {
   }
 
   @override
-  Future<Either<Failure, LoggedGroupInfo>> update(String id, LoggedGroupInfo group) async {
+  Future<Either<Failure, LoggedGroupInfo>> update(
+      String id, LoggedGroupInfo group) async {
     try {
       final response = await datasource.put("/group/$id", data: group.toMap());
       final data = GroupModel.fromMap(response.data);

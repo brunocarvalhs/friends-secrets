@@ -70,14 +70,22 @@ class UserModel extends LoggedUser implements LoggedUserInfo {
       photoUrl: map['photoUrl'] as String?,
       phone: map['phone'] as String?,
       notifications: map['notifications'] as int?,
-      likers: map['items'] != null ? List<LikersModel>.from(map['items']?.map((x) => LikersModel.fromMap(x))) : null,
-      created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
-      updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
+      likers: map['items'] != null
+          ? List<LikersModel>.from(
+              map['items']?.map((x) => LikersModel.fromMap(x)))
+          : null,
+      created: map["createdAt"] != null
+          ? DateTime.parse(map["createdAt"] as String)
+          : null,
+      updated: map["updatedAt"] != null
+          ? DateTime.parse(map["updatedAt"] as String)
+          : null,
     );
   }
 
   @override
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

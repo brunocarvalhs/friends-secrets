@@ -27,7 +27,9 @@ class ContactTodo extends StatelessWidget {
                   width: 1,
                 )
               : null,
-          color: isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.1) : null,
+          color: isSelected
+              ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
+              : null,
         ),
         child: Column(
           children: [

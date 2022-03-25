@@ -18,7 +18,8 @@ abstract class _DrawnControllerBase with Store {
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Profile');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Profile');
   }
 
   @observable

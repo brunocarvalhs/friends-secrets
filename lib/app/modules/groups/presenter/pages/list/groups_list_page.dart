@@ -15,7 +15,8 @@ class GroupsListPage extends StatefulWidget {
   GroupsListPageState createState() => GroupsListPageState();
 }
 
-class GroupsListPageState extends ModularState<GroupsListPage, GroupsListController> {
+class GroupsListPageState
+    extends ModularState<GroupsListPage, GroupsListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,8 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                       onPressed: () => controller.notificationRedirect(),
                       icon: FutureBuilder(
                         future: controller.notificationCheck(context),
-                        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                        builder: (BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot) {
                           switch (snapshot.connectionState) {
                             case ConnectionState.none:
                             case ConnectionState.waiting:
@@ -47,7 +49,8 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                                           color: Colors.white,
                                         ),
                                       ),
-                                      child: const Icon(Icons.notifications_active),
+                                      child: const Icon(
+                                          Icons.notifications_active),
                                     )
                                   : const Icon(Icons.notifications);
                           }
@@ -74,7 +77,8 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),
-                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+                    notificationPredicate: (scrollNotification) =>
+                        controller.notificationPredicate(scrollNotification),
                     child: CustomScrollView(
                       slivers: <Widget>[
                         Observer(
@@ -83,8 +87,10 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
                               (BuildContext context, int index) => Column(
                                 children: <Widget>[
                                   GroupTodo(
-                                    groupModel: controller.allGroups.elementAt(index),
-                                    onTap: (group) => controller.readGroup(group),
+                                    groupModel:
+                                        controller.allGroups.elementAt(index),
+                                    onTap: (group) =>
+                                        controller.readGroup(group),
                                   ),
                                   Divider(
                                     height: 2,
@@ -108,7 +114,8 @@ class GroupsListPageState extends ModularState<GroupsListPage, GroupsListControl
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.redirect(),
-          label: Text(Modular.get<I10n>().groups_groupsListPage_floatingActionButton_label),
+          label: Text(Modular.get<I10n>()
+              .groups_groupsListPage_floatingActionButton_label),
           icon: const Icon(Icons.add),
         ),
       ),

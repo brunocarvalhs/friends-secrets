@@ -65,11 +65,17 @@ class GroupTodo extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   ...groupModel.users
-                      ?.getRange(0, groupModel.users!.length > 6 ? 6 : groupModel.users!.length)
+                      ?.getRange(
+                          0,
+                          groupModel.users!.length > 6
+                              ? 6
+                              : groupModel.users!.length)
                       .map<Widget>(
                         (member) => Padding(
                           padding: EdgeInsets.only(
-                              left: groupModel.users!.length > 1 ? (groupModel.users!.indexOf(member) + 1) * 20 : 0),
+                              left: groupModel.users!.length > 1
+                                  ? (groupModel.users!.indexOf(member) + 1) * 20
+                                  : 0),
                           child: CircleAvatar(
                             backgroundImage: NetworkImage("${member.photoUrl}"),
                           ),
@@ -80,7 +86,8 @@ class GroupTodo extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 0),
                       child: CircleAvatar(
-                        child: Text("+ ${groupModel.users!.length > 9 ? 9 : groupModel.users?.length ?? 0}"),
+                        child: Text(
+                            "+ ${groupModel.users!.length > 9 ? 9 : groupModel.users?.length ?? 0}"),
                       ),
                     ),
                 ],

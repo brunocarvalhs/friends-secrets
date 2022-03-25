@@ -15,7 +15,8 @@ class ProfileModule extends Module {
     // Stores -----------------------------------------------------------------------------------
     // Datasource -------------------------------------------------------------------------------
     // Repositories -----------------------------------------------------------------------------
-    Bind.factory<LikersRepository>((i) => LikersRepositoryImpl(i.get(), i.get())),
+    Bind.factory<LikersRepository>(
+        (i) => LikersRepositoryImpl(i.get(), i.get())),
     // Use Case ---------------------------------------------------------------------------------
     Bind.factory<ListLikers>((i) => ListLikersImpl(i.get())),
     Bind.factory<SaveListLikes>((i) => SaveListLikesImpl(i.get())),

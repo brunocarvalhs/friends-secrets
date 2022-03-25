@@ -8,13 +8,15 @@ import 'package:friends_secrets/app/shared/widgets/text_field_default.dart';
 
 class GroupsUpdateInformationPage extends StatefulWidget {
   final String id;
-  const GroupsUpdateInformationPage({Key? key, required this.id}) : super(key: key);
+  const GroupsUpdateInformationPage({Key? key, required this.id})
+      : super(key: key);
   @override
-  GroupsUpdateInformationPageState createState() => GroupsUpdateInformationPageState();
+  GroupsUpdateInformationPageState createState() =>
+      GroupsUpdateInformationPageState();
 }
 
-class GroupsUpdateInformationPageState
-    extends ModularState<GroupsUpdateInformationPage, GroupsUpdateInformationController> {
+class GroupsUpdateInformationPageState extends ModularState<
+    GroupsUpdateInformationPage, GroupsUpdateInformationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +25,10 @@ class GroupsUpdateInformationPageState
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
               expandedHeight: 300,
-              title: Modular.get<I10n>().groups_groupsUpdateInformationPage_appBarDefault_title,
-              subtitle: Modular.get<I10n>().groups_groupsUpdateInformationPage_appBarDefault_subtitle,
+              title: Modular.get<I10n>()
+                  .groups_groupsUpdateInformationPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>()
+                  .groups_groupsUpdateInformationPage_appBarDefault_subtitle,
             ),
           ],
           body: SingleChildScrollView(
@@ -44,9 +48,10 @@ class GroupsUpdateInformationPageState
                         controller: controller.controllerName,
                         keyboardType: TextInputType.name,
                         filled: true,
-                        hintText: Modular.get<I10n>().groups_groupsUpdateInformationPage_textFieldDefault_name_hintText,
-                        labelText:
-                            Modular.get<I10n>().groups_groupsUpdateInformationPage_textFieldDefault_name_labelText,
+                        hintText: Modular.get<I10n>()
+                            .groups_groupsUpdateInformationPage_textFieldDefault_name_hintText,
+                        labelText: Modular.get<I10n>()
+                            .groups_groupsUpdateInformationPage_textFieldDefault_name_labelText,
                       ),
                       const SizedBox(
                         height: 14,
@@ -70,12 +75,15 @@ class GroupsUpdateInformationPageState
                                         .groups_groupsUpdateInformationPage_inputDecoration_date_labelText,
                                   ),
                                   child: Text(
-                                    Modular.get<I10n>().groups_groupsUpdateInformationPage_textFieldDefault_date_child(
+                                    Modular.get<I10n>()
+                                        .groups_groupsUpdateInformationPage_textFieldDefault_date_child(
                                       controller.getDay,
                                       controller.getMonth,
                                       controller.getYear,
                                     ),
-                                    style: Theme.of(context).inputDecorationTheme.counterStyle,
+                                    style: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .counterStyle,
                                   ),
                                 ),
                               ),
@@ -96,11 +104,14 @@ class GroupsUpdateInformationPageState
                                         .groups_groupsUpdateInformationPage_inputDecoration_hour_labelText,
                                   ),
                                   child: Text(
-                                    Modular.get<I10n>().groups_groupsUpdateInformationPage_textFieldDefault_hour_child(
+                                    Modular.get<I10n>()
+                                        .groups_groupsUpdateInformationPage_textFieldDefault_hour_child(
                                       controller.getHour,
                                       controller.getMinute,
                                     ),
-                                    style: Theme.of(context).inputDecorationTheme.counterStyle,
+                                    style: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .counterStyle,
                                   ),
                                 ),
                               ),
@@ -169,7 +180,8 @@ class GroupsUpdateInformationPageState
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => controller.update(context),
-        label: Text(Modular.get<I10n>().groups_groupsUpdateInformationPage_floatingActionButton_label),
+        label: Text(Modular.get<I10n>()
+            .groups_groupsUpdateInformationPage_floatingActionButton_label),
         icon: const Icon(Icons.save),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

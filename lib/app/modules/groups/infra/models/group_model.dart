@@ -94,9 +94,15 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
       priceMin: map["priceMin"] as double?,
       priceMax: map["priceMax"] as double?,
       author: map['author'] != null ? UserModel.fromMap(map['author']) : null,
-      users: map['users'] != null ? List<UserModel>.from(map['users']?.map((x) => UserModel.fromMap(x))) : null,
-      created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
-      updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
+      users: map['users'] != null
+          ? List<UserModel>.from(map['users']?.map((x) => UserModel.fromMap(x)))
+          : null,
+      created: map["createdAt"] != null
+          ? DateTime.parse(map["createdAt"] as String)
+          : null,
+      updated: map["updatedAt"] != null
+          ? DateTime.parse(map["updatedAt"] as String)
+          : null,
       isDrawns: map["isDrawns"] as bool? ?? false,
     );
   }
@@ -104,5 +110,6 @@ class GroupModel extends LoggedGroup implements LoggedGroupInfo {
   @override
   String toJson() => json.encode(toMap());
 
-  factory GroupModel.fromJson(String source) => GroupModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory GroupModel.fromJson(String source) =>
+      GroupModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

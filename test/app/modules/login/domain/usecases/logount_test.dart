@@ -30,7 +30,8 @@ void main() {
     expect(result, unit);
   });
   test('feat(login) - should return null if user not logged', () async {
-    when(repository.logout()).thenAnswer((_) async => Left(ErrorLogout(message: '')));
+    when(repository.logout())
+        .thenAnswer((_) async => Left(ErrorLogout(message: '')));
 
     var result = (await usecase()).fold(id, id);
     expect(result, isA<ErrorLogout>());
