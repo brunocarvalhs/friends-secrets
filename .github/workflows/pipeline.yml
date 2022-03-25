@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [develop, master, releases/**, hotfix/**]
 
+env:
+  flutter_version: "2.10.3"
+  flutter_channel: "stable"
+
 jobs:
   preparing_environment:
     runs-on: ubuntu-latest
