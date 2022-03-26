@@ -76,15 +76,6 @@ jobs:
           flutter build appbundle --profile
           flutter build apk --profile
 
-      - name: Upload math result for Android
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.version.outputs.content }}
-          commit: ${{ github.sha }}
-          name: ${{ env.APP_VERSION }}
-          token: ${{ secrets.GH_TOKEN }}
-          artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/*.aab"
-
   build_ios:
     runs-on: macos-latest
     needs: [preparing_environment]
@@ -125,12 +116,6 @@ jobs:
       # - name: Build iOS App
       #   run: |
       #     flutter build ios --profile
-
-      # - name: Upload math result for Android
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{ env.GIT_TAG_NAME }}
-      #     path: "build/ios/iphoneos/*.ipa"
 
   quality:
     runs-on: ubuntu-latest
@@ -270,7 +255,7 @@ jobs:
         with:
           tag: ${{ steps.version.outputs.content }}
           commit: ${{ github.sha }}
-          name: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}-develop
           token: ${{ secrets.GH_TOKEN }}
           artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/*.aab, build/ios/iphoneos/*.ipa"
 
@@ -326,6 +311,6 @@ jobs:
         with:
           tag: ${{ steps.version.outputs.content }}
           commit: ${{ github.sha }}
-          name: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}-prod
           token: ${{ secrets.GH_TOKEN }}
           artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/*.aab, build/ios/iphoneos/*.ipa"
