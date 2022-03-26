@@ -26,8 +26,6 @@ jobs:
           tagRegex: 'internal-v([0-9]+.[0-9]+.[0-9]+\+[0-9]+)'
           tagRegexGroup: 1
 
-      - run: echo "${ github.ref }"
-
       - name: Replace YAML version with tag version
         run: |
           sed -i 's/99.99.99+99/'$GIT_TAG_NAME'/g' pubspec.yaml|
