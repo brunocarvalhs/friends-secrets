@@ -34,104 +34,6 @@ jobs:
           sed -i 's/99.99.99+99/'$GIT_TAG_NAME'/g' pubspec.yaml|
           echo "Tag used version:"$GIT_TAG_NAME
 
-  build_ios:
-    runs-on: macos-latest
-    needs: [preparing_environment]
-    name: Build iOS
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Create env file
-        run: |
-          touch .env
-          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
-
-      - name: Create google-services file
-        run: |
-          touch ./android/app/google-services.json
-          echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
-
-      - name: Create key.properties file
-        run: |
-          touch ./android/key.properties
-          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
-
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          java-version: ${{ env.java_version }}
-          distribution: "adopt"
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
-
-      - name: Install pub Dependencies
-        run: flutter pub get
-
-      # - name: Build iOS App
-      #   run: |
-      #     flutter build ios --no-codesign
-
-      # - name: Upload math result for Android
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{ env.GIT_TAG_NAME }}
-      #     path: "build/ios/iphoneos/*.ipa"
-
-  build_android:
-    runs-on: ubuntu-latest
-    needs: [preparing_environment]
-    name: Build Android
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Create env file
-        run: |
-          touch .env
-          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
-
-      - name: Create google-services file
-        run: |
-          touch ./android/app/google-services.json
-          echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
-
-      - name: Create key.properties file
-        run: |
-          touch ./android/key.properties
-          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
-
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          java-version: ${{ env.java_version }}
-          distribution: "adopt"
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
-
-      - name: Install pub Dependencies
-        run: flutter pub get
-
-      - name: Build Android App
-        run: |
-          flutter build appbundle
-          flutter build apk
-
-      - name: Upload math result for Android
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.version.outputs.content }}
-          commit: ${{ github.sha }}
-          name: ${{ env.APP_VERSION }}
-          token: ${{ secrets.GH_TOKEN }}
-          artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/*.aab"
-
   quality:
     runs-on: ubuntu-latest
     needs: [build_ios, build_android]
@@ -139,8 +41,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: test
-        run: echo "quality"
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: ${{ env.flutter_channel }}
+
+      - name: Analyze Lint
+        run: flutter analyze --fatal-warnings
 
   checkstyle:
     runs-on: ubuntu-latest
@@ -212,21 +120,57 @@ jobs:
       - name: Run tests Coverage
         run: flutter test --coverage
 
-  preparing_delivery:
-    runs-on: ubuntu-latest
+  build_ios:
+    runs-on: macos-latest
     needs: [quality, lint, coverage]
-    name: Preparando Delivery
+    name: Build iOS
     steps:
       - uses: actions/checkout@v2
 
-      - name: test
-        run: echo "quality"
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
 
-  alpha:
+      - name: Create google-services file
+        run: |
+          touch ./android/app/google-services.json
+          echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
+
+      - name: Create key.properties file
+        run: |
+          touch ./android/key.properties
+          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ env.java_version }}
+          distribution: "adopt"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: ${{ env.flutter_channel }}
+
+      - name: Install pub Dependencies
+        run: flutter pub get
+
+      # - name: Build iOS App
+      #   run: |
+      #     flutter build ios --no-codesign
+
+      # - name: Upload math result for Android
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{ env.GIT_TAG_NAME }}
+      #     path: "build/ios/iphoneos/*.ipa"
+
+  build_android:
     runs-on: ubuntu-latest
-    if: github.repository == 'develop'
-    needs: [preparing_delivery]
-    name: Alpha
+    needs: [quality, lint, coverage]
+    name: Build Android
     steps:
       - uses: actions/checkout@v2
 
@@ -272,20 +216,7 @@ jobs:
           commit: ${{ github.sha }}
           name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GH_TOKEN }}
-          artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/*.aab, build/ios/iphoneos/*.ipa"
-
-  beta:
-    if: github.repository == 'releases/**' || github.repository == 'hotfix/**'
-    runs-on: ubuntu-latest
-    needs: [alpha]
-    name: Beta
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Download math result for build
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ env.GIT_TAG_NAME }}
+          artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/*.aab"
 
   play_store:
     if: github.repository == 'master'
