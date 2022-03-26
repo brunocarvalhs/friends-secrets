@@ -35,6 +35,7 @@ jobs:
           path: ${{ matrix.flutter_path }}
           key: ${{ runner.os }}-flutter
 
+      - name: Flutter Install
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.flutter_version }}
