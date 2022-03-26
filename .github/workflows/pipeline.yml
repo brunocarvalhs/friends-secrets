@@ -12,13 +12,33 @@ env:
 
 jobs:
   preparing_environment:
-    runs-on: ubuntu-latest
     name: Preparação do Ambiente
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            flutter_path: /opt/hostedtoolcache/flutter
+          - os: macos-latest
+            flutter_path: /Users/runner/hostedtoolcache/flutter
+      fail-fast: false
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
+
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: ${{ env.flutter_channel }}
 
       - uses: olegtarasov/get-tag@v2
         id: tagName
@@ -59,11 +79,12 @@ jobs:
           java-version: "8"
           distribution: "adopt"
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Cache Flutter
+        id: cache-flutter
+        uses: actions/cache@v1
         with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
 
       - name: Install pub Dependencies
         run: flutter pub get
@@ -106,11 +127,12 @@ jobs:
           java-version: "8"
           distribution: "adopt"
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Cache Flutter
+        id: cache-flutter
+        uses: actions/cache@v1
         with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
 
       - name: Install pub Dependencies
         run: flutter pub get
@@ -146,11 +168,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Cache Flutter
+        id: cache-flutter
+        uses: actions/cache@v1
         with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
 
       - name: Check Flutter Formatting
         run: flutter format ./lib --set-exit-if-changed
@@ -162,11 +185,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Cache Flutter
+        id: cache-flutter
+        uses: actions/cache@v1
         with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
 
       - name: Analyze Lint
         run: flutter analyze
@@ -178,11 +202,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Cache Flutter
+        id: cache-flutter
+        uses: actions/cache@v1
         with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
 
       - name: Install pub Dependencies
         run: flutter pub get
@@ -197,11 +222,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Cache Flutter
+        id: cache-flutter
+        uses: actions/cache@v1
         with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
 
       - name: Install pub Dependencies
         run: flutter pub get
@@ -248,11 +274,12 @@ jobs:
           java-version: "8"
           distribution: "adopt"
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Cache Flutter
+        id: cache-flutter
+        uses: actions/cache@v1
         with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: ${{ env.flutter_channel }}
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
 
       - name: Install pub Dependencies
         run: flutter pub get
