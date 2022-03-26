@@ -1,13 +1,10 @@
 name: Pipeline
 
 on:
-  push:
-    branches: [develop, master, releases/**, hotfix/**]
+  pull_request:
+    branches: [develop, master]
     paths-ignore:
       - "**/*.md"
-  pull_request:
-    branches: [develop, master, releases/**, hotfix/**]
-
 env:
   flutter_version: "2.10.3"
   flutter_channel: "stable"
