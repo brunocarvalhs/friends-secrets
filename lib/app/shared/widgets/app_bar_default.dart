@@ -32,7 +32,8 @@ class AppBarDefault extends StatelessWidget {
       sliver: SliverAppBar(
         leading: forceBackButton
             ? IconButton(
-                icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
+                icon: Icon(Icons.arrow_back,
+                    color: Theme.of(context).colorScheme.primary),
                 onPressed: () => Navigator.of(context).pop(),
               )
             : null,

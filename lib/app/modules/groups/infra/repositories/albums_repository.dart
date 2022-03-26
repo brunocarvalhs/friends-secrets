@@ -15,7 +15,8 @@ class AlbumsRepositoryImpl extends AlbumsRepository {
       final file = await datasource.album();
       return Right(file);
     } catch (e) {
-      return Left(ErrorImageAlbum(message: "Error ao carregar imagem do album"));
+      return Left(
+          ErrorImageAlbum(message: "Error ao carregar imagem do album"));
     }
   }
 }

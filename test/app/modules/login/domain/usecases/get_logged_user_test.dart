@@ -23,12 +23,14 @@ void main() {
   final usecase = GetLoggedUserImpl(repository);
 
   test('feat(login) - should verify if exist User Logged', () async {
-    when(repository.loggedUser()).thenAnswer((_) async => const Right(UserModel(id: "")));
+    when(repository.loggedUser())
+        .thenAnswer((_) async => const Right(UserModel(id: "")));
     var result = await usecase();
     expect(result.fold((l) => null, (r) => r), isA<LoggedUserInfo>());
   });
   test('feat(login) - should return null if user not logged', () async {
-    when(repository.loggedUser()).thenAnswer((_) async => Left(ErrorGetLoggedUser(message: '')));
+    when(repository.loggedUser())
+        .thenAnswer((_) async => Left(ErrorGetLoggedUser(message: '')));
 
     var result = await usecase();
     expect(result.fold((l) => null, (r) => r), null);

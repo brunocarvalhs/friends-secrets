@@ -11,7 +11,8 @@ import 'package:mobx/mobx.dart';
 part "groups_register_members_controller.g.dart";
 
 @Injectable()
-class GroupsRegisterMembersController = _GroupsRegisterMembersControllerBase with _$GroupsRegisterMembersController;
+class GroupsRegisterMembersController = _GroupsRegisterMembersControllerBase
+    with _$GroupsRegisterMembersController;
 
 abstract class _GroupsRegisterMembersControllerBase with Store {
   final AuthStore user;
@@ -29,7 +30,8 @@ abstract class _GroupsRegisterMembersControllerBase with Store {
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Register Members');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Group Register Members');
   }
 
   @observable

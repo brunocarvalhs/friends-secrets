@@ -14,7 +14,8 @@ class GroupsAddMembersPage extends StatefulWidget {
   GroupsAddMembersPageState createState() => GroupsAddMembersPageState();
 }
 
-class GroupsAddMembersPageState extends ModularState<GroupsAddMembersPage, GroupsAddMembersController> {
+class GroupsAddMembersPageState
+    extends ModularState<GroupsAddMembersPage, GroupsAddMembersController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +24,10 @@ class GroupsAddMembersPageState extends ModularState<GroupsAddMembersPage, Group
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
               expandedHeight: 300,
-              title: Modular.get<I10n>().groups_groupsAddMembersPage_appBarDefault_title,
-              subtitle: Modular.get<I10n>().groups_groupsAddMembersPage_appBarDefault_subtitle,
+              title: Modular.get<I10n>()
+                  .groups_groupsAddMembersPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>()
+                  .groups_groupsAddMembersPage_appBarDefault_subtitle,
             ),
           ],
           body: FutureBuilder(
@@ -37,7 +40,8 @@ class GroupsAddMembersPageState extends ModularState<GroupsAddMembersPage, Group
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),
-                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+                    notificationPredicate: (scrollNotification) =>
+                        controller.notificationPredicate(scrollNotification),
                     child: CustomScrollView(
                       slivers: <Widget>[
                         Observer(
@@ -47,10 +51,15 @@ class GroupsAddMembersPageState extends ModularState<GroupsAddMembersPage, Group
                                 children: <Widget>[
                                   Observer(
                                     builder: (context) => ContactTodo(
-                                      user: controller.allContacts.elementAt(index),
-                                      onSelect: (user) => controller.addMember(user),
-                                      onRemove: (user) => controller.removeMember(user),
-                                      isSelected: controller.isSelectedContact(controller.allContacts.elementAt(index)),
+                                      user: controller.allContacts
+                                          .elementAt(index),
+                                      onSelect: (user) =>
+                                          controller.addMember(user),
+                                      onRemove: (user) =>
+                                          controller.removeMember(user),
+                                      isSelected: controller.isSelectedContact(
+                                          controller.allContacts
+                                              .elementAt(index)),
                                     ),
                                   ),
                                   Divider(
@@ -75,7 +84,8 @@ class GroupsAddMembersPageState extends ModularState<GroupsAddMembersPage, Group
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.update(context),
-          label: Text(Modular.get<I10n>().groups_groupsAddMembersPage_floatingActionButton_label),
+          label: Text(Modular.get<I10n>()
+              .groups_groupsAddMembersPage_floatingActionButton_label),
           icon: const Icon(Icons.save),
         ),
       ),

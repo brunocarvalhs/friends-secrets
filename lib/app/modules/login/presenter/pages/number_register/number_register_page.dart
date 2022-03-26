@@ -12,7 +12,8 @@ class NumberRegisterPage extends StatefulWidget {
   NumberRegisterPageState createState() => NumberRegisterPageState();
 }
 
-class NumberRegisterPageState extends ModularState<NumberRegisterPage, NumberRegisterController> {
+class NumberRegisterPageState
+    extends ModularState<NumberRegisterPage, NumberRegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +24,10 @@ class NumberRegisterPageState extends ModularState<NumberRegisterPage, NumberReg
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               HeaderDefault(
-                title: Modular.get<I10n>().login_numberRegisterPage_headerDefault_title,
-                subtitle: Modular.get<I10n>().login_numberRegisterPage_headerDefault_subtitle,
+                title: Modular.get<I10n>()
+                    .login_numberRegisterPage_headerDefault_title,
+                subtitle: Modular.get<I10n>()
+                    .login_numberRegisterPage_headerDefault_subtitle,
               ),
               const SizedBox(height: 50),
               Padding(
@@ -40,9 +43,13 @@ class NumberRegisterPageState extends ModularState<NumberRegisterPage, NumberReg
                         controller: controller.phone,
                         validator: (text) => controller.validateNumber(text),
                         keyboardType: TextInputType.phone,
-                        labelText: Modular.get<I10n>().login_numberRegisterPage_textFieldDefault_labelText,
-                        hintText: Modular.get<I10n>().login_numberRegisterPage_textFieldDefault_hintText,
-                        inputFormatters: <TextInputFormatter>[controller.maskFormatter],
+                        labelText: Modular.get<I10n>()
+                            .login_numberRegisterPage_textFieldDefault_labelText,
+                        hintText: Modular.get<I10n>()
+                            .login_numberRegisterPage_textFieldDefault_hintText,
+                        inputFormatters: <TextInputFormatter>[
+                          controller.maskFormatter
+                        ],
                       ),
                     ],
                   ),
@@ -54,7 +61,8 @@ class NumberRegisterPageState extends ModularState<NumberRegisterPage, NumberReg
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => controller.postPhone(),
-        label: Text(Modular.get<I10n>().login_numberRegisterPage_floatingActionButton_label),
+        label: Text(Modular.get<I10n>()
+            .login_numberRegisterPage_floatingActionButton_label),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );

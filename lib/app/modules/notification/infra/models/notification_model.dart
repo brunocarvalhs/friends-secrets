@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:friends_secrets/app/modules/notification/domain/entities/logged_notification.dart';
 import 'package:friends_secrets/app/modules/notification/domain/entities/logged_notification_info.dart';
 
-class NotificationModel extends LoggedNotification implements LoggedNotificationInfo {
+class NotificationModel extends LoggedNotification
+    implements LoggedNotificationInfo {
   const NotificationModel({
     required String id,
     String? title,
@@ -61,8 +62,12 @@ class NotificationModel extends LoggedNotification implements LoggedNotification
       title: map["title"] as String,
       body: map["body"] as String,
       image: map["image"] as String?,
-      created: map["createdAt"] != null ? DateTime.parse(map["createdAt"] as String) : null,
-      updated: map["updatedAt"] != null ? DateTime.parse(map["updatedAt"] as String) : null,
+      created: map["createdAt"] != null
+          ? DateTime.parse(map["createdAt"] as String)
+          : null,
+      updated: map["updatedAt"] != null
+          ? DateTime.parse(map["updatedAt"] as String)
+          : null,
       isVisualized: map["isVisualized"] as bool,
     );
   }

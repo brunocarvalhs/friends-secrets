@@ -13,7 +13,8 @@ class GroupsRegisterTypePage extends StatefulWidget {
   GroupsRegisterTypePageState createState() => GroupsRegisterTypePageState();
 }
 
-class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, GroupsRegisterTypeController> {
+class GroupsRegisterTypePageState
+    extends ModularState<GroupsRegisterTypePage, GroupsRegisterTypeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +23,10 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
               expandedHeight: 300,
-              title: Modular.get<I10n>().groups_groupsRegisterTypePage_appBarDefault_title,
-              subtitle: Modular.get<I10n>().groups_groupsRegisterTypePage_appBarDefault_subtitle,
+              title: Modular.get<I10n>()
+                  .groups_groupsRegisterTypePage_appBarDefault_title,
+              subtitle: Modular.get<I10n>()
+                  .groups_groupsRegisterTypePage_appBarDefault_subtitle,
             ),
           ],
           body: FutureBuilder(
@@ -36,7 +39,8 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),
-                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+                    notificationPredicate: (scrollNotification) =>
+                        controller.notificationPredicate(scrollNotification),
                     child: CustomScrollView(
                       slivers: <Widget>[
                         Observer(
@@ -47,8 +51,10 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
                                   Observer(
                                     builder: (context) => TypeTodo(
                                       type: controller.allType.elementAt(index),
-                                      onSelect: (user) => controller.selectType(user),
-                                      isSelected: controller.isSelectedType(controller.allType.elementAt(index)),
+                                      onSelect: (user) =>
+                                          controller.selectType(user),
+                                      isSelected: controller.isSelectedType(
+                                          controller.allType.elementAt(index)),
                                     ),
                                   ),
                                   Divider(
@@ -73,7 +79,8 @@ class GroupsRegisterTypePageState extends ModularState<GroupsRegisterTypePage, G
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.redirect(),
-          label: Text(Modular.get<I10n>().groups_groupsRegisterTypePage_floatingActionButton_label),
+          label: Text(Modular.get<I10n>()
+              .groups_groupsRegisterTypePage_floatingActionButton_label),
           icon: const Icon(Icons.arrow_right),
         ),
       ),

@@ -9,7 +9,8 @@ import '../../../presenter/stores/auth_store.dart';
 part 'number_validation_controller.g.dart';
 
 @Injectable()
-class NumberValidationController = _NumberValidationControllerBase with _$NumberValidationController;
+class NumberValidationController = _NumberValidationControllerBase
+    with _$NumberValidationController;
 
 abstract class _NumberValidationControllerBase with Store {
   final AuthStore authStore;
@@ -20,7 +21,8 @@ abstract class _NumberValidationControllerBase with Store {
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Number Validation');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Number Validation');
   }
 
   final String? phone = Modular.args.queryParams["phone"] ?? "";

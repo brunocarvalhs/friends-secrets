@@ -34,7 +34,8 @@ class SocialLoginButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           border: Border.fromBorderSide(
             BorderSide(
-              color: Theme.of(context).buttonTheme.colorScheme?.background ?? Colors.grey.shade300,
+              color: Theme.of(context).buttonTheme.colorScheme?.background ??
+                  Colors.grey.shade300,
             ),
           ),
         ),
@@ -57,7 +58,10 @@ class SocialLoginButtonWidget extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: Theme.of(context).textTheme.button?.copyWith(color: Colors.black),
+                    style: Theme.of(context)
+                        .textTheme
+                        .button
+                        ?.copyWith(color: Colors.black),
                   ),
                 ],
               ),

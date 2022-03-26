@@ -14,20 +14,24 @@ import 'package:mobx/mobx.dart';
 part "groups_read_controller.g.dart";
 
 @Injectable()
-class GroupsReadController = _GroupsReadControllerBase with _$GroupsReadController;
+class GroupsReadController = _GroupsReadControllerBase
+    with _$GroupsReadController;
 
 abstract class _GroupsReadControllerBase with Store {
   final ReadGroup readGroup;
   final DrawnGroup drawnGroup;
   final ShowUserDrawnGroup showUserDrawnGroup;
 
-  _GroupsReadControllerBase(this.readGroup, this.drawnGroup, this.showUserDrawnGroup) {
+  _GroupsReadControllerBase(
+      this.readGroup, this.drawnGroup, this.showUserDrawnGroup) {
     analyticsDefines();
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Read');
-    await Modular.get<FirebaseAnalytics>().logEvent(name: 'view_group', parameters: {
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Group Read');
+    await Modular.get<FirebaseAnalytics>()
+        .logEvent(name: 'view_group', parameters: {
       'group_id': Modular.args.params["id"],
     });
   }
@@ -48,7 +52,9 @@ abstract class _GroupsReadControllerBase with Store {
   bool get buttonExtends => _buttonExtends;
 
   @computed
-  bool get isVisibilityDrawn => getGroup?.author == Modular.get<AuthStore>().user && getGroup!.users!.length >= 3;
+  bool get isVisibilityDrawn =>
+      getGroup?.author == Modular.get<AuthStore>().user &&
+      getGroup!.users!.length >= 3;
 
   @observable
   bool _drawn = false;
@@ -86,14 +92,19 @@ abstract class _GroupsReadControllerBase with Store {
     return true;
   }
 
-  void redirectShowDrawn() =>
-      Modular.to.pushNamed("/home/${Modular.args.params["id"]}/drawn", arguments: getGroup).then((value) => update());
+  void redirectShowDrawn() => Modular.to
+      .pushNamed("/home/${Modular.args.params["id"]}/drawn",
+          arguments: getGroup)
+      .then((value) => update());
 
-  void redirectAddMembers() =>
-      Modular.to.pushNamed("/home/${Modular.args.params["id"]}/members", arguments: getGroup).then((value) => update());
+  void redirectAddMembers() => Modular.to
+      .pushNamed("/home/${Modular.args.params["id"]}/members",
+          arguments: getGroup)
+      .then((value) => update());
 
-  void redirectEdit() =>
-      Modular.to.pushNamed("/home/${Modular.args.params["id"]}/edit", arguments: getGroup).then((value) => update());
+  void redirectEdit() => Modular.to
+      .pushNamed("/home/${Modular.args.params["id"]}/edit", arguments: getGroup)
+      .then((value) => update());
 
   Future<void> update() async {
     var result = await readGroup(Modular.args.params["id"]);

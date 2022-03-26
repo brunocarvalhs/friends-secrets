@@ -10,10 +10,12 @@ import 'package:friends_secrets/app/shared/widgets/loading_present.dart';
 class GroupsRegisterMembersPage extends StatefulWidget {
   const GroupsRegisterMembersPage({Key? key}) : super(key: key);
   @override
-  GroupsRegisterMembersPageState createState() => GroupsRegisterMembersPageState();
+  GroupsRegisterMembersPageState createState() =>
+      GroupsRegisterMembersPageState();
 }
 
-class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersPage, GroupsRegisterMembersController> {
+class GroupsRegisterMembersPageState extends ModularState<
+    GroupsRegisterMembersPage, GroupsRegisterMembersController> {
   @override
   void dispose() {
     controller.clear();
@@ -28,8 +30,10 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
               expandedHeight: 300,
-              title: Modular.get<I10n>().groups_groupsRegisterMembersPage_appBarDefault_title,
-              subtitle: Modular.get<I10n>().groups_groupsRegisterMembersPage_appBarDefault_subtitle,
+              title: Modular.get<I10n>()
+                  .groups_groupsRegisterMembersPage_appBarDefault_title,
+              subtitle: Modular.get<I10n>()
+                  .groups_groupsRegisterMembersPage_appBarDefault_subtitle,
             ),
           ],
           body: FutureBuilder(
@@ -42,7 +46,8 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
                 default:
                   return RefreshIndicator(
                     onRefresh: () => controller.request(context),
-                    notificationPredicate: (scrollNotification) => controller.notificationPredicate(scrollNotification),
+                    notificationPredicate: (scrollNotification) =>
+                        controller.notificationPredicate(scrollNotification),
                     child: CustomScrollView(
                       slivers: <Widget>[
                         Observer(
@@ -52,10 +57,15 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
                                 children: <Widget>[
                                   Observer(
                                     builder: (context) => ContactTodo(
-                                      user: controller.allContacts.elementAt(index),
-                                      onSelect: (user) => controller.selectContact(user),
-                                      onRemove: (user) => controller.removeContact(user),
-                                      isSelected: controller.isSelectedContact(controller.allContacts.elementAt(index)),
+                                      user: controller.allContacts
+                                          .elementAt(index),
+                                      onSelect: (user) =>
+                                          controller.selectContact(user),
+                                      onRemove: (user) =>
+                                          controller.removeContact(user),
+                                      isSelected: controller.isSelectedContact(
+                                          controller.allContacts
+                                              .elementAt(index)),
                                     ),
                                   ),
                                   Divider(
@@ -80,7 +90,8 @@ class GroupsRegisterMembersPageState extends ModularState<GroupsRegisterMembersP
         builder: (_) => FloatingActionButton.extended(
           isExtended: controller.buttonExtends,
           onPressed: () => controller.redirect(),
-          label: Text(Modular.get<I10n>().groups_groupsRegisterMembersPage_floatingActionButton_label),
+          label: Text(Modular.get<I10n>()
+              .groups_groupsRegisterMembersPage_floatingActionButton_label),
           icon: const Icon(Icons.arrow_right),
         ),
       ),

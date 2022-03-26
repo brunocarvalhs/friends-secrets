@@ -13,7 +13,8 @@ class NotificationPage extends StatefulWidget {
   NotificationPageState createState() => NotificationPageState();
 }
 
-class NotificationPageState extends ModularState<NotificationPage, NotificationController> {
+class NotificationPageState
+    extends ModularState<NotificationPage, NotificationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,8 @@ class NotificationPageState extends ModularState<NotificationPage, NotificationC
           headerSliverBuilder: (_, b) => [
             AppBarDefault(
               expandedHeight: 100,
-              title: Modular.get<I10n>().notification_notificationPage_appBarDefault_title,
+              title: Modular.get<I10n>()
+                  .notification_notificationPage_appBarDefault_title,
             ),
           ],
           body: FutureBuilder(
@@ -43,7 +45,8 @@ class NotificationPageState extends ModularState<NotificationPage, NotificationC
                               (BuildContext context, int index) => Column(
                                 children: <Widget>[
                                   NotificationTodo(
-                                    notification: controller.allNotifications.elementAt(index),
+                                    notification: controller.allNotifications
+                                        .elementAt(index),
                                   ),
                                   Divider(
                                     height: 2,

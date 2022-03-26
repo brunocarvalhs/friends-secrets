@@ -29,7 +29,8 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
               ),
               HeaderDefault(
                 title: Modular.get<I10n>().login_loginPage_headerDefault_title,
-                subtitle: Modular.get<I10n>().login_loginPage_headerDefault_subtitle,
+                subtitle:
+                    Modular.get<I10n>().login_loginPage_headerDefault_subtitle,
               ),
             ],
           ),

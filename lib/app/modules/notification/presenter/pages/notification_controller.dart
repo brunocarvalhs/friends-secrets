@@ -8,7 +8,8 @@ import 'package:mobx/mobx.dart';
 part "notification_controller.g.dart";
 
 @Injectable()
-class NotificationController = _NotificationControllerBase with _$NotificationController;
+class NotificationController = _NotificationControllerBase
+    with _$NotificationController;
 
 abstract class _NotificationControllerBase with Store {
   final ListNotifiactions _listNotifiactions;
@@ -18,12 +19,14 @@ abstract class _NotificationControllerBase with Store {
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Notification');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Notification');
   }
 
   @observable
   // ignore: prefer_final_fields
-  ObservableList<NotificationModel> _listNotifications = ObservableList<NotificationModel>.of([]);
+  ObservableList<NotificationModel> _listNotifications =
+      ObservableList<NotificationModel>.of([]);
 
   @computed
   bool get isNotifications => _listNotifications.isNotEmpty;

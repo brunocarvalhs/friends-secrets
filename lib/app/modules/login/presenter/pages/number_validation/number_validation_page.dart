@@ -8,12 +8,14 @@ import 'package:friends_secrets/app/shared/widgets/header_default.dart';
 class NumberValidationPage extends StatefulWidget {
   final String? verificadId;
 
-  const NumberValidationPage({Key? key, required this.verificadId}) : super(key: key);
+  const NumberValidationPage({Key? key, required this.verificadId})
+      : super(key: key);
   @override
   NumberValidationPageState createState() => NumberValidationPageState();
 }
 
-class NumberValidationPageState extends ModularState<NumberValidationPage, NumberValidationController> {
+class NumberValidationPageState
+    extends ModularState<NumberValidationPage, NumberValidationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +26,10 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               HeaderDefault(
-                title: Modular.get<I10n>().login_numberValidationPage_headerDefault_title,
-                subtitle: Modular.get<I10n>().login_numberValidationPage_headerDefault_subtitle,
+                title: Modular.get<I10n>()
+                    .login_numberValidationPage_headerDefault_title,
+                subtitle: Modular.get<I10n>()
+                    .login_numberValidationPage_headerDefault_subtitle,
               ),
               const SizedBox(height: 50),
               Padding(
@@ -42,7 +46,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         controller: controller.inputs[0],
                         focusNode: controller.focus[0],
                         maxLength: 1,
-                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[1]),
+                        onChanged: (value) => FocusScope.of(context)
+                            .requestFocus(controller.focus[1]),
                         decoration: const InputDecoration(
                           filled: true,
                           counterText: "",
@@ -57,7 +62,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         controller: controller.inputs[1],
                         focusNode: controller.focus[1],
                         maxLength: 1,
-                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[2]),
+                        onChanged: (value) => FocusScope.of(context)
+                            .requestFocus(controller.focus[2]),
                         decoration: const InputDecoration(
                           filled: true,
                           counterText: "",
@@ -72,7 +78,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         controller: controller.inputs[2],
                         focusNode: controller.focus[2],
                         maxLength: 1,
-                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[3]),
+                        onChanged: (value) => FocusScope.of(context)
+                            .requestFocus(controller.focus[3]),
                         decoration: const InputDecoration(
                           filled: true,
                           counterText: "",
@@ -87,7 +94,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         controller: controller.inputs[3],
                         focusNode: controller.focus[3],
                         maxLength: 1,
-                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[4]),
+                        onChanged: (value) => FocusScope.of(context)
+                            .requestFocus(controller.focus[4]),
                         decoration: const InputDecoration(
                           filled: true,
                           counterText: "",
@@ -102,7 +110,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         controller: controller.inputs[4],
                         focusNode: controller.focus[4],
                         maxLength: 1,
-                        onChanged: (value) => FocusScope.of(context).requestFocus(controller.focus[5]),
+                        onChanged: (value) => FocusScope.of(context)
+                            .requestFocus(controller.focus[5]),
                         decoration: const InputDecoration(
                           filled: true,
                           counterText: "",
@@ -117,7 +126,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
                         controller: controller.inputs[5],
                         focusNode: controller.focus[5],
                         maxLength: 1,
-                        onChanged: (value) => FocusManager.instance.primaryFocus?.unfocus(),
+                        onChanged: (value) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                         decoration: const InputDecoration(
                           filled: true,
                           counterText: "",
@@ -135,7 +145,8 @@ class NumberValidationPageState extends ModularState<NumberValidationPage, Numbe
         return FloatingActionButton.extended(
           enableFeedback: false,
           onPressed: () => controller.validation(),
-          label: Text(Modular.get<I10n>().login_numberValidationPage_floatingActionButton_label),
+          label: Text(Modular.get<I10n>()
+              .login_numberValidationPage_floatingActionButton_label),
         );
       }),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

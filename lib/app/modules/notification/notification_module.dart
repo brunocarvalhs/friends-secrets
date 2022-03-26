@@ -9,15 +9,19 @@ class NotificationModule extends Module {
   @override
   final List<Bind> binds = [
     // Repositories -----------------------------------------------------------------------------
-    Bind.factory<NotificationRepository>((i) => NotificationRepositoryImpl(i.get(), i.get()), export: true),
+    Bind.factory<NotificationRepository>(
+        (i) => NotificationRepositoryImpl(i.get(), i.get()),
+        export: true),
     // Use Case ---------------------------------------------------------------------------------
-    Bind.factory<ListNotifiactions>((i) => ListNotifiactionsImpl(i.get()), export: true),
+    Bind.factory<ListNotifiactions>((i) => ListNotifiactionsImpl(i.get()),
+        export: true),
     // Controllers -------------------------------------------------------------------------------
     Bind.factory((i) => NotificationController(i.get())),
   ];
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, args) => const NotificationPage()),
+    ChildRoute(Modular.initialRoute,
+        child: (_, args) => const NotificationPage()),
   ];
 }

@@ -28,20 +28,28 @@ class LoginModule extends Module {
     // Global ------------------------------------------------------------------------------------------
     Bind.instance<GoogleSignIn>(GoogleSignIn(), export: true),
     // Stores ------------------------------------------------------------------------------------------
-    Bind.lazySingleton<AuthStore>((i) => AuthStore(i.get(), i.get()), export: true),
+    Bind.lazySingleton<AuthStore>((i) => AuthStore(i.get(), i.get()),
+        export: true),
     // Use cases ---------------------------------------------------------------------------------------
     Bind.factory<Logout>((i) => LogoutImpl(i.get()), export: true),
     Bind.factory<LoginWithGoogle>((i) => LoginWithGoogleImpl(i.get())),
-    Bind.factory<GetLoggedUser>((i) => GetLoggedUserImpl(i.get()), export: true),
+    Bind.factory<GetLoggedUser>((i) => GetLoggedUserImpl(i.get()),
+        export: true),
     Bind.factory<RegisterPhone>((i) => RegisterPhoneImpl(i.get())),
     Bind.factory<ValidationPhone>((i) => ValidationPhoneImpl(i.get())),
     // Repositories ------------------------------------------------------------------------------------
-    Bind.factory<LoginRepository>((i) => LoginRepositoryImpl(i.get()), export: true),
-    Bind.factory<RegisterRepository>((i) => RegisterRepositoryImpl(i.get()), export: true),
-    // Datasource --------------------------------------------------------------------------------------
-    Bind.factory<LoginDataSource>((i) => LoginDataSourceImpl(i.get(), i.get(), i.get(), i.get(), i.get(), i.get()),
+    Bind.factory<LoginRepository>((i) => LoginRepositoryImpl(i.get()),
         export: true),
-    Bind.factory<RegisterDataSource>((i) => RegisterDataSourceImpl(i.get(), i.get(), i.get(), i.get(), i.get()),
+    Bind.factory<RegisterRepository>((i) => RegisterRepositoryImpl(i.get()),
+        export: true),
+    // Datasource --------------------------------------------------------------------------------------
+    Bind.factory<LoginDataSource>(
+        (i) => LoginDataSourceImpl(
+            i.get(), i.get(), i.get(), i.get(), i.get(), i.get()),
+        export: true),
+    Bind.factory<RegisterDataSource>(
+        (i) =>
+            RegisterDataSourceImpl(i.get(), i.get(), i.get(), i.get(), i.get()),
         export: true),
     // Controller --------------------------------------------------------------------------------------
     Bind.factory((i) => LoginController(i.get(), i.get())),
@@ -53,6 +61,7 @@ class LoginModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, args) => const LoginPage()),
     ChildRoute("/phone", child: (_, args) => const NumberRegisterPage()),
-    ChildRoute("/phone/:phone", child: (_, args) => NumberValidationPage(verificadId: args.data)),
+    ChildRoute("/phone/:phone",
+        child: (_, args) => NumberValidationPage(verificadId: args.data)),
   ];
 }

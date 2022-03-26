@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:friends_secrets/app/core/infra/datasources/network_datasource.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/modules/notification/domain/errors/errors.dart';
@@ -31,7 +29,8 @@ class NotificationRepositoryImpl extends NotificationRepository {
         "/notification",
         options: datasource.buildCache(forceRefresh: true),
       );
-      final notifications = response.data?.map((e) => NotificationModel.fromMap(e)) ?? [];
+      final notifications =
+          response.data?.map((e) => NotificationModel.fromMap(e)) ?? [];
       return Right(notifications);
     } catch (e) {
       return Left(ErrorNotificationSelectAll());

@@ -96,8 +96,10 @@ class LoginDataSourceImpl implements LoginDataSource {
 
   void _exception(exception) {
     if (Modular.get<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled) {
-      Modular.get<FirebaseCrashlytics>().setCustomKey("Exception", exception.toString());
-      Modular.get<FirebaseCrashlytics>().setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
+      Modular.get<FirebaseCrashlytics>()
+          .setCustomKey("Exception", exception.toString());
+      Modular.get<FirebaseCrashlytics>()
+          .setUserIdentifier("${Modular.get<AuthStore>().user?.id}");
     }
   }
 }

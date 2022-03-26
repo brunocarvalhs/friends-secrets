@@ -10,19 +10,22 @@ import 'package:mobx/mobx.dart';
 part "groups_register_type_controller.g.dart";
 
 @Injectable()
-class GroupsRegisterTypeController = _GroupsRegisterTypeControllerBase with _$GroupsRegisterTypeController;
+class GroupsRegisterTypeController = _GroupsRegisterTypeControllerBase
+    with _$GroupsRegisterTypeController;
 
 abstract class _GroupsRegisterTypeControllerBase with Store {
   final AuthStore user;
   final ListTypes listTypes;
   final RegisterGroupStore registerGroupStore;
 
-  _GroupsRegisterTypeControllerBase(this.user, this.listTypes, this.registerGroupStore) {
+  _GroupsRegisterTypeControllerBase(
+      this.user, this.listTypes, this.registerGroupStore) {
     analyticsDefines();
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Register Type');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Group Register Type');
   }
 
   @observable

@@ -24,7 +24,8 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Group Update Information');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Group Update Information');
   }
 
   Future<void> update(BuildContext context) async {
@@ -47,12 +48,13 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
 
   // Name ------------------------------------------------------------------------
 
-  final TextEditingController controllerName = TextEditingController(text: (Modular.args.data as GroupModel).name);
+  final TextEditingController controllerName =
+      TextEditingController(text: (Modular.args.data as GroupModel).name);
 
   // Discrible -------------------------------------------------------------------
 
-  final TextEditingController controllerDescription =
-      TextEditingController(text: (Modular.args.data as GroupModel).description);
+  final TextEditingController controllerDescription = TextEditingController(
+      text: (Modular.args.data as GroupModel).description);
 
   // Date -------------------------------------------------------------------
 
@@ -99,14 +101,16 @@ abstract class _GroupsUpdateInformationControllerBase with Store {
 
   // Price -------------------------------------------------------------------
 
-  final TextEditingController controllerPriceMin =
-      TextEditingController(text: (Modular.args.data as GroupModel).priceMin.toString());
-  final TextEditingController controllerPriceMax =
-      TextEditingController(text: (Modular.args.data as GroupModel).priceMax.toString());
+  final TextEditingController controllerPriceMin = TextEditingController(
+      text: (Modular.args.data as GroupModel).priceMin.toString());
+  final TextEditingController controllerPriceMax = TextEditingController(
+      text: (Modular.args.data as GroupModel).priceMax.toString());
 
-  final CurrencyTextInputFormatter filterPriceMin = CurrencyTextInputFormatter(symbol: "");
+  final CurrencyTextInputFormatter filterPriceMin =
+      CurrencyTextInputFormatter(symbol: "");
 
-  final CurrencyTextInputFormatter filterPriceMax = CurrencyTextInputFormatter(symbol: "");
+  final CurrencyTextInputFormatter filterPriceMax =
+      CurrencyTextInputFormatter(symbol: "");
 
   // Functions ==================================================================
 

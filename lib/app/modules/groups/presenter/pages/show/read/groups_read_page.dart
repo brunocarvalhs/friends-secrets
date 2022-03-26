@@ -16,7 +16,8 @@ class GroupsReadPage extends StatefulWidget {
   GroupsReadPageState createState() => GroupsReadPageState();
 }
 
-class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadController> {
+class GroupsReadPageState
+    extends ModularState<GroupsReadPage, GroupsReadController> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -35,7 +36,8 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                       builder: (_) => AppBarDefault(
                         expandedHeight: 300,
                         actions: [
-                          if (controller.getGroup?.author == Modular.get<AuthStore>().user)
+                          if (controller.getGroup?.author ==
+                              Modular.get<AuthStore>().user)
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: IconButton(
@@ -51,43 +53,56 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                   ],
                   body: RefreshIndicator(
                     onRefresh: () => controller.request(context),
-                    notificationPredicate: (scrollNotification) =>
-                        controller.notificationPredicate(scrollNotification, context),
+                    notificationPredicate: (scrollNotification) => controller
+                        .notificationPredicate(scrollNotification, context),
                     child: Observer(builder: (context) {
                       return CustomScrollView(
                         slivers: <Widget>[
                           SliverToBoxAdapter(
                             child: ExpansionTile(
                               title: Text(
-                                Modular.get<I10n>().groups_groupsReadPage_text_labelDatails,
-                                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                                Modular.get<I10n>()
+                                    .groups_groupsReadPage_text_labelDatails,
+                                style: const TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold),
                               ),
                               children: <Widget>[
                                 if (controller.getGroup?.date != null)
                                   ListTile(
                                     title: Text(
-                                      Modular.get<I10n>().groups_groupsReadPage_text_dataDatails(
-                                        controller.getGroup!.date!.day.toString(),
-                                        controller.getGroup!.date!.month.toString(),
-                                        controller.getGroup!.date!.year.toString(),
-                                        controller.getGroup!.date!.hour.toString(),
-                                        controller.getGroup!.date!.minute.toString(),
+                                      Modular.get<I10n>()
+                                          .groups_groupsReadPage_text_dataDatails(
+                                        controller.getGroup!.date!.day
+                                            .toString(),
+                                        controller.getGroup!.date!.month
+                                            .toString(),
+                                        controller.getGroup!.date!.year
+                                            .toString(),
+                                        controller.getGroup!.date!.hour
+                                            .toString(),
+                                        controller.getGroup!.date!.minute
+                                            .toString(),
                                       ),
                                     ),
                                   ),
                                 if (controller.getGroup?.priceMin != null)
                                   ListTile(
                                     title: Text(
-                                      Modular.get<I10n>().groups_groupsReadPage_text_priceMinDatails(
-                                        controller.getGroup!.priceMin.toString(),
+                                      Modular.get<I10n>()
+                                          .groups_groupsReadPage_text_priceMinDatails(
+                                        controller.getGroup!.priceMin
+                                            .toString(),
                                       ),
                                     ),
                                   ),
                                 if (controller.getGroup?.priceMax != null)
                                   ListTile(
                                     title: Text(
-                                      Modular.get<I10n>().groups_groupsReadPage_text_priceMaxDatails(
-                                        controller.getGroup!.priceMax.toString(),
+                                      Modular.get<I10n>()
+                                          .groups_groupsReadPage_text_priceMaxDatails(
+                                        controller.getGroup!.priceMax
+                                            .toString(),
                                       ),
                                     ),
                                   ),
@@ -100,13 +115,19 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                                 ExpansionTile(
                                   title: Text(
                                     "Tipo: ${controller.getGroup?.type?.name}",
-                                    style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                                    style: const TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   children: <Widget>[
-                                    if (controller.getGroup?.type?.image != null)
+                                    if (controller.getGroup?.type?.image !=
+                                        null)
                                       CachedNetworkImage(
-                                        imageUrl: "${controller.getGroup?.type?.image}",
-                                        imageBuilder: (context, imageProvider) => Container(
+                                        imageUrl:
+                                            "${controller.getGroup?.type?.image}",
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
                                           height: 200,
                                           decoration: BoxDecoration(
                                             image: DecorationImage(
@@ -116,14 +137,18 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                                             ),
                                           ),
                                         ),
-                                        placeholder: (context, url) => const CircularProgressIndicator(),
-                                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                                        placeholder: (context, url) =>
+                                            const CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
                                       ),
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Text(
                                         "${controller.getGroup?.type?.description}",
-                                        style: Theme.of(context).textTheme.bodyText1,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
                                       ),
                                     ),
                                   ],
@@ -138,11 +163,13 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                                 horizontal: 10,
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    Modular.get<I10n>().groups_groupsReadPage_text_labelMembers,
+                                    Modular.get<I10n>()
+                                        .groups_groupsReadPage_text_labelMembers,
                                   ),
                                   Observer(
                                     builder: (context) => Text(
@@ -158,16 +185,20 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                               child: Column(
                                 children: [
                                   InkWell(
-                                    onTap: () => controller.redirectAddMembers(),
+                                    onTap: () =>
+                                        controller.redirectAddMembers(),
                                     child: ListTile(
                                       leading: CircleAvatar(
                                         child: const Icon(
                                           Icons.group_add_rounded,
                                           color: Colors.white,
                                         ),
-                                        backgroundColor: Theme.of(context).colorScheme.primary,
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
-                                      title: Text(Modular.get<I10n>().groups_groupsReadPage_text_addMembersTitle),
+                                      title: Text(Modular.get<I10n>()
+                                          .groups_groupsReadPage_text_addMembersTitle),
                                     ),
                                   ),
                                 ],
@@ -180,7 +211,8 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                                   children: <Widget>[
                                     Observer(
                                       builder: (context) => MembersTodo(
-                                        user: controller.getGroup?.users!.elementAt(index),
+                                        user: controller.getGroup?.users!
+                                            .elementAt(index),
                                       ),
                                     ),
                                     Divider(
@@ -189,7 +221,8 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                                     )
                                   ],
                                 ),
-                                childCount: controller.getGroup?.users?.length ?? 0,
+                                childCount:
+                                    controller.getGroup?.users?.length ?? 0,
                               ),
                             ),
                           ),
@@ -210,7 +243,8 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                           builder: (_) => FloatingActionButton.extended(
                             isExtended: controller.buttonExtends,
                             onPressed: () => controller.redirectShowDrawn(),
-                            label: Text(Modular.get<I10n>().groups_groupsReadPage_text_showDrawnMembersLabel),
+                            label: Text(Modular.get<I10n>()
+                                .groups_groupsReadPage_text_showDrawnMembersLabel),
                             icon: const Icon(Icons.person),
                           ),
                         ),
@@ -224,16 +258,20 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                             onPressed: () => showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_title),
-                                content: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_content),
+                                title: Text(Modular.get<I10n>()
+                                    .groups_groupsReadPage_alertDialog_title),
+                                content: Text(Modular.get<I10n>()
+                                    .groups_groupsReadPage_alertDialog_content),
                                 actions: [
                                   TextButton(
-                                    child:
-                                        Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_textButton_cancel),
-                                    onPressed: () => Navigator.of(context).pop(),
+                                    child: Text(Modular.get<I10n>()
+                                        .groups_groupsReadPage_alertDialog_textButton_cancel),
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
                                   ),
                                   TextButton(
-                                    child: Text(Modular.get<I10n>().groups_groupsReadPage_alertDialog_textButton_next),
+                                    child: Text(Modular.get<I10n>()
+                                        .groups_groupsReadPage_alertDialog_textButton_next),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                       controller.drawMembers(context);
@@ -242,7 +280,8 @@ class GroupsReadPageState extends ModularState<GroupsReadPage, GroupsReadControl
                                 ],
                               ),
                             ),
-                            label: Text(Modular.get<I10n>().groups_groupsReadPage_floatingActionButton_label),
+                            label: Text(Modular.get<I10n>()
+                                .groups_groupsReadPage_floatingActionButton_label),
                             icon: const Icon(Icons.people_rounded),
                           ),
                         ),
