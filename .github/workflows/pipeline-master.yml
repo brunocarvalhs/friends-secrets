@@ -57,16 +57,16 @@ jobs:
           touch ./android/key.properties
           echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
 
-      - name: Podfile Install
-        if: matrix.os == 'macos-latest'
-        run: |
-          cd ./ios
-          rm -f Podfile.lock
-          rm -rf Pods
-          pod cache clean --all
-          pod deintegrate
-          pod setup
-          pod install
+      # - name: Podfile Install
+      #   if: matrix.os == 'macos-latest'
+      #   run: |
+      #     cd ./ios
+      #     rm -f Podfile.lock
+      #     rm -rf Pods
+      #     pod cache clean --all
+      #     pod deintegrate
+      #     pod setup
+      #     pod install
 
       - name: Set up Java
         if: matrix.os == 'ubuntu-latest'
