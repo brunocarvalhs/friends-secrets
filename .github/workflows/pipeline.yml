@@ -130,6 +130,11 @@ jobs:
           flutter-version: ${{ env.flutter_version }}
           channel: ${{ env.flutter_channel }}
 
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
       - name: Analyze Lint
         run: flutter analyze --fatal-warnings
 
@@ -162,6 +167,11 @@ jobs:
           flutter-version: ${{ env.flutter_version }}
           channel: ${{ env.flutter_channel }}
 
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
+
       - name: Analyze Lint
         run: flutter analyze
 
@@ -181,11 +191,6 @@ jobs:
         run: |
           touch ./android/app/google-services.json
           echo "${{ secrets.GOOGLE_SERVICE_JSON }}" | base64 --decode > ./android/app/google-services.json
-
-      - name: Create key.properties file
-        run: |
-          touch ./android/key.properties
-          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -211,6 +216,11 @@ jobs:
         with:
           flutter-version: ${{ env.flutter_version }}
           channel: ${{ env.flutter_channel }}
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENVIRONMENT }}" | base64 --decode > .env
 
       - name: Install pub Dependencies
         run: flutter pub get
