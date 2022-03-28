@@ -11,15 +11,6 @@ env:
   java_version: "8"
 
 jobs:
-  preparing_environment:
-    runs-on: ubuntu-latest
-    name: Preparação do Ambiente
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
-
   build:
     name: "Build - ${{ matrix.os }}"
     runs-on: ${{ matrix.os }}
@@ -27,7 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-    needs: [preparing_environment]
     steps:
       - uses: actions/checkout@v2
 
@@ -194,6 +184,12 @@ jobs:
     needs: [quality, lint, coverage]
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d')" >> $GITHUB_ENV
 
       - name: Create env file
         run: |
@@ -236,9 +232,6 @@ jobs:
       #   if: matrix.os == 'macos-latest'
       #   run: |
       #     flutter build ios
-
-      - name: Export Release Timestamp
-        run: echo "APP_VERSION=v$(date +'%Y.%m.%d')" >> $GITHUB_ENV
 
       - name: Upload math result
         uses: ncipollo/release-action@v1
