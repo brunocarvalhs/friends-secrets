@@ -174,7 +174,7 @@ jobs:
       - name: Run tests Coverage
         run: flutter test --coverage
 
-  beta:
+  prod:
     name: "Production build - ${{ matrix.os }}"
     runs-on: ${{ matrix.os }}
     strategy:
