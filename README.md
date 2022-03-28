@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/build_release.yml">
-        <img src="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/build_release.yml/badge.svg" alt="Build Release">
+    <a href="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/pipeline-master.yml">
+        <img src="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/pipeline-master.yml/badge.svg?branch=master" alt="Master">
     </a>
-    <a href="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/build_develop.yml">
-        <img src="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/build_develop.yml/badge.svg" alt="Build Develop">
+    <a href="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/pipeline-develop.yml">
+        <img src="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/pipeline-develop.yml/badge.svg?branch=develop" alt="Develop">
     </a>
 </p>
 
