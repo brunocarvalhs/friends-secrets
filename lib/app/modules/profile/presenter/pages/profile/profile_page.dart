@@ -25,7 +25,7 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () => controller.editLikert(),
                     icon: const Icon(Icons.edit),
                   ),
                 ),
@@ -37,7 +37,7 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                   ),
                 ),
               ],
-              expandedHeight: 400,
+              expandedHeight: 340,
               title:
                   "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
               childTop: Padding(
@@ -50,8 +50,7 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                       radius: 60,
                     ),
                   ),
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -72,8 +71,24 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, top: 20),
+                          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Gostos",
+                              ),
+                              Observer(
+                                builder: (context) => Text(
+                                  "All ${Modular.get<AuthStore>().user?.likers?.length}",
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
                           child: Observer(builder: (context) {
                             return Wrap(
                               spacing: 10,
@@ -83,8 +98,7 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                                       ?.map(
                                         (item) => Chip(
                                           label: Text('${item.name}'),
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 7, horizontal: 10),
+                                          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
                                         ),
                                       )
                                       .toList() ??
