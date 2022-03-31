@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/modules/profile/presenter/pages/profile/profile_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
@@ -76,19 +77,19 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                "Gostos",
-                              ),
+                              Text(Modular.get<I10n>().profile_profilePageState_text_descriptionLikes),
                               Observer(
                                 builder: (context) => Text(
-                                  "All ${Modular.get<AuthStore>().user?.likers?.length}",
+                                  Modular.get<I10n>().profile_profilePageState_text_descriptionLikesCount(
+                                    Modular.get<AuthStore>().user?.likers?.length.toString() ?? "0",
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+                          padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
                           child: Observer(builder: (context) {
                             return Wrap(
                               spacing: 10,

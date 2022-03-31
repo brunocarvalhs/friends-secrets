@@ -846,6 +846,26 @@ class I10n {
       args: [],
     );
   }
+
+  /// `Gostos`
+  String get profile_profilePageState_text_descriptionLikes {
+    return Intl.message(
+      'Gostos',
+      name: 'profile_profilePageState_text_descriptionLikes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total {count}`
+  String profile_profilePageState_text_descriptionLikesCount(String count) {
+    return Intl.message(
+      'Total $count',
+      name: 'profile_profilePageState_text_descriptionLikesCount',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<I10n> {
