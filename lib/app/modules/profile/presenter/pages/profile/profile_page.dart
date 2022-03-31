@@ -51,7 +51,8 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                       radius: 60,
                     ),
                   ),
-                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -72,16 +73,24 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(Modular.get<I10n>().profile_profilePageState_text_descriptionLikes),
+                              Text(Modular.get<I10n>()
+                                  .profile_profilePageState_text_descriptionLikes),
                               Observer(
                                 builder: (context) => Text(
-                                  Modular.get<I10n>().profile_profilePageState_text_descriptionLikesCount(
-                                    Modular.get<AuthStore>().user?.likers?.length.toString() ?? "0",
+                                  Modular.get<I10n>()
+                                      .profile_profilePageState_text_descriptionLikesCount(
+                                    Modular.get<AuthStore>()
+                                            .user
+                                            ?.likers
+                                            ?.length
+                                            .toString() ??
+                                        "0",
                                   ),
                                 ),
                               ),
@@ -89,7 +98,8 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10),
                           child: Observer(builder: (context) {
                             return Wrap(
                               spacing: 10,
@@ -99,7 +109,8 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                                       ?.map(
                                         (item) => Chip(
                                           label: Text('${item.name}'),
-                                          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 7, horizontal: 5),
                                         ),
                                       )
                                       .toList() ??

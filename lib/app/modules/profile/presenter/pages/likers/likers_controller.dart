@@ -25,7 +25,8 @@ abstract class _LikersControllerBase with Store {
   }
 
   Future<void> analyticsDefines() async {
-    await Modular.get<FirebaseAnalytics>().setCurrentScreen(screenName: 'Likers');
+    await Modular.get<FirebaseAnalytics>()
+        .setCurrentScreen(screenName: 'Likers');
   }
 
   @observable
@@ -47,7 +48,8 @@ abstract class _LikersControllerBase with Store {
   @observable
   // ignore: prefer_final_fields
   ObservableList<LoggedLikersInfo> _likers =
-      ObservableList<LoggedLikersInfo>.of(Modular.get<AuthStore>().user?.likers?.toList() ?? []);
+      ObservableList<LoggedLikersInfo>.of(
+          Modular.get<AuthStore>().user?.likers?.toList() ?? []);
 
   @action
   void selecLike(LoggedLikersInfo value) => _likers.add(value);
@@ -63,7 +65,8 @@ abstract class _LikersControllerBase with Store {
 
   @observable
   // ignore: prefer_final_fields
-  ObservableList<LoggedLikersInfo> _item = ObservableList<LoggedLikersInfo>.of([]);
+  ObservableList<LoggedLikersInfo> _item =
+      ObservableList<LoggedLikersInfo>.of([]);
 
   @computed
   bool get isLikers => _item.isNotEmpty;
