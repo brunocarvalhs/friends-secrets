@@ -1,3 +1,4 @@
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:edge_alerts/edge_alerts.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.da
 import 'package:friends_secrets/app/modules/profile/domain/entities/logged_likers_info.dart';
 import 'package:friends_secrets/app/modules/profile/domain/usecases/list_likers.dart';
 import 'package:friends_secrets/app/modules/profile/domain/usecases/save_list_likes.dart';
+import 'package:friends_secrets/app/shared/widgets/loading_default.dart';
 import 'package:mobx/mobx.dart';
 
 part "likers_controller.g.dart";
@@ -89,7 +91,10 @@ abstract class _LikersControllerBase with Store {
   }
 
   Future<void> save(BuildContext context) async {
+    var entry = OverlayEntry(builder: (context) => const LoadingDefault());
+    asuka.addOverlay(entry);
     final result = await saveListLikes(_likers.toList());
+    entry.remove();
     result.fold((failure) {
       edgeAlert(
         context,

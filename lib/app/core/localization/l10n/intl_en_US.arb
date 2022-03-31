@@ -159,5 +159,14 @@
     "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_hintText": "Ex.: 200.00",
     "groups_groupsUpdateInformationPage_textFieldDefault_priceMax_prefixText": "R$ ",
     "groups_groupsUpdateInformationPage_textFieldDefault_description_labelText": "Description",
-    "groups_groupsUpdateInformationPage_floatingActionButton_label": "Save update"
+    "groups_groupsUpdateInformationPage_floatingActionButton_label": "Save update",
+    "profile_profilePageState_text_descriptionLikes": "Likes",
+    "profile_profilePageState_text_descriptionLikesCount": "All {count}",
+    "@profile_profilePageState_text_descriptionLikesCount": {
+        "placeholders": {
+            "count": {
+                "type": "String"
+            }
+        }
+    }
 }
