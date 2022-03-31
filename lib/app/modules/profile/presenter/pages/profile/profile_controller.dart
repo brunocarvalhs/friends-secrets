@@ -22,11 +22,14 @@ abstract class _ProfileControllerBase with Store {
   }
 
   Future<void> signOut(BuildContext context) async {
-    await authStore.signOut(context).then((_) {
-      Modular.to.pushNamedAndRemoveUntil("/login/", ModalRoute.withName('/'));
-    });
+    final result = await authStore.signOut(context);
+    if (result) {
+      Modular.to.navigate("/login/");
+    }
   }
 
   Future<void> request(BuildContext context) async =>
       await authStore.refresh(context);
+
+  Future<void> editLikert() => Modular.to.pushNamed("/profile/likers");
 }

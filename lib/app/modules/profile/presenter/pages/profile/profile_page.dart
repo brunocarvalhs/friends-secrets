@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:friends_secrets/app/core/localization/generated/l10n.dart';
 import 'package:friends_secrets/app/modules/login/presenter/stores/auth_store.dart';
 import 'package:friends_secrets/app/modules/profile/presenter/pages/profile/profile_controller.dart';
 import 'package:friends_secrets/app/shared/widgets/app_bar_default.dart';
@@ -25,7 +26,7 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () => controller.editLikert(),
                     icon: const Icon(Icons.edit),
                   ),
                 ),
@@ -37,7 +38,7 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                   ),
                 ),
               ],
-              expandedHeight: 400,
+              expandedHeight: 340,
               title:
                   "${Modular.get<AuthStore>().getName?.split(" ").first}\n${Modular.get<AuthStore>().getName?.split(" ").last}",
               childTop: Padding(
@@ -74,6 +75,31 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 20, right: 20, top: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(Modular.get<I10n>()
+                                  .profile_profilePageState_text_descriptionLikes),
+                              Observer(
+                                builder: (context) => Text(
+                                  Modular.get<I10n>()
+                                      .profile_profilePageState_text_descriptionLikesCount(
+                                    Modular.get<AuthStore>()
+                                            .user
+                                            ?.likers
+                                            ?.length
+                                            .toString() ??
+                                        "0",
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10),
                           child: Observer(builder: (context) {
                             return Wrap(
                               spacing: 10,
@@ -84,7 +110,7 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                                         (item) => Chip(
                                           label: Text('${item.name}'),
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 7, horizontal: 10),
+                                              vertical: 7, horizontal: 5),
                                         ),
                                       )
                                       .toList() ??

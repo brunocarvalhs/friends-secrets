@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(hour, minute) => "${hour}:${minute}";
 
+  static String m8(count) => "All ${count}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "groups_groupsAddMembersPage_appBarDefault_subtitle":
@@ -191,6 +193,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile_likersPage_appBarDefault_title":
             MessageLookupByLibrary.simpleMessage("Creation of\nlikes"),
         "profile_likersPage_floatingActionButton_label":
-            MessageLookupByLibrary.simpleMessage("Save")
+            MessageLookupByLibrary.simpleMessage("Save"),
+        "profile_profilePageState_text_descriptionLikes":
+            MessageLookupByLibrary.simpleMessage("Likes"),
+        "profile_profilePageState_text_descriptionLikesCount": m8
       };
 }
