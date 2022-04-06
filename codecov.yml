@@ -1,0 +1,15 @@
+coverage:
+  status:
+    project:
+      default:
+        informational: true
+    patch:
+      default:
+        informational: false
+
+codecov:
+  require_ci_to_pass: false
+
+ignore:
+  - "**/example/"
+  - "**/*.g.dart"

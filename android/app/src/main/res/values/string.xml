@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  App  -->
+    <string name="app_name">Friends Secrets</string>
+    <string name="app_scheme">friendssecrets</string>
+    <string name="app_scheme_web">friendssecrets.com.br</string>
+    <!--  Deep link  -->
+    <string name="link_host_home">home</string>
+</resources>

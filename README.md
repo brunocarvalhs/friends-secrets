@@ -1,16 +1,57 @@
-# friends_secrets
+<p align="center"><a href="https://github.com/brunocarvalhs/friends-secrets" target="_blank"><img src="https://github.com/brunocarvalhs/friends-secrets/blob/develop/docs/images/logo.png" width="150"></a></p>
 
-A new Flutter project.
+<p align="center">
+    <a href="https://github.com/brunocarvalhs/friends-secrets/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/brunocarvalhs/friends-secrets" alt="License">
+    </a>
+    <a href="https://github.com/brunocarvalhs/friends-secrets/issues">
+        <img src="https://img.shields.io/github/issues/brunocarvalhs/friends-secrets" alt="Issues">
+    </a>
+</p>
 
-## Getting Started
+<p align="center">
+    <a href="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/pipeline-master.yml">
+        <img src="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/pipeline-master.yml/badge.svg" alt="Master">
+    </a>
+    <a href="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/pipeline-develop.yml">
+        <img src="https://github.com/brunocarvalhs/friends-secrets/actions/workflows/pipeline-develop.yml/badge.svg" alt="Develop">
+    </a>
+</p>
 
-This project is a starting point for a Flutter application.
+Inglês | [Português](/docs/README_ptbr.md)
 
-A few resources to get you started if this is your first Flutter project:
+> As of now, this project is designed to only output builds for Android and iOS. Even though, given the current
+> _stability_ of Flutter SDK for desktop (Windows, Linux and macOS) and web, there is a high probability that this
+> project will eventually support builds for all platforms.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+This README is intended to guide how this project is structured and should serve as a guide to help scale the project with
+current and future requirements. Think of it as a map and flexible rules that guide design decisions. While
+they can (and probably will) change over time, discussions must be raised to trigger such changes: this means that
+let's think/question ourselves before taking an action that breaks any rational decision made here.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Sobre
+
+The Friends Secrets demand is for groups of people who need to present a tool for organizations of secret friends, with greater ease and patricity, from the use case when they almost ruin a secret by asking what the other friend wanted, because without knowing the likes of your secret friend is difficult, as well as the differential of the application and providing a profile with the likes that your lucky one likes.
+
+- [Layout Figma](https://www.figma.com/file/bddo9g6PIXsmkIMxVICwUS/Friends-Secrets?node-id=0%3A1)
+
+## Configurar
+
+If you have no idea how to install Flutter and run it locally, check this
+[_Get started_](https://flutter.dev/docs/get-started/install).
+
+If you have Flutter setup locally, on the project's root folder, install pubspec dependencies by running
+`flutter pub get`.
+
+## Arquitetura
+
+How this application works from inside and how it interacts with external dependencies - written in details in
+[ARCHITECTURE](docs/ARCHITECTURE.md).
+
+## Contribuindo
+
+See [CONTRIBUTING](CONTRIBUTING.md) for details about how to contribute to the project.
+
+## Licença
+
+Friends Secrets is published under [BSD 3-Clause](LICENSE).
