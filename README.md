@@ -7,7 +7,6 @@
 </div>
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/brunocarvalhs/FriendsSecrets)](https://github.com/brunocarvalhs/FriendsSecrets/releases)
-[![License](https://img.shields.io/github/license/brunocarvalhs/FriendsSecrets)](LICENSE)
 
 ## 📋 O que é o Friends Secrets?
 
@@ -273,7 +272,7 @@ Por favor, siga as [diretrizes de contribuição](CONTRIBUTING.md) e o [código 
 
 ## 📄 Licença
 
-Este projeto é licenciado sob a [MIT License](LICENSE).
+Copyright (c) Bruno Carvalho. Todos os direitos reservados. O código é público apenas para consulta; não é permitido copiar, modificar ou redistribuir sem autorização. Veja [LICENSE](LICENSE).
 
 ## 👨‍💻 Autor
 
