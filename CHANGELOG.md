@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.11.1] - 2026-10-13
+
+* Merge pull request #89 from brunocarvalhs/feat/color-palette-picker
+* chore: switch to proprietary license (all rights reserved)
+* chore: bump version to 3.11.0 [skip ci]
+
+
 ## [3.11.0] - 2026-09-10
 
 * Merge pull request #88 from brunocarvalhs/feat/color-palette-picker
