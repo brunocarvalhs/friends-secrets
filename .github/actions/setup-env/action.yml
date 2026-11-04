@@ -39,7 +39,16 @@ runs:
         java-version: ${{ inputs.jdk-version }}
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+      shell: bash
+      run: |
+        # ubuntu-24.04 runners ship the Android SDK; this only normalizes the env
+        # vars and accepts licenses. android-actions/setup-android@v2 doesn't
+        # recognize newer license text (e.g. the SDK Preview license) and exits 1.
+        SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+        echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
+        echo "ANDROID_SDK_ROOT=$SDK_ROOT" >> "$GITHUB_ENV"
+        SDKMANAGER="$(find "$SDK_ROOT/cmdline-tools" -maxdepth 2 -type f -name sdkmanager | sort -r | head -n1)"
+        yes | "$SDKMANAGER" --licenses --sdk_root="$SDK_ROOT" > /dev/null 2>&1 || true
 
     - name: Create local.properties
       shell: bash
